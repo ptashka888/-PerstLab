@@ -17,6 +17,13 @@
 Скачай репозиторий:
 
 [git clone https://github.com/ptashka888/PerstLab-Analyzer.git](https://github.com/ptashka888/-PerstLab/tree/main/PerstLab-Analyzer-pro-fool)
+
+или
+
+https://github.com/ptashka888/-PerstLab
+
+![image](https://github.com/user-attachments/assets/124a85e1-bbc8-45fb-9255-06527afb6bb4)
+
 Открой Chrome и перейди в chrome://extensions/.
 Включи "Режим разработчика" (в правом верхнем углу).
 Нажми "Загрузить распакованное расширение" и выбери папку с проектом.
