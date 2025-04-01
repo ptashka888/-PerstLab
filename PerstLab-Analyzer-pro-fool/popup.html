@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      width: 320px;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-bottom: 10px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button, input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    input[type="file"] {
+      background-color: #f5f5f5;
+    }
+    #colorSelect {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    #statistics {
+      margin-top: 10px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+    }
+    .stat-item-container {
+      margin-bottom: 12px;
+      padding: 8px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      border-left: 3px solid #4CAF50;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      padding: 5px;
+      background-color: #f0f0f0;
+      border-radius: 3px;
+    }
+    .stat-locations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      padding: 5px 0;
+    }
+    .location-badge {
+      display: inline-block;
+      padding: 3px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+    .header-loc {
+      background-color: #e3f2fd;
+      color: #0d47a1;
+      border: 1px solid #bbdefb;
+    }
+    .footer-loc {
+      background-color: #e8f5e9;
+      color: #1b5e20;
+      border: 1px solid #c8e6c9;
+    }
+    .content-loc {
+      background-color: #fff3e0;
+      color: #e65100;
+      border: 1px solid #ffe0b2;
+    }
+    .link-loc {
+      background-color: #e1f5fe;
+      color: #01579b;
+      border: 1px solid #b3e5fc;
+    }
+    .list-loc {
+      background-color: #f3e5f5;
+      color: #6a1b9a;
+      border: 1px solid #e1bee7;
+    }
+    .table-loc {
+      background-color: #e0f7fa;
+      color: #006064;
+      border: 1px solid #b2ebf2;
+    }
+    .unknown-loc {
+      background-color: #f5f5f5;
+      color: #616161;
+      border: 1px solid #e0e0e0;
+    }
+    .stat-word {
+      font-weight: 500;
+      max-width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .stat-count {
+      font-weight: bold;
+      color: #4CAF50;
+      background-color: #e8f5e9;
+      padding: 2px 8px;
+      border-radius: 10px;
+      min-width: 24px;
+      text-align: center;
+    }
+    /* Стили для вкладок */
+    .wh-tabs {
+      display: flex;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    .wh-tab {
+      padding: 8px 15px;
+      cursor: pointer;
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+      margin-right: 2px;
+    }
+    .wh-tab.active {
+      background-color: #4CAF50;
+      color: white;
+      border-color: #4CAF50;
+    }
+    .wh-tab-content {
+      display: none;
+    }
+    .wh-tab-content.active {
+      display: block;
+    }
+    /* Стили для вкладки автора */
+    .wh-author-info {
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .wh-author-name {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .wh-author-links a {
+      display: block;
+      color: #4CAF50;
+      text-decoration: none;
+      margin: 5px 0;
+    }
+    .wh-author-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Вкладки навигации -->
+  <div class="wh-tabs">
+    <div class="wh-tab active" data-tab="main">Основное</div>
+    <div class="wh-tab" data-tab="stats">Статистика</div>
+    <div class="wh-tab" data-tab="author">Автор</div>
+  </div>
+
+  <!-- Вкладка основных настроек -->
+  <div id="main-tab" class="wh-tab-content active">
+    <h3>Введите слова для подсветки</h3>
+    <p>По одному слову или фразе на строку:</p>
+    <textarea id="wordsList" placeholder="Введите слова здесь..."></textarea>
+    <input type="file" id="fileInput" accept=".txt" />
+    <select id="colorSelect">
+      <option value="yellow">Желтый</option>
+      <option value="pink">Розовый</option>
+      <option value="lightblue">Голубой</option>
+      <option value="lightgreen">Салатовый</option>
+    </select>
+    <button id="saveButton">Сохранить</button>
+  </div>
+
+  <!-- Вкладка статистики -->
+  <div id="stats-tab" class="wh-tab-content">
+    <h3>Статистика найденных слов</h3>
+    <div id="statsContent"></div>
+  </div>
+
+  <!-- Вкладка автора -->
+  <div id="author-tab" class="wh-tab-content">
+    <h3>Об авторе</h3>
+    <div class="wh-author-info">
+      <div class="wh-author-name">Лещенко Иван</div>
+      <div class="wh-author-links">
+        <a href="https://t.me/PerstLab" target="_blank">Telegram: PerstLab</a>
+        <a href="https://vk.com/perstboga" target="_blank">VK: perstboga</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

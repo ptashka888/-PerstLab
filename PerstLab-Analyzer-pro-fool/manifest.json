@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "PerstLab-Analyzer",
+  "version": "1.2",
+  "description": "Подсвечивает заданные слова на веб-страницах с возможностью загрузки файлов и выбора цвета",
+  "permissions": ["storage", "activeTab"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["styles.css"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "author": "Лещенко Иван"
+}
