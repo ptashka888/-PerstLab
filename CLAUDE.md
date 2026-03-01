@@ -1,103 +1,157 @@
-# CLAUDE.md — PerstLab-Analyzer
+# CLAUDE.md — PerstLab / CarFinance MSK
 
-## Project Overview
+This repository contains two projects:
 
-PerstLab-Analyzer is a Chrome extension (Manifest V3) that highlights user-specified words and phrases on web pages. It supports color-coded highlighting, word list import from `.txt` files, and provides statistics on word occurrences with location context (header, footer, body, links, lists, tables).
+1. **PerstLab-Analyzer** — Chrome extension for word highlighting
+2. **CarFinance Theme** — WordPress theme for carfinance-msk.ru (auto import & selection)
 
-- **Author:** Ivan Leshchenko (Лещенко Иван)
+---
+
+## Project 1: PerstLab-Analyzer (Chrome Extension)
+
+### Overview
+
+Chrome extension (Manifest V3) that highlights user-specified words and phrases on web pages. Supports color-coded highlighting, word list import from `.txt` files, and statistics on word occurrences with location context.
+
+- **Author:** Ivan Leshchenko
 - **License:** MIT
-- **Language:** Russian UI, all user-facing strings are in Russian
+- **Language:** Russian UI
 
-## Repository Structure
+### Structure
 
 ```
-/
-├── CLAUDE.md                          # This file
-├── LICENSE                            # MIT License
-├── README.md                          # Project documentation (Russian)
-└── PerstLab-Analyzer-pro-fool/        # Extension source directory
-    ├── manifest.json                  # Chrome extension manifest (V3)
-    ├── popup.html                     # Extension popup UI (HTML + inline CSS)
-    ├── popup.js                       # Popup logic (tab switching, word management, statistics display)
-    └── content.js                     # Content script (DOM highlighting, word counting, location detection)
+PerstLab-Analyzer-pro-fool/
+├── manifest.json    # Manifest V3
+├── popup.html       # Popup UI (inline CSS)
+├── popup.js         # Popup logic
+└── content.js       # Content script (highlighting, stats, location)
 ```
 
-## Architecture
+### Key Patterns
 
-### Chrome Extension Components
+- No build system, no dependencies — plain HTML/CSS/JS
+- `updateStatsDisplay()` defined twice in `popup.js` (closure + global)
+- Words sorted by length (longest first) for regex matching
+- `MutationObserver` with throttling (3 updates/sec, 300ms debounce)
+- `manifest.json` references `styles.css` in `web_accessible_resources` but file doesn't exist; styles injected by `content.js`
 
-- **manifest.json** — Manifest V3 configuration. Declares permissions (`storage`, `activeTab`), registers `content.js` as a content script on all URLs, and sets `popup.html` as the browser action popup.
-- **popup.html** — The extension popup with three tabs: "Основное" (main settings), "Статистика" (statistics), "Автор" (author info). All CSS is inline in a `<style>` block.
-- **popup.js** — Manages the popup lifecycle:
-  - Tab navigation (`.wh-tab` / `.wh-tab-content` class toggling)
-  - Word list editing (textarea input + `.txt` file upload)
-  - Color selection (yellow, pink, lightblue, lightgreen)
-  - Sends `UPDATE_HIGHLIGHTS` messages to the content script via `chrome.tabs.sendMessage`
-  - Requests and displays statistics via `REQUEST_STATS` messages
-  - Polls statistics every 1 second via `setInterval`
-  - Persists data with `chrome.storage.sync`
-- **content.js** — Runs on every web page:
-  - Receives highlight words and colors from popup via Chrome messaging
-  - Traverses the DOM to find and wrap matching text nodes in `<span>` elements with per-word CSS classes
-  - Tracks word occurrence counts (`wordStats`) and locations (`wordLocations`)
-  - Uses `MutationObserver` with throttling (max 3 updates/sec, 300ms debounce) to re-highlight on dynamic DOM changes
-  - Determines word location (header, footer, body, links, lists, tables) via `element.closest()` and heuristic position-based detection
+---
 
-### Message Protocol (popup ↔ content script)
+## Project 2: CarFinance Theme (WordPress)
 
-| Message Type          | Direction         | Payload                            | Response                          |
-|-----------------------|-------------------|------------------------------------|-----------------------------------|
-| `UPDATE_HIGHLIGHTS`   | popup → content   | `{ words, colors }`               | `{ success, stats, locations }`   |
-| `REQUEST_STATS`       | popup → content   | (none)                             | `{ stats, locations }`            |
-| `STATS_UPDATE`        | content → popup   | `{ stats, locations }`             | (none)                            |
+### Overview
 
-### Data Storage
+Custom WordPress theme for carfinance-msk.ru — auto import and selection service (Korea, Japan, China, USA, UAE). SILO architecture, 8 content clusters, 110+ planned pages, Schema.org markup.
 
-Uses `chrome.storage.sync` with keys:
-- `highlightWords` — `string[]` of words to highlight
-- `wordColors` — `Record<string, string>` mapping each word to a CSS color
+### Structure
 
-### CSS Class Naming Convention
+```
+carfinance-theme/
+├── style.css                          # Theme declaration + all CSS (variables, components, responsive)
+├── functions.php                      # CPTs, taxonomies, meta boxes, Schema.org, AJAX calculator, SILO helpers
+├── header.php                         # Sticky header, SILO nav, country dropdown, mobile burger
+├── footer.php                         # SILO footer, modal, contacts
+├── index.php                          # Fallback template
+├── front-page.php                     # Homepage — 18 blocks per spec
+├── page.php                           # Default page (SILO pillars)
+├── single.php                         # Blog post (sidebar, author E-E-A-T card)
+├── single-car_model.php               # Car model page (specs, lots, calculator, related)
+├── archive-car_model.php              # Catalog with faceted filters
+├── 404.php                            # Not found page
+├── page-templates/
+│   ├── country.php                    # Country landing (/korea/, /japan/, /china/, /usa/, /uae/)
+│   ├── calculator.php                 # 3-in-1 calculator (customs, ownership, constructor)
+│   ├── services.php                   # Services overview + pricing packages
+│   ├── about.php                      # About company (founder, team, reviews, contacts)
+│   ├── faq.php                        # FAQ with categories, Schema.org/FAQPage
+│   └── city.php                       # City landing (LocalBusiness schema)
+├── assets/
+│   ├── css/                           # (reserved for additional stylesheets)
+│   ├── js/
+│   │   ├── calculator.js              # Customs/ownership/constructor calculators
+│   │   └── main.js                    # Burger, FAQ accordion, modal, counters, lead forms
+│   └── img/                           # (images go here)
+└── inc/                               # (reserved for PHP includes)
+```
 
-- Highlight spans use class `highlight-{safeWord}` where `safeWord` replaces non-alphanumeric characters with `_` + hex charcode
-- Tab system uses `wh-` prefix: `wh-tab`, `wh-tab-content`, `wh-highlight-word`, `wh-highlight-styles`, `wh-author-*`
+### Custom Post Types
 
-## Development Workflow
+| CPT | Slug | Purpose |
+|---|---|---|
+| `car_model` | `/catalog/` | Car models with specs, prices, generations |
+| `auction_lot` | `/auctions/` | Live auction lots with status tracking |
+| `case_study` | `/kejsy/` | Client cases (before/after, savings) |
+| `cf_service` | `/services/` | Service descriptions |
+| `cf_faq` | — | FAQ items (grouped by category) |
+| `cf_team` | — | Team members (photo, role, social links) |
+| `cf_review` | — | Client reviews (rating, video, model) |
 
-### Loading the Extension Locally
+### Custom Taxonomies
 
-1. Open `chrome://extensions/` in Chrome
-2. Enable "Developer mode"
-3. Click "Load unpacked" and select the `PerstLab-Analyzer-pro-fool/` directory
+| Taxonomy | Attached to | Purpose |
+|---|---|---|
+| `cf_country` | car_model, auction_lot, case_study, cf_review | Country of origin |
+| `cf_brand` | car_model, auction_lot | Car brand (Toyota, KIA, etc.) |
+| `cf_body_type` | car_model, auction_lot | Body type (sedan, SUV, minivan) |
+| `cf_price_range` | car_model, auction_lot | Price brackets |
+| `cf_faq_cat` | cf_faq | FAQ categories |
+| `cf_blog_cluster` | post | Blog SILO clusters |
+| `cf_city` | case_study, cf_review | City (for local SEO) |
 
-### No Build System
+### Schema.org Markup (auto-generated JSON-LD)
 
-This project uses plain HTML/CSS/JavaScript with no build tools, bundlers, transpilers, or package managers. Edit the source files directly.
+- **Organization** — on all pages
+- **WebSite** + SearchAction — homepage
+- **Product** + Offer — `car_model` singles
+- **Service** — service pages and country landings
+- **FAQPage** — pages with FAQ blocks
+- **Article** — blog posts
+- **LocalBusiness** — city pages
+- **Person** — team member pages
+- **BreadcrumbList** — all inner pages
 
-### No Test Framework
+### SILO Architecture Rules
 
-There are no automated tests. Manual testing is done by loading the extension in Chrome and verifying highlighting behavior on web pages.
+- **Level 1 (Matriarch):** Homepage, country pages, calculator, services — accumulate domain authority
+- **Level 2 (Hub):** Brand pages, price ranges, section hubs — redistribute weight
+- **Level 3 (Support):** Specific models, lots, blog posts, cases — close user intent
+- **Cross-cocoon links:** Only between Level 1 pages. NEVER link Support→Support across different cocoons.
+- Countries in directories (`/korea/`), cities on subdomains (`krasnodar.carfinance-msk.ru`)
 
-## Key Conventions
+### Calculator
 
-- **No build step** — All files are vanilla JS/CSS/HTML, served directly by Chrome
-- **No dependencies** — Only the Chrome Extensions API is used
-- **Russian locale** — All UI text, comments, and console logs are in Russian
-- **Inline styles** — `popup.html` contains all popup CSS in a `<style>` block; `content.js` dynamically injects highlight styles into the page's `<head>`
-- **Commit messages** — Written in English, brief and descriptive
+- Client-side JavaScript calculator with server-side AJAX fallback
+- Three modes: Customs duty, Ownership cost, Constructor (Japan)
+- Handles customs duty rates by car age (0-3, 3-5, 5+ years) and engine displacement
+- Includes: duty, utilization fee, SBKTS, EPTS, broker, freight, commission
 
-## Known Code Patterns
+### Development Workflow
 
-- `updateStatsDisplay()` is defined twice in `popup.js`: once inside the `DOMContentLoaded` closure (lines 108-198) and once globally (lines 245-338). The global version is used by `chrome.runtime.onMessage` listener
-- Word processing sorts words by length (longest first) to avoid partial-match conflicts in regex replacement
-- `escapeRegExp()` is used to safely build regex from user input
-- `isCodeOrPreElement()` prevents highlighting inside `<code>`, `<pre>`, `<script>`, `<style>` tags
-- Throttling in `content.js` uses a combination of counter-based rate limiting and `setTimeout` debouncing
+1. Place `carfinance-theme/` in WordPress `wp-content/themes/`
+2. Activate theme in WP Admin → Appearance → Themes
+3. Theme auto-creates default pages on activation (country pages, calculator, services, etc.)
+4. No build tools — plain PHP/CSS/JS, edit directly
+5. No package.json or node_modules
+6. Test by refreshing the WordPress site
 
-## Important Notes for AI Assistants
+### Key Conventions
 
-- The extension source lives in `PerstLab-Analyzer-pro-fool/`, not the repo root
-- There is no `package.json`, `node_modules`, or any Node.js tooling
-- There is no background/service worker — only a popup and a content script
-- `manifest.json` references `styles.css` in `web_accessible_resources` but this file does not exist in the repo; styles are injected dynamically by `content.js`
-- When modifying the extension, test by reloading it in `chrome://extensions/` and refreshing target pages
+- **Russian locale** — All UI text in Russian
+- **No build step** — Vanilla PHP/CSS/JS
+- **CSS prefix** — All classes use `cf-` prefix
+- **BEM-like naming** — `cf-card__title`, `cf-btn--primary`
+- **Deferred scripts** — Calculator and main JS loaded with `defer`
+- **Lazy loading** — Images use `loading="lazy"` with explicit dimensions
+- **Performance** — Emojis disabled, WordPress head junk removed, preconnect for fonts
+- **Commit messages** — English, brief and descriptive
+
+### Important Notes for AI Assistants
+
+- WordPress theme is in `carfinance-theme/`, Chrome extension is in `PerstLab-Analyzer-pro-fool/`
+- No `package.json`, `node_modules`, or Node.js tooling in either project
+- `functions.php` registers all CPTs, taxonomies, meta boxes, Schema.org, AJAX handlers
+- Country data (flags, colors, CSS classes) is centralized in `cf_get_country_data()`
+- Meta box fields use `cf_` prefix for all custom field keys
+- Theme creates default pages on activation via `cf_create_default_pages()`
+- Calculator works client-side by default; AJAX handler in `functions.php` is a fallback
+- `front-page.php` contains all 18 homepage blocks inline (no template parts yet)
