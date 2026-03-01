@@ -1130,3 +1130,418 @@ function cf_create_default_pages(): void {
     // Flush rewrite rules
     flush_rewrite_rules();
 }
+
+/* ==========================================================================
+   16. Content Population (one-time admin action)
+   Run via: /wp-admin/?cf_populate=1 (logged in as admin)
+   ========================================================================== */
+
+add_action('admin_init', 'cf_maybe_populate_content');
+
+function cf_maybe_populate_content(): void {
+    if (empty($_GET['cf_populate']) || $_GET['cf_populate'] !== '1') return;
+    if (!current_user_can('manage_options')) return;
+    if (get_option('cf_content_populated')) {
+        add_action('admin_notices', function () {
+            echo '<div class="notice notice-warning"><p>Контент уже был создан. Для повторного запуска удалите опцию <code>cf_content_populated</code> из базы данных.</p></div>';
+        });
+        return;
+    }
+
+    set_time_limit(300);
+    $log = [];
+
+    // --- Helper: ensure taxonomy term ---
+    $ensure_term = function ($taxonomy, $name, $slug = '', $parent = 0) use (&$log) {
+        $term = term_exists($name, $taxonomy);
+        if ($term) return (int) $term['term_id'];
+        $args = [];
+        if ($slug) $args['slug'] = $slug;
+        if ($parent) $args['parent'] = $parent;
+        $result = wp_insert_term($name, $taxonomy, $args);
+        if (is_wp_error($result)) return 0;
+        $log[] = "TERM: {$taxonomy}/{$name}";
+        return (int) $result['term_id'];
+    };
+
+    // --- Helper: create or update page ---
+    $upsert_page = function ($slug, $title, $content, $template = '', $parent_id = 0) use (&$log) {
+        $existing = get_page_by_path($slug);
+        if ($existing) {
+            wp_update_post(['ID' => $existing->ID, 'post_title' => $title, 'post_content' => $content, 'post_status' => 'publish', 'post_parent' => $parent_id]);
+            if ($template) update_post_meta($existing->ID, '_wp_page_template', $template);
+            $log[] = "UPDATED page: {$slug}";
+            return $existing->ID;
+        }
+        $page_id = wp_insert_post(['post_title' => $title, 'post_name' => $slug, 'post_content' => $content, 'post_status' => 'publish', 'post_type' => 'page', 'post_parent' => $parent_id]);
+        if ($template && !is_wp_error($page_id)) update_post_meta($page_id, '_wp_page_template', $template);
+        $log[] = "CREATED page: {$slug}";
+        return is_wp_error($page_id) ? 0 : $page_id;
+    };
+
+    // --- Helper: create post ---
+    $create_post = function ($post_type, $title, $content, $meta = [], $tax = []) use (&$log) {
+        $existing = get_posts(['post_type' => $post_type, 'title' => $title, 'post_status' => 'publish', 'numberposts' => 1]);
+        if ($existing) return $existing[0]->ID;
+        $post_id = wp_insert_post(['post_title' => $title, 'post_content' => $content, 'post_status' => 'publish', 'post_type' => $post_type]);
+        if (is_wp_error($post_id)) return 0;
+        foreach ($meta as $key => $value) update_post_meta($post_id, $key, $value);
+        foreach ($tax as $taxonomy => $terms) wp_set_object_terms($post_id, $terms, $taxonomy);
+        $log[] = "CREATED [{$post_type}]: {$title}";
+        return $post_id;
+    };
+
+    // ===================== 1. TAXONOMY TERMS =====================
+
+    // Countries
+    $ensure_term('cf_country', 'Корея', 'korea');
+    $ensure_term('cf_country', 'Япония', 'japan');
+    $ensure_term('cf_country', 'Китай', 'china');
+    $ensure_term('cf_country', 'США', 'usa');
+    $ensure_term('cf_country', 'ОАЭ', 'uae');
+
+    // Brands
+    foreach (['Toyota','Honda','Nissan','Mazda','Subaru','Suzuki','Mitsubishi','Hyundai','KIA','Genesis','Samsung','Geely','Changan','Chery','BYD','Zeekr','NIO','Haval','BMW','Mercedes-Benz','Audi','Ford','Chevrolet','Tesla','Lexus'] as $brand) {
+        $ensure_term('cf_brand', $brand, sanitize_title($brand));
+    }
+
+    // Body types
+    foreach (['Седан','Кроссовер','Внедорожник','Минивэн','Хэтчбек','Универсал','Купе','Пикап'] as $bt) {
+        $ensure_term('cf_body_type', $bt, sanitize_title($bt));
+    }
+
+    // Price ranges
+    foreach (['До 1 млн' => 'do-1-milliona', 'До 1.5 млн' => 'do-1-5-millionov', 'До 2 млн' => 'do-2-millionov', 'До 3 млн' => 'do-3-millionov', 'До 5 млн' => 'do-5-millionov', 'Свыше 5 млн' => 'svyshe-5-millionov'] as $name => $slug) {
+        $ensure_term('cf_price_range', $name, $slug);
+    }
+
+    // FAQ categories
+    foreach (['Общие вопросы' => 'obshchie', 'Доставка и сроки' => 'dostavka', 'Растаможка' => 'rastamozhka', 'Оплата и гарантии' => 'oplata', 'Автоподбор' => 'avtopodborshchik'] as $name => $slug) {
+        $ensure_term('cf_faq_cat', $name, $slug);
+    }
+
+    // Blog clusters
+    foreach (['Сравнения' => 'sravneniya', 'Китайские бренды' => 'kitajskie-brendy', 'Финансы и таможня' => 'finansy-tamozhnya', 'Юридический ликбез' => 'yuridicheskij-likbez', 'Дневник пригона' => 'dnevnik-prigona', 'США специфика' => 'usa-specifika', 'ОАЭ специфика' => 'oae-specifika'] as $name => $slug) {
+        $ensure_term('cf_blog_cluster', $name, $slug);
+    }
+
+    // Cities
+    foreach (['Москва','Владивосток','Краснодар','Сочи','Уссурийск','Екатеринбург','Новосибирск','Казань','Тюмень','Челябинск'] as $city) {
+        $ensure_term('cf_city', $city, sanitize_title($city));
+    }
+
+    // ===================== 2. COUNTRY PAGES =====================
+
+    $korea_id = $upsert_page('korea', 'Авто из Кореи под ключ', '<h2>Почему авто из Кореи?</h2>
+<p>Корея — одно из самых выгодных направлений для импорта автомобилей в Россию. Левый руль, честная страховая история каждого автомобиля, доступ к крупнейшей площадке Encar с 300 000+ предложений. Hyundai, KIA, Genesis, Samsung, а также корейские версии BMW, Mercedes, Audi — всё это доступно на 30-40% дешевле, чем у российских дилеров.</p>
+<h3>Преимущества покупки из Кореи</h3>
+<ul>
+<li><strong>Левый руль</strong> — не нужна переделка, всё как в России</li>
+<li><strong>Честная страховая история</strong> — каждый авто проверяется через КИКС</li>
+<li><strong>Encar.com</strong> — крупнейшая площадка с 300 000+ авто</li>
+<li><strong>Премиум дешевле</strong> — BMW, Mercedes, Audi на 30-40% дешевле</li>
+</ul>
+<h3>Популярные модели</h3>
+<ul>
+<li><strong>KIA Carnival</strong> — от 2 500 000 ₽ под ключ</li>
+<li><strong>Hyundai Santa Fe</strong> — от 2 200 000 ₽</li>
+<li><strong>Hyundai Palisade</strong> — от 2 800 000 ₽</li>
+<li><strong>Genesis GV80</strong> — от 3 500 000 ₽</li>
+<li><strong>KIA Sorento</strong> — от 2 000 000 ₽</li>
+</ul>
+<h3>Как мы работаем</h3>
+<ol>
+<li>Заявка и обсуждение бюджета, модели, комплектации</li>
+<li>Поиск вариантов на Encar / SKEncar / дилерских площадках</li>
+<li>Полная инспекция: проверка по КИКС, осмотр на месте</li>
+<li>Выкуп и оформление документов в Корее</li>
+<li>Паром Корея — Владивосток (7-10 дней)</li>
+<li>Растаможка, СБКТС, получение ЭПТС</li>
+<li>Доставка автовозом до вашего города</li>
+</ol>
+<p><strong>Комиссия:</strong> от 5% стоимости авто. <strong>Сроки:</strong> 3-4 недели.</p>', 'page-templates/country.php');
+    if ($korea_id) update_post_meta($korea_id, 'cf_country_slug', 'korea');
+
+    $japan_id = $upsert_page('japan', 'Авто из Японии с аукционов', '<h2>Почему авто из Японии?</h2>
+<p>Японские аукционы — самая прозрачная система покупки б/у автомобилей в мире. Каждый автомобиль проходит независимую инспекцию. Минимальный пробег, отсутствие реагентов — нет коррозии.</p>
+<h3>Преимущества</h3>
+<ul>
+<li><strong>Прозрачные аукционы</strong> — USS, AA Japan, JU, TAA, CAA</li>
+<li><strong>Аукционный лист</strong> — полное описание с оценкой инспектора</li>
+<li><strong>Минимальный пробег</strong> — 8 000 км/год в среднем</li>
+<li><strong>Нет коррозии</strong> — нет соли на дорогах</li>
+</ul>
+<h3>Популярные модели</h3>
+<ul>
+<li><strong>Toyota Alphard / Vellfire</strong> — от 2 500 000 ₽</li>
+<li><strong>Honda Freed</strong> — от 1 100 000 ₽</li>
+<li><strong>Nissan Note e-Power</strong> — от 900 000 ₽</li>
+<li><strong>Toyota Land Cruiser</strong> — от 3 000 000 ₽</li>
+<li><strong>Suzuki Jimny</strong> — от 1 500 000 ₽</li>
+</ul>
+<p><strong>Комиссия:</strong> от 5%. <strong>Сроки:</strong> 3-5 недель.</p>', 'page-templates/country.php');
+    if ($japan_id) update_post_meta($japan_id, 'cf_country_slug', 'japan');
+
+    $china_id = $upsert_page('china', 'Авто из Китая под заказ', '<h2>Почему авто из Китая?</h2>
+<p>Китайский автопром за последние 5 лет сделал колоссальный рывок. Geely, Changan, Chery, BYD, Zeekr — технологичные автомобили с передовым оснащением. Экономия 20-30%.</p>
+<h3>Преимущества</h3>
+<ul>
+<li><strong>Новые авто с гарантией</strong> — заказ напрямую с завода</li>
+<li><strong>Максимальная комплектация</strong> по цене базовой в России</li>
+<li><strong>Электромобили и гибриды</strong> — BYD, Zeekr, NIO</li>
+<li><strong>Левый руль</strong></li>
+<li><strong>Экономия 20-30%</strong></li>
+</ul>
+<h3>Популярные модели</h3>
+<ul>
+<li><strong>Geely Monjaro</strong> — от 2 200 000 ₽</li>
+<li><strong>Changan CS75 Plus</strong> — от 1 800 000 ₽</li>
+<li><strong>Chery Tiggo 8 Pro</strong> — от 2 000 000 ₽</li>
+<li><strong>Zeekr 001</strong> — от 3 500 000 ₽</li>
+<li><strong>BYD Han</strong> — от 3 000 000 ₽</li>
+</ul>
+<p><strong>Сроки:</strong> 4-6 недель. <strong>Комиссия:</strong> от 5%.</p>', 'page-templates/country.php');
+    if ($china_id) update_post_meta($china_id, 'cf_country_slug', 'china');
+
+    $usa_id = $upsert_page('usa', 'Авто из США', '<h2>Почему авто из США?</h2>
+<p>Американский рынок — крупнейший в мире. На аукционах Copart и IAAI можно найти автомобили с экономией до 40%.</p>
+<h3>Преимущества</h3>
+<ul>
+<li><strong>Экономия до 40%</strong></li>
+<li><strong>Эксклюзивные модели</strong> и комплектации</li>
+<li><strong>Copart и IAAI</strong> — дилерский доступ</li>
+<li><strong>Carfax / AutoCheck</strong> — подробная история</li>
+</ul>
+<h3>Clean Title vs Salvage</h3>
+<p><strong>Clean Title</strong> — без серьёзных повреждений. <strong>Salvage / Rebuilt</strong> — восстановлен после ДТП, цена на 30-50% ниже.</p>
+<h3>Популярные модели</h3>
+<ul>
+<li><strong>Toyota Camry</strong> — от 1 800 000 ₽</li>
+<li><strong>Tesla Model 3</strong> — от 2 500 000 ₽</li>
+<li><strong>Ford Mustang</strong> — от 2 000 000 ₽</li>
+<li><strong>Chevrolet Tahoe</strong> — от 3 500 000 ₽</li>
+<li><strong>BMW X5</strong> — от 3 000 000 ₽</li>
+</ul>
+<p><strong>Сроки:</strong> 6-10 недель. <strong>Комиссия:</strong> от 5%.</p>', 'page-templates/country.php');
+    if ($usa_id) update_post_meta($usa_id, 'cf_country_slug', 'usa');
+
+    $uae_id = $upsert_page('uae', 'Авто из ОАЭ под заказ', '<h2>Почему авто из ОАЭ?</h2>
+<p>Параллельный импорт из ОАЭ — легальная возможность приобрести автомобили, недоступные через официальных дилеров в России. Самая быстрая доставка — 2-4 недели.</p>
+<h3>Преимущества</h3>
+<ul>
+<li><strong>Быстрая доставка</strong> — 2-4 недели</li>
+<li><strong>Модели, недоступные в РФ</strong></li>
+<li><strong>Новые авто</strong> с минимальным пробегом</li>
+<li><strong>Параллельный импорт</strong> — полностью законная схема</li>
+</ul>
+<h3>Популярные модели</h3>
+<ul>
+<li><strong>Toyota Land Cruiser 300</strong> — от 6 500 000 ₽</li>
+<li><strong>Nissan Patrol</strong> — от 5 500 000 ₽</li>
+<li><strong>Lexus LX 600</strong> — от 8 000 000 ₽</li>
+<li><strong>Toyota Hilux</strong> — от 3 500 000 ₽</li>
+<li><strong>Range Rover</strong> — от 9 000 000 ₽</li>
+</ul>
+<p><strong>Сроки:</strong> 2-4 недели. <strong>Комиссия:</strong> от 5%.</p>', 'page-templates/country.php');
+    if ($uae_id) update_post_meta($uae_id, 'cf_country_slug', 'uae');
+
+    // ===================== 3. SILO PILLAR PAGES =====================
+
+    $upsert_page('avtopodborshchik', 'Автоподбор — что это и зачем нужен', '<h2>Что такое автоподбор?</h2>
+<p>Автоподбор — профессиональная услуга по поиску, проверке и покупке автомобиля с пробегом. Эксперт проверяет авто по 48 пунктам, использует профессиональное оборудование и умеет торговаться.</p>
+<h3>Этапы работы</h3>
+<ol>
+<li>Заявка и консультация — обсуждаем бюджет и требования</li>
+<li>Мониторинг рынка — находим 5-10 лучших вариантов</li>
+<li>Предварительная проверка — отсеиваем подозрительные</li>
+<li>Выезд и диагностика — толщиномер, OBD2, эндоскопия, тест-драйв</li>
+<li>Торг — снижаем цену на 5-15%</li>
+<li>Оформление — ДКП, проверка документов, передача</li>
+</ol>
+<h3>Стоимость</h3>
+<p><strong>Базовый</strong> (осмотр) — от 25 000 ₽. <strong>Стандарт</strong> (диагностика) — от 45 000 ₽. <strong>Под ключ</strong> — от 5% стоимости авто.</p>');
+
+    $upsert_page('kupit-avto-s-probegom', 'Покупка авто с пробегом — полный гид', '<h2>Как купить б/у автомобиль и не пожалеть</h2>
+<p>Покупка автомобиля с пробегом — лотерея, если не знать, на что обращать внимание.</p>
+<h3>10 шагов к правильной покупке</h3>
+<ol>
+<li>Определите бюджет (с учётом оформления, страховки, ремонта)</li>
+<li>Выберите 3-5 моделей-кандидатов</li>
+<li>Изучите типичные проблемы моделей</li>
+<li>Проверьте объявления — отсеивайте подозрительно дешёвые</li>
+<li>Проверьте авто по VIN (ГИБДД, Автотека, Автокод)</li>
+<li>Осмотрите кузов с толщиномером</li>
+<li>Проведите диагностику двигателя и КПП</li>
+<li>Тест-драйв: минимум 30 минут</li>
+<li>Проверьте документы (ПТС, СТС, сервисная книжка)</li>
+<li>Оформите ДКП правильно</li>
+</ol>');
+
+    $upsert_page('avto-iz-yaponii', 'Авто из Японии — полный гид по покупке', '<h2>Полный гид по покупке авто с аукционов Японии</h2>
+<p>Японские аукционы — уникальная система. Ежедневно на торги выставляются тысячи автомобилей с независимой оценкой состояния.</p>
+<h3>Аукционы Японии</h3>
+<ul>
+<li><strong>USS</strong> — крупнейшая сеть, 16 площадок</li>
+<li><strong>AA Japan</strong> — второй по величине</li>
+<li><strong>JU</strong> — ассоциация дилеров</li>
+<li><strong>TAA</strong> — Toyota/Lexus</li>
+<li><strong>CAA</strong> — центральный аукцион</li>
+</ul>
+<h3>Как читать аукционный лист</h3>
+<p>Аукционный лист содержит оценку состояния кузова, салона, двигателя, трансмиссии. Оценки: S — идеальное, R/RA — с дефектами, A-D — градация.</p>');
+
+    $upsert_page('avto-iz-korei', 'Авто из Кореи — полный гид 2025', '<h2>Полный гид по покупке авто из Кореи</h2>
+<p>Корея — самое популярное направление импорта в Россию. Левый руль, близость к Владивостоку, огромный выбор на Encar.</p>
+<h3>Encar: как пользоваться</h3>
+<p>Encar.com — крупнейший автопортал Кореи. 300 000+ автомобилей с инспекционными листами.</p>
+<h3>Налоги и утильсбор 2025</h3>
+<p>Таможенная пошлина + утилизационный сбор + СБКТС + ЭПТС + услуги брокера. Используйте наш <a href="/calculator/">калькулятор</a>.</p>');
+
+    $upsert_page('avto-iz-kitaya', 'Авто из Китая — полный гид', '<h2>Полный гид по покупке авто из Китая</h2>
+<p>Geely, Changan, Chery, BYD, Zeekr, NIO — конкурируют с европейскими и японскими брендами. Экономия 20-30%.</p>
+<h3>Бренды</h3>
+<ul>
+<li><strong>Geely</strong> — владеет Volvo. Monjaro, Atlas, Coolray</li>
+<li><strong>Changan</strong> — CS75 Plus, UNI-K</li>
+<li><strong>Chery</strong> — экспортёр №1. Tiggo 4/7/8</li>
+<li><strong>BYD</strong> — лидер электромобилей. Han, Tang, Seal</li>
+<li><strong>Zeekr</strong> — премиальный электробренд. 001, 009</li>
+</ul>');
+
+    $upsert_page('proverka-avto-gibdd', 'Проверка авто по базам ГИБДД и VIN', '<h2>Проверка авто по VIN и базам ГИБДД</h2>
+<p>Проверка автомобиля перед покупкой — обязательный шаг.</p>
+<h3>Какие базы мы проверяем</h3>
+<ul>
+<li><strong>ГИБДД</strong> — регистрация, ДТП, розыск, ограничения</li>
+<li><strong>ФНП</strong> — проверка на залог</li>
+<li><strong>ФССП</strong> — исполнительные производства</li>
+<li><strong>РСА</strong> — страховые случаи</li>
+<li><strong>Автотека / Автокод</strong> — история обслуживания, пробег</li>
+<li><strong>Таможенная база</strong> — для импортных авто</li>
+</ul>');
+
+    // ===================== 4. FAQ ENTRIES =====================
+
+    $faqs = [
+        ['cat' => 'Общие вопросы', 'q' => 'Сколько времени занимает доставка автомобиля?', 'a' => 'Сроки зависят от страны: Корея — 3-4 недели, Япония — 3-5 недель, Китай — 4-6 недель, США — 6-10 недель, ОАЭ — 2-4 недели.'],
+        ['cat' => 'Общие вопросы', 'q' => 'Какие скрытые расходы могут возникнуть?', 'a' => 'У нас нет скрытых расходов. Калькулятор показывает полную стоимость. Всё фиксируется в договоре.'],
+        ['cat' => 'Общие вопросы', 'q' => 'С какими странами вы работаете?', 'a' => 'Мы импортируем из 5 стран: Южная Корея, Япония, Китай, США и ОАЭ.'],
+        ['cat' => 'Общие вопросы', 'q' => 'Работаете ли вы с регионами?', 'a' => 'Да, доставляем по всей России. Офисы: Москва, Владивосток, Краснодар, Сочи, Уссурийск.'],
+        ['cat' => 'Общие вопросы', 'q' => 'Можно ли приехать и посмотреть офис?', 'a' => 'Конечно! Основной офис в Москве. Позвоните заранее.'],
+        ['cat' => 'Оплата и гарантии', 'q' => 'Как гарантируется безопасность сделки?', 'a' => 'Работаем по договору. Фотоотчёт и видео до покупки. Все платежи прозрачны. Компания застрахована.'],
+        ['cat' => 'Оплата и гарантии', 'q' => 'Нужна ли предоплата?', 'a' => 'Аванс 50 000 — 100 000 ₽. Основная оплата после одобрения конкретного автомобиля.'],
+        ['cat' => 'Оплата и гарантии', 'q' => 'Можно ли вернуть автомобиль?', 'a' => 'Если авто не соответствует описанию — да. Условия возврата в договоре. За 7 лет таких случаев не было.'],
+        ['cat' => 'Оплата и гарантии', 'q' => 'Какие способы оплаты?', 'a' => 'Безналичный расчёт (физлицо или ИП/ООО), перевод по реквизитам.'],
+        ['cat' => 'Доставка и сроки', 'q' => 'Как отслеживать доставку?', 'a' => 'Присылаем трек-номер контейнера. Менеджер информирует о каждом этапе.'],
+        ['cat' => 'Доставка и сроки', 'q' => 'Куда приходит авто из Кореи и Японии?', 'a' => 'В порт Владивостока. Далее — растаможка и доставка до вашего города.'],
+        ['cat' => 'Доставка и сроки', 'q' => 'Что если авто повредили при доставке?', 'a' => 'Все авто застрахованы на время транспортировки.'],
+        ['cat' => 'Растаможка', 'q' => 'Из чего складывается стоимость растаможки?', 'a' => 'Таможенная пошлина + утилизационный сбор + СБКТС + ЭПТС + услуги брокера. Используйте калькулятор.'],
+        ['cat' => 'Растаможка', 'q' => 'Что такое СБКТС и ЭПТС?', 'a' => 'СБКТС — сертификат безопасности конструкции ТС. ЭПТС — электронный паспорт ТС, заменивший бумажный ПТС.'],
+        ['cat' => 'Растаможка', 'q' => 'Помогаете с постановкой на учёт?', 'a' => 'Да, в пакете «Под ключ» — полное сопровождение: СБКТС, ЭПТС, регистрация в ГИБДД.'],
+        ['cat' => 'Растаможка', 'q' => 'Сколько стоит утильсбор в 2025 году?', 'a' => 'Зависит от объёма двигателя и возраста. Для авто до 3 лет с 2.0 л — около 84 000 ₽. Старше 3 лет — 313 800 ₽.'],
+        ['cat' => 'Автоподбор', 'q' => 'Чем автоподбор отличается от самостоятельной покупки?', 'a' => 'Эксперт использует профоборудование, знает рыночные цены, умеет торговаться. Средняя экономия 150 000-300 000 ₽.'],
+        ['cat' => 'Автоподбор', 'q' => 'Сколько стоит автоподбор?', 'a' => 'Базовый осмотр — от 25 000 ₽, полная диагностика — от 45 000 ₽, под ключ — от 5% стоимости авто.'],
+        ['cat' => 'Автоподбор', 'q' => 'В каких городах работает автоподбор?', 'a' => 'Москва, Краснодар, Сочи, Владивосток, Уссурийск. Другие города — через партнёров.'],
+        ['cat' => 'Автоподбор', 'q' => 'Какие авто популярны для импорта?', 'a' => 'Корея: KIA Carnival, Hyundai Santa Fe. Япония: Toyota Alphard, Honda Freed. Китай: Geely Monjaro, Zeekr 001. ОАЭ: Toyota LC300.'],
+    ];
+
+    foreach ($faqs as $i => $faq) {
+        $faq_id = $create_post('cf_faq', $faq['q'], $faq['a'], ['menu_order' => $i + 1]);
+        if ($faq_id) wp_set_object_terms($faq_id, $faq['cat'], 'cf_faq_cat');
+    }
+
+    // ===================== 5. CASE STUDIES =====================
+
+    $create_post('case_study', 'KIA Carnival 2022 из Кореи — экономия 1 750 000 ₽',
+        'Клиент из Москвы искал KIA Carnival в максимальной комплектации. У дилера — 5 500 000 ₽. Мы нашли на Encar Carnival 2022 с пробегом 15 000 км в комплектации Prestige. Итог под ключ: 3 800 000 ₽. Экономия: 1 750 000 ₽.',
+        ['cf_case_model' => 'KIA Carnival', 'cf_case_budget' => '4 000 000 ₽', 'cf_case_savings' => '1750000', 'cf_case_duration' => '4 недели'],
+        ['cf_country' => 'Корея', 'cf_city' => 'Москва']);
+
+    $create_post('case_study', 'Toyota Alphard 2021 из Японии — мечта для семьи',
+        'Семья из Краснодара хотела Toyota Alphard. Нашли на USS: 2021 год, оценка 4.5, пробег 22 000 км. Под ключ: 3 200 000 ₽. У перекупов — от 4 500 000 ₽.',
+        ['cf_case_model' => 'Toyota Alphard', 'cf_case_budget' => '3 500 000 ₽', 'cf_case_savings' => '1300000', 'cf_case_duration' => '5 недель'],
+        ['cf_country' => 'Япония', 'cf_city' => 'Краснодар']);
+
+    $create_post('case_study', 'Geely Monjaro из Китая — максималка по цене базы',
+        'Клиент из Новосибирска хотел кроссовер с полным приводом. Заказали Geely Monjaro напрямую из Китая в максималке (панорама, кожа, HUD) за 2 200 000 ₽. В России базовая — 3 200 000 ₽.',
+        ['cf_case_model' => 'Geely Monjaro', 'cf_case_budget' => '2 500 000 ₽', 'cf_case_savings' => '1000000', 'cf_case_duration' => '6 недель'],
+        ['cf_country' => 'Китай', 'cf_city' => 'Новосибирск']);
+
+    $create_post('case_study', 'Hyundai Santa Fe 2023 из Кореи для семьи из Сочи',
+        'Молодая семья с двумя детьми. Подобрали Santa Fe 2023 Calligraphy с пробегом 8 000 км. Проверка по КИКС: ноль повреждений. Под ключ: 2 600 000 ₽.',
+        ['cf_case_model' => 'Hyundai Santa Fe', 'cf_case_budget' => '2 800 000 ₽', 'cf_case_savings' => '800000', 'cf_case_duration' => '3.5 недели'],
+        ['cf_country' => 'Корея', 'cf_city' => 'Сочи']);
+
+    // ===================== 6. TEAM MEMBERS =====================
+
+    foreach ([
+        ['name' => 'Иван Лещенко', 'role' => 'Основатель и руководитель', 'exp' => '7', 'order' => 1],
+        ['name' => 'Алексей Петров', 'role' => 'Менеджер по Корее', 'exp' => '5', 'order' => 2],
+        ['name' => 'Дмитрий Козлов', 'role' => 'Менеджер по Японии', 'exp' => '6', 'order' => 3],
+        ['name' => 'Елена Смирнова', 'role' => 'Логистика и растаможка', 'exp' => '4', 'order' => 4],
+        ['name' => 'Сергей Волков', 'role' => 'Эксперт по автоподбору', 'exp' => '8', 'order' => 5],
+        ['name' => 'Андрей Новиков', 'role' => 'Менеджер по Китаю', 'exp' => '3', 'order' => 6],
+    ] as $m) {
+        $create_post('cf_team', $m['name'], '', ['cf_team_role' => $m['role'], 'cf_team_experience' => $m['exp'], 'menu_order' => $m['order']]);
+    }
+
+    // ===================== 7. REVIEWS =====================
+
+    foreach ([
+        ['author' => 'Михаил К.', 'model' => 'KIA Carnival 2022', 'rating' => '5', 'text' => 'Огромное спасибо! Привезли Carnival за 3.5 недели. Сэкономили 1.7 млн. Рекомендую!', 'city' => 'Москва'],
+        ['author' => 'Анна С.', 'model' => 'Toyota Alphard 2021', 'rating' => '5', 'text' => 'Подобрали отличный Alphard. Муж в восторге, дети счастливы. Спасибо за терпение!', 'city' => 'Краснодар'],
+        ['author' => 'Дмитрий В.', 'model' => 'Hyundai Santa Fe 2023', 'rating' => '5', 'text' => 'Второй раз обращаюсь. Быстро, чётко, без сюрпризов. Спасибо менеджеру Алексею.', 'city' => 'Сочи'],
+        ['author' => 'Олег М.', 'model' => 'Geely Monjaro', 'rating' => '4', 'text' => 'Немного затянулись сроки, но качество авто превзошло ожидания. Экономия ощутимая.', 'city' => 'Новосибирск'],
+        ['author' => 'Сергей Н.', 'model' => 'Honda Freed 2020', 'rating' => '5', 'text' => 'Honda Freed с аукциона, оценка 4.5, пробег 18 000. Под ключ 1.3 млн. За эти деньги в РФ ничего нет.', 'city' => 'Владивосток'],
+    ] as $r) {
+        $create_post('cf_review', $r['author'] . ' — ' . $r['model'], $r['text'],
+            ['cf_review_author' => $r['author'], 'cf_review_model' => $r['model'], 'cf_review_rating' => $r['rating']],
+            ['cf_city' => $r['city']]);
+    }
+
+    // ===================== 8. ABOUT PAGE =====================
+
+    $upsert_page('o-kompanii', 'О компании CarFinance MSK', '<p>CarFinance MSK — компания полного цикла по импорту и подбору автомобилей из Кореи, Японии, Китая, США и ОАЭ. Основана в 2017 году.</p>
+<p>За 7 лет мы доставили более 1 200 автомобилей по всей России. Команда — 6 профессионалов с опытом от 3 до 8 лет.</p>
+<h3>Наши принципы</h3>
+<ul>
+<li><strong>Прозрачность</strong> — фиксированная стоимость в договоре</li>
+<li><strong>Ответственность</strong> — основатель лично контролирует каждую сделку</li>
+<li><strong>Экспертиза</strong> — 7 лет на рынке</li>
+<li><strong>Клиентоориентированность</strong> — 98% клиентов рекомендуют нас</li>
+</ul>
+<h3>Наши офисы</h3>
+<ul>
+<li><strong>Москва</strong> — главный офис</li>
+<li><strong>Владивосток</strong> — приём авто из Кореи и Японии</li>
+<li><strong>Краснодар</strong> — южное представительство</li>
+<li><strong>Сочи</strong> — партнёрский офис</li>
+<li><strong>Уссурийск</strong> — логистический хаб</li>
+</ul>', 'page-templates/about.php');
+
+    // ===================== MARK AS DONE =====================
+
+    update_option('cf_content_populated', true);
+
+    $log[] = "\n=== ГОТОВО! Создано записей: " . count($log) . " ===";
+
+    // Show admin notice on next page load
+    set_transient('cf_populate_log', $log, 60);
+    wp_redirect(admin_url('?cf_populated=1'));
+    exit;
+}
+
+// Show populate result notice
+add_action('admin_notices', function () {
+    $log = get_transient('cf_populate_log');
+    if ($log) {
+        echo '<div class="notice notice-success"><p><strong>Контент успешно создан!</strong></p><pre>' . esc_html(implode("\n", $log)) . '</pre></div>';
+        delete_transient('cf_populate_log');
+    }
+
+    // Show populate button if not yet run
+    if (!get_option('cf_content_populated') && !isset($_GET['cf_populate'])) {
+        $url = admin_url('?cf_populate=1');
+        echo '<div class="notice notice-info"><p><strong>CarFinance:</strong> Контент сайта ещё не заполнен. <a href="' . esc_url($url) . '" class="button button-primary">Заполнить контент</a></p></div>';
+    }
+});
