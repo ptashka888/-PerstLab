@@ -1,0 +1,137 @@
+[
+  {
+    "key": "group_cf00000d",
+    "title": "Страница калькулятора",
+    "fields": [
+      {
+        "key": "field_cf000c00",
+        "label": "Режим по умолчанию",
+        "name": "cf_calc_default_mode",
+        "type": "select",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "choices": {
+          "turnkey": "Под ключ",
+          "customs": "Таможенная пошлина",
+          "ownership": "Стоимость владения"
+        },
+        "default_value": "turnkey",
+        "return_format": "value",
+        "multiple": 0,
+        "allow_null": 0,
+        "ui": 1,
+        "ajax": 0
+      },
+      {
+        "key": "field_cf000c01",
+        "label": "Страна по умолчанию",
+        "name": "cf_calc_default_country",
+        "type": "select",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "choices": {
+          "korea": "Корея",
+          "japan": "Япония",
+          "china": "Китай",
+          "usa": "США",
+          "uae": "ОАЭ"
+        },
+        "default_value": "korea",
+        "return_format": "value",
+        "multiple": 0,
+        "allow_null": 0,
+        "ui": 1,
+        "ajax": 0
+      },
+      {
+        "key": "field_cf000c02",
+        "label": "Вступительный текст",
+        "name": "cf_calc_intro_text",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "tabs": "all",
+        "toolbar": "full",
+        "media_upload": 1,
+        "delay": 0
+      },
+      {
+        "key": "field_cf000c03",
+        "label": "FAQ",
+        "name": "cf_calc_faq",
+        "type": "relationship",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "post_type": [
+          "faq_item"
+        ],
+        "taxonomy": [],
+        "filters": [
+          "search"
+        ],
+        "elements": "",
+        "min": "",
+        "max": "",
+        "return_format": "object"
+      },
+      {
+        "key": "field_cf000c04",
+        "label": "SEO текст внизу",
+        "name": "cf_calc_seo_text",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "tabs": "all",
+        "toolbar": "full",
+        "media_upload": 1,
+        "delay": 0
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page_template",
+          "operator": "==",
+          "value": "page-calculator.php"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "modified": 1709600000
+  }
+]

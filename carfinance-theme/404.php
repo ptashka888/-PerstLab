@@ -1,23 +1,31 @@
 <?php
 /**
- * 404 Page Template
- *
- * @package CarFinance
+ * Template: 404 Not Found
  */
+
+defined('ABSPATH') || exit;
 
 get_header();
 ?>
 
-<section class="cf-section" style="text-align:center;padding:80px 0;">
-  <div class="cf-container">
-    <h1 style="font-size:4rem;color:var(--cf-primary);">404</h1>
-    <h2 class="cf-mt-2">Страница не найдена</h2>
-    <p class="cf-mt-2" style="color:var(--cf-gray-500);max-width:500px;margin:16px auto 32px;">
-      Страница была удалена или перемещена. Воспользуйтесь навигацией или вернитесь на главную.
-    </p>
-    <a href="<?php echo esc_url(home_url('/')); ?>" class="cf-btn cf-btn--primary">На главную</a>
-    <a href="<?php echo esc_url(home_url('/catalog/')); ?>" class="cf-btn cf-btn--outline" style="margin-left:12px;">Каталог</a>
-  </div>
+<section class="cf-section cf-404">
+    <div class="cf-container">
+        <div class="cf-404__content">
+            <span class="cf-404__code">404</span>
+            <h1 class="cf-404__title">Страница не найдена</h1>
+            <p class="cf-404__text">Возможно, страница была перемещена или удалена. Воспользуйтесь поиском или перейдите на главную.</p>
+            <div class="cf-404__actions">
+                <a href="<?php echo esc_url(home_url('/')); ?>" class="cf-btn cf-btn--primary">На главную</a>
+                <a href="<?php echo esc_url(get_post_type_archive_link('car_model')); ?>" class="cf-btn cf-btn--secondary">Каталог</a>
+            </div>
+            <form class="cf-404__search" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
+                <input type="search" name="s" class="cf-form__input" placeholder="Поиск по сайту..." required>
+                <button type="submit" class="cf-btn cf-btn--primary">Найти</button>
+            </form>
+        </div>
+    </div>
 </section>
 
-<?php get_footer(); ?>
+<?php
+cf_block('country-cards', ['show_comparison' => false]);
+get_footer();

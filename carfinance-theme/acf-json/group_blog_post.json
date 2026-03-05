@@ -1,0 +1,158 @@
+[
+  {
+    "key": "group_cf00000c",
+    "title": "Расширения блога",
+    "fields": [
+      {
+        "key": "field_cf000b00",
+        "label": "Имя автора",
+        "name": "cf_author_name",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "33",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000b01",
+        "label": "Должность автора",
+        "name": "cf_author_position",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "33",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000b02",
+        "label": "Фото автора",
+        "name": "cf_author_photo",
+        "type": "image",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "33",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array",
+        "preview_size": "thumbnail",
+        "library": "all"
+      },
+      {
+        "key": "field_cf000b03",
+        "label": "Связанные модели",
+        "name": "cf_related_models",
+        "type": "relationship",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "post_type": [
+          "car_model"
+        ],
+        "taxonomy": [],
+        "filters": [
+          "search"
+        ],
+        "elements": "",
+        "min": "",
+        "max": "",
+        "return_format": "object"
+      },
+      {
+        "key": "field_cf000b04",
+        "label": "Связанные теги каталога",
+        "name": "cf_related_tags",
+        "type": "taxonomy",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "taxonomy": "catalog_tag",
+        "field_type": "multi_select",
+        "allow_null": 1,
+        "add_term": 0,
+        "save_terms": 0,
+        "load_terms": 0,
+        "return_format": "id",
+        "multiple": 1
+      },
+      {
+        "key": "field_cf000b05",
+        "label": "Хаб-страница (тема)",
+        "name": "cf_hub_page",
+        "type": "taxonomy",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "taxonomy": "blog_topic",
+        "field_type": "select",
+        "allow_null": 1,
+        "add_term": 0,
+        "save_terms": 0,
+        "load_terms": 0,
+        "return_format": "id",
+        "multiple": 0
+      },
+      {
+        "key": "field_cf000b06",
+        "label": "Показывать содержание",
+        "name": "cf_show_toc",
+        "type": "true_false",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "30",
+          "class": "",
+          "id": ""
+        },
+        "default_value": 1,
+        "ui": 1,
+        "ui_on_text": "Да",
+        "ui_off_text": "Нет"
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "post"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "modified": 1709600000
+  }
+]

@@ -1,0 +1,91 @@
+/* ==========================================================================
+   CarFinance Theme — Component: Buttons
+   ========================================================================== */
+
+.cf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border-radius: var(--cf-radius);
+  font-weight: 600;
+  font-size: var(--cf-fs-base);
+  font-family: var(--cf-font);
+  line-height: 1.4;
+  transition: var(--cf-transition);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cf-btn:focus-visible {
+  outline: 2px solid var(--cf-primary);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Variants
+   -------------------------------------------------------------------------- */
+
+.cf-btn--primary {
+  background-color: var(--cf-accent);
+  color: #ffffff;
+}
+
+.cf-btn--primary:hover {
+  background-color: var(--cf-accent-dark);
+}
+
+.cf-btn--secondary {
+  background-color: transparent;
+  border: 2px solid var(--cf-primary);
+  color: var(--cf-primary);
+}
+
+.cf-btn--secondary:hover {
+  background-color: var(--cf-primary);
+  color: #ffffff;
+}
+
+.cf-btn--ghost {
+  background-color: transparent;
+  color: var(--cf-primary);
+}
+
+.cf-btn--ghost:hover {
+  background-color: var(--cf-bg-alt);
+}
+
+/* --------------------------------------------------------------------------
+   Sizes
+   -------------------------------------------------------------------------- */
+
+.cf-btn--lg {
+  padding: 16px 36px;
+  font-size: var(--cf-fs-lg);
+}
+
+.cf-btn--sm {
+  padding: 8px 16px;
+  font-size: var(--cf-fs-sm);
+}
+
+/* --------------------------------------------------------------------------
+   Modifiers
+   -------------------------------------------------------------------------- */
+
+.cf-btn--full {
+  width: 100%;
+}
+
+.cf-btn--icon {
+  gap: 8px;
+}
+
+.cf-btn:disabled,
+.cf-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}

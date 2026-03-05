@@ -1,0 +1,107 @@
+/* ==========================================================================
+   CarFinance Theme — Layout: Container, Grid, Sections
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Container
+   -------------------------------------------------------------------------- */
+
+.cf-container {
+  max-width: var(--cf-container);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.cf-container--sm {
+  max-width: var(--cf-container-sm);
+}
+
+.cf-container--lg {
+  max-width: var(--cf-container-lg);
+}
+
+/* --------------------------------------------------------------------------
+   Sections
+   -------------------------------------------------------------------------- */
+
+.cf-section {
+  padding: var(--cf-space-4xl) 0;
+}
+
+.cf-section--alt {
+  background-color: var(--cf-bg-alt);
+}
+
+.cf-section--dark {
+  background-color: var(--cf-bg-dark);
+  color: var(--cf-text-inverse);
+}
+
+.cf-section__header {
+  text-align: center;
+  margin-bottom: var(--cf-space-2xl);
+}
+
+.cf-section__title {
+  font-size: var(--cf-fs-3xl);
+  font-weight: 700;
+  margin-bottom: var(--cf-space-sm);
+}
+
+.cf-section__subtitle {
+  font-size: var(--cf-fs-lg);
+  color: var(--cf-text-light);
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Grid
+   -------------------------------------------------------------------------- */
+
+.cf-grid {
+  display: grid;
+  gap: var(--cf-space-lg);
+}
+
+.cf-grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.cf-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cf-grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* --------------------------------------------------------------------------
+   Flex
+   -------------------------------------------------------------------------- */
+
+.cf-flex {
+  display: flex;
+  gap: var(--cf-space-md);
+}
+
+.cf-flex--center {
+  align-items: center;
+  justify-content: center;
+}
+
+.cf-flex--between {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cf-flex--wrap {
+  flex-wrap: wrap;
+}
+
+.cf-flex--column {
+  flex-direction: column;
+}

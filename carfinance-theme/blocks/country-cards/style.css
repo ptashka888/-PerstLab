@@ -1,0 +1,118 @@
+.cf-country-cards {
+    padding: var(--cf-space-4xl) 0;
+}
+
+.cf-country-cards__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--cf-space-lg);
+}
+
+.cf-country-cards__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: #fff;
+    border-radius: var(--cf-radius-lg);
+    padding: var(--cf-space-xl) var(--cf-space-lg);
+    border-top: 4px solid var(--card-accent, var(--cf-primary));
+    box-shadow: 0 2px 8px var(--cf-shadow);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cf-country-cards__card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 24px var(--cf-shadow-lg);
+}
+
+.cf-country-cards__flag {
+    font-size: 3rem;
+    margin-bottom: var(--cf-space-md);
+}
+
+.cf-country-cards__name {
+    font-size: var(--cf-fs-lg);
+    font-weight: 700;
+    margin-bottom: var(--cf-space-xs);
+}
+
+.cf-country-cards__tagline {
+    font-size: var(--cf-fs-sm);
+    color: var(--cf-text-light);
+    margin-bottom: var(--cf-space-md);
+    line-height: 1.4;
+}
+
+.cf-country-cards__price {
+    font-size: var(--cf-fs-base);
+    font-weight: 700;
+    color: var(--cf-primary);
+    margin-top: auto;
+}
+
+/* Comparison table */
+.cf-country-cards__comparison {
+    margin-top: var(--cf-space-3xl);
+}
+
+.cf-country-cards__comparison-title {
+    font-size: var(--cf-fs-xl);
+    font-weight: 700;
+    margin-bottom: var(--cf-space-lg);
+    text-align: center;
+}
+
+.cf-country-cards__table-wrap {
+    overflow-x: auto;
+}
+
+.cf-country-cards__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--cf-fs-sm);
+}
+
+.cf-country-cards__table th,
+.cf-country-cards__table td {
+    padding: var(--cf-space-md);
+    text-align: center;
+    border-bottom: 1px solid var(--cf-border);
+}
+
+.cf-country-cards__table th {
+    background-color: var(--cf-bg-alt);
+    font-weight: 600;
+}
+
+.cf-country-cards__table td:first-child,
+.cf-country-cards__table th:first-child {
+    text-align: left;
+    font-weight: 600;
+}
+
+@media (max-width: 992px) {
+    .cf-country-cards__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .cf-country-cards {
+        padding: var(--cf-space-3xl) 0;
+    }
+
+    .cf-country-cards__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cf-country-cards__card {
+        padding: var(--cf-space-lg) var(--cf-space-md);
+    }
+
+    .cf-country-cards__flag {
+        font-size: 2.5rem;
+    }
+}

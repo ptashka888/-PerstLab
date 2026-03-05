@@ -1,0 +1,93 @@
+/* ==========================================================================
+   CarFinance Theme — Component: Modal
+   ========================================================================== */
+
+.cf-modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--cf-z-modal);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--cf-transition);
+  padding: var(--cf-space-lg);
+}
+
+.cf-modal--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* --------------------------------------------------------------------------
+   Modal Content
+   -------------------------------------------------------------------------- */
+
+.cf-modal__content {
+  background-color: #ffffff;
+  border-radius: var(--cf-radius-lg);
+  padding: var(--cf-space-2xl);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: scale(0.9);
+  transition: var(--cf-transition);
+}
+
+.cf-modal--active .cf-modal__content {
+  transform: scale(1);
+}
+
+/* --------------------------------------------------------------------------
+   Modal Close Button
+   -------------------------------------------------------------------------- */
+
+.cf-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--cf-text-light);
+  line-height: 1;
+  padding: 4px;
+  transition: var(--cf-transition-fast);
+}
+
+.cf-modal__close:hover {
+  color: var(--cf-text);
+}
+
+/* --------------------------------------------------------------------------
+   Modal Title
+   -------------------------------------------------------------------------- */
+
+.cf-modal__title {
+  font-size: var(--cf-fs-xl);
+  font-weight: 700;
+  margin-bottom: var(--cf-space-lg);
+}
+
+/* --------------------------------------------------------------------------
+   Modal Body
+   -------------------------------------------------------------------------- */
+
+.cf-modal__body {
+  margin-bottom: var(--cf-space-lg);
+}
+
+/* --------------------------------------------------------------------------
+   Modal Footer
+   -------------------------------------------------------------------------- */
+
+.cf-modal__footer {
+  display: flex;
+  gap: var(--cf-space-sm);
+  justify-content: flex-end;
+}

@@ -1,0 +1,108 @@
+.cf-reviews {
+    padding: var(--cf-space-4xl) 0;
+}
+
+.cf-reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--cf-space-lg);
+}
+
+.cf-reviews__card {
+    background: #fff;
+    border-radius: var(--cf-radius-lg);
+    overflow: hidden;
+    box-shadow: 0 2px 8px var(--cf-shadow);
+    transition: transform 0.2s ease;
+}
+
+.cf-reviews__card:hover {
+    transform: translateY(-2px);
+}
+
+.cf-reviews__video-wrap {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--cf-bg-alt);
+    overflow: hidden;
+}
+
+.cf-reviews__thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cf-reviews__thumbnail-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
+}
+
+.cf-reviews__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    text-decoration: none;
+}
+
+.cf-reviews__play:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.cf-reviews__play svg {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.cf-reviews__info {
+    padding: var(--cf-space-lg);
+}
+
+.cf-reviews__name {
+    font-size: var(--cf-fs-base);
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.cf-reviews__car {
+    font-size: var(--cf-fs-sm);
+    color: var(--cf-text-light);
+    margin-bottom: var(--cf-space-sm);
+}
+
+.cf-reviews__rating {
+    display: flex;
+    gap: 2px;
+}
+
+.cf-reviews__star {
+    font-size: var(--cf-fs-lg);
+    color: var(--cf-border);
+}
+
+.cf-reviews__star--active {
+    color: #f1c40f;
+}
+
+@media (max-width: 992px) {
+    .cf-reviews__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .cf-reviews {
+        padding: var(--cf-space-3xl) 0;
+    }
+
+    .cf-reviews__grid {
+        grid-template-columns: 1fr;
+    }
+}

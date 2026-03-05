@@ -1,0 +1,4 @@
+.cf-breadcrumbs-wrap {
+    padding: var(--cf-space-sm, 0.75rem) 0;
+    font-size: var(--cf-fs-sm, 0.8125rem);
+}

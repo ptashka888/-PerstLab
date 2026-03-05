@@ -1,0 +1,226 @@
+[
+  {
+    "key": "group_cf000004",
+    "title": "Страница услуги",
+    "fields": [
+      {
+        "key": "field_cf000300",
+        "label": "Иконка",
+        "name": "cf_service_icon",
+        "type": "text",
+        "instructions": "Emoji или CSS-класс иконки",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "30",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000301",
+        "label": "Краткое описание",
+        "name": "cf_service_short_desc",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "70",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3
+      },
+      {
+        "key": "field_cf000302",
+        "label": "Преимущества",
+        "name": "cf_service_benefits",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "layout": "block",
+        "button_label": "Добавить преимущество",
+        "sub_fields": [
+          {
+            "key": "field_cf000303",
+            "label": "Иконка",
+            "name": "cf_benefit_icon",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "20",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          },
+          {
+            "key": "field_cf000304",
+            "label": "Заголовок",
+            "name": "cf_benefit_title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "30",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          },
+          {
+            "key": "field_cf000305",
+            "label": "Описание",
+            "name": "cf_benefit_text",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "50",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "rows": 3
+          }
+        ]
+      },
+      {
+        "key": "field_cf000306",
+        "label": "Пакеты услуг",
+        "name": "cf_service_packages",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "layout": "block",
+        "button_label": "Добавить пакет",
+        "sub_fields": [
+          {
+            "key": "field_cf000307",
+            "label": "Название",
+            "name": "cf_package_name",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "30",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          },
+          {
+            "key": "field_cf000308",
+            "label": "Цена",
+            "name": "cf_package_price",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "20",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          },
+          {
+            "key": "field_cf000309",
+            "label": "Что входит (по строкам)",
+            "name": "cf_package_features",
+            "type": "textarea",
+            "instructions": "Каждая строка — отдельный пункт",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "35",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "rows": 5
+          },
+          {
+            "key": "field_cf00030a",
+            "label": "Популярный",
+            "name": "cf_package_is_popular",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "15",
+              "class": "",
+              "id": ""
+            },
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Да",
+            "ui_off_text": "Нет"
+          }
+        ]
+      },
+      {
+        "key": "field_cf00030b",
+        "label": "FAQ",
+        "name": "cf_service_faq",
+        "type": "relationship",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "post_type": [
+          "faq_item"
+        ],
+        "taxonomy": [],
+        "filters": [
+          "search"
+        ],
+        "elements": "",
+        "min": "",
+        "max": "",
+        "return_format": "object"
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "service_page"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "modified": 1709600000
+  }
+]

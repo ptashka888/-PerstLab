@@ -1,0 +1,270 @@
+/* ── Filter container ── */
+.cf-catalog-filter {
+    padding: var(--cf-space-lg, 2rem) 0;
+}
+
+/* ── Panel layout ── */
+.cf-catalog-filter--full-page .cf-catalog-filter__panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--cf-space-md, 1.25rem);
+    padding: var(--cf-space-lg, 2rem);
+    background: var(--cf-color-card-bg, #fff);
+    border-radius: var(--cf-radius, 8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin-bottom: var(--cf-space-lg, 2rem);
+}
+
+.cf-catalog-filter--sidebar .cf-catalog-filter__panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cf-space-md, 1.25rem);
+    padding: var(--cf-space-md, 1.25rem);
+    background: var(--cf-color-card-bg, #fff);
+    border-radius: var(--cf-radius, 8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Filter group ── */
+.cf-catalog-filter__group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 180px;
+}
+
+.cf-catalog-filter--full-page .cf-catalog-filter__group {
+    flex: 1 1 auto;
+}
+
+.cf-catalog-filter__label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--cf-fs-sm, 0.8125rem);
+    font-weight: 600;
+    color: var(--cf-color-heading, #1a1a2e);
+}
+
+.cf-catalog-filter__reset {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--cf-color-text-muted, #888);
+    padding: 0 4px;
+    line-height: 1;
+}
+
+.cf-catalog-filter__reset:hover {
+    color: var(--cf-color-danger, #dc2626);
+}
+
+/* ── Inputs ── */
+.cf-catalog-filter__select,
+.cf-catalog-filter__input {
+    padding: 8px 12px;
+    border: 1px solid var(--cf-color-border, #ddd);
+    border-radius: var(--cf-radius-sm, 6px);
+    font-size: var(--cf-fs-sm, 0.8125rem);
+    color: var(--cf-color-text, #444);
+    background: #fff;
+    outline: none;
+    transition: border-color 0.15s ease;
+}
+
+.cf-catalog-filter__select:focus,
+.cf-catalog-filter__input:focus {
+    border-color: var(--cf-color-primary, #2563eb);
+}
+
+.cf-catalog-filter__range {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.cf-catalog-filter__range .cf-catalog-filter__input {
+    flex: 1;
+    min-width: 0;
+}
+
+.cf-catalog-filter__sep {
+    color: var(--cf-color-text-muted, #888);
+}
+
+/* ── Button-style checkboxes (countries) ── */
+.cf-catalog-filter__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.cf-catalog-filter__btn-check {
+    cursor: pointer;
+}
+
+.cf-catalog-filter__btn-check input {
+    display: none;
+}
+
+.cf-catalog-filter__btn-check span {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid var(--cf-color-border, #ddd);
+    border-radius: 20px;
+    font-size: var(--cf-fs-sm, 0.8125rem);
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.cf-catalog-filter__btn-check input:checked + span {
+    background: var(--cf-color-primary, #2563eb);
+    border-color: var(--cf-color-primary, #2563eb);
+    color: #fff;
+}
+
+/* ── Regular checkboxes (body type) ── */
+.cf-catalog-filter__checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.cf-catalog-filter__checkbox {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--cf-fs-sm, 0.8125rem);
+    color: var(--cf-color-text, #444);
+    cursor: pointer;
+}
+
+/* ── Actions ── */
+.cf-catalog-filter__actions {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--cf-space-sm, 0.75rem);
+    margin-left: auto;
+}
+
+/* ── Toolbar (sort + active filters) ── */
+.cf-catalog-filter__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--cf-space-sm, 0.75rem);
+    margin-bottom: var(--cf-space-md, 1.25rem);
+}
+
+.cf-catalog-filter__active {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.cf-catalog-filter__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: var(--cf-color-primary-light, #eef2ff);
+    color: var(--cf-color-primary, #2563eb);
+    border-radius: 20px;
+    font-size: var(--cf-fs-xs, 0.75rem);
+    font-weight: 500;
+}
+
+.cf-catalog-filter__tag-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: inherit;
+    padding: 0;
+    line-height: 1;
+}
+
+.cf-catalog-filter__sort {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--cf-fs-sm, 0.8125rem);
+    margin-left: auto;
+}
+
+/* ── Results grid ── */
+.cf-catalog-filter__results {
+    position: relative;
+    min-height: 200px;
+}
+
+.cf-catalog-filter__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--cf-space-md, 1.25rem);
+}
+
+/* ── Loading spinner ── */
+.cf-catalog-filter__spinner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 10;
+    border-radius: var(--cf-radius, 8px);
+}
+
+.cf-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--cf-color-border, #ddd);
+    border-top-color: var(--cf-color-primary, #2563eb);
+    border-radius: 50%;
+    animation: cf-spin 0.7s linear infinite;
+}
+
+@keyframes cf-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Pagination ── */
+.cf-catalog-filter__pagination {
+    display: flex;
+    justify-content: center;
+    padding: var(--cf-space-lg, 2rem) 0;
+}
+
+/* ── Mobile: bottom sheet ── */
+@media (max-width: 768px) {
+    .cf-catalog-filter--full-page .cf-catalog-filter__panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        flex-direction: column;
+        max-height: 80vh;
+        overflow-y: auto;
+        border-radius: var(--cf-radius, 8px) var(--cf-radius, 8px) 0 0;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+    }
+
+    .cf-catalog-filter--full-page .cf-catalog-filter__panel.is-open {
+        transform: translateY(0);
+    }
+
+    .cf-catalog-filter__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .cf-catalog-filter__grid {
+        grid-template-columns: 1fr;
+    }
+}

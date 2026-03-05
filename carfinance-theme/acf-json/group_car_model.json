@@ -1,0 +1,429 @@
+[
+  {
+    "key": "group_cf000006",
+    "title": "Модель автомобиля",
+    "fields": [
+      {
+        "key": "field_cf000500",
+        "label": "Основное",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_cf000501",
+        "label": "Цена от (RUB)",
+        "name": "cf_price_from",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000502",
+        "label": "Цена до (RUB)",
+        "name": "cf_price_to",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000503",
+        "label": "Год выпуска",
+        "name": "cf_year",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "15",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000504",
+        "label": "Год до (для диапазона)",
+        "name": "cf_year_to",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "15",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000505",
+        "label": "Поколение",
+        "name": "cf_generation",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "20",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000506",
+        "label": "Характеристики",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_cf000507",
+        "label": "Объём двигателя (куб.см)",
+        "name": "cf_engine_cc",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000508",
+        "label": "Мощность (л.с.)",
+        "name": "cf_power_hp",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000509",
+        "label": "Тип топлива",
+        "name": "cf_fuel_type",
+        "type": "select",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "choices": {
+          "petrol": "Бензин",
+          "diesel": "Дизель",
+          "hybrid": "Гибрид",
+          "electric": "Электро"
+        },
+        "default_value": "petrol",
+        "return_format": "value",
+        "multiple": 0,
+        "allow_null": 0,
+        "ui": 1,
+        "ajax": 0
+      },
+      {
+        "key": "field_cf00050a",
+        "label": "КПП",
+        "name": "cf_transmission",
+        "type": "select",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "choices": {
+          "automatic": "Автомат",
+          "manual": "Механика",
+          "robot": "Робот",
+          "variator": "Вариатор"
+        },
+        "default_value": "automatic",
+        "return_format": "value",
+        "multiple": 0,
+        "allow_null": 0,
+        "ui": 1,
+        "ajax": 0
+      },
+      {
+        "key": "field_cf00050b",
+        "label": "Привод",
+        "name": "cf_drive",
+        "type": "select",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "choices": {
+          "fwd": "Передний",
+          "rwd": "Задний",
+          "awd": "Полный"
+        },
+        "default_value": "fwd",
+        "return_format": "value",
+        "multiple": 0,
+        "allow_null": 0,
+        "ui": 1,
+        "ajax": 0
+      },
+      {
+        "key": "field_cf00050c",
+        "label": "Количество мест",
+        "name": "cf_body_seats",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": 5
+      },
+      {
+        "key": "field_cf00050d",
+        "label": "Расход топлива (л/100км)",
+        "name": "cf_fuel_consumption",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "step": 0.1
+      },
+      {
+        "key": "field_cf00050e",
+        "label": "Галерея",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_cf00050f",
+        "label": "Фотогалерея",
+        "name": "cf_gallery",
+        "type": "gallery",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array",
+        "preview_size": "medium",
+        "insert": "append",
+        "library": "all",
+        "min": "",
+        "max": ""
+      },
+      {
+        "key": "field_cf000510",
+        "label": "Описание",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_cf000511",
+        "label": "Полное описание",
+        "name": "cf_full_description",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "tabs": "all",
+        "toolbar": "full",
+        "media_upload": 1,
+        "delay": 0
+      },
+      {
+        "key": "field_cf000512",
+        "label": "Плюсы и минусы",
+        "name": "cf_pros_cons",
+        "type": "group",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "layout": "block",
+        "sub_fields": [
+          {
+            "key": "field_cf000513",
+            "label": "Плюсы (по строкам)",
+            "name": "cf_pros",
+            "type": "textarea",
+            "instructions": "Каждая строка — отдельный пункт",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "50",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "rows": 5
+          },
+          {
+            "key": "field_cf000514",
+            "label": "Минусы (по строкам)",
+            "name": "cf_cons",
+            "type": "textarea",
+            "instructions": "Каждая строка — отдельный пункт",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "50",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "rows": 5
+          }
+        ]
+      },
+      {
+        "key": "field_cf000515",
+        "label": "Связи",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_cf000516",
+        "label": "FAQ",
+        "name": "cf_related_faq",
+        "type": "relationship",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "post_type": [
+          "faq_item"
+        ],
+        "taxonomy": [],
+        "filters": [
+          "search"
+        ],
+        "elements": "",
+        "min": "",
+        "max": "",
+        "return_format": "object"
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "car_model"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "modified": 1709600000
+  }
+]

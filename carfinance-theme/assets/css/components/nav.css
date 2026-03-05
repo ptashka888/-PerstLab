@@ -1,0 +1,208 @@
+/* ==========================================================================
+   CarFinance Theme — Component: Navigation (Breadcrumbs, Pagination, Tabs, Mobile Nav)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Breadcrumbs
+   -------------------------------------------------------------------------- */
+
+.cf-breadcrumbs {
+  padding: var(--cf-space-md) 0;
+  font-size: var(--cf-fs-sm);
+}
+
+.cf-breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cf-space-xs);
+  list-style: none;
+}
+
+.cf-breadcrumbs li {
+  display: flex;
+  align-items: center;
+}
+
+.cf-breadcrumbs li:not(:last-child)::after {
+  content: "\2192";
+  margin-left: var(--cf-space-xs);
+  color: var(--cf-text-light);
+}
+
+.cf-breadcrumbs a {
+  color: var(--cf-primary);
+  text-decoration: none;
+  transition: var(--cf-transition-fast);
+}
+
+.cf-breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.cf-breadcrumbs [aria-current] {
+  color: var(--cf-text-light);
+}
+
+/* --------------------------------------------------------------------------
+   Pagination
+   -------------------------------------------------------------------------- */
+
+.cf-pagination {
+  display: flex;
+  justify-content: center;
+  gap: var(--cf-space-xs);
+  margin-top: var(--cf-space-2xl);
+}
+
+.cf-pagination__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--cf-radius);
+  border: 1px solid var(--cf-border);
+  color: var(--cf-text);
+  font-size: var(--cf-fs-sm);
+  font-weight: 500;
+  text-decoration: none;
+  transition: var(--cf-transition);
+}
+
+.cf-pagination__link:hover {
+  border-color: var(--cf-primary);
+  color: var(--cf-primary);
+}
+
+.cf-pagination__link--active {
+  background-color: var(--cf-primary);
+  color: #ffffff;
+  border-color: var(--cf-primary);
+}
+
+.cf-pagination__link--active:hover {
+  color: #ffffff;
+}
+
+.cf-pagination__link--disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Tabs
+   -------------------------------------------------------------------------- */
+
+.cf-tabs {
+  display: flex;
+  gap: var(--cf-space-sm);
+  border-bottom: 2px solid var(--cf-border);
+}
+
+.cf-tabs__item {
+  padding: var(--cf-space-sm) var(--cf-space-lg);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  font-weight: 500;
+  color: var(--cf-text-light);
+  transition: var(--cf-transition);
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-size: var(--cf-fs-base);
+  font-family: var(--cf-font);
+}
+
+.cf-tabs__item:hover {
+  color: var(--cf-text);
+}
+
+.cf-tabs__item--active {
+  border-bottom-color: var(--cf-primary);
+  color: var(--cf-primary);
+}
+
+.cf-tabs__content {
+  padding: var(--cf-space-lg) 0;
+}
+
+.cf-tabs__panel {
+  display: none;
+}
+
+.cf-tabs__panel--active {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Navigation
+   -------------------------------------------------------------------------- */
+
+.cf-mobile-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100vh;
+  background-color: #ffffff;
+  z-index: var(--cf-z-modal);
+  transform: translateX(100%);
+  transition: var(--cf-transition);
+  box-shadow: -4px 0 24px var(--cf-shadow-lg);
+  overflow-y: auto;
+  padding: var(--cf-space-xl) var(--cf-space-lg);
+}
+
+.cf-mobile-nav--open {
+  transform: translateX(0);
+}
+
+.cf-mobile-nav__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--cf-text-light);
+}
+
+.cf-mobile-nav__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cf-space-xs);
+  margin-top: var(--cf-space-xl);
+}
+
+.cf-mobile-nav__link {
+  display: block;
+  padding: var(--cf-space-sm) 0;
+  font-weight: 500;
+  color: var(--cf-text);
+  border-bottom: 1px solid var(--cf-border);
+  transition: var(--cf-transition-fast);
+}
+
+.cf-mobile-nav__link:hover {
+  color: var(--cf-primary);
+}
+
+/* Mobile nav overlay */
+.cf-mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: calc(var(--cf-z-modal) - 1);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--cf-transition);
+}
+
+.cf-mobile-nav-overlay--active {
+  opacity: 1;
+  visibility: visible;
+}

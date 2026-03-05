@@ -1,0 +1,189 @@
+/* ==========================================================================
+   CarFinance Theme — Responsive Media Queries
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Large Desktops (max-width: 1200px)
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1200px) {
+  .cf-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .cf-grid--4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cf-nav {
+    gap: var(--cf-space-md);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Tablets (max-width: 992px)
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 992px) {
+  .cf-grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cf-grid--3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Show burger, hide desktop nav */
+  .cf-burger {
+    display: flex;
+  }
+
+  .cf-nav {
+    display: none;
+  }
+
+  .cf-header__phone {
+    font-size: var(--cf-fs-base);
+  }
+
+  /* Footer: 2 columns */
+  .cf-footer__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cf-section {
+    padding: var(--cf-space-3xl) 0;
+  }
+
+  .cf-section__title {
+    font-size: var(--cf-fs-2xl);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile (max-width: 768px)
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .cf-grid--2,
+  .cf-grid--3,
+  .cf-grid--4 {
+    grid-template-columns: 1fr;
+  }
+
+  .cf-section {
+    padding: var(--cf-space-2xl) 0;
+  }
+
+  .cf-section__title {
+    font-size: var(--cf-fs-2xl);
+  }
+
+  .cf-section__subtitle {
+    font-size: var(--cf-fs-base);
+  }
+
+  /* Topbar: hide cities */
+  .cf-topbar__cities {
+    display: none;
+  }
+
+  /* Header phone: icon only */
+  .cf-header__phone-text {
+    display: none;
+  }
+
+  /* Horizontal card becomes vertical */
+  .cf-card--horizontal {
+    grid-template-columns: 1fr;
+  }
+
+  .cf-card--horizontal .cf-card__image {
+    aspect-ratio: 16 / 9;
+  }
+
+  /* Forms: single column */
+  .cf-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Reduce heading sizes */
+  h1 {
+    font-size: var(--cf-fs-2xl);
+  }
+
+  h2 {
+    font-size: var(--cf-fs-xl);
+  }
+
+  h3 {
+    font-size: var(--cf-fs-lg);
+  }
+
+  /* Tabs: scrollable */
+  .cf-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cf-tabs__item {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Footer bottom: stack */
+  .cf-footer__bottom {
+    flex-direction: column;
+    gap: var(--cf-space-sm);
+    text-align: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Small Mobile (max-width: 480px)
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 480px) {
+  .cf-container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .cf-btn--lg {
+    width: 100%;
+  }
+
+  .cf-section__title {
+    font-size: var(--cf-fs-xl);
+  }
+
+  .cf-card__price {
+    font-size: var(--cf-fs-lg);
+  }
+
+  .cf-card__specs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Footer: single column */
+  .cf-footer__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cf-header__cta {
+    padding: 8px 16px;
+    font-size: var(--cf-fs-xs);
+  }
+
+  .cf-modal__content {
+    padding: var(--cf-space-lg);
+    width: 95%;
+  }
+
+  .cf-pagination__link {
+    width: 36px;
+    height: 36px;
+    font-size: var(--cf-fs-xs);
+  }
+}

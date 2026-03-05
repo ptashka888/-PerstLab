@@ -1,0 +1,194 @@
+/* ==========================================================================
+   CarFinance Theme — Component: Header
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Top Bar
+   -------------------------------------------------------------------------- */
+
+.cf-topbar {
+  background-color: var(--cf-bg-dark);
+  color: var(--cf-text-inverse);
+  padding: 8px 0;
+  font-size: var(--cf-fs-sm);
+}
+
+.cf-topbar__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cf-topbar__cities {
+  display: flex;
+  gap: var(--cf-space-md);
+}
+
+.cf-topbar__cities a {
+  color: rgba(255, 255, 255, 0.7);
+  transition: var(--cf-transition-fast);
+}
+
+.cf-topbar__cities a:hover,
+.cf-topbar__cities a.active {
+  color: #ffffff;
+}
+
+.cf-topbar__contacts {
+  display: flex;
+  gap: var(--cf-space-lg);
+  align-items: center;
+}
+
+.cf-topbar__contacts a {
+  color: rgba(255, 255, 255, 0.7);
+  transition: var(--cf-transition-fast);
+}
+
+.cf-topbar__contacts a:hover {
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+
+.cf-header {
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px var(--cf-shadow);
+  position: sticky;
+  top: 0;
+  z-index: var(--cf-z-sticky);
+}
+
+.cf-header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.cf-header__logo img {
+  height: 48px;
+  width: auto;
+}
+
+.cf-header__phone {
+  font-weight: 700;
+  font-size: var(--cf-fs-lg);
+  color: var(--cf-primary);
+  text-decoration: none;
+}
+
+.cf-header__phone:hover {
+  color: var(--cf-primary-dark);
+}
+
+.cf-header__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  background-color: var(--cf-accent);
+  color: #ffffff;
+  border-radius: var(--cf-radius);
+  font-weight: 600;
+  font-size: var(--cf-fs-sm);
+  transition: var(--cf-transition);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.cf-header__cta:hover {
+  background-color: var(--cf-accent-dark);
+}
+
+/* --------------------------------------------------------------------------
+   Navigation
+   -------------------------------------------------------------------------- */
+
+.cf-nav {
+  display: flex;
+  gap: var(--cf-space-lg);
+  align-items: center;
+}
+
+.cf-nav__item {
+  position: relative;
+  font-weight: 500;
+  color: var(--cf-text);
+  transition: var(--cf-transition-fast);
+  padding: 8px 0;
+}
+
+.cf-nav__item:hover {
+  color: var(--cf-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Dropdown
+   -------------------------------------------------------------------------- */
+
+.cf-nav__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px var(--cf-shadow-lg);
+  border-radius: var(--cf-radius);
+  min-width: 220px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: var(--cf-transition);
+  padding: var(--cf-space-sm) 0;
+  z-index: var(--cf-z-dropdown);
+}
+
+.cf-nav__item:hover .cf-nav__dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.cf-nav__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  color: var(--cf-text);
+  transition: var(--cf-transition-fast);
+  font-size: var(--cf-fs-sm);
+}
+
+.cf-nav__dropdown-item:hover {
+  background-color: var(--cf-bg-alt);
+  color: var(--cf-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Burger (mobile — hidden on desktop)
+   -------------------------------------------------------------------------- */
+
+.cf-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.cf-burger__line {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--cf-text);
+  border-radius: 1px;
+  transition: var(--cf-transition);
+}

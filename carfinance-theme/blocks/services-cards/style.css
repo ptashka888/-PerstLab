@@ -1,0 +1,119 @@
+/* Block: Services Cards */
+.cf-services-cards {
+    padding: 60px 0;
+}
+
+.cf-services-cards__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.cf-services-cards__title {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+    color: var(--cf-text, #1a1a2e);
+}
+
+.cf-services-cards__subtitle {
+    text-align: center;
+    font-size: 16px;
+    color: var(--cf-text-secondary, #6b7280);
+    margin-bottom: 40px;
+}
+
+/* Grid */
+.cf-services-cards__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* Card */
+.cf-services-cards__card {
+    background: var(--cf-bg, #fff);
+    border-radius: 12px;
+    padding: 32px 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-bottom: 3px solid transparent;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.cf-services-cards__card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-bottom-color: var(--cf-primary, #2563eb);
+}
+
+/* Icon */
+.cf-services-cards__icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.cf-services-cards__icon-inner {
+    width: 28px;
+    height: 28px;
+    background: var(--cf-primary, #2563eb);
+    border-radius: 4px;
+    opacity: 0.8;
+}
+
+/* Content */
+.cf-services-cards__card-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--cf-text, #1a1a2e);
+    margin-bottom: 10px;
+}
+
+.cf-services-cards__card-text {
+    font-size: 15px;
+    color: var(--cf-text-secondary, #6b7280);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.cf-services-cards__link {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--cf-primary, #2563eb);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.cf-services-cards__link:hover {
+    color: var(--cf-primary-dark, #1d4ed8);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .cf-services-cards__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .cf-services-cards {
+        padding: 40px 0;
+    }
+
+    .cf-services-cards__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cf-services-cards__title {
+        font-size: 26px;
+    }
+
+    .cf-services-cards__card {
+        padding: 24px 20px;
+    }
+}
