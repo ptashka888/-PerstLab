@@ -186,32 +186,66 @@
           btn.disabled = true;
         }
 
-        // Simulate form submission (replace with real AJAX in production)
-        setTimeout(function () {
-          // Clear form
-          form.reset();
+        // Build form data
+        var data = new FormData(form);
+        data.append('action', 'cf_lead');
+        data.append('nonce',  (window.cfMain && window.cfMain.nonce) ? window.cfMain.nonce : '');
+        data.append('page_url', window.location.href);
 
-          // Show success
-          if (btn) {
-            btn.textContent = 'Заявка отправлена!';
-            btn.style.background = 'var(--cf-accent)';
-          }
+        var ajaxUrl = (window.cfMain && window.cfMain.ajaxUrl)
+          ? window.cfMain.ajaxUrl
+          : '/wp-admin/admin-ajax.php';
 
-          // Reset button after 3 seconds
-          setTimeout(function () {
+        fetch(ajaxUrl, {
+          method: 'POST',
+          credentials: 'same-origin',
+          body: data,
+        })
+          .then(function (res) { return res.json(); })
+          .then(function (json) {
+            if (json.success) {
+              form.reset();
+              if (btn) {
+                btn.textContent = '✓ Заявка отправлена!';
+                btn.style.background = 'var(--cf-accent, #0f9d58)';
+              }
+              // Close modal after 2.5 seconds
+              setTimeout(function () {
+                if (btn) {
+                  btn.textContent = originalText;
+                  btn.disabled = false;
+                  btn.style.background = '';
+                }
+                var modal = form.closest('.cf-modal');
+                if (modal) {
+                  modal.style.display = 'none';
+                  document.body.style.overflow = '';
+                }
+              }, 2500);
+            } else {
+              var msg = (json.data && json.data.message) ? json.data.message : 'Ошибка отправки. Позвоните нам.';
+              if (btn) {
+                btn.textContent = msg;
+                btn.style.background = '#dc2626';
+                setTimeout(function () {
+                  btn.textContent = originalText;
+                  btn.disabled = false;
+                  btn.style.background = '';
+                }, 4000);
+              }
+            }
+          })
+          .catch(function () {
             if (btn) {
-              btn.textContent = originalText;
-              btn.disabled = false;
-              btn.style.background = '';
+              btn.textContent = 'Ошибка соединения. Позвоните нам.';
+              btn.style.background = '#dc2626';
+              setTimeout(function () {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                btn.style.background = '';
+              }, 4000);
             }
-            // Close modal if inside one
-            var modal = form.closest('.cf-modal');
-            if (modal) {
-              modal.style.display = 'none';
-              document.body.style.overflow = '';
-            }
-          }, 3000);
-        }, 1000);
+          });
       });
     });
   }

@@ -30,6 +30,7 @@ require_once CF_DIR . '/inc/interlinking.php';
 require_once CF_DIR . '/inc/catalog-filter.php';
 require_once CF_DIR . '/inc/catalog-tags.php';
 require_once CF_DIR . '/inc/calculator-ajax.php';
+require_once CF_DIR . '/inc/lead-form-ajax.php';
 require_once CF_DIR . '/inc/multisite.php';
 
 /* ==========================================================================
@@ -134,6 +135,10 @@ add_action('wp_enqueue_scripts', function (): void {
 
     // Main JS
     wp_enqueue_script('cf-main', CF_URI . '/assets/js/main.js', [], CF_VERSION, true);
+    wp_localize_script('cf-main', 'cfMain', [
+        'ajaxUrl' => admin_url('admin-ajax.php'),
+        'nonce'   => wp_create_nonce('cf_lead_nonce'),
+    ]);
 });
 
 /* ==========================================================================
@@ -250,6 +255,7 @@ add_action('manage_car_model_posts_custom_column', function (string $column, int
    ========================================================================== */
 
 add_action('after_switch_theme', 'cf_create_default_pages');
+add_action('after_switch_theme', 'cf_create_service_cpt_pages');
 
 function cf_create_default_pages(): void {
     $pages = [
@@ -284,6 +290,59 @@ function cf_create_default_pages(): void {
 
         if ($slug === 'blog' && !is_wp_error($page_id)) {
             update_option('page_for_posts', $page_id);
+        }
+    }
+
+    flush_rewrite_rules();
+}
+
+/**
+ * Create default service_page CPT entries so /services/{slug}/ URLs resolve correctly.
+ * Hooked on after_switch_theme — skips entries that already exist.
+ */
+function cf_create_service_cpt_pages(): void {
+    $services = [
+        'kredit-lizing' => [
+            'title'      => 'Кредит и лизинг на авто из Кореи и Китая',
+            'icon'       => '💳',
+            'short_desc' => 'Помогаем получить автокредит или оформить лизинг на импортный автомобиль из Кореи, Китая, Японии. Ставки от 5,9% годовых, срок до 7 лет.',
+        ],
+        'import-pod-klyuch' => [
+            'title'      => 'Импорт авто под ключ из Кореи, Китая, Японии',
+            'icon'       => '🚢',
+            'short_desc' => 'Полный цикл: подбор, аукцион, выкуп, логистика, таможня, СБКТС, постановка на учёт. Вы получаете готовый автомобиль с документами РФ.',
+        ],
+        'trade-in' => [
+            'title'      => 'Трейд-ин — обмен вашего авто на импортное',
+            'icon'       => '🔄',
+            'short_desc' => 'Сдайте ваш автомобиль в счёт стоимости нового. Честная оценка за 15 минут, мгновенный зачёт, без очередей и торговли.',
+        ],
+    ];
+
+    foreach ($services as $slug => $data) {
+        // Check if post with this slug already exists for this CPT
+        $existing = get_posts([
+            'name'        => $slug,
+            'post_type'   => 'service_page',
+            'post_status' => 'publish',
+            'numberposts' => 1,
+        ]);
+
+        if ($existing) {
+            continue;
+        }
+
+        $post_id = wp_insert_post([
+            'post_title'   => $data['title'],
+            'post_name'    => $slug,
+            'post_status'  => 'publish',
+            'post_type'    => 'service_page',
+            'post_content' => '',
+        ]);
+
+        if (!is_wp_error($post_id)) {
+            update_post_meta($post_id, 'cf_service_icon',       $data['icon']);
+            update_post_meta($post_id, 'cf_service_short_desc', $data['short_desc']);
         }
     }
 
