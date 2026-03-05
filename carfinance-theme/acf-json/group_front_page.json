@@ -1,0 +1,184 @@
+[
+  {
+    "key": "group_cf000002",
+    "title": "Настройки главной страницы",
+    "fields": [
+      {
+        "key": "field_cf000100",
+        "label": "Заголовок Hero",
+        "name": "cf_hero_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000101",
+        "label": "Подзаголовок Hero",
+        "name": "cf_hero_subtitle",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3
+      },
+      {
+        "key": "field_cf000102",
+        "label": "Фоновое изображение",
+        "name": "cf_hero_image",
+        "type": "image",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array",
+        "preview_size": "medium",
+        "library": "all"
+      },
+      {
+        "key": "field_cf000103",
+        "label": "Счётчики",
+        "name": "cf_counters",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "layout": "table",
+        "button_label": "Добавить счётчик",
+        "sub_fields": [
+          {
+            "key": "field_cf000104",
+            "label": "Значение",
+            "name": "cf_counter_value",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "33",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          },
+          {
+            "key": "field_cf000105",
+            "label": "Подпись",
+            "name": "cf_counter_label",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "34",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          },
+          {
+            "key": "field_cf000106",
+            "label": "Суффикс (+, шт, и т.д.)",
+            "name": "cf_counter_suffix",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "33",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "key": "field_cf000107",
+        "label": "Показывать секции",
+        "name": "cf_show_sections",
+        "type": "checkbox",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "choices": {
+          "dealer-traps": "Ловушки дилеров",
+          "self-vs-us": "Сами vs с нами",
+          "checklist": "Чек-лист",
+          "country-cards": "Карточки стран",
+          "pricing": "Цены",
+          "calculator": "Калькулятор",
+          "cases": "Кейсы",
+          "steps": "Этапы работы",
+          "founder": "Основатель",
+          "team": "Команда",
+          "services": "Услуги",
+          "comparison": "Сравнение",
+          "reviews": "Отзывы",
+          "faq": "FAQ"
+        },
+        "default_value": [
+          "dealer-traps",
+          "self-vs-us",
+          "checklist",
+          "country-cards",
+          "pricing",
+          "calculator",
+          "cases",
+          "steps",
+          "founder",
+          "team",
+          "services",
+          "comparison",
+          "reviews",
+          "faq"
+        ],
+        "layout": "vertical",
+        "toggle": 1,
+        "return_format": "value"
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page_type",
+          "operator": "==",
+          "value": "front_page"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "modified": 1709600000
+  }
+]

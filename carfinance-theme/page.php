@@ -1,33 +1,25 @@
 <?php
 /**
- * Default Page Template
- *
+ * Template: Default Page
  * Used for SILO pillar pages and generic pages
- * that don't have a specific template.
- *
- * @package CarFinance
  */
+
+defined('ABSPATH') || exit;
 
 get_header();
 ?>
 
-<section class="cf-section" style="padding-top:32px;">
-  <div class="cf-container">
-    <h1><?php the_title(); ?></h1>
+<article class="cf-page">
+    <div class="cf-container">
+        <h1 class="cf-page__title"><?php the_title(); ?></h1>
 
-    <div class="cf-mt-3" style="max-width:800px;line-height:1.8;">
-      <?php the_content(); ?>
+        <div class="cf-page__content cf-content">
+            <?php the_content(); ?>
+        </div>
     </div>
-  </div>
-</section>
+</article>
 
-<!-- CTA -->
-<section class="cf-cta">
-  <div class="cf-container">
-    <h2>Остались вопросы?</h2>
-    <p>Оставьте заявку — мы свяжемся с вами в течение 15 минут</p>
-    <a href="#cf-lead-modal" class="cf-btn cf-btn--secondary cf-btn--lg" data-modal="lead">Оставить заявку</a>
-  </div>
-</section>
-
-<?php get_footer(); ?>
+<?php
+cf_block('faq', ['source' => 'page']);
+cf_block('cta-final', ['variant' => 'default']);
+get_footer();

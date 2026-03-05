@@ -1,0 +1,116 @@
+/* Block: CTA Final */
+.cf-cta {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    text-align: center;
+    color: #fff;
+}
+
+.cf-cta__container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.cf-cta__title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.cf-cta__subtitle {
+    font-size: 18px;
+    opacity: 0.85;
+    margin-bottom: 36px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Urgency variant accent */
+.cf-cta--urgency .cf-cta__subtitle {
+    color: #fbbf24;
+    opacity: 1;
+    font-weight: 500;
+}
+
+/* Actions */
+.cf-cta__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* CTA Button with pulse */
+.cf-cta__button {
+    display: inline-block;
+    padding: 18px 48px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--cf-primary, #2563eb);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.2s, transform 0.2s;
+    animation: cf-cta-pulse 2s infinite;
+}
+
+.cf-cta__button:hover {
+    background: var(--cf-primary-dark, #1d4ed8);
+    transform: scale(1.03);
+    animation: none;
+}
+
+@keyframes cf-cta-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5);
+    }
+    70% {
+        box-shadow: 0 0 0 16px rgba(37, 99, 235, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+    }
+}
+
+/* Phone */
+.cf-cta__phone {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+.cf-cta__phone:hover {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .cf-cta {
+        padding: 48px 0;
+    }
+
+    .cf-cta__title {
+        font-size: 26px;
+    }
+
+    .cf-cta__subtitle {
+        font-size: 16px;
+    }
+
+    .cf-cta__button {
+        padding: 16px 36px;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .cf-cta__phone {
+        font-size: 18px;
+    }
+}

@@ -1,0 +1,213 @@
+[
+  {
+    "key": "group_cf000005",
+    "title": "Страница города",
+    "fields": [
+      {
+        "key": "field_cf000400",
+        "label": "Название города",
+        "name": "cf_city_name",
+        "type": "text",
+        "instructions": "",
+        "required": 1,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "33",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000401",
+        "label": "В предложном падеже (в Краснодаре)",
+        "name": "cf_city_name_prepositional",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "33",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000402",
+        "label": "В родительном падеже (Краснодара)",
+        "name": "cf_city_name_genitive",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "33",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000403",
+        "label": "Местный телефон",
+        "name": "cf_city_phone",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000404",
+        "label": "Адрес офиса",
+        "name": "cf_city_address",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3
+      },
+      {
+        "key": "field_cf000405",
+        "label": "Широта",
+        "name": "cf_city_lat",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "step": 0.000001
+      },
+      {
+        "key": "field_cf000406",
+        "label": "Долгота",
+        "name": "cf_city_lng",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "step": 0.000001
+      },
+      {
+        "key": "field_cf000407",
+        "label": "Регион",
+        "name": "cf_city_region",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000408",
+        "label": "Статистика",
+        "name": "cf_city_stats",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "layout": "table",
+        "button_label": "Добавить показатель",
+        "sub_fields": [
+          {
+            "key": "field_cf000409",
+            "label": "Значение",
+            "name": "cf_stat_value",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "50",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          },
+          {
+            "key": "field_cf00040a",
+            "label": "Подпись",
+            "name": "cf_stat_label",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "50",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "key": "field_cf00040b",
+        "label": "SEO текст",
+        "name": "cf_city_seo_text",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "tabs": "all",
+        "toolbar": "full",
+        "media_upload": 1,
+        "delay": 0
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "city_page"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "modified": 1709600000
+  }
+]

@@ -1,0 +1,142 @@
+/* Block: FAQ */
+.cf-faq {
+    padding: 60px 0;
+}
+
+.cf-faq__container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.cf-faq__title {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 32px;
+    color: var(--cf-text, #1a1a2e);
+}
+
+/* List */
+.cf-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Item */
+.cf-faq__item {
+    border-bottom: 1px solid var(--cf-border, #e5e7eb);
+}
+
+.cf-faq__item:first-child {
+    border-top: 1px solid var(--cf-border, #e5e7eb);
+}
+
+/* Question button */
+.cf-faq__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    gap: 16px;
+}
+
+.cf-faq__question-text {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--cf-text, #1a1a2e);
+    line-height: 1.4;
+}
+
+.cf-faq__question:hover .cf-faq__question-text {
+    color: var(--cf-primary, #2563eb);
+}
+
+/* Plus/minus indicator */
+.cf-faq__indicator {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.cf-faq__indicator::before,
+.cf-faq__indicator::after {
+    content: '';
+    position: absolute;
+    background: var(--cf-text-secondary, #6b7280);
+    border-radius: 2px;
+    transition: transform 0.3s ease;
+}
+
+.cf-faq__indicator::before {
+    top: 50%;
+    left: 4px;
+    right: 4px;
+    height: 2px;
+    transform: translateY(-50%);
+}
+
+.cf-faq__indicator::after {
+    left: 50%;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    transform: translateX(-50%);
+}
+
+.cf-faq__item--open .cf-faq__indicator::after {
+    transform: translateX(-50%) rotate(90deg);
+    opacity: 0;
+}
+
+/* Answer */
+.cf-faq__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+}
+
+.cf-faq__item--open .cf-faq__answer {
+    max-height: 500px;
+}
+
+.cf-faq__answer-inner {
+    padding: 0 0 20px 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--cf-text-secondary, #4b5563);
+}
+
+.cf-faq__answer-inner p {
+    margin: 0 0 12px 0;
+}
+
+.cf-faq__answer-inner p:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .cf-faq {
+        padding: 40px 0;
+    }
+
+    .cf-faq__title {
+        font-size: 26px;
+    }
+
+    .cf-faq__question {
+        padding: 16px 0;
+    }
+
+    .cf-faq__question-text {
+        font-size: 15px;
+    }
+}

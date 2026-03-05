@@ -1,244 +1,209 @@
 <?php
 /**
- * Single Car Model Template
- *
- * /catalog/[brand]/[model]/[generation]/
- *
- * Blocks: Hero gallery, specs, active lots, price forecast,
- * calculator (preset), video reviews, similar models in budget,
- * reviews, FAQ.
- *
- * @package CarFinance
+ * Template: Single Car Model
+ * URL: /catalog/{brand}/{model-slug}/
  */
+
+defined('ABSPATH') || exit;
 
 get_header();
 
 $post_id   = get_the_ID();
-$brand     = '';
-$brands    = get_the_terms($post_id, 'cf_brand');
-if ($brands && !is_wp_error($brands)) {
-    $brand = $brands[0]->name;
-}
+$brands    = get_the_terms($post_id, 'car_brand');
+$brand     = $brands ? $brands[0] : null;
+$countries = get_the_terms($post_id, 'car_country');
+$country   = $countries ? $countries[0] : null;
 
-$country_terms = get_the_terms($post_id, 'cf_country');
-$country_name  = ($country_terms && !is_wp_error($country_terms)) ? $country_terms[0]->name : '';
+$price_from   = cf_get_field('cf_price_from', $post_id);
+$price_to     = cf_get_field('cf_price_to', $post_id);
+$year         = cf_get_field('cf_year', $post_id);
+$year_to      = cf_get_field('cf_year_to', $post_id);
+$engine_cc    = cf_get_field('cf_engine_cc', $post_id);
+$power_hp     = cf_get_field('cf_power_hp', $post_id);
+$fuel_type    = cf_get_field('cf_fuel_type', $post_id);
+$transmission = cf_get_field('cf_transmission', $post_id);
+$drive        = cf_get_field('cf_drive', $post_id);
+$gallery      = cf_get_field('cf_gallery', $post_id);
+$description  = cf_get_field('cf_full_description', $post_id);
+$pros_cons    = cf_get_field('cf_pros_cons', $post_id);
 
-$year_from    = get_post_meta($post_id, 'cf_year_from', true);
-$year_to      = get_post_meta($post_id, 'cf_year_to', true);
-$engine       = get_post_meta($post_id, 'cf_engine', true);
-$power        = get_post_meta($post_id, 'cf_power_hp', true);
-$transmission = get_post_meta($post_id, 'cf_transmission', true);
-$drive        = get_post_meta($post_id, 'cf_drive', true);
-$price_from   = get_post_meta($post_id, 'cf_price_from', true);
-$price_to     = get_post_meta($post_id, 'cf_price_to', true);
-$generation   = get_post_meta($post_id, 'cf_generation', true);
-$reliability  = get_post_meta($post_id, 'cf_reliability', true);
+$fuel_labels = ['petrol' => 'Бензин', 'diesel' => 'Дизель', 'hybrid' => 'Гибрид', 'electric' => 'Электро'];
+$trans_labels = ['automatic' => 'Автомат', 'manual' => 'Механика', 'robot' => 'Робот', 'variator' => 'Вариатор'];
+$drive_labels = ['fwd' => 'Передний', 'rwd' => 'Задний', 'awd' => 'Полный'];
 ?>
 
-<!-- ===== HERO ===== -->
-<section class="cf-section" style="padding-top:40px;">
-  <div class="cf-container">
-    <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:start;">
-
-      <!-- Gallery -->
-      <div>
-        <?php if (has_post_thumbnail()) : ?>
-          <img src="<?php the_post_thumbnail_url('cf-hero'); ?>"
-               alt="<?php the_title_attribute(); ?>"
-               width="1200" height="600"
-               style="border-radius:var(--cf-radius);width:100%;height:auto;object-fit:cover;">
-        <?php endif; ?>
-      </div>
-
-      <!-- Specs card -->
-      <div>
-        <h1><?php the_title(); ?></h1>
-        <?php if ($brand) : ?>
-          <p style="font-size:1.125rem;color:var(--cf-gray-500);margin-top:4px;"><?php echo esc_html($brand); ?> <?php if ($generation) echo '/ ' . esc_html($generation); ?></p>
-        <?php endif; ?>
-
-        <?php if ($price_from) : ?>
-          <div style="margin-top:20px;">
-            <span class="cf-card__price" style="font-size:1.75rem;"><?php echo cf_format_price((int) $price_from); ?></span>
-            <?php if ($price_to) : ?>
-              <span style="color:var(--cf-gray-500);"> — <?php echo cf_format_price((int) $price_to); ?></span>
-            <?php endif; ?>
-            <div style="font-size:0.875rem;color:var(--cf-gray-500);">под ключ в Россию</div>
-          </div>
-        <?php endif; ?>
-
-        <!-- Specs table -->
-        <table style="width:100%;margin-top:24px;border-collapse:collapse;">
-          <?php
-          $specs = array_filter([
-              'Год выпуска'  => ($year_from && $year_to) ? "$year_from — $year_to" : ($year_from ?: ''),
-              'Двигатель'    => $engine,
-              'Мощность'     => $power ? $power . ' л.с.' : '',
-              'КПП'          => $transmission,
-              'Привод'       => $drive,
-              'Поколение'    => $generation,
-              'Надёжность'   => $reliability ? $reliability . '/10' : '',
-              'Страна'       => $country_name,
-          ]);
-          foreach ($specs as $label => $val) :
-          ?>
-            <tr style="border-bottom:1px solid var(--cf-gray-100);">
-              <td style="padding:10px 0;color:var(--cf-gray-500);width:40%;"><?php echo esc_html($label); ?></td>
-              <td style="padding:10px 0;font-weight:600;"><?php echo esc_html($val); ?></td>
-            </tr>
-          <?php endforeach; ?>
-        </table>
-
-        <div style="display:flex;gap:12px;margin-top:24px;">
-          <a href="#cf-lead-modal" class="cf-btn cf-btn--primary" data-modal="lead">Заказать подбор</a>
-          <a href="#model-calc" class="cf-btn cf-btn--outline">Рассчитать стоимость</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== DESCRIPTION ===== -->
-<?php if (get_the_content()) : ?>
-<section class="cf-section cf-section--gray">
-  <div class="cf-container">
-    <div style="max-width:800px;">
-      <h2>Обзор <?php the_title(); ?></h2>
-      <div class="cf-mt-3" style="line-height:1.8;">
-        <?php the_content(); ?>
-      </div>
-    </div>
-  </div>
-</section>
-<?php endif; ?>
-
-
-<!-- ===== ACTIVE LOTS FOR THIS MODEL ===== -->
-<section class="cf-section">
-  <div class="cf-container">
-    <h2 class="cf-mb-3">Актуальные лоты <?php the_title(); ?></h2>
-
-    <div class="cf-grid cf-grid--4">
-      <?php
-      $lots = cf_get_model_lots($post_id, 8);
-      if ($lots) :
-          foreach ($lots as $lot) :
-              $lot_price = get_post_meta($lot->ID, 'cf_lot_price_rub', true);
-              $lot_year  = get_post_meta($lot->ID, 'cf_lot_year', true);
-              $lot_km    = get_post_meta($lot->ID, 'cf_lot_mileage', true);
-      ?>
-        <article class="cf-lot-card">
-          <?php if (has_post_thumbnail($lot->ID)) : ?>
-            <img class="cf-lot-card__img" src="<?php echo get_the_post_thumbnail_url($lot->ID, 'cf-lot'); ?>"
-                 alt="<?php echo esc_attr($lot->post_title); ?>" loading="lazy" width="480" height="360">
-          <?php endif; ?>
-          <div class="cf-lot-card__body">
-            <h3 class="cf-lot-card__title"><a href="<?php echo get_permalink($lot->ID); ?>"><?php echo esc_html($lot->post_title); ?></a></h3>
-            <div class="cf-lot-card__specs">
-              <?php if ($lot_year) : ?><span><?php echo esc_html($lot_year); ?> г.</span><?php endif; ?>
-              <?php if ($lot_km) : ?><span><?php echo number_format((int)$lot_km, 0, ',', ' '); ?> км</span><?php endif; ?>
+<article class="cf-model">
+    <div class="cf-container">
+        <!-- Header -->
+        <div class="cf-model__header">
+            <div class="cf-model__meta">
+                <?php if ($brand): ?>
+                    <a href="<?php echo esc_url(get_term_link($brand)); ?>" class="cf-model__brand"><?php echo esc_html($brand->name); ?></a>
+                <?php endif; ?>
+                <?php if ($country): ?>
+                    <?php $cd = cf_get_country_data($country->slug); ?>
+                    <span class="cf-model__country"><?php echo esc_html($cd['flag'] ?? ''); ?> <?php echo esc_html($cd['name'] ?? $country->name); ?></span>
+                <?php endif; ?>
             </div>
-            <?php if ($lot_price) : ?>
-              <div class="cf-lot-card__price"><?php echo cf_format_price((int) $lot_price); ?></div>
+            <h1 class="cf-model__title"><?php the_title(); ?></h1>
+            <?php if ($year): ?>
+                <span class="cf-model__year"><?php echo esc_html($year); ?><?php echo $year_to ? '–' . esc_html($year_to) : ''; ?> г.</span>
             <?php endif; ?>
-          </div>
-        </article>
-      <?php endforeach; else : ?>
-        <p style="grid-column:1/-1;">Актуальных лотов по данной модели пока нет. <a href="#cf-lead-modal" data-modal="lead">Оставьте заявку</a> — найдём для вас.</p>
-      <?php endif; ?>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== CALCULATOR (preset for this model) ===== -->
-<section class="cf-section cf-section--gray" id="model-calc">
-  <div class="cf-container">
-    <div class="cf-section__header">
-      <h2>Калькулятор: <?php the_title(); ?> под ключ</h2>
-    </div>
-    <div class="cf-calculator">
-      <form id="cf-calc-form">
-        <div class="cf-calc-form__row">
-          <div class="cf-calc-form__group">
-            <label>Цена автомобиля (&#8381;)</label>
-            <input type="number" name="price_fob" value="<?php echo esc_attr($price_from); ?>" min="0" step="10000" required>
-          </div>
-          <div class="cf-calc-form__group">
-            <label>Год выпуска</label>
-            <select name="year">
-              <?php for ($y = date('Y') + 1; $y >= 2000; $y--) : ?>
-                <option value="<?php echo $y; ?>" <?php selected($y, (int)$year_from); ?>><?php echo $y; ?></option>
-              <?php endfor; ?>
-            </select>
-          </div>
         </div>
-        <div class="cf-calc-form__row">
-          <div class="cf-calc-form__group">
-            <label>Объём двигателя (куб.см)</label>
-            <input type="number" name="engine_cc" value="2000" min="600" max="8000">
-          </div>
-          <div class="cf-calc-form__group">
-            <label>Тип топлива</label>
-            <select name="fuel_type">
-              <option value="gasoline">Бензин</option>
-              <option value="diesel">Дизель</option>
-              <option value="hybrid">Гибрид</option>
-              <option value="electric">Электро</option>
-            </select>
-          </div>
+
+        <div class="cf-model__layout">
+            <!-- Gallery -->
+            <div class="cf-model__gallery">
+                <?php if ($gallery): ?>
+                    <div class="cf-model__main-image">
+                        <img src="<?php echo esc_url($gallery[0]['sizes']['large'] ?? $gallery[0]['url']); ?>"
+                             alt="<?php echo esc_attr(get_the_title()); ?>"
+                             width="800" height="600" loading="eager">
+                    </div>
+                    <?php if (count($gallery) > 1): ?>
+                        <div class="cf-model__thumbs">
+                            <?php foreach ($gallery as $i => $img): ?>
+                                <button class="cf-model__thumb<?php echo $i === 0 ? ' cf-model__thumb--active' : ''; ?>"
+                                        data-src="<?php echo esc_url($img['sizes']['large'] ?? $img['url']); ?>">
+                                    <img src="<?php echo esc_url($img['sizes']['thumbnail'] ?? $img['url']); ?>"
+                                         alt="" width="120" height="90" loading="lazy">
+                                </button>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                <?php elseif (has_post_thumbnail()): ?>
+                    <div class="cf-model__main-image">
+                        <?php the_post_thumbnail('large', ['loading' => 'eager']); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+
+            <!-- Specs & Price -->
+            <div class="cf-model__info">
+                <!-- Price -->
+                <div class="cf-model__price-block">
+                    <span class="cf-model__price-label">Стоимость под ключ</span>
+                    <span class="cf-model__price">
+                        <?php if ($price_from): ?>
+                            от <?php echo esc_html(cf_format_price($price_from)); ?>
+                            <?php if ($price_to): ?>
+                                до <?php echo esc_html(cf_format_price($price_to)); ?>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            По запросу
+                        <?php endif; ?>
+                    </span>
+                    <a href="#cf-modal" class="cf-btn cf-btn--primary cf-btn--lg cf-btn--full" data-modal="lead">
+                        Узнать точную цену
+                    </a>
+                    <a href="<?php echo esc_url(home_url('/calculator/')); ?>" class="cf-btn cf-btn--secondary cf-btn--full">
+                        Рассчитать в калькуляторе
+                    </a>
+                </div>
+
+                <!-- Specs Table -->
+                <div class="cf-model__specs">
+                    <h3>Характеристики</h3>
+                    <table class="cf-table cf-table--specs">
+                        <?php if ($engine_cc): ?>
+                            <tr><td>Двигатель</td><td><?php echo esc_html(number_format($engine_cc / 1000, 1, '.', '')); ?> л (<?php echo esc_html($engine_cc); ?> куб.см)</td></tr>
+                        <?php endif; ?>
+                        <?php if ($power_hp): ?>
+                            <tr><td>Мощность</td><td><?php echo esc_html($power_hp); ?> л.с.</td></tr>
+                        <?php endif; ?>
+                        <?php if ($fuel_type): ?>
+                            <tr><td>Топливо</td><td><?php echo esc_html($fuel_labels[$fuel_type] ?? $fuel_type); ?></td></tr>
+                        <?php endif; ?>
+                        <?php if ($transmission): ?>
+                            <tr><td>КПП</td><td><?php echo esc_html($trans_labels[$transmission] ?? $transmission); ?></td></tr>
+                        <?php endif; ?>
+                        <?php if ($drive): ?>
+                            <tr><td>Привод</td><td><?php echo esc_html($drive_labels[$drive] ?? $drive); ?></td></tr>
+                        <?php endif; ?>
+                        <?php
+                        $seats = cf_get_field('cf_body_seats', $post_id);
+                        if ($seats): ?>
+                            <tr><td>Мест</td><td><?php echo esc_html($seats); ?></td></tr>
+                        <?php endif; ?>
+                        <?php
+                        $consumption = cf_get_field('cf_fuel_consumption', $post_id);
+                        if ($consumption): ?>
+                            <tr><td>Расход</td><td><?php echo esc_html($consumption); ?> л/100 км</td></tr>
+                        <?php endif; ?>
+                    </table>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="cf-btn cf-btn--primary cf-btn--lg cf-btn--block">Рассчитать</button>
-      </form>
-      <div class="cf-calc-result" id="cf-calc-result" style="display:none;">
-        <div class="cf-calc-result__total" id="calc-total"></div>
-        <ul class="cf-calc-result__breakdown" id="calc-breakdown"></ul>
-      </div>
+
+        <!-- Description -->
+        <?php if ($description): ?>
+            <div class="cf-model__description cf-content">
+                <h2>Описание <?php the_title(); ?></h2>
+                <?php echo wp_kses_post($description); ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- Pros & Cons -->
+        <?php if ($pros_cons): ?>
+            <div class="cf-model__pros-cons">
+                <?php
+                $pros = $pros_cons['cf_pros'] ?? '';
+                $cons = $pros_cons['cf_cons'] ?? '';
+                ?>
+                <?php if ($pros): ?>
+                    <div class="cf-model__pros">
+                        <h3>Преимущества</h3>
+                        <ul>
+                            <?php foreach (explode("\n", $pros) as $line):
+                                $line = trim($line);
+                                if ($line): ?>
+                                    <li><?php echo esc_html($line); ?></li>
+                                <?php endif;
+                            endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+                <?php if ($cons): ?>
+                    <div class="cf-model__cons">
+                        <h3>Недостатки</h3>
+                        <ul>
+                            <?php foreach (explode("\n", $cons) as $line):
+                                $line = trim($line);
+                                if ($line): ?>
+                                    <li><?php echo esc_html($line); ?></li>
+                                <?php endif;
+                            endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
     </div>
-  </div>
-</section>
+</article>
 
-
-<!-- ===== SIMILAR MODELS IN BUDGET ===== -->
 <?php
-$related = cf_get_related_models($post_id, 4);
-if ($related) :
-?>
-<section class="cf-section">
-  <div class="cf-container">
-    <h2 class="cf-mb-3">Похожие модели в бюджете</h2>
-    <div class="cf-grid cf-grid--4">
-      <?php foreach ($related as $rel) : ?>
-        <a href="<?php echo get_permalink($rel->ID); ?>" class="cf-card" style="text-decoration:none;">
-          <?php if (has_post_thumbnail($rel->ID)) : ?>
-            <img class="cf-card__img" src="<?php echo get_the_post_thumbnail_url($rel->ID, 'cf-card'); ?>"
-                 alt="<?php echo esc_attr($rel->post_title); ?>" loading="lazy" width="600" height="375">
-          <?php endif; ?>
-          <div class="cf-card__body">
-            <h4 class="cf-card__title"><?php echo esc_html($rel->post_title); ?></h4>
-            <?php
-            $rel_price = get_post_meta($rel->ID, 'cf_price_from', true);
-            if ($rel_price) :
-            ?>
-              <div class="cf-card__price"><?php echo cf_format_price((int) $rel_price); ?></div>
-            <?php endif; ?>
-          </div>
-        </a>
-      <?php endforeach; ?>
-    </div>
-  </div>
-</section>
-<?php endif; ?>
+// Related auction lots
+cf_block('cars-slider', ['variant' => 'related', 'post_id' => $post_id, 'limit' => 4]);
 
+// Calculator preset
+cf_block('calculator', [
+    'variant' => 'turnkey',
+    'country' => $country ? $country->slug : '',
+]);
 
-<!-- ===== CTA ===== -->
-<section class="cf-cta">
-  <div class="cf-container">
-    <h2>Хотите <?php the_title(); ?>?</h2>
-    <p>Оставьте заявку — мы найдём лучший вариант и рассчитаем полную стоимость</p>
-    <a href="#cf-lead-modal" class="cf-btn cf-btn--secondary cf-btn--lg" data-modal="lead">Заказать подбор</a>
-  </div>
-</section>
+// Cases for this model
+cf_block('cases', ['variant' => 'grid', 'limit' => 3]);
 
-<?php get_footer(); ?>
+// FAQ
+cf_block('faq', ['source' => 'car_model']);
+
+// Related models (same brand — SILO rule)
+cf_block('related-models', ['post_id' => $post_id, 'limit' => 4]);
+
+// Interlinking
+cf_block('interlinking', ['position' => 'footer']);
+
+// CTA
+cf_block('cta-final', ['variant' => 'default']);
+
+get_footer();

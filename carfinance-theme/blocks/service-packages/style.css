@@ -1,0 +1,123 @@
+.cf-packages {
+    padding: var(--cf-space-4xl) 0;
+}
+
+.cf-packages__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--cf-space-xl);
+    align-items: start;
+}
+
+.cf-packages__card {
+    position: relative;
+    background: #fff;
+    border-radius: var(--cf-radius-lg);
+    padding: var(--cf-space-2xl);
+    box-shadow: 0 2px 8px var(--cf-shadow);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transition: transform 0.25s ease;
+}
+
+.cf-packages__card:hover {
+    transform: translateY(-4px);
+}
+
+.cf-packages__card--popular {
+    border: 2px solid var(--cf-primary);
+    transform: scale(1.05);
+    box-shadow: 0 8px 32px var(--cf-shadow-lg);
+    z-index: 1;
+}
+
+.cf-packages__card--popular:hover {
+    transform: scale(1.05) translateY(-4px);
+}
+
+.cf-packages__badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--cf-primary);
+    color: var(--cf-text-inverse);
+    font-size: var(--cf-fs-xs);
+    font-weight: 700;
+    padding: 4px 16px;
+    border-radius: var(--cf-radius-full);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cf-packages__name {
+    font-size: var(--cf-fs-xl);
+    font-weight: 700;
+    margin-bottom: var(--cf-space-sm);
+}
+
+.cf-packages__price {
+    font-size: var(--cf-fs-2xl);
+    font-weight: 800;
+    color: var(--cf-primary);
+    margin-bottom: var(--cf-space-xl);
+}
+
+.cf-packages__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--cf-space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--cf-space-sm);
+    text-align: left;
+}
+
+.cf-packages__feature {
+    display: flex;
+    align-items: center;
+    gap: var(--cf-space-sm);
+    font-size: var(--cf-fs-sm);
+    line-height: 1.5;
+}
+
+.cf-packages__check {
+    color: var(--cf-success);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.cf-packages__cta {
+    margin-top: auto;
+    display: inline-block;
+    padding: var(--cf-space-md) var(--cf-space-xl);
+    border-radius: var(--cf-radius);
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+@media (max-width: 992px) {
+    .cf-packages__card--popular {
+        transform: none;
+    }
+
+    .cf-packages__card--popular:hover {
+        transform: translateY(-4px);
+    }
+}
+
+@media (max-width: 768px) {
+    .cf-packages__grid {
+        grid-template-columns: 1fr;
+        max-width: 440px;
+        margin-inline: auto;
+    }
+
+    .cf-packages {
+        padding: var(--cf-space-3xl) 0;
+    }
+}

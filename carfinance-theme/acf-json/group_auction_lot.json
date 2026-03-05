@@ -1,0 +1,237 @@
+[
+  {
+    "key": "group_cf000007",
+    "title": "Аукционный лот",
+    "fields": [
+      {
+        "key": "field_cf000600",
+        "label": "Аукцион",
+        "name": "cf_lot_auction",
+        "type": "select",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "choices": {
+          "copart": "Copart",
+          "iaai": "IAAI",
+          "uss": "USS",
+          "ManheimJP": "Manheim JP",
+          "other": "Другой"
+        },
+        "default_value": "copart",
+        "return_format": "value",
+        "multiple": 0,
+        "allow_null": 0,
+        "ui": 1,
+        "ajax": 0
+      },
+      {
+        "key": "field_cf000601",
+        "label": "Номер лота",
+        "name": "cf_lot_number",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000602",
+        "label": "Оценка",
+        "name": "cf_lot_grade",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000603",
+        "label": "Пробег (км)",
+        "name": "cf_lot_mileage",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000604",
+        "label": "Стартовая цена",
+        "name": "cf_lot_price_start",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000605",
+        "label": "Финальная цена",
+        "name": "cf_lot_price_final",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000606",
+        "label": "Валюта",
+        "name": "cf_lot_currency",
+        "type": "select",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "choices": {
+          "USD": "USD",
+          "KRW": "KRW",
+          "JPY": "JPY",
+          "CNY": "CNY",
+          "AED": "AED"
+        },
+        "default_value": "USD",
+        "return_format": "value",
+        "multiple": 0,
+        "allow_null": 0,
+        "ui": 1,
+        "ajax": 0
+      },
+      {
+        "key": "field_cf000607",
+        "label": "Статус",
+        "name": "cf_lot_status",
+        "type": "select",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "choices": {
+          "active": "Активный",
+          "sold": "Продан",
+          "cancelled": "Отменён"
+        },
+        "default_value": "active",
+        "return_format": "value",
+        "multiple": 0,
+        "allow_null": 0,
+        "ui": 1,
+        "ajax": 0
+      },
+      {
+        "key": "field_cf000608",
+        "label": "Фото лота",
+        "name": "cf_lot_gallery",
+        "type": "gallery",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array",
+        "preview_size": "medium",
+        "insert": "append",
+        "library": "all",
+        "min": "",
+        "max": ""
+      },
+      {
+        "key": "field_cf000609",
+        "label": "Дата аукциона",
+        "name": "cf_lot_date",
+        "type": "date_picker",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "display_format": "d.m.Y",
+        "return_format": "Y-m-d",
+        "first_day": 1
+      },
+      {
+        "key": "field_cf00060a",
+        "label": "Модель авто",
+        "name": "cf_lot_car_model",
+        "type": "post_object",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "post_type": [
+          "car_model"
+        ],
+        "taxonomy": [],
+        "allow_null": 1,
+        "multiple": 0,
+        "return_format": "object",
+        "ui": 1
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "auction_lot"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "modified": 1709600000
+  }
+]

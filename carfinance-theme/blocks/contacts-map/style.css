@@ -1,0 +1,132 @@
+/* Block: Contacts Map */
+.cf-contacts {
+    padding: 60px 0;
+}
+
+.cf-contacts__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.cf-contacts__title {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--cf-text, #1a1a2e);
+}
+
+/* Grid */
+.cf-contacts__grid {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    gap: 32px;
+    align-items: start;
+}
+
+/* Contact info */
+.cf-contacts__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.cf-contacts__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.cf-contacts__icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(37, 99, 235, 0.08);
+    color: var(--cf-primary, #2563eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cf-contacts__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cf-contacts__label {
+    font-size: 13px;
+    color: var(--cf-text-secondary, #6b7280);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.cf-contacts__value {
+    font-size: 16px;
+    color: var(--cf-text, #1a1a2e);
+    font-weight: 500;
+}
+
+.cf-contacts__value--phone {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--cf-text, #1a1a2e);
+    text-decoration: none;
+}
+
+.cf-contacts__value--phone:hover {
+    color: var(--cf-primary, #2563eb);
+}
+
+a.cf-contacts__value {
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a.cf-contacts__value:hover {
+    color: var(--cf-primary, #2563eb);
+}
+
+/* Map */
+.cf-contacts__map {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--cf-bg-alt, #f0f0f0);
+}
+
+.cf-contacts__map-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: var(--cf-text-secondary, #6b7280);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cf-contacts {
+        padding: 40px 0;
+    }
+
+    .cf-contacts__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cf-contacts__title {
+        font-size: 26px;
+    }
+
+    .cf-contacts__map {
+        aspect-ratio: 16 / 9;
+    }
+}

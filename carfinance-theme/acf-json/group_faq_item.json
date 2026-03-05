@@ -1,0 +1,57 @@
+[
+  {
+    "key": "group_cf00000a",
+    "title": "FAQ",
+    "fields": [
+      {
+        "key": "field_cf000900",
+        "label": "Ответ",
+        "name": "cf_faq_answer",
+        "type": "wysiwyg",
+        "instructions": "Заголовок записи используется как вопрос",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "tabs": "all",
+        "toolbar": "full",
+        "media_upload": 1,
+        "delay": 0
+      },
+      {
+        "key": "field_cf000901",
+        "label": "Порядок сортировки",
+        "name": "cf_faq_order",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "30",
+          "class": "",
+          "id": ""
+        },
+        "default_value": 0
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "faq_item"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "modified": 1709600000
+  }
+]

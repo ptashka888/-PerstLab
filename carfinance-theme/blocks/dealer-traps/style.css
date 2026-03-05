@@ -1,0 +1,58 @@
+.cf-dealer-traps {
+    padding: var(--cf-space-4xl) 0;
+    background-color: var(--cf-bg-alt);
+}
+
+.cf-dealer-traps__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--cf-space-lg);
+}
+
+.cf-dealer-traps__card {
+    background: #fff;
+    border-radius: var(--cf-radius);
+    padding: var(--cf-space-xl);
+    border-left: 4px solid var(--cf-danger);
+    box-shadow: 0 2px 8px var(--cf-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cf-dealer-traps__card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px var(--cf-shadow-lg);
+}
+
+.cf-dealer-traps__icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--cf-space-md);
+}
+
+.cf-dealer-traps__title {
+    font-size: var(--cf-fs-lg);
+    font-weight: 700;
+    margin-bottom: var(--cf-space-sm);
+    color: var(--cf-text, #2c3e50);
+}
+
+.cf-dealer-traps__text {
+    font-size: var(--cf-fs-sm);
+    color: var(--cf-text-light);
+    line-height: 1.6;
+}
+
+@media (max-width: 992px) {
+    .cf-dealer-traps__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .cf-dealer-traps {
+        padding: var(--cf-space-3xl) 0;
+    }
+
+    .cf-dealer-traps__grid {
+        grid-template-columns: 1fr;
+    }
+}

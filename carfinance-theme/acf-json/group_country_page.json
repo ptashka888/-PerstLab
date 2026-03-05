@@ -1,0 +1,273 @@
+[
+  {
+    "key": "group_cf000003",
+    "title": "Страница страны",
+    "fields": [
+      {
+        "key": "field_cf000200",
+        "label": "Код страны",
+        "name": "cf_country_code",
+        "type": "select",
+        "instructions": "",
+        "required": 1,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "choices": {
+          "korea": "Корея",
+          "japan": "Япония",
+          "china": "Китай",
+          "usa": "США",
+          "uae": "ОАЭ"
+        },
+        "default_value": "korea",
+        "return_format": "value",
+        "multiple": 0,
+        "allow_null": 0,
+        "ui": 1,
+        "ajax": 0
+      },
+      {
+        "key": "field_cf000201",
+        "label": "Заголовок",
+        "name": "cf_country_hero_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000202",
+        "label": "Подзаголовок",
+        "name": "cf_country_hero_subtitle",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3
+      },
+      {
+        "key": "field_cf000203",
+        "label": "Фон Hero",
+        "name": "cf_country_hero_image",
+        "type": "image",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array",
+        "preview_size": "medium",
+        "library": "all"
+      },
+      {
+        "key": "field_cf000204",
+        "label": "Вступительный текст",
+        "name": "cf_country_intro",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "tabs": "all",
+        "toolbar": "full",
+        "media_upload": 1,
+        "delay": 0
+      },
+      {
+        "key": "field_cf000205",
+        "label": "Преимущества",
+        "name": "cf_country_advantages",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "layout": "block",
+        "button_label": "Добавить преимущество",
+        "sub_fields": [
+          {
+            "key": "field_cf000206",
+            "label": "Иконка (emoji или класс)",
+            "name": "cf_adv_icon",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "20",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          },
+          {
+            "key": "field_cf000207",
+            "label": "Заголовок",
+            "name": "cf_adv_title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "30",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          },
+          {
+            "key": "field_cf000208",
+            "label": "Описание",
+            "name": "cf_adv_text",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "50",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "rows": 3
+          }
+        ]
+      },
+      {
+        "key": "field_cf000209",
+        "label": "Этапы работы",
+        "name": "cf_country_steps",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "layout": "block",
+        "button_label": "Добавить этап",
+        "sub_fields": [
+          {
+            "key": "field_cf00020a",
+            "label": "Заголовок",
+            "name": "cf_step_title",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "40",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          },
+          {
+            "key": "field_cf00020b",
+            "label": "Описание",
+            "name": "cf_step_text",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "60",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "rows": 3
+          }
+        ]
+      },
+      {
+        "key": "field_cf00020c",
+        "label": "FAQ",
+        "name": "cf_country_faq",
+        "type": "relationship",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "post_type": [
+          "faq_item"
+        ],
+        "taxonomy": [],
+        "filters": [
+          "search"
+        ],
+        "elements": "",
+        "min": "",
+        "max": "",
+        "return_format": "object"
+      },
+      {
+        "key": "field_cf00020d",
+        "label": "SEO текст внизу",
+        "name": "cf_country_seo_text",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "tabs": "all",
+        "toolbar": "full",
+        "media_upload": 1,
+        "delay": 0
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page_template",
+          "operator": "==",
+          "value": "page-country.php"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "modified": 1709600000
+  }
+]

@@ -1,0 +1,472 @@
+[
+  {
+    "key": "group_cf000001",
+    "title": "Глобальные настройки",
+    "fields": [
+      {
+        "key": "field_cf000001",
+        "label": "Телефон",
+        "name": "cf_phone",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "placeholder": "+7 (999) 999-99-99"
+      },
+      {
+        "key": "field_cf000002",
+        "label": "Телефон (отображение)",
+        "name": "cf_phone_display",
+        "type": "text",
+        "instructions": "Форматированный номер для отображения на сайте",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "placeholder": "+7 (999) 999-99-99"
+      },
+      {
+        "key": "field_cf000003",
+        "label": "Email",
+        "name": "cf_email",
+        "type": "email",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000004",
+        "label": "WhatsApp",
+        "name": "cf_whatsapp",
+        "type": "url",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000005",
+        "label": "Telegram",
+        "name": "cf_telegram",
+        "type": "url",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000006",
+        "label": "Instagram",
+        "name": "cf_instagram",
+        "type": "url",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000007",
+        "label": "YouTube",
+        "name": "cf_youtube",
+        "type": "url",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000008",
+        "label": "ВКонтакте",
+        "name": "cf_vk",
+        "type": "url",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000009",
+        "label": "Адрес офиса",
+        "name": "cf_address",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3
+      },
+      {
+        "key": "field_cf00000a",
+        "label": "Часы работы",
+        "name": "cf_working_hours",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf00000b",
+        "label": "Текст CTA кнопки",
+        "name": "cf_cta_text",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "Получить консультацию"
+      },
+      {
+        "key": "field_cf00000c",
+        "label": "Заголовок модального окна",
+        "name": "cf_cta_modal_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf00000d",
+        "label": "Курсы валют",
+        "name": "cf_exchange_rates",
+        "type": "group",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "layout": "block",
+        "sub_fields": [
+          {
+            "key": "field_cf00000e",
+            "label": "Курс USD",
+            "name": "cf_rate_usd",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "33",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "step": 0.01
+          },
+          {
+            "key": "field_cf00000f",
+            "label": "Курс EUR",
+            "name": "cf_rate_eur",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "33",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "step": 0.01
+          },
+          {
+            "key": "field_cf000010",
+            "label": "Курс KRW",
+            "name": "cf_rate_krw",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "33",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "step": 0.0001
+          },
+          {
+            "key": "field_cf000011",
+            "label": "Курс JPY",
+            "name": "cf_rate_jpy",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "33",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "step": 0.0001
+          },
+          {
+            "key": "field_cf000012",
+            "label": "Курс CNY",
+            "name": "cf_rate_cny",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "33",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "step": 0.01
+          },
+          {
+            "key": "field_cf000013",
+            "label": "Курс AED",
+            "name": "cf_rate_aed",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "33",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "step": 0.01
+          }
+        ]
+      },
+      {
+        "key": "field_cf000014",
+        "label": "Стоимость доставки",
+        "name": "cf_freight_costs",
+        "type": "group",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "layout": "block",
+        "sub_fields": [
+          {
+            "key": "field_cf000015",
+            "label": "Доставка из Кореи (RUB)",
+            "name": "cf_freight_korea",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "33",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          },
+          {
+            "key": "field_cf000016",
+            "label": "Доставка из Японии",
+            "name": "cf_freight_japan",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "33",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          },
+          {
+            "key": "field_cf000017",
+            "label": "Доставка из Китая",
+            "name": "cf_freight_china",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "33",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          },
+          {
+            "key": "field_cf000018",
+            "label": "Доставка из США",
+            "name": "cf_freight_usa",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "33",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          },
+          {
+            "key": "field_cf000019",
+            "label": "Доставка из ОАЭ",
+            "name": "cf_freight_uae",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "33",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "key": "field_cf00001a",
+        "label": "Комиссия компании (RUB)",
+        "name": "cf_commission",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf00001b",
+        "label": "Стоимость СБКТС",
+        "name": "cf_sbkts_cost",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf00001c",
+        "label": "Стоимость ЭПТС",
+        "name": "cf_epts_cost",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf00001d",
+        "label": "Стоимость брокера",
+        "name": "cf_broker_cost",
+        "type": "number",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "25",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "options_page",
+          "operator": "==",
+          "value": "cf-settings"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "modified": 1709600000
+  }
+]

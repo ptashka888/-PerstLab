@@ -1,15 +1,21 @@
-
 <?php
 /**
  * Theme Header
  *
- * Top bar with contacts, main nav with SILO structure,
- * country dropdown, CTA button, mobile burger menu.
+ * Top bar with contacts, mega-menu with all countries visible to GoogleBot,
+ * CTA button, mobile burger menu.
  *
  * @package CarFinance
  */
 
 defined('ABSPATH') || exit;
+
+$countries = cf_get_country_data();
+$phone = function_exists('get_field') ? get_field('site_phone_moscow', 'option') : '';
+$phone = $phone ?: '+7 (XXX) XXX-XX-XX';
+$whatsapp = function_exists('get_field') ? get_field('site_whatsapp', 'option') : '';
+$telegram = function_exists('get_field') ? get_field('site_telegram', 'option') : 'carfinance_msk';
+$email = function_exists('get_field') ? get_field('site_email', 'option') : 'info@carfinance-msk.ru';
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -22,7 +28,6 @@ defined('ABSPATH') || exit;
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- ===== HEADER ===== -->
 <header class="cf-header" role="banner">
 
   <!-- Top bar -->
@@ -31,10 +36,14 @@ defined('ABSPATH') || exit;
       <div class="cf-header__top-left">
         <span>Москва, Владивосток, Краснодар, Сочи, Уссурийск</span>
       </div>
-      <div class="cf-header__top-right" style="display:flex;gap:16px;align-items:center;">
-        <a href="mailto:info@carfinance-msk.ru">info@carfinance-msk.ru</a>
-        <a href="https://t.me/carfinance_msk" target="_blank" rel="noopener">Telegram</a>
-        <a href="https://wa.me/7XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp</a>
+      <div class="cf-header__top-right">
+        <a href="<?php echo esc_url('mailto:' . $email); ?>"><?php echo esc_html($email); ?></a>
+        <?php if ($telegram) : ?>
+          <a href="<?php echo esc_url('https://t.me/' . $telegram); ?>" target="_blank" rel="noopener">Telegram</a>
+        <?php endif; ?>
+        <?php if ($whatsapp) : ?>
+          <a href="<?php echo esc_url('https://wa.me/' . preg_replace('/\D/', '', $whatsapp)); ?>" target="_blank" rel="noopener">WhatsApp</a>
+        <?php endif; ?>
       </div>
     </div>
   </div>
@@ -52,26 +61,17 @@ defined('ABSPATH') || exit;
         <?php endif; ?>
       </a>
 
-      <!-- Navigation -->
+      <!-- Navigation (all links visible to GoogleBot) -->
       <nav class="cf-nav" id="cf-main-nav" role="navigation" aria-label="Основная навигация">
 
-        <!-- Countries dropdown (Level 1 SILO) -->
+        <!-- Countries dropdown (Level 1 SILO — inter-cocoon links) -->
         <div class="cf-nav__dropdown">
           <a href="#" class="cf-nav__link" aria-haspopup="true">Направления &#9662;</a>
           <div class="cf-nav__dropdown-menu">
-            <?php
-            $countries = [
-                'korea' => ['flag' => "\xF0\x9F\x87\xB0\xF0\x9F\x87\xB7", 'name' => 'Корея'],
-                'japan' => ['flag' => "\xF0\x9F\x87\xAF\xF0\x9F\x87\xB5", 'name' => 'Япония'],
-                'china' => ['flag' => "\xF0\x9F\x87\xA8\xF0\x9F\x87\xB3", 'name' => 'Китай'],
-                'usa'   => ['flag' => "\xF0\x9F\x87\xBA\xF0\x9F\x87\xB8", 'name' => 'США'],
-                'uae'   => ['flag' => "\xF0\x9F\x87\xA6\xF0\x9F\x87\xAA", 'name' => 'ОАЭ'],
-            ];
-            foreach ($countries as $slug => $c) :
-            ?>
-              <a href="<?php echo esc_url(home_url('/' . $slug . '/')); ?>">
+            <?php foreach ($countries as $code => $c) : ?>
+              <a href="<?php echo esc_url(home_url($c['url'])); ?>">
                 <span class="flag"><?php echo $c['flag']; ?></span>
-                <?php echo esc_html('Авто из ' . $c['name']); ?>
+                <?php echo esc_html('Авто ' . $c['name_from']); ?>
               </a>
             <?php endforeach; ?>
           </div>
@@ -83,9 +83,11 @@ defined('ABSPATH') || exit;
         <div class="cf-nav__dropdown">
           <a href="<?php echo esc_url(home_url('/services/')); ?>" class="cf-nav__link" aria-haspopup="true">Услуги &#9662;</a>
           <div class="cf-nav__dropdown-menu">
-            <a href="<?php echo esc_url(home_url('/avtopodborshchik/')); ?>">Автоподбор</a>
-            <a href="<?php echo esc_url(home_url('/kupit-avto-s-probegom/')); ?>">Авто с пробегом</a>
-            <a href="<?php echo esc_url(home_url('/proverka-avto-gibdd/')); ?>">Проверка авто</a>
+            <a href="<?php echo esc_url(home_url('/services/avtopodborshchik/')); ?>">Автоподбор</a>
+            <a href="<?php echo esc_url(home_url('/services/import-pod-klyuch/')); ?>">Импорт под ключ</a>
+            <a href="<?php echo esc_url(home_url('/services/kredit-lizing/')); ?>">Кредит / Лизинг</a>
+            <a href="<?php echo esc_url(home_url('/services/logistika/')); ?>">Логистика</a>
+            <a href="<?php echo esc_url(home_url('/services/trade-in/')); ?>">Trade-in</a>
           </div>
         </div>
 
@@ -96,7 +98,7 @@ defined('ABSPATH') || exit;
 
       <!-- Right side: phone + CTA -->
       <div class="cf-header__cta">
-        <a href="tel:+7XXXXXXXXXX" class="cf-header__phone">+7 (XXX) XXX-XX-XX</a>
+        <a href="<?php echo esc_url('tel:' . preg_replace('/\s/', '', $phone)); ?>" class="cf-header__phone"><?php echo esc_html($phone); ?></a>
         <a href="#cf-lead-modal" class="cf-btn cf-btn--primary cf-btn--sm" data-modal="lead">Оставить заявку</a>
       </div>
 

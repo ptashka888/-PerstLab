@@ -1,0 +1,161 @@
+[
+  {
+    "key": "group_cf00000b",
+    "title": "Тег каталога",
+    "fields": [
+      {
+        "key": "field_cf000a00",
+        "label": "Вступительный текст (SEO)",
+        "name": "cf_tag_intro",
+        "type": "wysiwyg",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "tabs": "all",
+        "toolbar": "full",
+        "media_upload": 1,
+        "delay": 0
+      },
+      {
+        "key": "field_cf000a01",
+        "label": "SEO заголовок",
+        "name": "cf_tag_seo_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": ""
+      },
+      {
+        "key": "field_cf000a02",
+        "label": "SEO описание",
+        "name": "cf_tag_seo_desc",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "50",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3
+      },
+      {
+        "key": "field_cf000a03",
+        "label": "Связанные теги",
+        "name": "cf_tag_related_tags",
+        "type": "taxonomy",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "taxonomy": "catalog_tag",
+        "field_type": "multi_select",
+        "allow_null": 1,
+        "add_term": 0,
+        "save_terms": 0,
+        "load_terms": 0,
+        "return_format": "id",
+        "multiple": 1
+      },
+      {
+        "key": "field_cf000a04",
+        "label": "FAQ для тега",
+        "name": "cf_tag_faq",
+        "type": "repeater",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "layout": "block",
+        "button_label": "Добавить вопрос",
+        "sub_fields": [
+          {
+            "key": "field_cf000a05",
+            "label": "Вопрос",
+            "name": "cf_tag_faq_q",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": ""
+          },
+          {
+            "key": "field_cf000a06",
+            "label": "Ответ",
+            "name": "cf_tag_faq_a",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "rows": 4
+          }
+        ]
+      },
+      {
+        "key": "field_cf000a07",
+        "label": "Изображение для тега",
+        "name": "cf_tag_image",
+        "type": "image",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "array",
+        "preview_size": "medium",
+        "library": "all"
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "taxonomy",
+          "operator": "==",
+          "value": "catalog_tag"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "modified": 1709600000
+  }
+]

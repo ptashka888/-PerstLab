@@ -1,0 +1,120 @@
+.cf-hero {
+    position: relative;
+    padding: var(--cf-space-4xl) 0;
+    background-color: var(--cf-bg-dark);
+    background-size: cover;
+    background-position: center;
+    color: var(--cf-text-inverse);
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+}
+
+.cf-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(26, 82, 118, 0.7) 100%);
+    z-index: 1;
+}
+
+.cf-hero > .cf-container {
+    position: relative;
+    z-index: 2;
+}
+
+.cf-hero__content {
+    max-width: 700px;
+}
+
+.cf-hero__title {
+    font-size: var(--cf-fs-4xl);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: var(--cf-space-lg);
+}
+
+.cf-hero__subtitle {
+    font-size: var(--cf-fs-lg);
+    line-height: 1.6;
+    opacity: 0.9;
+    margin-bottom: var(--cf-space-2xl);
+}
+
+.cf-hero__actions {
+    display: flex;
+    gap: var(--cf-space-md);
+    flex-wrap: wrap;
+    margin-bottom: var(--cf-space-2xl);
+}
+
+.cf-hero__badges {
+    display: flex;
+    gap: var(--cf-space-lg);
+    flex-wrap: wrap;
+}
+
+.cf-hero__badge {
+    font-size: var(--cf-fs-sm);
+    opacity: 0.85;
+    white-space: nowrap;
+}
+
+.cf-hero__country-flag {
+    margin-top: var(--cf-space-lg);
+}
+
+.cf-hero__flag {
+    font-size: 3rem;
+}
+
+/* Country variant */
+.cf-hero--country {
+    min-height: 400px;
+}
+
+/* Service variant */
+.cf-hero--service {
+    min-height: 350px;
+    padding: var(--cf-space-3xl) 0;
+}
+
+/* Calculator variant */
+.cf-hero--calculator {
+    min-height: 300px;
+    padding: var(--cf-space-2xl) 0;
+}
+
+/* City variant */
+.cf-hero--city::before {
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.85) 0%, rgba(39, 174, 96, 0.6) 100%);
+}
+
+@media (max-width: 768px) {
+    .cf-hero {
+        min-height: 400px;
+        padding: var(--cf-space-3xl) 0;
+    }
+
+    .cf-hero__title {
+        font-size: var(--cf-fs-2xl);
+    }
+
+    .cf-hero__subtitle {
+        font-size: var(--cf-fs-base);
+    }
+
+    .cf-hero__actions {
+        flex-direction: column;
+    }
+
+    .cf-hero__actions .cf-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .cf-hero__badges {
+        flex-direction: column;
+        gap: var(--cf-space-sm);
+    }
+}

@@ -1,0 +1,114 @@
+.cf-checklist {
+    padding: var(--cf-space-4xl) 0;
+}
+
+.cf-checklist__categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--cf-space-lg);
+}
+
+.cf-checklist__category {
+    background: #fff;
+    border-radius: var(--cf-radius);
+    box-shadow: 0 2px 8px var(--cf-shadow);
+    overflow: hidden;
+}
+
+.cf-checklist__header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: var(--cf-space-lg);
+    border: none;
+    background: none;
+    cursor: pointer;
+    gap: var(--cf-space-sm);
+    text-align: left;
+    transition: background-color 0.2s ease;
+}
+
+.cf-checklist__header:hover {
+    background-color: var(--cf-bg-alt);
+}
+
+.cf-checklist__title {
+    font-size: var(--cf-fs-lg);
+    font-weight: 700;
+    flex-grow: 1;
+}
+
+.cf-checklist__count {
+    font-size: var(--cf-fs-xs);
+    font-weight: 600;
+    color: var(--cf-text-inverse);
+    background-color: var(--cf-primary);
+    padding: 2px 10px;
+    border-radius: var(--cf-radius-full);
+    white-space: nowrap;
+}
+
+.cf-checklist__toggle {
+    font-size: var(--cf-fs-xl);
+    font-weight: 300;
+    color: var(--cf-text-light);
+    transition: transform 0.3s ease;
+    width: 24px;
+    text-align: center;
+}
+
+.cf-checklist__category.is-open .cf-checklist__toggle {
+    transform: rotate(45deg);
+}
+
+.cf-checklist__list {
+    list-style: none;
+    padding: 0 var(--cf-space-lg) var(--cf-space-lg);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--cf-space-sm);
+    animation: cf-checklist-expand 0.3s ease;
+}
+
+@keyframes cf-checklist-expand {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cf-checklist__item {
+    display: flex;
+    align-items: center;
+    gap: var(--cf-space-sm);
+    font-size: var(--cf-fs-sm);
+    line-height: 1.5;
+    padding: var(--cf-space-xs) 0;
+}
+
+.cf-checklist__check {
+    color: var(--cf-success);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+@media (max-width: 992px) {
+    .cf-checklist__categories {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .cf-checklist {
+        padding: var(--cf-space-3xl) 0;
+    }
+
+    .cf-checklist__categories {
+        grid-template-columns: 1fr;
+    }
+}
