@@ -70,38 +70,50 @@ add_action('after_setup_theme', function (): void {
    ========================================================================== */
 
 add_action('wp_enqueue_scripts', function (): void {
-    // Fonts
-    wp_enqueue_style('cf-fonts-preconnect', 'https://fonts.googleapis.com', [], null);
-    wp_enqueue_style('cf-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap', [], null);
-
-    // Theme CSS files
     $css_dir = CF_DIR . '/assets/css';
     $css_uri = CF_URI . '/assets/css';
-    $css_files = ['variables', 'reset', 'layout'];
-    foreach ($css_files as $file) {
+
+    // Google Fonts (no preconnect via wp_enqueue_style — preconnect is handled in wp_head below)
+    wp_enqueue_style('cf-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap', [], null);
+
+    // Base CSS: variables → reset → layout (strict dependency chain)
+    $base_files = [
+        'variables' => [],
+        'reset'     => ['cf-variables'],
+        'layout'    => ['cf-variables', 'cf-reset'],
+    ];
+    foreach ($base_files as $file => $deps) {
         $path = $css_dir . '/' . $file . '.css';
         if (file_exists($path)) {
-            wp_enqueue_style('cf-' . $file, $css_uri . '/' . $file . '.css', [], filemtime($path));
+            wp_enqueue_style('cf-' . $file, $css_uri . '/' . $file . '.css', $deps, filemtime($path));
         }
     }
 
-    // Component CSS
+    // Component CSS (each depends on variables)
     $component_files = ['buttons', 'cards', 'forms', 'header', 'footer', 'modal', 'nav'];
     foreach ($component_files as $file) {
         $path = $css_dir . '/components/' . $file . '.css';
         if (file_exists($path)) {
-            wp_enqueue_style('cf-comp-' . $file, $css_uri . '/components/' . $file . '.css', [], filemtime($path));
+            wp_enqueue_style('cf-comp-' . $file, $css_uri . '/components/' . $file . '.css', ['cf-variables'], filemtime($path));
         }
     }
 
-    // Responsive CSS
-    $responsive_path = $css_dir . '/responsive.css';
-    if (file_exists($responsive_path)) {
-        wp_enqueue_style('cf-responsive', $css_uri . '/responsive.css', [], filemtime($responsive_path));
+    // Catalog CSS (only on catalog/taxonomy pages)
+    if (is_post_type_archive('car_model') || is_tax('car_brand') || is_tax('catalog_tag') || is_tax('car_type') || is_tax('car_country')) {
+        $catalog_path = $css_dir . '/components/catalog.css';
+        if (file_exists($catalog_path)) {
+            wp_enqueue_style('cf-comp-catalog', $css_uri . '/components/catalog.css', ['cf-variables', 'cf-comp-forms'], filemtime($catalog_path));
+        }
     }
 
-    // Main theme stylesheet (header only in v2)
-    wp_enqueue_style('cf-style', get_stylesheet_uri(), [], CF_VERSION);
+    // Responsive CSS (depends on layout and all components)
+    $responsive_path = $css_dir . '/responsive.css';
+    if (file_exists($responsive_path)) {
+        wp_enqueue_style('cf-responsive', $css_uri . '/responsive.css', ['cf-layout'], filemtime($responsive_path));
+    }
+
+    // Main theme stylesheet (theme declaration only — no actual styles)
+    wp_enqueue_style('cf-style', get_stylesheet_uri(), ['cf-responsive'], CF_VERSION);
 
     // Calculator JS
     wp_enqueue_script('cf-calculator', CF_URI . '/assets/js/calculator.js', [], CF_VERSION, true);

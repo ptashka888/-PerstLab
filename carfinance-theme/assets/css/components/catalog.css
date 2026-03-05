@@ -1,0 +1,402 @@
+/* ==========================================================================
+   CarFinance Theme — Component: Catalog Layout & Filter
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Catalog Wrapper & Layout
+   -------------------------------------------------------------------------- */
+
+.cf-catalog {
+  padding: var(--cf-space-2xl) 0 var(--cf-space-4xl);
+}
+
+.cf-catalog__layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--cf-space-2xl);
+  align-items: start;
+}
+
+.cf-catalog__sidebar {
+  position: sticky;
+  top: 80px;
+}
+
+.cf-catalog__main {
+  min-width: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Toolbar (count / sort / view toggle)
+   -------------------------------------------------------------------------- */
+
+.cf-catalog__toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--cf-space-sm);
+  margin-bottom: var(--cf-space-lg);
+  padding-bottom: var(--cf-space-md);
+  border-bottom: 1px solid var(--cf-border);
+}
+
+.cf-catalog__count {
+  font-size: var(--cf-fs-sm);
+  color: var(--cf-text-light);
+}
+
+.cf-catalog__sort {
+  display: flex;
+  align-items: center;
+  gap: var(--cf-space-sm);
+  font-size: var(--cf-fs-sm);
+}
+
+.cf-catalog__view-toggle {
+  display: flex;
+  gap: 4px;
+}
+
+.cf-catalog__view {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--cf-fs-md);
+  color: var(--cf-text-light);
+  cursor: pointer;
+  transition: var(--cf-transition-fast);
+  background: none;
+}
+
+.cf-catalog__view:hover,
+.cf-catalog__view.active {
+  border-color: var(--cf-primary);
+  color: var(--cf-primary);
+  background-color: var(--cf-bg-alt);
+}
+
+/* --------------------------------------------------------------------------
+   Car Grid / List
+   -------------------------------------------------------------------------- */
+
+.cf-catalog__grid {
+  display: grid;
+  gap: var(--cf-space-lg);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cf-catalog__grid--list {
+  grid-template-columns: 1fr;
+}
+
+.cf-catalog__empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--cf-space-4xl) 0;
+  color: var(--cf-text-light);
+}
+
+/* --------------------------------------------------------------------------
+   Pagination
+   -------------------------------------------------------------------------- */
+
+.cf-catalog__pagination {
+  margin-top: var(--cf-space-2xl);
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Catalog Filter Panel
+   -------------------------------------------------------------------------- */
+
+.cf-catalog-filter {
+  background-color: #ffffff;
+  border-radius: var(--cf-radius-lg);
+  box-shadow: 0 2px 8px var(--cf-shadow);
+  overflow: hidden;
+}
+
+.cf-catalog-filter__panel {
+  padding: var(--cf-space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cf-space-lg);
+}
+
+/* --------------------------------------------------------------------------
+   Filter Group
+   -------------------------------------------------------------------------- */
+
+.cf-catalog-filter__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cf-space-sm);
+}
+
+.cf-catalog-filter__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: var(--cf-fs-sm);
+  color: var(--cf-text);
+}
+
+.cf-catalog-filter__reset {
+  background: none;
+  border: none;
+  color: var(--cf-text-light);
+  font-size: var(--cf-fs-md);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 2px;
+  transition: var(--cf-transition-fast);
+}
+
+.cf-catalog-filter__reset:hover {
+  color: var(--cf-danger);
+}
+
+/* --------------------------------------------------------------------------
+   Filter: Checkbox Buttons (country)
+   -------------------------------------------------------------------------- */
+
+.cf-catalog-filter__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cf-space-xs);
+}
+
+.cf-catalog-filter__btn-check {
+  cursor: pointer;
+}
+
+.cf-catalog-filter__btn-check input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.cf-catalog-filter__btn-check span {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-radius-full);
+  font-size: var(--cf-fs-xs);
+  font-weight: 500;
+  color: var(--cf-text);
+  transition: var(--cf-transition-fast);
+  cursor: pointer;
+}
+
+.cf-catalog-filter__btn-check input[type="checkbox"]:checked + span {
+  background-color: var(--cf-primary);
+  border-color: var(--cf-primary);
+  color: #ffffff;
+}
+
+.cf-catalog-filter__btn-check span:hover {
+  border-color: var(--cf-primary);
+  color: var(--cf-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Filter: Select
+   -------------------------------------------------------------------------- */
+
+.cf-catalog-filter__select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-radius);
+  font-size: var(--cf-fs-sm);
+  color: var(--cf-text);
+  background-color: #ffffff;
+  appearance: auto;
+  cursor: pointer;
+  transition: var(--cf-transition-fast);
+}
+
+.cf-catalog-filter__select:focus {
+  outline: none;
+  border-color: var(--cf-primary);
+  box-shadow: 0 0 0 3px rgba(26, 82, 118, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   Filter: Range Inputs
+   -------------------------------------------------------------------------- */
+
+.cf-catalog-filter__range {
+  display: flex;
+  align-items: center;
+  gap: var(--cf-space-xs);
+}
+
+.cf-catalog-filter__input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-radius);
+  font-size: var(--cf-fs-sm);
+  color: var(--cf-text);
+  transition: var(--cf-transition-fast);
+}
+
+.cf-catalog-filter__input:focus {
+  outline: none;
+  border-color: var(--cf-primary);
+  box-shadow: 0 0 0 3px rgba(26, 82, 118, 0.15);
+}
+
+.cf-catalog-filter__sep {
+  color: var(--cf-text-light);
+  font-size: var(--cf-fs-sm);
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Filter: Checkboxes (body type)
+   -------------------------------------------------------------------------- */
+
+.cf-catalog-filter__checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cf-catalog-filter__checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--cf-space-sm);
+  font-size: var(--cf-fs-sm);
+  cursor: pointer;
+}
+
+.cf-catalog-filter__checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--cf-primary);
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   Filter: Actions
+   -------------------------------------------------------------------------- */
+
+.cf-catalog-filter__actions {
+  display: flex;
+  gap: var(--cf-space-sm);
+  padding-top: var(--cf-space-sm);
+  border-top: 1px solid var(--cf-border);
+}
+
+.cf-catalog-filter__actions .cf-btn {
+  flex: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Filter: Toolbar (sort + active filters)
+   -------------------------------------------------------------------------- */
+
+.cf-catalog-filter__toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--cf-space-md) var(--cf-space-lg);
+  border-top: 1px solid var(--cf-border);
+  background-color: var(--cf-bg-alt);
+  flex-wrap: wrap;
+  gap: var(--cf-space-sm);
+}
+
+.cf-catalog-filter__active {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cf-space-xs);
+}
+
+.cf-catalog-filter__sort {
+  display: flex;
+  align-items: center;
+  gap: var(--cf-space-sm);
+  font-size: var(--cf-fs-sm);
+}
+
+/* --------------------------------------------------------------------------
+   Filter: Results & Spinner
+   -------------------------------------------------------------------------- */
+
+.cf-catalog-filter__results {
+  position: relative;
+  min-height: 200px;
+}
+
+.cf-catalog-filter__spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--cf-space-4xl) 0;
+}
+
+.cf-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--cf-border);
+  border-top-color: var(--cf-primary);
+  border-radius: 50%;
+  animation: cf-spin 0.7s linear infinite;
+}
+
+@keyframes cf-spin {
+  to { transform: rotate(360deg); }
+}
+
+.cf-catalog-filter__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--cf-space-lg);
+}
+
+.cf-catalog-filter__pagination {
+  margin-top: var(--cf-space-2xl);
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 992px) {
+  .cf-catalog__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cf-catalog__sidebar {
+    position: static;
+  }
+
+  .cf-catalog__grid,
+  .cf-catalog-filter__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .cf-catalog__grid,
+  .cf-catalog-filter__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cf-catalog-filter__toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
