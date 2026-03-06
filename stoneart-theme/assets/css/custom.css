@@ -1,0 +1,84 @@
+/* Custom overrides — add your custom styles here */
+/* This file is loaded after the main style.css */
+
+/* WordPress admin bar fix */
+body.admin-bar .sa-header {
+    top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+    body.admin-bar .sa-header {
+        top: 46px;
+    }
+}
+
+/* WordPress alignment classes */
+.alignleft {
+    float: left;
+    margin-right: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.alignright {
+    float: right;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+}
+
+/* WordPress gallery */
+.wp-block-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+/* WordPress pagination */
+.nav-links {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.nav-links .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: 0 0.75rem;
+    border-radius: var(--sa-radius);
+    font-weight: 700;
+    font-size: 0.875rem;
+    transition: all 0.3s;
+    border: 1px solid var(--sa-gray-200);
+    background: var(--sa-white);
+    color: var(--sa-gray-700);
+}
+
+.nav-links .page-numbers.current,
+.nav-links .page-numbers:hover {
+    background: var(--sa-primary);
+    color: var(--sa-gray-900);
+    border-color: var(--sa-primary);
+}
+
+/* WordPress widgets */
+.sa-widget {
+    margin-bottom: 2rem;
+}
+
+.sa-widget__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--sa-primary);
+}
