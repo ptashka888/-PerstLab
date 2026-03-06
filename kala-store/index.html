@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изделия из натурального и искусственного камня на заказ | StoneArt Москва</title>
+    <meta name="description" content="Производство столешниц, подоконников, ступеней из мрамора, гранита, кварцевого агломерата (Avant, Caesarstone) и акрила (Grandex). Изделия под ключ от экспертов с гарантией 10 лет.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased overflow-x-hidden pt-24 md:pt-32">
+
+    <div id="toast-container" class="fixed bottom-5 left-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <header class="fixed top-0 w-full bg-white z-50 transition-all duration-300 shadow-sm" id="header">
+        <div class="bg-gray-900 hidden md:block">
+            <div class="container mx-auto px-4 py-2 flex justify-between items-center text-xs text-gray-300">
+                <div class="flex items-center gap-6">
+                    <span><i class="fa-solid fa-location-dot text-yellow-500 mr-2"></i>г. Москва, ул. Каменная, д. 1 (Шоурум)</span>
+                    <span><i class="fa-regular fa-clock text-yellow-500 mr-2"></i>Пн-Вс: 09:00 — 20:00</span>
+                    <span class="bg-yellow-500 text-gray-900 px-2 py-0.5 rounded font-bold">B2B и Частные клиенты | Работаем по РФ</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="mailto:info@stoneart.ru" class="hover:text-white transition"><i class="fa-regular fa-envelope text-yellow-500 mr-2"></i>info@stoneart.ru</a>
+                    <div class="flex gap-3 border-l border-gray-700 pl-4">
+                        <a href="#" class="text-green-500 hover:text-green-400 text-base transition"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="#" class="text-blue-500 hover:text-blue-400 text-base transition"><i class="fa-brands fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4 py-3 md:py-4 flex justify-between items-center bg-white" id="main-header-bar">
+            <a href="#" class="flex items-center gap-3 group">
+                <i class="fa-solid fa-gem text-yellow-500 text-3xl group-hover:rotate-12 transition-transform"></i>
+                <div>
+                    <div class="text-2xl md:text-3xl font-extrabold text-gray-900 uppercase tracking-wider font-serif">Stone<span class="text-yellow-500">Art</span></div>
+                </div>
+            </a>
+
+            <!-- Навигация с учетом SILO-структуры -->
+            <nav class="hidden lg:flex space-x-6 items-center">
+                <a href="#about" class="font-bold text-gray-800 hover:text-yellow-600 transition uppercase text-sm">Производство</a>
+                
+                <div class="relative group">
+                    <a href="#catalog" class="font-bold text-gray-800 hover:text-yellow-600 transition uppercase text-sm flex items-center py-4">
+                        Изделия <i class="fa-solid fa-chevron-down ml-1 text-[10px]"></i>
+                    </a>
+                    <div class="absolute top-[100%] left-0 w-64 bg-white shadow-xl rounded-b-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-4 grid grid-cols-1 gap-2 border-t-2 border-yellow-500">
+                        <a href="#catalog" class="hover:text-yellow-600 text-sm py-1 border-b border-gray-50">Кухонные столешницы</a>
+                        <a href="#catalog" class="hover:text-yellow-600 text-sm py-1 border-b border-gray-50">Подоконники из камня</a>
+                        <a href="#catalog" class="hover:text-yellow-600 text-sm py-1 border-b border-gray-50">Лестницы и ступени</a>
+                        <a href="#catalog" class="hover:text-yellow-600 text-sm py-1 border-b border-gray-50">Мойки и раковины</a>
+                        <a href="#catalog" class="hover:text-yellow-600 text-sm py-1 border-b border-gray-50">Камины и порталы</a>
+                        <a href="#catalog" class="hover:text-yellow-600 text-sm py-1">Полы и облицовка</a>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <a href="#materials-interactive" class="font-bold text-gray-800 hover:text-yellow-600 transition uppercase text-sm flex items-center py-4">
+                        Материалы <i class="fa-solid fa-chevron-down ml-1 text-[10px]"></i>
+                    </a>
+                    <div class="absolute top-[100%] left-0 w-80 bg-white shadow-xl rounded-b-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-4 grid grid-cols-1 gap-2 border-t-2 border-yellow-500">
+                        <a href="#materials-interactive" class="hover:text-yellow-600 text-sm py-1 border-b border-gray-50"><strong class="block text-gray-900">Кварцевый агломерат</strong> Avant, Caesarstone, Etna Quartz</a>
+                        <a href="#materials-interactive" class="hover:text-yellow-600 text-sm py-1 border-b border-gray-50"><strong class="block text-gray-900">Натуральный камень</strong> Мрамор, Гранит, Кварцит (Patagonia)</a>
+                        <a href="#materials-interactive" class="hover:text-yellow-600 text-sm py-1 border-b border-gray-50"><strong class="block text-gray-900">Акриловый камень</strong> Grandex, Tristone, Staron</a>
+                        <a href="#materials-interactive" class="hover:text-yellow-600 text-sm py-1 border-b border-gray-50"><strong class="block text-gray-900">Керамика / Спеченный камень</strong> Dekton, Laminam</a>
+                        <a href="#materials-interactive" class="hover:text-yellow-600 text-sm py-1"><strong class="block text-gray-900">Эксклюзив</strong> Оникс с подсветкой, Агат</a>
+                    </div>
+                </div>
+
+                <a href="#portfolio" class="font-bold text-gray-800 hover:text-yellow-600 transition uppercase text-sm py-4">Портфолио</a>
+                <a href="#expert-tips" class="font-bold text-gray-800 hover:text-yellow-600 transition uppercase text-sm py-4">Советы</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:block text-right">
+                    <a href="tel:+74950000000" class="font-extrabold text-xl text-gray-900 hover:text-yellow-600 block transition leading-none mb-1">
+                        +7 (495) 000-00-00
+                    </a>
+                    <a href="#quiz-section" class="text-xs text-yellow-600 font-bold hover:text-yellow-700 transition border-b border-dashed border-yellow-600">Заказать звонок</a>
+                </div>
+                <a href="#quiz-section" class="hidden md:flex bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-lg shadow-md transition transform hover:-translate-y-0.5 items-center uppercase text-sm">
+                    <i class="fa-solid fa-calculator mr-2"></i> Рассчитать
+                </a>
+                
+                <button class="lg:hidden text-gray-800 p-2" id="mobile-menu-btn">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-80 z-50 hidden opacity-0 transition-opacity duration-300" id="mobile-menu-overlay">
+            <div class="absolute right-0 top-0 bottom-0 w-4/5 max-w-sm bg-white shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col" id="mobile-menu-drawer">
+                <div class="p-5 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                    <div class="text-xl font-extrabold text-gray-900 uppercase font-serif">
+                        <i class="fa-solid fa-gem text-yellow-500 mr-2"></i>StoneArt
+                    </div>
+                    <button class="text-gray-400 hover:text-gray-800 text-2xl" id="mobile-menu-close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="flex-grow overflow-y-auto py-2">
+                    <a href="#about" class="block px-6 py-4 border-b border-gray-100 font-bold text-gray-800 uppercase text-sm">О производстве</a>
+                    <a href="#catalog" class="block px-6 py-4 border-b border-gray-100 font-bold text-gray-800 uppercase text-sm">Изделия</a>
+                    <a href="#materials-interactive" class="block px-6 py-4 border-b border-gray-100 font-bold text-gray-800 uppercase text-sm">Каталог материалов</a>
+                    <a href="#portfolio" class="block px-6 py-4 border-b border-gray-100 font-bold text-gray-800 uppercase text-sm">Наши работы</a>
+                    <a href="#expert-tips" class="block px-6 py-4 border-b border-gray-100 font-bold text-gray-800 uppercase text-sm">Советы экспертов</a>
+                </div>
+                <div class="p-6 bg-gray-900 text-white mt-auto">
+                    <a href="tel:+74950000000" class="font-bold text-2xl block mb-6 text-center"><i class="fa-solid fa-phone text-yellow-500 mr-2"></i>+7 (495) 000-00-00</a>
+                    <a href="#quiz-section" class="block w-full bg-yellow-500 text-gray-900 font-bold py-4 text-center rounded-lg uppercase text-sm">Рассчитать стоимость</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="hero" class="relative bg-gray-900 text-white flex items-center min-h-[85vh] py-20" style="background-image: linear-gradient(rgba(17, 24, 39, 0.75), rgba(17, 24, 39, 0.85)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; background-attachment: fixed;">
+        <div class="container mx-auto px-4 relative z-10 text-center md:text-left">
+            <div class="max-w-4xl">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 leading-tight">
+                    Изделия из натурального и искусственного камня <span class="text-yellow-500 border-b-4 border-yellow-500 pb-1 inline-block">на заказ в Москве</span>
+                </h1>
+                
+                <ul class="text-lg md:text-xl mb-10 text-gray-200 inline-block text-left space-y-4 font-medium">
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-yellow-500 mt-1.5 mr-3 text-xl"></i> 
+                        <span><strong class="text-white font-bold">Официальная гарантия 10 лет</strong> по договору на материал и монтаж</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-yellow-500 mt-1.5 mr-3 text-xl"></i> 
+                        <span>Сотни слэбов в наличии: от акрила Grandex до кварцита Patagonia</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-yellow-500 mt-1.5 mr-3 text-xl"></i> 
+                        <span>Срок изготовления столешниц и подоконников <strong class="text-white font-bold">от 5 дней</strong></span>
+                    </li>
+                </ul>
+                
+                <div class="mb-6">
+                    <div class="inline-flex items-center bg-yellow-600 bg-opacity-20 border border-yellow-500 text-white px-6 py-3 rounded-lg shadow-lg">
+                        <span class="relative flex h-3 w-3 mr-3">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
+                        </span>
+                        <p class="text-lg font-bold">Пройдите тест за 1 минуту и получите скидку до 30 000 ₽</p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center mt-8">
+                    <a href="#quiz-section" class="pulse-btn bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-extrabold py-5 px-10 rounded-full transition shadow-xl text-lg uppercase tracking-wider text-center w-full sm:w-auto">
+                        Рассчитать стоимость
+                    </a>
+                </div>
+                <p class="mt-5 text-sm text-gray-400 flex items-center justify-center md:justify-start opacity-80"><i class="fa-solid fa-gift text-yellow-500 mr-2"></i> Подарок за прохождение — набор по уходу за камнем.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ИНТЕРАКТИВНЫЙ БЛОК: Выбор материала -->
+    <section id="materials-interactive" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 font-serif">Выберите свой идеальный материал</h2>
+            
+            <div class="flex flex-col lg:flex-row gap-8 items-stretch max-w-6xl mx-auto bg-gray-50 rounded-2xl overflow-hidden shadow-xl border border-gray-100">
+                <div class="lg:w-3/5 relative min-h-[400px]">
+                    <img id="visualizer-img" src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1000&q=80" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" alt="Кварцевый агломерат">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-0 left-0 w-full p-8 text-white z-10">
+                        <div class="flex gap-2 mb-3" id="visualizer-badges">
+                            <span class="bg-yellow-500 text-gray-900 text-xs font-bold px-2 py-1 rounded">Хит для кухни</span>
+                            <span class="bg-gray-800 text-xs font-bold px-2 py-1 rounded border border-gray-600">Avant Quartz</span>
+                        </div>
+                        <h3 id="visualizer-title" class="text-3xl font-bold font-serif mb-2">Кварцевый агломерат</h3>
+                        <p id="visualizer-desc" class="text-gray-200">Идеальный выбор для кухонных столешниц. Абсолютно не впитывает влагу, не боится пятен вина и кофе.</p>
+                    </div>
+                </div>
+                <div class="lg:w-2/5 p-8 flex flex-col justify-center bg-white">
+                    <p class="text-sm uppercase tracking-widest text-gray-400 font-bold mb-6 border-b pb-4">Категории камня</p>
+                    <div class="space-y-4">
+                        <button class="visualizer-btn active w-full text-left p-4 rounded-xl border-2 border-yellow-500 bg-yellow-50 transition" data-mat="quartz">
+                            <div class="font-bold text-lg text-gray-900 mb-1">Кварцевый агломерат</div>
+                            <div class="text-sm text-gray-600">Практичность 10/10. Бренды: Caesarstone, Avant.</div>
+                        </button>
+                        <button class="visualizer-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-gray-300 transition" data-mat="granite">
+                            <div class="font-bold text-lg text-gray-900 mb-1">Натуральный гранит</div>
+                            <div class="text-sm text-gray-600">Максимальная прочность. Можно ставить горячую посуду.</div>
+                        </button>
+                        <button class="visualizer-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-gray-300 transition" data-mat="marble">
+                            <div class="font-bold text-lg text-gray-900 mb-1">Натуральный мрамор</div>
+                            <div class="text-sm text-gray-600">Премиальная эстетика (Calacatta, Emperador). Для ванных.</div>
+                        </button>
+                        <button class="visualizer-btn w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-gray-300 transition" data-mat="acrylic">
+                            <div class="font-bold text-lg text-gray-900 mb-1">Акриловый камень</div>
+                            <div class="text-sm text-gray-600">Бесшовное соединение, любые формы. Бренд: Grandex.</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ИНФОГРАФИКА: Сравнение материалов (Закрытие болей выбора) -->
+    <section id="comparison" class="py-20 bg-gray-50 border-t border-gray-200">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 font-serif">Какой камень выбрать?</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Честное сравнение характеристик материалов для принятия верного решения при заказе столешницы или подоконника.</p>
+            
+            <div class="overflow-x-auto shadow-xl rounded-2xl">
+                <table class="w-full max-w-5xl mx-auto border-collapse bg-white min-w-[800px]">
+                    <thead>
+                        <tr class="bg-gray-900 text-white">
+                            <th class="p-5 text-left text-lg font-serif rounded-tl-2xl">Характеристика</th>
+                            <th class="p-5 text-center text-lg font-serif">Кварцевый агломерат</th>
+                            <th class="p-5 text-center text-lg font-serif">Акриловый камень</th>
+                            <th class="p-5 text-center text-lg font-serif">Натуральный гранит</th>
+                            <th class="p-5 text-center text-lg font-serif rounded-tr-2xl">Мрамор / Оникс</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                            <td class="p-5 font-bold text-gray-900 bg-gray-50 border-r border-gray-100">Впитываемость (Пятна)</td>
+                            <td class="p-5 text-center text-green-600 font-bold"><i class="fa-solid fa-shield-halved mr-1"></i> Нулевая</td>
+                            <td class="p-5 text-center text-green-600 font-bold"><i class="fa-solid fa-shield-halved mr-1"></i> Нулевая</td>
+                            <td class="p-5 text-center">Низкая (нужна защита)</td>
+                            <td class="p-5 text-center text-red-500">Высокая (впитывает вино)</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                            <td class="p-5 font-bold text-gray-900 bg-gray-50 border-r border-gray-100">Термостойкость</td>
+                            <td class="p-5 text-center">До 150°C</td>
+                            <td class="p-5 text-center text-red-500">Низкая (боится горячего)</td>
+                            <td class="p-5 text-center text-green-600 font-bold"><i class="fa-solid fa-fire mr-1"></i> До 800°C</td>
+                            <td class="p-5 text-center">До 150°C</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                            <td class="p-5 font-bold text-gray-900 bg-gray-50 border-r border-gray-100">Царапины</td>
+                            <td class="p-5 text-center text-green-600 font-bold">Высокая защита</td>
+                            <td class="p-5 text-center text-red-500">Легко царапается (реставрируется)</td>
+                            <td class="p-5 text-center text-green-600 font-bold">Очень сложно поцарапать</td>
+                            <td class="p-5 text-center">Средняя защита</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                            <td class="p-5 font-bold text-gray-900 bg-gray-50 border-r border-gray-100">Бесшовное соединение</td>
+                            <td class="p-5 text-center text-red-500">Нет (тонкий шов)</td>
+                            <td class="p-5 text-center text-green-600 font-bold"><i class="fa-solid fa-check mr-1"></i> Да, абсолютно</td>
+                            <td class="p-5 text-center text-red-500">Нет (тонкий шов)</td>
+                            <td class="p-5 text-center text-red-500">Нет (тонкий шов)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-5 font-bold text-gray-900 bg-gray-50 border-r border-gray-100 rounded-bl-2xl">Идеально для:</td>
+                            <td class="p-5 text-center font-bold text-yellow-600">Столешницы кухни</td>
+                            <td class="p-5 text-center font-bold text-yellow-600">Сложные формы, ванны</td>
+                            <td class="p-5 text-center font-bold text-yellow-600">Улица, ступени, кухни</td>
+                            <td class="p-5 text-center font-bold text-yellow-600">Полы, камины, панно</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- КВИЗ (Лид-магнит) -->
+    <section id="quiz-section" class="py-20 bg-gray-900 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center"></div>
+        
+        <div class="container mx-auto px-4 max-w-4xl relative z-10">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-5xl font-bold text-white font-serif mb-4">Узнайте стоимость за 1 минуту</h2>
+                <p class="text-gray-300 text-lg">Ответьте на 4 вопроса и получите точный расчет + подарок по уходу</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border-4 border-yellow-500">
+                <div class="bg-gray-100 p-6 flex justify-between items-center border-b">
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-900 hidden sm:block">Калькулятор проекта</h2>
+                    <div class="text-yellow-600 font-bold bg-yellow-100 px-4 py-1 rounded-full text-sm ml-auto">Шаг <span id="current-step">1</span> из 4</div>
+                </div>
+                
+                <div class="w-full bg-gray-200 h-2">
+                    <div id="quiz-progress" class="bg-yellow-500 h-2 transition-all duration-500 ease-out" style="width: 25%;"></div>
+                </div>
+
+                <div class="p-8 md:p-10 bg-white">
+                    <div class="quiz-step" id="step-1">
+                        <h3 class="text-2xl font-bold mb-8 text-center">Что именно планируете заказать?</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <label class="cursor-pointer group relative rounded-xl border-2 border-gray-200 hover:border-yellow-500 transition p-2 flex flex-col items-center bg-gray-50">
+                                <input type="radio" name="product" value="Столешница кухня" class="hidden quiz-radio">
+                                <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400" alt="Столешница" class="w-full h-32 object-cover rounded-lg mb-3 shadow-sm">
+                                <span class="font-bold text-sm text-gray-800 group-hover:text-yellow-600 mb-1 text-center">Столешница (Кухня)</span>
+                            </label>
+                            <label class="cursor-pointer group relative rounded-xl border-2 border-gray-200 hover:border-yellow-500 transition p-2 flex flex-col items-center bg-gray-50">
+                                <input type="radio" name="product" value="Подоконник" class="hidden quiz-radio">
+                                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400" alt="Подоконник" class="w-full h-32 object-cover rounded-lg mb-3 shadow-sm">
+                                <span class="font-bold text-sm text-gray-800 group-hover:text-yellow-600 mb-1 text-center">Подоконники</span>
+                            </label>
+                            <label class="cursor-pointer group relative rounded-xl border-2 border-gray-200 hover:border-yellow-500 transition p-2 flex flex-col items-center bg-gray-50">
+                                <input type="radio" name="product" value="Столешница ванная" class="hidden quiz-radio">
+                                <img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?w=400" alt="Ванная" class="w-full h-32 object-cover rounded-lg mb-3 shadow-sm">
+                                <span class="font-bold text-sm text-gray-800 group-hover:text-yellow-600 mb-1 text-center">Столешница (Ванная)</span>
+                            </label>
+                            <label class="cursor-pointer group relative rounded-xl border-2 border-gray-200 hover:border-yellow-500 transition p-2 flex flex-col items-center bg-gray-50">
+                                <input type="radio" name="product" value="Лестница/Камин" class="hidden quiz-radio">
+                                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400" alt="Камин Ступени" class="w-full h-32 object-cover rounded-lg mb-3 shadow-sm">
+                                <span class="font-bold text-sm text-gray-800 group-hover:text-yellow-600 mb-1 text-center">Лестница / Камин</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-step hidden" id="step-2">
+                        <h3 class="text-2xl font-bold mb-8 text-center">Выберите предполагаемую форму</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <label class="cursor-pointer group relative rounded-xl border-2 border-gray-200 hover:border-yellow-500 transition p-6 text-center bg-gray-50 flex flex-col items-center justify-center min-h-[140px]">
+                                <input type="radio" name="form" value="Прямая" class="hidden quiz-radio" checked>
+                                <span class="font-bold text-xl block mb-2">Прямая</span>
+                                <span class="text-sm text-gray-500 block">Классический вариант</span>
+                            </label>
+                            <label class="cursor-pointer group relative rounded-xl border-2 border-gray-200 hover:border-yellow-500 transition p-6 text-center bg-gray-50 flex flex-col items-center justify-center min-h-[140px]">
+                                <input type="radio" name="form" value="Угловая (Г-образная)" class="hidden quiz-radio">
+                                <span class="font-bold text-xl block mb-2">Г-образная</span>
+                                <span class="text-sm text-gray-500 block">Угловая форма</span>
+                            </label>
+                            <label class="cursor-pointer group relative rounded-xl border-2 border-gray-200 hover:border-yellow-500 transition p-6 text-center bg-gray-50 flex flex-col items-center justify-center min-h-[140px]">
+                                <input type="radio" name="form" value="П-образная" class="hidden quiz-radio">
+                                <span class="font-bold text-xl block mb-2">П-образная</span>
+                                <span class="text-sm text-gray-500 block">Максимум пространства</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-step hidden" id="step-3">
+                        <h3 class="text-2xl font-bold mb-8 text-center">Нужна ли интегрированная мойка (из того же камня)?</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                            <label class="cursor-pointer group relative rounded-xl border-2 border-gray-200 hover:border-yellow-500 transition p-6 text-center bg-gray-50 flex flex-col items-center justify-center">
+                                <input type="radio" name="sink" value="Да" class="hidden quiz-radio">
+                                <span class="font-bold text-xl block mb-2">Да, нужна</span>
+                                <span class="text-sm text-gray-500 block">Бесшовная эстетика</span>
+                            </label>
+                            <label class="cursor-pointer group relative rounded-xl border-2 border-gray-200 hover:border-yellow-500 transition p-6 text-center bg-gray-50 flex flex-col items-center justify-center">
+                                <input type="radio" name="sink" value="Нет" class="hidden quiz-radio" checked>
+                                <span class="font-bold text-xl block mb-2">Нет, обычная накладная/подстольная</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-step hidden" id="step-4">
+                        <h3 class="text-3xl font-bold mb-4 text-center">Готово! Куда отправить расчет?</h3>
+                        <p class="text-center text-gray-600 mb-8 text-lg">За номером будет закреплена <strong class="text-yellow-600">скидка до 30 000 ₽</strong> и подарок.</p>
+                        
+                        <form id="quiz-form" class="max-w-md mx-auto">
+                            <div class="flex gap-4 mb-4 justify-center">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="contact_method" value="WhatsApp" checked class="text-yellow-500 focus:ring-yellow-500">
+                                    <span class="ml-2 font-bold"><i class="fa-brands fa-whatsapp text-green-500 mr-1"></i> WhatsApp</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="contact_method" value="Telegram" class="text-yellow-500 focus:ring-yellow-500">
+                                    <span class="ml-2 font-bold"><i class="fa-brands fa-telegram text-blue-500 mr-1"></i> Telegram</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="contact_method" value="Phone" class="text-yellow-500 focus:ring-yellow-500">
+                                    <span class="ml-2 font-bold"><i class="fa-solid fa-phone text-gray-500 mr-1"></i> Звонок</span>
+                                </label>
+                            </div>
+
+                            <div class="mb-6 relative">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <i class="fa-solid fa-mobile-screen text-gray-400 text-xl"></i>
+                                </div>
+                                <input type="tel" id="user-phone" placeholder="+7 (999) 000-00-00" required class="w-full pl-12 pr-4 py-4 border-2 border-gray-300 rounded-xl text-xl font-bold focus:border-yellow-500 focus:ring-0 outline-none transition bg-gray-50 text-gray-900 tracking-wide">
+                            </div>
+                            <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-extrabold py-5 px-8 rounded-xl text-xl transition transform hover:-translate-y-1 shadow-lg uppercase tracking-wide border border-yellow-600">
+                                Получить расчет
+                            </button>
+                            <p class="text-xs text-center text-gray-400 mt-6"><i class="fa-solid fa-lock mr-1"></i> Ваши данные надежно защищены.</p>
+                        </form>
+                    </div>
+
+                    <div class="flex justify-between mt-10 pt-6 border-t border-gray-100" id="quiz-navigation">
+                        <button type="button" id="btn-prev" class="hidden text-gray-500 hover:text-gray-900 font-bold px-6 py-3 border-2 border-gray-200 rounded-lg transition">← Назад</button>
+                        <button type="button" id="btn-next" class="ml-auto bg-gray-900 hover:bg-gray-800 text-white font-bold px-10 py-3 rounded-lg transition shadow-md">Далее →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПРОИЗВОДСТВО -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-yellow-500 rounded-2xl transform translate-x-4 translate-y-4"></div>
+                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800" alt="Производство камня" class="relative rounded-2xl shadow-xl z-10 w-full object-cover h-96">
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 font-serif">Искусство в каждом камне</h2>
+                    <p class="text-gray-800 mb-6 text-lg">
+                        <span class="font-bold bg-yellow-200 px-1">StoneArt — это прямой производитель.</span> Мы создаем изделия на высокоточных станках с ЧПУ, обеспечивая идеальную геометрию и бесшовную стыковку деталей.
+                    </p>
+                    <p class="text-gray-800 mb-8 text-lg">
+                        Мы привозим слэбы напрямую с карьеров Европы, Азии и Бразилии, а также являемся официальными партнерами брендов Avant Quartz, Caesarstone и Grandex. Это позволяет держать цены на 15-20% ниже рынка.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-gray-50 p-6 rounded-xl border-l-4 border-yellow-500 shadow-sm">
+                            <div class="text-3xl font-extrabold text-gray-900 mb-1">15 лет</div>
+                            <div class="text-xs text-gray-500 uppercase font-bold tracking-wider">Опыта на рынке</div>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-xl border-l-4 border-yellow-500 shadow-sm">
+                            <div class="text-3xl font-extrabold text-gray-900 mb-1">2000+</div>
+                            <div class="text-xs text-gray-500 uppercase font-bold tracking-wider">Успешных проектов</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ИСТОРИИ КАМНЯ (Эмоциональный блок) -->
+    <section id="stone-stories" class="py-20 bg-gray-900 overflow-hidden text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold mb-6 font-serif uppercase tracking-tight text-yellow-500">Истории, застывшие в камне</h2>
+                    <p class="text-xl text-gray-300 mb-6 italic leading-relaxed">"Каждый слэб натурального кварцита или мрамора — это картина, которую природа писала миллионы лет."</p>
+                    <p class="text-gray-400 mb-8">От глубокого черного гранита Black Galaxy из Индии до экзотического бразильского кварцита Patagonia. Наша миссия — сохранить эту природную душу и органично интегрировать её в пространство вашего дома.</p>
+                    <div class="flex gap-6">
+                        <div class="text-center">
+                            <span class="block text-3xl font-bold text-yellow-500">45+</span>
+                            <span class="text-xs uppercase text-gray-400 mt-1 block">Стран импорта</span>
+                        </div>
+                        <div class="w-px h-12 bg-gray-700"></div>
+                        <div class="text-center">
+                            <span class="block text-3xl font-bold text-yellow-500">1200</span>
+                            <span class="text-xs uppercase text-gray-400 mt-1 block">Слэбов на складе</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 relative">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://images.unsplash.com/photo-1590373407330-3331804d023f?w=400" class="rounded-lg shadow-2xl transform translate-y-8 border-2 border-gray-800" alt="Карьер по добыче мрамора">
+                        <img src="https://images.unsplash.com/photo-1628527302488-349f7ba30f78?w=400" class="rounded-lg shadow-2xl border-2 border-gray-800" alt="Слэб оникса с подсветкой">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КАТАЛОГ ИЗДЕЛИЙ -->
+    <section id="catalog" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-bold mb-16 text-center font-serif text-gray-900">Каталог изделий</h2>
+            
+            <div class="flex flex-col md:flex-row gap-10 items-center mb-16 bg-white p-6 md:p-10 rounded-3xl shadow-lg border border-gray-100">
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800" alt="Кухонная столешница из кварцевого агломерата" class="rounded-2xl shadow-md w-full h-80 object-cover">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-3xl font-bold mb-6 font-serif text-gray-900">Каменные столешницы</h3>
+                    <p class="mb-6 text-gray-600 text-lg">Идеальное решение для вашей кухни. Столешницы из кварцевого агломерата или гранита не царапаются ножом, устойчивы к температурам и агрессивной химии.</p>
+                    <ul class="space-y-3 mb-8 text-gray-700 font-medium">
+                        <li><i class="fa-solid fa-check text-yellow-500 mr-2"></i> Прямые, угловые и с кухонным островом</li>
+                        <li><i class="fa-solid fa-check text-yellow-500 mr-2"></i> С интегрированной каменной мойкой</li>
+                        <li><i class="fa-solid fa-check text-yellow-500 mr-2"></i> Из кварца, акрила, гранита, керамики</li>
+                    </ul>
+                    <a href="#quiz-section" class="inline-block bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-400 transition shadow">Заказать расчет</a>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row-reverse gap-10 items-center mb-16 bg-white p-6 md:p-10 rounded-3xl shadow-lg border border-gray-100">
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800" alt="Подоконники из камня" class="rounded-2xl shadow-md w-full h-80 object-cover">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-3xl font-bold mb-6 font-serif text-gray-900">Подоконники и откосы</h3>
+                    <p class="mb-6 text-gray-600 text-lg">Долговечные подоконники из акрила или мрамора. Не желтеют на солнце, не деформируются от батарей, не боятся влаги от цветов.</p>
+                    <ul class="space-y-3 mb-8 text-gray-700 font-medium">
+                        <li><i class="fa-solid fa-check text-yellow-500 mr-2"></i> Классические, эркерные, радиусные</li>
+                        <li><i class="fa-solid fa-check text-yellow-500 mr-2"></i> Подоконник, переходящий в столешницу</li>
+                        <li><i class="fa-solid fa-check text-yellow-500 mr-2"></i> Комплексная облицовка откосов</li>
+                    </ul>
+                    <a href="#quiz-section" class="inline-block bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-400 transition shadow">Заказать расчет</a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl shadow p-6 border border-gray-100 flex flex-col items-center text-center hover:shadow-xl transition">
+                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400" alt="Лестницы" class="w-full h-48 object-cover rounded-xl mb-4">
+                    <h4 class="font-bold text-xl mb-2">Лестницы и ступени</h4>
+                    <p class="text-sm text-gray-500 mb-4">Облицовка бетонных и металлических лестниц гранитом и мрамором.</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow p-6 border border-gray-100 flex flex-col items-center text-center hover:shadow-xl transition">
+                    <img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?w=400" alt="Ванные комнаты" class="w-full h-48 object-cover rounded-xl mb-4">
+                    <h4 class="font-bold text-xl mb-2">Мебель для ванных</h4>
+                    <p class="text-sm text-gray-500 mb-4">Столешницы под раковину, душевые поддоны, облицовка стен.</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow p-6 border border-gray-100 flex flex-col items-center text-center hover:shadow-xl transition">
+                    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400" alt="Камины" class="w-full h-48 object-cover rounded-xl mb-4">
+                    <h4 class="font-bold text-xl mb-2">Камины и порталы</h4>
+                    <p class="text-sm text-gray-500 mb-4">Роскошная облицовка каминов слэбами мрамора (Bookmatch) и ониксом.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПРОЦЕСС РАБОТЫ -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 font-serif">Простой процесс работы (до 14 дней)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center relative">
+                <div class="hidden md:block absolute top-10 left-[12%] w-[76%] h-0.5 bg-gray-200 -z-10"></div>
+                
+                <div class="relative bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div class="w-20 h-20 bg-white border-4 border-yellow-500 text-yellow-600 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 absolute -top-10 left-1/2 transform -translate-x-1/2">1</div>
+                    <h4 class="font-bold text-xl mb-3 mt-10">Заявка</h4>
+                    <p class="text-gray-600 text-sm">Вы проходите тест на сайте или звоните нам для предварительного расчета.</p>
+                </div>
+                <div class="relative bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div class="w-20 h-20 bg-white border-4 border-yellow-500 text-yellow-600 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 absolute -top-10 left-1/2 transform -translate-x-1/2">2</div>
+                    <h4 class="font-bold text-xl mb-3 mt-10">Точный замер</h4>
+                    <p class="text-gray-600 text-sm">Инженер приезжает с лазерным 3D-сканером и образцами камня. Договор.</p>
+                </div>
+                <div class="relative bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div class="w-20 h-20 bg-white border-4 border-yellow-500 text-yellow-600 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 absolute -top-10 left-1/2 transform -translate-x-1/2">3</div>
+                    <h4 class="font-bold text-xl mb-3 mt-10">Производство</h4>
+                    <p class="text-gray-600 text-sm">Резка и обработка на ЧПУ станках в нашем цеху в Москве (5-10 дней).</p>
+                </div>
+                <div class="relative bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div class="w-20 h-20 bg-white border-4 border-yellow-500 text-yellow-600 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 absolute -top-10 left-1/2 transform -translate-x-1/2">4</div>
+                    <h4 class="font-bold text-xl mb-3 mt-10">Монтаж</h4>
+                    <p class="text-gray-600 text-sm">Аккуратная доставка и установка мастерами (опыт от 7 лет) без строительной пыли.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЭКСПЕРТЫ И СОВЕТЫ (E-E-A-T Секция) -->
+    <section id="expert-tips" class="py-20 bg-gray-50 border-t border-gray-200">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 font-serif">Наши эксперты к вашим услугам</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center group bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="w-32 h-32 mx-auto mb-4 overflow-hidden rounded-full border-4 border-yellow-500">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400" class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition duration-500" alt="Старший технолог">
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-900">Виктор Петров</h4>
+                    <p class="text-sm text-yellow-600 font-bold mb-2">Старший технолог</p>
+                    <p class="text-xs text-gray-500">Опыт работы с камнем: 18 лет.</p>
+                </div>
+                <div class="text-center group bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="w-32 h-32 mx-auto mb-4 overflow-hidden rounded-full border-4 border-yellow-500">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400" class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition duration-500" alt="Дизайнер-проектировщик">
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-900">Елена Смирнова</h4>
+                    <p class="text-sm text-yellow-600 font-bold mb-2">Дизайнер-проектировщик</p>
+                    <p class="text-xs text-gray-500">Спроектировала более 500 изделий.</p>
+                </div>
+                
+                <div class="bg-gray-900 text-white p-8 rounded-2xl md:col-span-2 flex flex-col justify-center relative overflow-hidden shadow-xl">
+                    <i class="fa-solid fa-quote-right absolute top-4 right-6 text-6xl text-gray-800 opacity-50"></i>
+                    <h3 class="text-2xl font-bold mb-4 font-serif text-yellow-500">Совет эксперта: Как не ошибиться?</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">«Для кухонь с высокой нагрузкой (много готовите) я всегда рекомендую <strong>Кварцевый агломерат</strong>. В отличие от мрамора, он не имеет пор, поэтому в него не впитывается вино, свекла или кофе. А вот для роскошной облицовки камина или стен в ванной натуральный мрамор и оникс вне конкуренции.»</p>
+                    <a href="#quiz-section" class="text-yellow-500 font-bold border-b border-yellow-500 self-start hover:text-white transition">Получить консультацию Виктора</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПРАВИЛА УХОДА -->
+    <section class="py-16 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="bg-yellow-50 rounded-3xl p-8 md:p-12 border border-yellow-200 flex flex-col md:flex-row items-center gap-10">
+                <div class="md:w-1/3 text-center md:text-left">
+                    <i class="fa-solid fa-hand-sparkles text-6xl text-yellow-500 mb-6"></i>
+                    <h3 class="text-2xl font-bold mb-4 font-serif">Памятка по уходу</h3>
+                    <p class="text-gray-600">Соблюдайте эти простые правила, и ваши изделия прослужат столетия без реставрации.</p>
+                </div>
+                <div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-xl border-l-4 border-blue-400 shadow-sm">
+                        <h4 class="font-bold mb-1 text-gray-800"><i class="fa-solid fa-droplet text-blue-400 mr-2"></i> Мягкая очистка</h4>
+                        <p class="text-xs text-gray-500">Используйте только ph-нейтральные средства (мыльный раствор).</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border-l-4 border-green-500 shadow-sm">
+                        <h4 class="font-bold mb-1 text-gray-800"><i class="fa-solid fa-shield text-green-500 mr-2"></i> Пропитка (Мрамор)</h4>
+                        <p class="text-xs text-gray-500">Натуральный мрамор требует защиты гидрофобизатором 1 раз в год.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border-l-4 border-red-500 shadow-sm">
+                        <h4 class="font-bold mb-1 text-gray-800"><i class="fa-solid fa-ban text-red-500 mr-2"></i> Нет кислотам</h4>
+                        <p class="text-xs text-gray-500">Берегите мраморные поверхности от лимона, вина и уксуса.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border-l-4 border-orange-500 shadow-sm">
+                        <h4 class="font-bold mb-1 text-gray-800"><i class="fa-solid fa-temperature-arrow-up text-orange-500 mr-2"></i> Подставки</h4>
+                        <p class="text-xs text-gray-500">Используйте подставки под горячие сковороды на акриле и кварце.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ОТЗЫВЫ -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 font-serif">Отзывы клиентов</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex text-yellow-400 mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-gray-700 mb-6 italic">«Заказывали столешницу из кварца Avant на кухню. Сделали всё быстро, замеры точные, стыков не видно вообще. Очень довольна качеством материала и работой монтажников!»</p>
+                    <div class="font-bold text-gray-900">Елена В.</div>
+                    <div class="text-xs text-gray-500">г. Москва, ЖК "Символ"</div>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex text-yellow-400 mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-gray-700 mb-6 italic">«Делали облицовку камина натуральным мрамором Calacatta. Мастера — настоящие профи. Подсказали, как лучше сделать раскладку жил бабочкой (bookmatch). Выглядит роскошно.»</p>
+                    <div class="font-bold text-gray-900">Игорь Николаевич</div>
+                    <div class="text-xs text-gray-500">КП "Жуковка"</div>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex text-yellow-400 mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-gray-700 mb-6 italic">«Меняли пластиковые подоконники на гранитные Absolute Black. Совсем другой вид квартиры! Монтажники работали чисто, убрали за собой строительный мусор.»</p>
+                    <div class="font-bold text-gray-900">Анна С.</div>
+                    <div class="text-xs text-gray-500">г. Химки</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- СБОР E-MAIL / PDF КАТАЛОГ -->
+    <section class="bg-yellow-500 py-12 relative overflow-hidden">
+        <div class="absolute inset-0 bg-yellow-600 opacity-20 transform -skew-y-3 z-0"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="bg-gray-900 text-white rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-3xl font-bold mb-4 font-serif">Получите полный каталог и прайс-лист</h2>
+                    <p class="text-gray-300 mb-2"><i class="fa-solid fa-check text-yellow-500 mr-2"></i> Более 200 видов камня (Мрамор, Кварц, Акрил)</p>
+                    <p class="text-gray-300 mb-2"><i class="fa-solid fa-check text-yellow-500 mr-2"></i> Подробные цены на обработку кромок и вырезов</p>
+                    <p class="text-gray-300"><i class="fa-solid fa-check text-yellow-500 mr-2"></i> Секретная скидка 5% за скачивание</p>
+                </div>
+                <div class="md:w-1/2 w-full max-w-md">
+                    <form id="pdf-form" class="flex flex-col gap-4">
+                        <input type="email" placeholder="Введите ваш E-mail" required class="w-full py-4 px-6 rounded-xl text-gray-900 focus:outline-none focus:ring-4 focus:ring-yellow-500 font-bold">
+                        <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-extrabold py-4 rounded-xl transition text-lg uppercase tracking-wide">
+                            Скачать PDF-каталог
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8 pb-8 border-b border-gray-800">
+                <div class="md:col-span-2">
+                    <div class="text-2xl font-bold text-white mb-4 font-serif uppercase tracking-wider">
+                        <i class="fa-solid fa-gem text-yellow-500 mr-2"></i>Stone<span class="text-yellow-500">Art</span>
+                    </div>
+                    <p class="text-sm leading-relaxed mb-4 max-w-sm">Производство изделий из натурального (мрамор, гранит) и искусственного (кварц, акрил) камня премиум-класса в Москве.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Изделия</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#catalog" class="hover:text-yellow-500 transition">Столешницы</a></li>
+                        <li><a href="#catalog" class="hover:text-yellow-500 transition">Подоконники</a></li>
+                        <li><a href="#catalog" class="hover:text-yellow-500 transition">Ступени и лестницы</a></li>
+                        <li><a href="#catalog" class="hover:text-yellow-500 transition">Камины и облицовка</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Услуги</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#about" class="hover:text-yellow-500 transition">Изготовление на заказ</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition">Замер и 3D-проект</a></li>
+                        <li><a href="#" class="hover:text-yellow-500 transition">Монтаж изделий</a></li>
+                        <li><a href="#expert-tips" class="hover:text-yellow-500 transition">Реставрация и полировка</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Контакты</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="tel:+74950000000" class="hover:text-yellow-500 text-white font-bold text-lg transition"><i class="fa-solid fa-phone w-5 text-yellow-500"></i> +7 (495) 000-00-00</a></li>
+                        <li><i class="fa-solid fa-envelope w-5 text-yellow-500"></i> info@stoneart.ru</li>
+                        <li><i class="fa-solid fa-location-dot w-5 text-yellow-500"></i> г. Москва, ул. Каменная, д. 1</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- SEO Text Block (Hidden visual, visible to robots and users who read footer) -->
+            <div class="text-[10px] text-gray-600 mb-6 leading-relaxed">
+                Популярные запросы: <a href="#" class="hover:text-gray-400">кварцевый агломерат</a>, <a href="#" class="hover:text-gray-400">столешница из искусственного камня цена</a>, <a href="#" class="hover:text-gray-400">avant quartz 7400</a>, <a href="#" class="hover:text-gray-400">подоконники из мрамора</a>, <a href="#" class="hover:text-gray-400">гранит absolute black</a>, <a href="#" class="hover:text-gray-400">акриловый камень grandex</a>, <a href="#" class="hover:text-gray-400">оникс с подсветкой</a>, <a href="#" class="hover:text-gray-400">caesarstone</a>, <a href="#" class="hover:text-gray-400">литьевой мрамор столешницы</a>. Мы работаем с ведущими брендами и натуральным слэбами со всего мира.
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm">
+                <p>&copy; 2026 StoneArt. Все права защищены.</p>
+                <div class="mt-4 md:mt-0 space-x-4">
+                    <a href="#" class="hover:text-gray-300 transition">Политика конфиденциальности</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SMART BANNER -->
+    <div id="smart-banner" class="fixed bottom-0 left-0 w-full bg-gray-900 border-t border-yellow-500 p-3 z-40 transform translate-y-full transition-transform duration-500 flex justify-between items-center px-4 md:px-8 shadow-[0_-10px_20px_rgba(0,0,0,0.3)]">
+        <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-gray-900 text-xl flex-shrink-0">
+                <i class="fa-solid fa-percent"></i>
+            </div>
+            <div>
+                <p class="text-white font-bold text-sm md:text-base leading-tight">Скидка до 30 000 ₽ на заказ</p>
+                <p class="text-gray-400 text-xs hidden md:block">Пройдите тест и зафиксируйте выгоду за своим номером.</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="#quiz-section" class="bg-yellow-500 text-gray-900 px-4 py-2 rounded-lg font-bold text-sm hover:bg-yellow-400 transition whitespace-nowrap">Пройти тест</a>
+            <button id="close-banner" class="text-gray-400 hover:text-white px-2"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
