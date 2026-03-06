@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Структура сайта — Натуральный камень · SEO 2026</title>
+<style>
+:root{
+  --bg:#0b0a08;--s1:#121009;--s2:#181510;--s3:#1e1b13;--s4:#242017;
+  --gold:#c9a85c;--gold2:#e8cc88;--goldf:rgba(201,168,92,.1);
+  --cream:#ede8dc;--muted:#6e6654;--dim:#3d3929;
+  --red:#c05040;--green:#5a9a6a;--blue:#4a7abf;--purple:#8855bb;--teal:#3a9898;--orange:#c07830;
+  --rb:rgba(192,80,64,.14);--gb:rgba(90,154,106,.1);--bb:rgba(74,122,191,.1);
+  --pb:rgba(136,85,187,.1);--tb:rgba(58,152,152,.1);--ob:rgba(192,120,48,.1);
+  --bdr:rgba(201,168,92,.13);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;line-height:1.6}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;width:252px;height:100vh;background:#090806;border-right:1px solid var(--bdr);overflow-y:auto;z-index:200;padding-bottom:20px}
+nav::-webkit-scrollbar{width:3px}nav::-webkit-scrollbar-thumb{background:var(--dim)}
+.nlogo{padding:18px 18px 14px;border-bottom:1px solid var(--bdr)}
+.nlogo h1{font-size:17px;font-weight:300;color:var(--gold2);letter-spacing:.5px}
+.nlogo p{font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.ng{margin-top:10px}
+.ngt{padding:6px 18px 3px;font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);font-weight:600}
+nav a{display:flex;align-items:center;gap:7px;padding:4px 18px;color:var(--muted);font-size:10.5px;text-decoration:none;border-left:2px solid transparent;transition:all .12s}
+nav a:hover,nav a.active{background:var(--goldf);color:var(--gold2);border-left-color:var(--gold)}
+.nd1{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.nd2{width:5px;height:5px;border-radius:50%;background:var(--dim);flex-shrink:0}
+.nc{font-family:monospace;font-size:9px;color:var(--dim)}
+
+/* MAIN */
+main{margin-left:252px;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(11,10,8,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--bdr);padding:10px 28px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar h2{font-size:17px;font-weight:300;color:var(--cream)}
+.topbar h2 b{color:var(--gold);font-weight:400}
+.pill{padding:2px 9px;border:1px solid var(--bdr);font-size:8.5px;color:var(--muted);letter-spacing:.5px}
+.content{padding:28px}
+
+/* INTRO GRID */
+.intro{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:28px}
+.icard{background:var(--s2);border:1px solid var(--bdr);padding:14px;text-align:center}
+.inum{font-size:34px;color:var(--gold);font-weight:300;line-height:1}
+.ilbl{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:3px}
+
+/* BOOK INSIGHT */
+.insight{background:rgba(74,122,191,.05);border:1px solid rgba(74,122,191,.16);padding:12px 16px;margin-bottom:28px;display:flex;gap:12px;align-items:flex-start}
+.insight-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+.insight-body{font-size:11px;color:var(--muted);line-height:1.7}
+.insight-body strong{color:var(--gold2)}
+.insight-body code{background:rgba(201,168,92,.08);padding:1px 5px;font-size:10px;color:var(--gold)}
+
+/* URL MAP */
+.urlmap{background:var(--s2);border:1px solid var(--bdr);padding:20px 24px;margin-bottom:32px}
+.urlmap h3{font-size:16px;font-weight:300;color:var(--cream);margin-bottom:6px}
+.urlmap p{font-size:11px;color:var(--muted);margin-bottom:16px}
+.urlgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:5px}
+.urlitem{padding:7px 11px;border:1px solid var(--bdr);background:var(--s3);display:flex;align-items:center;gap:7px;font-size:10px}
+.urlitem.t2{border-left:2px solid rgba(201,168,92,.28);opacity:.7}
+.utag{font-size:7.5px;padding:1px 5px;font-weight:700;text-transform:uppercase;white-space:nowrap;border-radius:1px}
+.ut-prod{background:rgba(201,168,92,.15);color:var(--gold)}
+.ut-mat{background:rgba(136,85,187,.18);color:#d088ff}
+.ut-srv{background:rgba(58,152,152,.18);color:#70d0d0}
+.ut-inf{background:rgba(74,122,191,.18);color:#88b0ff}
+.ut-tpl{background:rgba(90,154,106,.18);color:#7ecf93}
+.urltext{font-family:monospace;font-size:9px;color:var(--muted)}
+
+/* LEGEND */
+.legend{display:flex;gap:14px;flex-wrap:wrap;background:var(--s2);border:1px solid var(--bdr);padding:10px 20px;margin-bottom:28px;align-items:center}
+.leg{display:flex;align-items:center;gap:5px;font-size:9.5px;color:var(--muted)}
+.ldot{width:9px;height:9px;border-radius:50%}
+
+/* PAGE CARD */
+.pc{background:var(--s1);border:1px solid var(--bdr);margin-bottom:44px;overflow:hidden}
+.pc-head{background:linear-gradient(90deg,rgba(201,168,92,.06),transparent);border-bottom:1px solid var(--bdr);padding:18px 24px;display:flex;gap:14px;align-items:flex-start}
+.pnum{font-size:42px;font-weight:200;color:rgba(201,168,92,.14);line-height:1;min-width:50px;font-variant-numeric:tabular-nums}
+.pinfo{flex:1;min-width:0}
+.ptitle{font-size:20px;font-weight:300;color:var(--cream);margin-bottom:4px}
+.purl{font-family:monospace;font-size:11px;background:rgba(201,168,92,.09);border:1px solid rgba(201,168,92,.2);color:var(--gold);padding:2px 8px;display:inline-block;margin-bottom:8px}
+.pmeta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.mtag{font-size:9px;padding:2px 8px;border-radius:1px}
+.mt-int{background:rgba(74,122,191,.12);color:#88b0ff;border:1px solid rgba(74,122,191,.2)}
+.mt-aud{background:rgba(90,154,106,.12);color:#7ecf93;border:1px solid rgba(90,154,106,.2)}
+.mt-sch{background:rgba(136,85,187,.12);color:#d088ff;border:1px solid rgba(136,85,187,.2)}
+.mt-dep{background:rgba(201,168,92,.08);color:var(--gold);border:1px solid var(--bdr)}
+.pkws{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px}
+.kw{font-family:monospace;font-size:9px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.05);color:var(--muted);padding:1px 6px}
+
+/* PAIN BAR */
+.painbar{padding:8px 24px;background:rgba(192,80,64,.04);border-bottom:1px solid rgba(192,80,64,.1);display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.plbl{font-size:8px;text-transform:uppercase;letter-spacing:2px;color:rgba(192,80,64,.55);margin-right:3px}
+.ptag{font-size:9px;color:#ff8870;background:rgba(192,80,64,.1);border:1px solid rgba(192,80,64,.18);padding:2px 8px}
+
+/* SEO SIGNAL BAR */
+.sigbar{padding:8px 24px;background:rgba(74,122,191,.04);border-bottom:1px solid rgba(74,122,191,.1);display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.slbl{font-size:8px;text-transform:uppercase;letter-spacing:2px;color:rgba(74,122,191,.55);margin-right:3px}
+.stag{font-size:9px;color:#88b0ff;background:rgba(74,122,191,.1);border:1px solid rgba(74,122,191,.18);padding:2px 8px}
+
+/* BLOCKS */
+.blocks{padding:18px 24px}
+.btitle{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.btitle::after{content:'';flex:1;height:1px;background:var(--bdr)}
+.blist{display:flex;flex-direction:column;gap:3px}
+.block{display:flex;border:1px solid rgba(255,255,255,.04);overflow:hidden;transition:border-color .12s}
+.block:hover{border-color:rgba(201,168,92,.14)}
+.bno{width:38px;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:9px;color:rgba(201,168,92,.25);background:rgba(201,168,92,.03);border-right:1px solid rgba(255,255,255,.04);flex-shrink:0}
+.bbar{width:3px;flex-shrink:0}
+.bb-hook{background:var(--gold)} .bg-hook{background:var(--ob)}
+.bb-conv{background:var(--red)} .bg-conv{background:var(--rb)}
+.bb-trust{background:var(--green)} .bg-trust{background:var(--gb)}
+.bb-seo{background:var(--blue)} .bg-seo{background:var(--bb)}
+.bb-nav{background:var(--teal)} .bg-nav{background:var(--tb)}
+.bb-content{background:var(--purple)} .bg-content{background:var(--pb)}
+.bmain{flex:1;padding:8px 13px;min-width:0}
+.bname{font-size:12.5px;font-weight:600;color:var(--cream);margin-bottom:2px}
+.bdesc{font-size:11px;color:var(--muted);line-height:1.55}
+.bseo{font-size:10px;font-style:italic;color:rgba(201,168,92,.52);margin-top:3px;padding-left:8px;border-left:2px solid rgba(201,168,92,.2)}
+.bpain{font-size:9.5px;color:#ff9070;margin-top:2px}
+.bright{padding:8px 11px;min-width:100px;border-left:1px solid rgba(255,255,255,.04);display:flex;flex-direction:column;gap:3px;justify-content:center;flex-shrink:0}
+.badge{font-size:7.5px;padding:2px 7px;font-weight:700;text-transform:uppercase;text-align:center;white-space:nowrap;border-radius:1px}
+.bd-hook{background:var(--ob);color:#ffbb70;border:1px solid rgba(192,120,48,.3)}
+.bd-conv{background:var(--rb);color:#ff9070;border:1px solid rgba(192,80,64,.28)}
+.bd-trust{background:var(--gb);color:#7ecf93;border:1px solid rgba(90,154,106,.28)}
+.bd-seo{background:var(--bb);color:#88b0ff;border:1px solid rgba(74,122,191,.28)}
+.bd-nav{background:var(--tb);color:#70d0d0;border:1px solid rgba(58,152,152,.28)}
+.bd-content{background:var(--pb);color:#d088ff;border:1px solid rgba(136,85,187,.28)}
+
+/* CROSS-LINK */
+.crosslink{padding:10px 24px 18px;background:rgba(90,154,106,.03);border-top:1px solid rgba(90,154,106,.1)}
+.cltitle{font-size:8px;text-transform:uppercase;letter-spacing:2px;color:rgba(90,154,106,.5);margin-bottom:7px}
+.cllist{display:flex;flex-wrap:wrap;gap:5px}
+.cltag{font-family:monospace;font-size:9px;color:#7ecf93;background:rgba(90,154,106,.08);border:1px solid rgba(90,154,106,.18);padding:2px 8px;text-decoration:none}
+
+@media(max-width:880px){nav{display:none}main{margin-left:0}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nlogo"><h1>Изделия из камня</h1><p>Структура · SEO 2026</p></div>
+
+  <div class="ng"><div class="ngt">Главная</div>
+    <a href="#p0"><span class="nd1"></span><span class="nc">/</span></a>
+  </div>
+  <div class="ng"><div class="ngt">Каталог изделий</div>
+    <a href="#p1"><span class="nd1"></span><span class="nc">/stoleshnicy/</span></a>
+    <a href="#p2"><span class="nd1"></span><span class="nc">/podokonnniki/</span></a>
+    <a href="#p3"><span class="nd1"></span><span class="nc">/lestnicy-stupeni/</span></a>
+    <a href="#p4"><span class="nd1"></span><span class="nc">/moidki-rakoviny/</span></a>
+    <a href="#p5"><span class="nd1"></span><span class="nc">/poly-steny/</span></a>
+    <a href="#p6"><span class="nd1"></span><span class="nc">/kaminy-portaly/</span></a>
+    <a href="#p7"><span class="nd1"></span><span class="nc">/mebel-dekor/</span></a>
+  </div>
+  <div class="ng"><div class="ngt">Каталог материалов</div>
+    <a href="#p8"><span class="nd1"></span><span class="nc">/mramor/</span></a>
+    <a href="#p9"><span class="nd1"></span><span class="nc">/granit/</span></a>
+    <a href="#p10"><span class="nd1"></span><span class="nc">/kvartsit/</span></a>
+    <a href="#p11"><span class="nd1"></span><span class="nc">/oniks-travertin/</span></a>
+    <a href="#p12"><span class="nd1"></span><span class="nc">/kvartsevyi-aglomerat/</span></a>
+    <a href="#p13"><span class="nd1"></span><span class="nc">/akrilovyi-kamen/</span></a>
+    <a href="#p14"><span class="nd1"></span><span class="nc">/keramogranit/</span></a>
+  </div>
+  <div class="ng"><div class="ngt">Услуги</div>
+    <a href="#p15"><span class="nd1"></span><span class="nc">/izgotovlenie/</span></a>
+    <a href="#p16"><span class="nd1"></span><span class="nc">/dostavka-montazh/</span></a>
+    <a href="#p17"><span class="nd1"></span><span class="nc">/zamer/</span></a>
+    <a href="#p18"><span class="nd1"></span><span class="nc">/restavraciya/</span></a>
+  </div>
+  <div class="ng"><div class="ngt">Контент / Доверие</div>
+    <a href="#p19"><span class="nd1"></span><span class="nc">/portfolio/</span></a>
+    <a href="#p20"><span class="nd1"></span><span class="nc">/brendy/</span></a>
+    <a href="#p21"><span class="nd1"></span><span class="nc">/blog/</span></a>
+    <a href="#p22"><span class="nd1"></span><span class="nc">/otzyvy/</span></a>
+    <a href="#p23"><span class="nd1"></span><span class="nc">/o-nas/</span></a>
+  </div>
+  <div class="ng"><div class="ngt">Конверсия</div>
+    <a href="#p24"><span class="nd1"></span><span class="nc">/konfigurator/</span></a>
+    <a href="#p25"><span class="nd1"></span><span class="nc">/ceny/</span></a>
+    <a href="#p26"><span class="nd1"></span><span class="nc">/kontakty/</span></a>
+  </div>
+  <div class="ng"><div class="ngt">Шаблоны глубина 2</div>
+    <a href="#p27"><span class="nd2"></span><span class="nc">/portfolio/{slug}/</span></a>
+    <a href="#p28"><span class="nd2"></span><span class="nc">/brendy/{slug}/</span></a>
+    <a href="#p29"><span class="nd2"></span><span class="nc">/blog/{slug}/</span></a>
+  </div>
+</nav>
+
+<main>
+<div class="topbar">
+  <h2>Сайт <b>Изделия из камня</b> · Блоки и SEO</h2>
+  <span class="pill">30 страниц</span><span class="pill">27 на глубине 1</span><span class="pill">3 шаблона гл. 2</span><span class="pill">Доказательное SEO 2026 + SEO Монстр</span>
+</div>
+<div class="content">
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="leg"><div class="ldot" style="background:var(--orange)"></div>Hero / Крючок</div>
+  <div class="leg"><div class="ldot" style="background:var(--red)"></div>Конверсия</div>
+  <div class="leg"><div class="ldot" style="background:var(--green)"></div>Доверие (E-E-A-T)</div>
+  <div class="leg"><div class="ldot" style="background:var(--blue)"></div>SEO / FAQ</div>
+  <div class="leg"><div class="ldot" style="background:var(--teal)"></div>Навигация</div>
+  <div class="leg"><div class="ldot" style="background:var(--purple)"></div>Контент (QBST)</div>
+  <span style="margin-left:auto;font-size:9px;color:var(--dim)">📖 Курсив = сигнал из книги DrMax</span>
+</div>
+
+<!-- OVERVIEW STATS -->
+<div class="intro">
+  <div class="icard"><div class="inum">30</div><div class="ilbl">страниц всего</div></div>
+  <div class="icard"><div class="inum">27</div><div class="ilbl">глубина 1 (1 клик)</div></div>
+  <div class="icard"><div class="inum">3</div><div class="ilbl">шаблона (глубина 2)</div></div>
+  <div class="icard"><div class="inum">7</div><div class="ilbl">изделий-категорий</div></div>
+  <div class="icard"><div class="inum">7</div><div class="ilbl">материалов-разделов</div></div>
+  <div class="icard"><div class="inum">4</div><div class="ilbl">услуги-посадочные</div></div>
+</div>
+
+<!-- BOOK INSIGHT -->
+<div class="insight">
+  <div class="insight-icon">📚</div>
+  <div class="insight-body">
+    <strong>SEO Монстр (DrMax) — Глубина страниц:</strong> Чем глубже страница, тем меньше сессий туда попадает и тем хуже она ранжируется. Каждый лишний уровень отнимает краулинговый бюджет. <strong>Решение: плоская архитектура — все коммерческие страницы на глубине 1</strong>, шаблоны (проекты, статьи, бренды) — не глубже 2. Внутренняя перелинковка: Главная → Категория → все страницы категории, создавая «тематические кластеры». <br><br>
+    <strong>Доказательное SEO 2026 (DrMax) — ключевые сигналы:</strong> <code>contentEffort</code> — Google алгоритмически измеряет «усилие» создания контента (видео, интерактив, оригинальные фото &gt; стоковые). <code>NavBoost</code> — поведение пользователей (dwell time, goodClicks) переранжирует результаты. <code>siteFocusScore</code> — тематическая плотность сайта. Страницы материалов (/mramor/, /granit/) повышают <code>siteFocusScore</code> для всего домена. <code>OriginalContentScore</code> — уникальные описания каждого товара, а не копипаст с производителя. <code>EntityAnnotations</code> — явно указывайте сущности: название камня, страна добычи, бренд — это помогает Google понять тематику. Schema.org — FAQ, Review, Organization, LocalBusiness дают расширенные сниппеты и повышают CTR.
+  </div>
+</div>
+
+<!-- URL MAP -->
+<div class="urlmap">
+  <h3>Плоская архитектура URL</h3>
+  <p>Все коммерческие страницы на глубине 1. Фильтры каталога — только <code>?filter=&color=</code> с canonical на чистый URL, не самостоятельные страницы. Пагинация — <code>?page=2</code> с <code>rel=canonical</code> на страницу 1 для фильтров, либо <code>rel=next/prev</code> для ключевых листингов.</p>
+  <div class="urlgrid">
+    <div class="urlitem"><span class="utag ut-inf">Главная</span><span class="urltext">/</span></div>
+    <div class="urlitem"><span class="utag ut-prod">Изделие</span><span class="urltext">/stoleshnicy/</span></div>
+    <div class="urlitem"><span class="utag ut-prod">Изделие</span><span class="urltext">/podokonnniki/</span></div>
+    <div class="urlitem"><span class="utag ut-prod">Изделие</span><span class="urltext">/lestnicy-stupeni/</span></div>
+    <div class="urlitem"><span class="utag ut-prod">Изделие</span><span class="urltext">/moidki-rakoviny/</span></div>
+    <div class="urlitem"><span class="utag ut-prod">Изделие</span><span class="urltext">/poly-steny/</span></div>
+    <div class="urlitem"><span class="utag ut-prod">Изделие</span><span class="urltext">/kaminy-portaly/</span></div>
+    <div class="urlitem"><span class="utag ut-prod">Изделие</span><span class="urltext">/mebel-dekor/</span></div>
+    <div class="urlitem"><span class="utag ut-mat">Материал</span><span class="urltext">/mramor/</span></div>
+    <div class="urlitem"><span class="utag ut-mat">Материал</span><span class="urltext">/granit/</span></div>
+    <div class="urlitem"><span class="utag ut-mat">Материал</span><span class="urltext">/kvartsit/</span></div>
+    <div class="urlitem"><span class="utag ut-mat">Материал</span><span class="urltext">/oniks-travertin/</span></div>
+    <div class="urlitem"><span class="utag ut-mat">Материал</span><span class="urltext">/kvartsevyi-aglomerat/</span></div>
+    <div class="urlitem"><span class="utag ut-mat">Материал</span><span class="urltext">/akrilovyi-kamen/</span></div>
+    <div class="urlitem"><span class="utag ut-mat">Материал</span><span class="urltext">/keramogranit/</span></div>
+    <div class="urlitem"><span class="utag ut-srv">Услуга</span><span class="urltext">/izgotovlenie/</span></div>
+    <div class="urlitem"><span class="utag ut-srv">Услуга</span><span class="urltext">/dostavka-montazh/</span></div>
+    <div class="urlitem"><span class="utag ut-srv">Услуга</span><span class="urltext">/zamer/</span></div>
+    <div class="urlitem"><span class="utag ut-srv">Услуга</span><span class="urltext">/restavraciya/</span></div>
+    <div class="urlitem"><span class="utag ut-inf">Контент</span><span class="urltext">/portfolio/</span></div>
+    <div class="urlitem"><span class="utag ut-inf">Контент</span><span class="urltext">/brendy/</span></div>
+    <div class="urlitem"><span class="utag ut-inf">Контент</span><span class="urltext">/blog/</span></div>
+    <div class="urlitem"><span class="utag ut-inf">Контент</span><span class="urltext">/otzyvy/</span></div>
+    <div class="urlitem"><span class="utag ut-inf">Контент</span><span class="urltext">/o-nas/</span></div>
+    <div class="urlitem"><span class="utag ut-inf">Конверсия</span><span class="urltext">/konfigurator/</span></div>
+    <div class="urlitem"><span class="utag ut-inf">Конверсия</span><span class="urltext">/ceny/</span></div>
+    <div class="urlitem"><span class="utag ut-inf">Конверсия</span><span class="urltext">/kontakty/</span></div>
+    <div class="urlitem t2"><span class="utag ut-tpl">Шаблон</span><span class="urltext">/portfolio/{slug}/</span></div>
+    <div class="urlitem t2"><span class="utag ut-tpl">Шаблон</span><span class="urltext">/brendy/{slug}/</span></div>
+    <div class="urlitem t2"><span class="utag ut-tpl">Шаблон</span><span class="urltext">/blog/{slug}/</span></div>
+  </div>
+</div>
+
+
+<!-- ===== P0: ГЛАВНАЯ ===== -->
+<div class="pc" id="p0">
+<div class="pc-head">
+  <div class="pnum">01</div>
+  <div class="pinfo">
+    <div class="ptitle">Главная страница</div>
+    <div class="purl">/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span>
+      <span class="mtag mt-int">Навигационный + информационный</span>
+      <span class="mtag mt-aud">Все сегменты ЦА — первый контакт</span>
+      <span class="mtag mt-sch">Organization · LocalBusiness · WebSite · BreadcrumbList</span>
+    </div>
+    <div class="pkws">
+      <span class="kw">изделия из камня</span><span class="kw">столешницы из камня</span><span class="kw">натуральный камень на заказ</span><span class="kw">мрамор гранит купить</span><span class="kw">производство изделий из камня</span>
+    </div>
+  </div>
+</div>
+<div class="painbar"><span class="plbl">Закрывает боли</span>
+  <span class="ptag">Сложность выбора типа камня</span>
+  <span class="ptag">Нужно увидеть и потрогать</span>
+  <span class="ptag">Нет понимания процесса заказа</span>
+  <span class="ptag">Поиск квалифицированных мастеров</span>
+</div>
+<div class="sigbar"><span class="slbl">SEO 2026</span>
+  <span class="stag">H1 = avgTermWeight MAX</span>
+  <span class="stag">Видео = contentEffort↑</span>
+  <span class="stag">Оригинальные фото = OriginalContentScore↑</span>
+  <span class="stag">Schema Organization → Knowledge Graph</span>
+  <span class="stag">dwell time через интерактив = NavBoost↑</span>
+</div>
+<div class="blocks">
+  <div class="btitle">Блоки страницы — порядок соответствует реальному расположению</div>
+  <div class="blist">
+
+    <div class="block bg-hook">
+      <div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain">
+        <div class="bname">Промо-бар (sticky, вверху сайта)</div>
+        <div class="bdesc">Строка с текущей акцией — «Бесплатный замер + 3D-визуализация до 31 марта» или «Успейте заказать по цене 2024 года». Таймер обратного отсчёта. Крестик для закрытия.</div>
+        <div class="bseo">FOMO-сигнал. Повышает CTR сниппета если вынесен в title. Увеличивает dwell time — пользователь видит ограничение и остаётся изучать сайт (NavBoost goodClicks).</div>
+        <div class="bpain">Боль: высокая стоимость → «успеть по старой цене»</div>
+      </div>
+      <div class="bright"><span class="badge bd-hook">Hero/Крючок</span></div>
+    </div>
+
+    <div class="block bg-hook">
+      <div class="bno">02</div><div class="bbar bb-hook"></div>
+      <div class="bmain">
+        <div class="bname">Hero — полноэкранный слайдер / видео-фон</div>
+        <div class="bdesc">H1 с главным ключом: «Изделия из натурального камня на заказ». Подзаголовок: 3 главные выгоды (25 лет гарантии · 1840 проектов · Бесплатный замер). Видео-фон или параллакс слайдер из 3-5 оригинальных фото. Две кнопки CTA: «Смотреть каталог» + «Получить расчёт стоимости».</div>
+        <div class="bseo">H1 + жирный текст = avgTermWeight максимальный. Оригинальное видео производства = contentEffort высокий. Кнопка CTA — снижает показатель отказов (goodClicks NavBoost).</div>
+        <div class="bpain">Боль: нужно увидеть и потрогать → эмоциональные фото/видео</div>
+      </div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div>
+    </div>
+
+    <div class="block bg-trust">
+      <div class="bno">03</div><div class="bbar bb-trust"></div>
+      <div class="bmain">
+        <div class="bname">Счётчики достижений (animated при скролле)</div>
+        <div class="bdesc">4 анимированных числа: X лет на рынке · X реализованных проектов · X видов камня · Гарантия X лет. Конкретные цифры, не «много лет опыта».</div>
+        <div class="bseo">siteAuthority: конкретные факты = сигнал доверия. Анимация = задержка взгляда = dwell time.</div>
+        <div class="bpain">Боль: высокая стоимость, поиск квалифицированных мастеров — «мы заслуживаем доверия»</div>
+      </div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div>
+    </div>
+
+    <div class="block bg-nav">
+      <div class="bno">04</div><div class="bbar bb-nav"></div>
+      <div class="bmain">
+        <div class="bname">Навигатор по аудитории (3 пути)</div>
+        <div class="bdesc">3 большие карточки: «Я частный клиент (квартира/дом)» → «Я дизайнер/архитектор» → «Я застройщик/B2B». Разные иконки, разный CTA, разный URL для каждого сегмента. Дизайнерам — доп. скидка и персональный менеджер.</div>
+        <div class="bseo">Снижает показатель отказов: каждый пользователь видит релевантный путь → goodClicks. Сегментация аудитории = персонализированный контент = dwell time.</div>
+        <div class="bpain">Боль: недостаток информации о процессе → «для тебя есть свой путь»</div>
+      </div>
+      <div class="bright"><span class="badge bd-nav">Навигация</span></div>
+    </div>
+
+    <div class="block bg-nav">
+      <div class="bno">05</div><div class="bbar bb-nav"></div>
+      <div class="bmain">
+        <div class="bname">Категории изделий (сетка 4×2 или горизонтальный скролл)</div>
+        <div class="bdesc">8 карточек: Столешницы / Подоконники / Лестницы / Мойки / Полы и стены / Камины / Мебель / Ресепшн. На каждой: оригинальное фото, название, «от X₽/м²», счётчик позиций в каталоге. Hover — краткое описание.</div>
+        <div class="bseo">Внутренние ссылки на категории передают PageRank. Оригинальные фото = OriginalContentScore. Ключевые слова в alt-тегах изображений.</div>
+      </div>
+      <div class="bright"><span class="badge bd-nav">Навигация</span></div>
+    </div>
+
+    <div class="block bg-nav">
+      <div class="bno">06</div><div class="bbar bb-nav"></div>
+      <div class="bmain">
+        <div class="bname">Виды камня (горизонтальный скролл / табы)</div>
+        <div class="bdesc">7 карточек: Мрамор / Гранит / Кварцит / Оникс / Травертин / Кварцевый агломерат / Акриловый камень. На каждой: фото текстуры крупным планом, название, 2-3 слова о свойстве, ссылка на раздел.</div>
+        <div class="bseo">EntityAnnotations: каждый вид камня — отдельная entity. Покрывает кластер запросов «виды камня для столешницы». siteFocusScore — тематическая плотность вокруг «камень».</div>
+        <div class="bpain">Боль: сложность выбора типа камня</div>
+      </div>
+      <div class="bright"><span class="badge bd-nav">Навигация</span></div>
+    </div>
+
+    <div class="block bg-content">
+      <div class="bno">07</div><div class="bbar bb-content"></div>
+      <div class="bmain">
+        <div class="bname">Натуральный vs искусственный — честное сравнение</div>
+        <div class="bdesc">Таблица сравнения: натуральный мрамор / гранит / кварцит vs кварцевый агломерат vs акрил vs керамогранит. Параметры: прочность по Моосу, пористость, уход, цена/м², долговечность, ремонтопригодность, уникальность. Вывод: «для каждой задачи — свой материал».</div>
+        <div class="bseo">QBST покрытие: «кварц или мрамор что лучше», «натуральный или искусственный камень», «кварцевый агломерат и искусственный камень отличие». Таблица = Featured Snippet кандидат. contentEffort: уникальный анализ, не копипаст.</div>
+        <div class="bpain">Боль: сложность выбора + опасения по долговечности</div>
+      </div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div>
+    </div>
+
+    <div class="block bg-conv">
+      <div class="bno">08</div><div class="bbar bb-conv"></div>
+      <div class="bmain">
+        <div class="bname">Интерактивный мини-конфигуратор (превью)</div>
+        <div class="bdesc">3 шага прямо на главной: выбрать изделие (столешница/подоконник/ступени) → выбрать камень (фото текстур) → увидеть результат в типовом интерьере. Кнопка «Получить полный расчёт» → /konfigurator/.</div>
+        <div class="bseo">contentEffort: интерактивность = мощный сигнал. Вовлечение пользователя = сессия 5+ минут = lastLongestClicks NavBoost.</div>
+        <div class="bpain">Боль: нужно увидеть результат перед покупкой + поиск уникальных решений</div>
+      </div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div>
+    </div>
+
+    <div class="block bg-trust">
+      <div class="bno">09</div><div class="bbar bb-trust"></div>
+      <div class="bmain">
+        <div class="bname">Мини-портфолио (masonry, 6 проектов)</div>
+        <div class="bdesc">Только оригинальные фото наших работ — никаких стоков. Подпись: тип объекта + материал + город. Кнопка «Все 847 проектов». Мобайл: 3 фото + «Смотреть ещё».</div>
+        <div class="bseo">OriginalContentScore: собственные фото проектов — уникальный контент. ImageObject Schema на каждом фото.</div>
+        <div class="bpain">Боль: нужно увидеть и потрогать → «вот наши реальные работы»</div>
+      </div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div>
+    </div>
+
+    <div class="block bg-trust">
+      <div class="bno">10</div><div class="bbar bb-trust"></div>
+      <div class="bmain">
+        <div class="bname">Как мы работаем (4 шага с иконками)</div>
+        <div class="bdesc">Шаг 1: Бесплатный замер (выезд в течение 24ч) → Шаг 2: КП и 3D-проект (1-2 дня) → Шаг 3: Изготовление на производстве (7-21 день) → Шаг 4: Доставка и монтаж (1 день). Конкретные сроки на каждом шаге.</div>
+        <div class="bseo">Закрывает поисковые запросы «как заказать столешницу из камня», снижает badClicks. Явное описание процесса = доверие = E-E-A-T.</div>
+        <div class="bpain">Боль: недостаток информации о процессе и сроках</div>
+      </div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div>
+    </div>
+
+    <div class="block bg-trust">
+      <div class="bno">11</div><div class="bbar bb-trust"></div>
+      <div class="bmain">
+        <div class="bname">Блок отзывов (карусель, 6 карточек)</div>
+        <div class="bdesc">Карточка: фото клиента + имя + город + тип заказа (столешница из мрамора Calacatta, 3.2м²) + рейтинг ★★★★★ + цитата 2-3 предложения. Значок «Проверено» + источник (Яндекс.Карты/Google). Кнопка «Все 312 отзывов».</div>
+        <div class="bseo">Schema Review на каждой карточке → звёздочки в выдаче = CTR +30%. AggregateRating → рейтинг в сниппете. Верифицированные отзывы = E-E-A-T.</div>
+        <div class="bpain">Боль: поиск квалифицированных мастеров — «нам доверяют реальные люди»</div>
+      </div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div>
+    </div>
+
+    <div class="block bg-trust">
+      <div class="bno">12</div><div class="bbar bb-trust"></div>
+      <div class="bmain">
+        <div class="bname">Сертификаты и партнёры-поставщики</div>
+        <div class="bdesc">Логотипы мировых карьеров и поставщиков (Italmarmi, Cosentino, Technistone и т.д.). Сертификаты качества с возможностью скачать. «Работаем напрямую — без посредников».</div>
+        <div class="bseo">EntityAnnotations: связь с авторитетными брендами усиливает доверие Google к домену. Исходящие ссылки на официальные сайты партнёров = spamrank clean (качественные исходящие).</div>
+      </div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div>
+    </div>
+
+    <div class="block bg-seo">
+      <div class="bno">13</div><div class="bbar bb-seo"></div>
+      <div class="bmain">
+        <div class="bname">FAQ главной страницы (аккордеон, Schema FAQPage)</div>
+        <div class="bdesc">8 вопросов из блока «Люди также спрашивают»: Сколько стоит столешница из мрамора? / Какой камень лучше для кухонной столешницы? / Как долго делается столешница? / Можно ли заказать по нестандартному размеру? / Чем отличается натуральный камень от кварцевого агломерата? / Как ухаживать за мраморной столешницей? / Делаете ли монтаж? / Есть ли гарантия?</div>
+        <div class="bseo">Schema FAQPage → расширенные сниппеты. PAA-покрытие → Featured Snippets. Ответы 50-120 слов — оптимально для извлечения AI Overviews (чанкинг по H2/H3).</div>
+        <div class="bpain">Боли: сложность выбора + высокая стоимость + опасения по долговечности</div>
+      </div>
+      <div class="bright"><span class="badge bd-seo">SEO / FAQ</span></div>
+    </div>
+
+    <div class="block bg-seo">
+      <div class="bno">14</div><div class="bbar bb-seo"></div>
+      <div class="bmain">
+        <div class="bname">SEO-текст (аккордеон «Подробнее», 2000-2500 слов)</div>
+        <div class="bdesc">H2: Изделия из натурального камня — виды и применение. H2: Мрамор, гранит, кварцит, оникс — как выбрать. H2: Производство столешниц из камня на заказ. H2: Почему натуральный камень лучше искусственного. H2: Уход за изделиями из камня. Каждый раздел 300-500 слов с оригинальным авторским текстом.</div>
+        <div class="bseo">QBST покрытие: семантическое ядро темы. siteFocusScore для всего домена. H2-структура = чанки для Passage Indexing и AI Overviews. Только авторский текст — contentEffort.</div>
+      </div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div>
+    </div>
+
+    <div class="block bg-conv">
+      <div class="bno">15</div><div class="bbar bb-conv"></div>
+      <div class="bmain">
+        <div class="bname">Pop-up exit-intent + pop-up с задержкой 45 сек</div>
+        <div class="bdesc">Exit-intent: «Подождите! Скачайте каталог 500+ видов камня — бесплатно». Форма: Email + кнопка. Задержка 45 сек: «Хотите узнать стоимость вашего проекта? Оставьте номер — перезвоним за 15 минут». Один активный pop-up одновременно.</div>
+        <div class="bseo">Конверсионный механизм, не влияет на SEO напрямую. Важно: не блокировать контент сразу при загрузке (штраф Google за intrusive interstitials).</div>
+      </div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div>
+    </div>
+
+  </div>
+</div>
+<div class="crosslink">
+  <div class="cltitle">Ключевые внутренние ссылки с главной</div>
+  <div class="cllist">
+    <a class="cltag" href="#p1">/stoleshnicy/</a><a class="cltag" href="#p8">/mramor/</a><a class="cltag" href="#p9">/granit/</a>
+    <a class="cltag" href="#p12">/kvartsevyi-aglomerat/</a><a class="cltag" href="#p19">/portfolio/</a>
+    <a class="cltag" href="#p24">/konfigurator/</a><a class="cltag" href="#p17">/zamer/</a><a class="cltag" href="#p22">/otzyvy/</a>
+  </div>
+</div>
+</div>
+
+<!-- ===== P1: СТОЛЕШНИЦЫ ===== -->
+<div class="pc" id="p1">
+<div class="pc-head">
+  <div class="pnum">02</div>
+  <div class="pinfo">
+    <div class="ptitle">Столешницы из камня</div>
+    <div class="purl">/stoleshnicy/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span>
+      <span class="mtag mt-int">Коммерческий + информационный</span>
+      <span class="mtag mt-aud">Владельцы жилья с ремонтом · Дизайнеры интерьеров</span>
+      <span class="mtag mt-sch">CollectionPage · FAQPage · BreadcrumbList</span>
+    </div>
+    <div class="pkws">
+      <span class="kw">столешница из камня</span><span class="kw">столешница из мрамора</span><span class="kw">столешница из гранита</span><span class="kw">кварцевая столешница</span><span class="kw">акриловая столешница</span><span class="kw">столешница с интегрированной мойкой</span><span class="kw">столешница из натурального камня цена</span><span class="kw">каменная столешница плюсы минусы</span>
+    </div>
+  </div>
+</div>
+<div class="painbar"><span class="plbl">Закрывает боли</span>
+  <span class="ptag">Сложность выбора (натуральный vs искусственный)</span>
+  <span class="ptag">Высокая стоимость (цены «от»)</span>
+  <span class="ptag">Опасения по долговечности</span>
+  <span class="ptag">Нужно увидеть в интерьере</span>
+</div>
+<div class="sigbar"><span class="slbl">SEO 2026</span>
+  <span class="stag">H1 = avgTermWeight</span><span class="stag">Фильтры = canonical на /stoleshnicy/</span>
+  <span class="stag">Калькулятор = contentEffort↑↑</span><span class="stag">Оригинальные описания каждой позиции = OriginalContentScore</span>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero с H1 + баннер категории</div>
+      <div class="bdesc">H1: «Столешницы из натурального и искусственного камня на заказ». Оригинальное фото 1920px — лучшие столешницы из портфолио. Строка: «от 4 500 ₽/м² · изготовление 7-14 дней · бесплатный замер». CTA: «Рассчитать стоимость».</div>
+      <div class="bseo">H1 = главный сигнал avgTermWeight. Ключ в первых 100 символах страницы усиливает сигнал T* (Text).</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+
+    <div class="block bg-nav"><div class="bno">02</div><div class="bbar bb-nav"></div>
+      <div class="bmain"><div class="bname">Sticky фильтр (сверху или слева)</div>
+      <div class="bdesc">Фильтрация: по материалу (мрамор/гранит/кварцит/оникс/кварцевый агломерат/акрил/керамика) · по применению (кухня/ванная/офис/улица) · по цвету · по цене · по отделке (полированная/матовая/кожаная). Все фильтры — параметры URL с canonical на /stoleshnicy/.</div>
+      <div class="bseo">КРИТИЧНО: фильтры НЕ создают отдельных URL → не дробят краулинговый бюджет. Canonical=rel на родительскую страницу для всех комбинаций.</div></div>
+      <div class="bright"><span class="badge bd-nav">Навигация</span></div></div>
+
+    <div class="block bg-nav"><div class="bno">03</div><div class="bbar bb-nav"></div>
+      <div class="bmain"><div class="bname">Сетка товаров (24 позиции + lazy-load)</div>
+      <div class="bdesc">Карточка товара: оригинальное фото (не с сайта производителя!) + название + тип камня + цена «от X ₽/м²» + бейджи (хит продаж / новинка / эксклюзив) + кнопка «Рассчитать». Сортировка: популярные / дешевле / дороже / новинки.</div>
+      <div class="bseo">OriginalContentScore: уникальное описание и фото для каждого товара. Schema Product на каждой карточке с offers и availability.</div>
+      <div class="bpain">Боль: высокая стоимость → цена «от» снижает барьер входа</div></div>
+      <div class="bright"><span class="badge bd-nav">Каталог</span></div></div>
+
+    <div class="block bg-content"><div class="bno">04</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Сравнительная таблица материалов для столешниц</div>
+      <div class="bdesc">Таблица: Мрамор / Гранит / Кварцит / Кварцевый агломерат / Акрил / Керамика. Строки: твёрдость по Моосу / пористость / устойчивость к пятнам / уход / цена м² / применение (кухня/ванная) / можно ли шлифовать. Авторские комментарии под таблицей.</div>
+      <div class="bseo">QBST: «какую столешницу выбрать для кухни советы специалиста», «кварц или акрил что лучше», «каменная столешница плюсы минусы». Таблица = Featured Snippet. contentEffort: аналитика, не компиляция.</div>
+      <div class="bpain">Боль: сложность выбора + опасения по долговечности</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+
+    <div class="block bg-conv"><div class="bno">05</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Онлайн-калькулятор стоимости (inline)</div>
+      <div class="bdesc">3 шага встроены прямо в страницу: 1) Размер столешницы (ширина × длина, +отверстие под мойку) 2) Материал (с ценой/м²) 3) Тип отделки края (прямой / радиус / сложный). Итог: «ориентировочно от X ₽». CTA: «Получить точный расчёт — пришлём за 1 час».</div>
+      <div class="bseo">contentEffort MAX: интерактивный калькулятор трудно воспроизвести. Вовлечение = сессия 5-10 мин = lastLongestClicks.</div>
+      <div class="bpain">Боль: высокая стоимость → «узнай свою цену сразу»</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+
+    <div class="block bg-trust"><div class="bno">06</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Фото наших столешниц в интерьере (4-6 проектов)</div>
+      <div class="bdesc">Оригинальные фото с подписью: «Кухня 18м², мрамор Calacatta Gold, толщина 30мм, интегрированная мойка, г. Москва». Ссылка на полный проект в портфолио.</div>
+      <div class="bseo">OriginalContentScore: собственные фото. EntityAnnotations: конкретное название камня + применение + параметры.</div>
+      <div class="bpain">Боль: нужно увидеть результат</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+
+    <div class="block bg-seo"><div class="bno">07</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ по столешницам (Schema FAQPage, 8 вопросов)</div>
+      <div class="bdesc">Откуда берётся цена за м² / Какая толщина стандарт для кухни / Делаете ли столешницу с интегрированной мойкой / Как ухаживать за кварцевым агломератом / Можно ли нестандартный размер / Сколько служит мраморная столешница / Делаете ли фартук в тон / Есть ли рассрочка.</div>
+      <div class="bseo">PAA-покрытие = Featured Snippets. Schema FAQPage = расширенный сниппет. Вопросы-ответы 60-120 слов каждый = чанки для AI Overviews (Passage Indexing).</div>
+      <div class="bpain">Боли: высокая стоимость + опасения + процесс</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+
+    <div class="block bg-seo"><div class="bno">08</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">SEO-текст (2000 слов, аккордеон «Подробнее»)</div>
+      <div class="bdesc">H2: Виды камня для столешниц: мрамор, гранит, кварцит, оникс. H2: Кварцевый агломерат — популярные бренды (Caesarstone, Аварус, Avant Quartz, Radianz, Technistone). H2: Акриловый камень (Grandex, Staron, Tristone). H2: Уход за столешницей. H2: Производство и монтаж. Каждый раздел 300-400 слов, авторский текст.</div>
+      <div class="bseo">QBST полное покрытие темы. siteFocusScore. Упоминание брендов = EntityAnnotations (Caesarstone, Grandex — авторитетные entity).</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+
+</div></div>
+<div class="crosslink"><div class="cltitle">Ключевые внутренние ссылки</div><div class="cllist">
+  <a class="cltag" href="#p8">/mramor/</a><a class="cltag" href="#p9">/granit/</a><a class="cltag" href="#p12">/kvartsevyi-aglomerat/</a>
+  <a class="cltag" href="#p13">/akrilovyi-kamen/</a><a class="cltag" href="#p4">/moidki-rakoviny/</a><a class="cltag" href="#p24">/konfigurator/</a>
+</div></div>
+</div>
+
+<!-- ===== P2: ПОДОКОННИКИ ===== -->
+<div class="pc" id="p2">
+<div class="pc-head">
+  <div class="pnum">03</div>
+  <div class="pinfo">
+    <div class="ptitle">Подоконники из камня</div>
+    <div class="purl">/podokonnniki/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span>
+      <span class="mtag mt-int">Коммерческий</span>
+      <span class="mtag mt-aud">Владельцы квартир/домов · Строительные компании</span>
+      <span class="mtag mt-sch">CollectionPage · FAQPage · Product</span>
+    </div>
+    <div class="pkws">
+      <span class="kw">подоконник из камня</span><span class="kw">мраморный подоконник</span><span class="kw">подоконник из гранита</span><span class="kw">подоконник из кварцевого агломерата</span><span class="kw">акриловые подоконники плюсы минусы</span><span class="kw">какие подоконники лучше выбрать для квартиры</span><span class="kw">толщина подоконника из искусственного камня</span>
+    </div>
+  </div>
+</div>
+<div class="painbar"><span class="plbl">Закрывает боли</span>
+  <span class="ptag">Сложность выбора материала</span><span class="ptag">Высокая стоимость</span><span class="ptag">Опасения по долговечности</span>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero с H1 + подвиды</div>
+      <div class="bdesc">H1: «Подоконники из натурального и искусственного камня». Подраздел: из мрамора / из гранита / из кварцевого агломерата / из акрила. Цена от X ₽/мп. CTA: «Рассчитать длину и стоимость».</div>
+      <div class="bseo">H1 с главным ключом. Breadcrumb: Главная → Подоконники (Schema BreadcrumbList).</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-nav"><div class="bno">02</div><div class="bbar bb-nav"></div>
+      <div class="bmain"><div class="bname">Фильтр по материалу + толщине + цвету</div>
+      <div class="bdesc">Фильтр: материал (мрамор/гранит/кварцит/агломерат/акрил) · толщина (20/30/40 мм) · цвет · ширина (от 150 до 600 мм). Карточки с ценой за мп.</div>
+      <div class="bseo">Canonical для всех фильтров на /podokonnniki/. Пагинация с rel=next/prev.</div></div>
+      <div class="bright"><span class="badge bd-nav">Каталог</span></div></div>
+    <div class="block bg-content"><div class="bno">03</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Сравнение: камень vs пластик vs дерево vs ПВХ</div>
+      <div class="bdesc">Таблица: долговечность / уход / влагостойкость / теплоизоляция / цена / ремонтопригодность / экологичность. Вывод: «каменный подоконник — вложение на 50+ лет».</div>
+      <div class="bseo">QBST: «какие подоконники лучше для квартиры», «акриловые подоконники плюсы минусы». Featured Snippet.</div>
+      <div class="bpain">Боли: сложность выбора + опасения долговечности</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-conv"><div class="bno">04</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Калькулятор подоконника (длина × ширина = цена)</div>
+      <div class="bdesc">Ввод: длина (мм) + ширина (мм) + количество штук + материал = стоимость. Чекбоксы: «с выносом», «скошенный угол», «отверстие под радиатор». Результат + «Заказать замер».</div>
+      <div class="bseo">contentEffort: интерактивный инструмент. Вовлечение пользователя.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-trust"><div class="bno">05</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">6 фото наших подоконников в интерьере</div>
+      <div class="bdesc">Оригинальные фото. Подпись: материал + ширина + комната. Ссылки на проекты в портфолио.</div>
+      <div class="bseo">OriginalContentScore. ImageObject Schema.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-seo"><div class="bno">06</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ + SEO-текст (1200 слов)</div>
+      <div class="bdesc">FAQ (6 вопросов): Стандартная ширина и толщина / Монтаж своими руками / Уход / Нестандартные размеры / Совместить с откосами / Гарантия. SEO-текст H2: Виды материалов. H2: Размеры стандарт. H2: Установка. H2: Уход.</div>
+      <div class="bseo">PAA покрытие. Schema FAQPage. siteFocusScore += тема подоконников.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- ===== P3: ЛЕСТНИЦЫ ===== -->
+<div class="pc" id="p3">
+<div class="pc-head">
+  <div class="pnum">04</div>
+  <div class="pinfo">
+    <div class="ptitle">Лестницы и ступени из камня</div>
+    <div class="purl">/lestnicy-stupeni/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span>
+      <span class="mtag mt-int">Коммерческий</span>
+      <span class="mtag mt-aud">Частные дома · Застройщики · Коммерческие объекты</span>
+      <span class="mtag mt-sch">CollectionPage · FAQPage</span>
+    </div>
+    <div class="pkws">
+      <span class="kw">ступени из мрамора</span><span class="kw">мраморная лестница</span><span class="kw">каменные ступени купить</span><span class="kw">лестница из гранита</span><span class="kw">гранитные ступени купить</span><span class="kw">облицовка ступеней керамогранитом</span>
+    </div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero с видео монтажа или фото парадных лестниц</div>
+      <div class="bdesc">H1: «Лестницы и ступени из натурального камня». Оригинальное видео: процесс монтажа мраморных ступеней (1-2 мин). Или fullbleed фото парадной лестницы. Цена от X ₽/ступень.</div>
+      <div class="bseo">contentEffort: оригинальное видео монтажа = максимальный сигнал.</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-nav"><div class="bno">02</div><div class="bbar bb-nav"></div>
+      <div class="bmain"><div class="bname">Типы ступеней + каталог</div>
+      <div class="bdesc">Фильтр: прямые / угловые (L-образные) / радиусные / забежные / площадки / плинтусы. Материал: мрамор / гранит / кварцит. Поверхность: полированная / матовая / бучардированная / термообработанная. Карточки с ценой за штуку.</div></div>
+      <div class="bright"><span class="badge bd-nav">Каталог</span></div></div>
+    <div class="block bg-conv"><div class="bno">03</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Калькулятор ступеней</div>
+      <div class="bdesc">Количество ступеней × размер (ширина/глубина/высота) × материал = ориентировочная стоимость. Опции: антискользящий вкладыш (+X%), монтаж (+X%). Кнопка «Рассчитать проект».</div>
+      <div class="bseo">contentEffort: интерактив. Специфический инструмент для ниши.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-trust"><div class="bno">04</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">До/после — слайдер (деревянные → мраморные)</div>
+      <div class="bdesc">Drag-слайдер: старые деревянные/бетонные ступени vs новые мраморные. 6-8 примеров. Самый конвертирующий формат для данной услуги.</div>
+      <div class="bseo">dwell time MAX. contentEffort: оригинальный до/после контент. Поведенческий сигнал NavBoost.</div>
+      <div class="bpain">Боль: нужно увидеть результат до покупки</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-content"><div class="bno">05</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Облицовка ступеней — технология</div>
+      <div class="bdesc">H2: Облицовка бетонных ступеней. H2: Облицовка деревянных ступеней. H2: Антискользящие вставки: стекло/нержавейка/бучарда. H2: Уход за каменными ступенями. Оригинальные фото каждого этапа.</div>
+      <div class="bseo">contentEffort: технологический гайд с фото. «облицовка ступеней натуральным камнем» — кластер запросов.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-seo"><div class="bno">06</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ (6 вопросов) + SEO-текст 1500 слов</div>
+      <div class="bdesc">FAQ: Сколько стоит мраморная лестница / Какой камень самый нескользкий / Можно ли на улицу / Срок изготовления / Гарантия / Монтаж. SEO-текст: H2 виды, H2 материалы, H2 уход, H2 цены.</div>
+      <div class="bseo">PAA покрытие. siteFocusScore.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- ===== P4: МОЙКИ ===== -->
+<div class="pc" id="p4">
+<div class="pc-head">
+  <div class="pnum">05</div>
+  <div class="pinfo">
+    <div class="ptitle">Мойки и раковины из камня</div>
+    <div class="purl">/moidki-rakoviny/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span>
+      <span class="mtag mt-int">Коммерческий</span>
+      <span class="mtag mt-aud">Частные клиенты (кухня/ванная) · Дизайнеры</span>
+      <span class="mtag mt-sch">CollectionPage · FAQPage · Product</span>
+    </div>
+    <div class="pkws">
+      <span class="kw">мойка из камня под заказ</span><span class="kw">каменная мойка для кухни</span><span class="kw">раковина из мрамора</span><span class="kw">столешница с интегрированной мойкой</span><span class="kw">установка мойки из искусственного камня</span><span class="kw">мойка подстольного монтажа в каменную столешницу</span>
+    </div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero — типы монтажа + H1</div>
+      <div class="bdesc">H1: «Мойки и раковины из натурального и искусственного камня». 3 главных типа с иконками: врезная / накладная / интегрированная. Фото. Цена от X ₽.</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-content"><div class="bno">02</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Столешница с интегрированной мойкой — отдельный блок</div>
+      <div class="bdesc">Высокочастотный запрос. Описание технологии изготовления: фрезеровка из цельного слэба. Фото 6 вариантов. Видео процесса изготовления. Цена. CTA.</div>
+      <div class="bseo">contentEffort: оригинальное видео + фото процесса. Кластер: «столешница с интегрированной мойкой», «столешница с интегрированной раковиной».</div>
+      <div class="bpain">Боль: поиск уникальных решений</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-nav"><div class="bno">03</div><div class="bbar bb-nav"></div>
+      <div class="bmain"><div class="bname">Каталог: тип монтажа × материал</div>
+      <div class="bdesc">Фильтр: врезная/накладная/подстольная/интегрированная × мрамор/гранит/оникс/акрил/агломерат. Размеры. Цены.</div></div>
+      <div class="bright"><span class="badge bd-nav">Каталог</span></div></div>
+    <div class="block bg-seo"><div class="bno">04</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ (6 вопросов) + SEO-текст 1000 слов</div>
+      <div class="bdesc">FAQ: Чем мыть каменную мойку / Можно ли ставить горячее / Монтаж подстольного крепления / Размеры / Уход / Разница между материалами. SEO-текст с H2.</div>
+      <div class="bseo">PAA: «чем мыть каменную мойку» — Featured Snippet.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- ===== P5-7 компактно ===== -->
+<div class="pc" id="p5">
+<div class="pc-head">
+  <div class="pnum">06</div>
+  <div class="pinfo">
+    <div class="ptitle">Полы и стены из натурального камня</div>
+    <div class="purl">/poly-steny/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Коммерческий + информационный</span>
+      <span class="mtag mt-aud">Застройщики · Частные клиенты · Дизайнеры</span>
+      <span class="mtag mt-sch">CollectionPage · FAQPage</span>
+    </div>
+    <div class="pkws"><span class="kw">пол из камня</span><span class="kw">мраморный пол в квартире</span><span class="kw">облицовка стен камнем</span><span class="kw">каменная плитка для пола</span><span class="kw">мрамор или керамогранит что лучше</span></div>
+  </div>
+</div>
+<div class="painbar"><span class="plbl">Закрывает боли</span>
+  <span class="ptag">Мрамор или керамогранит — что выбрать</span><span class="ptag">Стоимость укладки</span>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero + H1 с видео укладки</div>
+      <div class="bdesc">H1: «Полы и стены из натурального камня». Оригинальное видео процесса укладки мраморной плитки. Подвиды: плитка / слэбы / мозаика / паркет из камня.</div>
+      <div class="bseo">contentEffort MAX: видео укладки — уникальный контент.</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-content"><div class="bno">02</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Мрамор vs керамогранит — честное сравнение</div>
+      <div class="bdesc">Таблица по 8 параметрам. Вывод: для каждой комнаты свой оптимальный выбор. Авторский анализ, не реклама.</div>
+      <div class="bseo">ВЧ запрос: «мрамор или керамогранит что лучше» — Featured Snippet. QBST.</div>
+      <div class="bpain">Боль: сложность выбора материала</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-conv"><div class="bno">03</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Конфигуратор раскладки (площадь + формат = материал)</div>
+      <div class="bdesc">Введи площадь комнаты → выбери формат плитки (300×300/600×600/слэб) → выбери материал → получи количество и стоимость с монтажом.</div>
+      <div class="bseo">contentEffort: специализированный инструмент.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-trust"><div class="bno">04</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Портфолио: ванные / холлы / гостиные (6 объектов)</div>
+      <div class="bdesc">Оригинальные фото. Drag-слайдер до/после на 2 проектах. Описание с параметрами.</div>
+      <div class="bseo">OriginalContentScore.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-seo"><div class="bno">05</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ (7 вопросов) + SEO-текст 1500 слов</div>
+      <div class="bdesc">FAQ: Стоимость укладки / Уход за мраморным полом / Тёплый пол под мрамором / Минусы мраморного пола / Нескользкость / Монтаж в ванной / Рекомендации по толщине. SEO H2: виды материалов, применение, уход, монтаж.</div>
+      <div class="bseo">PAA покрытие. siteFocusScore.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<div class="pc" id="p6">
+<div class="pc-head">
+  <div class="pnum">07</div>
+  <div class="pinfo">
+    <div class="ptitle">Камины и порталы из камня</div>
+    <div class="purl">/kaminy-portaly/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Коммерческий</span>
+      <span class="mtag mt-aud">Загородные дома · Дизайнеры премиум-класса</span>
+      <span class="mtag mt-sch">CollectionPage · FAQPage</span>
+    </div>
+    <div class="pkws"><span class="kw">камин из натурального камня</span><span class="kw">мраморный портал для камина</span><span class="kw">облицовка камина натуральным камнем</span><span class="kw">каменная облицовка камина</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero с видео горящего камина в мраморном портале</div>
+      <div class="bdesc">H1: «Камины и порталы из натурального камня». Видео-фон: огонь в мраморном портале. Эмоциональный заголовок. Цена от X ₽.</div>
+      <div class="bseo">contentEffort: видео. Эмоциональный hook = dwell time.</div>
+      <div class="bpain">Боль: поиск уникальных дизайнерских решений</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-nav"><div class="bno">02</div><div class="bbar bb-nav"></div>
+      <div class="bmain"><div class="bname">Каталог порталов (готовые + на заказ)</div>
+      <div class="bdesc">Фильтр: стиль (классика/ампир/лофт/минимализм/арт-деко). Материал: мрамор/гранит/известняк/травертин. Карточки с ценой и сроком.</div></div>
+      <div class="bright"><span class="badge bd-nav">Каталог</span></div></div>
+    <div class="block bg-conv"><div class="bno">03</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Конфигуратор портала (размер топки + стиль + материал)</div>
+      <div class="bdesc">3 шага: габариты топки → стиль → материал = ориентировочная стоимость. Форма «Получить точный КП».</div>
+      <div class="bseo">contentEffort: специализированный инструмент для узкой ниши.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-trust"><div class="bno">04</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Видео-обзор наших каминов (YouTube embed)</div>
+      <div class="bdesc">Рассказ мастера о технологии облицовки. Наши проекты. Комментарий дизайнера.</div>
+      <div class="bseo">contentEffort: видео-экспертиза = E-E-A-T demonstrated expertise.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-seo"><div class="bno">05</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ (5 вопросов) + SEO-текст 1200 слов</div>
+      <div class="bdesc">FAQ: Жаростойкость камня / Какой камень лучше для камина / Уход / Монтаж / Срок изготовления. SEO: H2 виды порталов, H2 материалы, H2 стили, H2 монтаж.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<div class="pc" id="p7">
+<div class="pc-head">
+  <div class="pnum">08</div>
+  <div class="pinfo">
+    <div class="ptitle">Мебель и декор из камня</div>
+    <div class="purl">/mebel-dekor/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Коммерческий</span>
+      <span class="mtag mt-aud">Частные клиенты с высоким доходом · Дизайнеры</span>
+      <span class="mtag mt-sch">CollectionPage · Product</span>
+    </div>
+    <div class="pkws"><span class="kw">стол из камня</span><span class="kw">журнальный столик из мрамора</span><span class="kw">декор из камня</span><span class="kw">мраморный стол купить</span><span class="kw">ресепшн из камня</span><span class="kw">остров кухонный купить</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero + H1 — линейка изделий</div>
+      <div class="bdesc">H1: «Мебель и декор из натурального камня». Подвиды: журнальные столики / обеденные столы / барные стойки / ресепшн / консоли / тумбы. Оригинальные фото в интерьере. Цена от X ₽.</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-nav"><div class="bno">02</div><div class="bbar bb-nav"></div>
+      <div class="bmain"><div class="bname">Сетка изделий (фото в интерьере)</div>
+      <div class="bdesc">Карточки: оригинальное фото в реальном интерьере + название + материал + цена «от». Кнопка «Заказать аналогичный».</div>
+      <div class="bseo">OriginalContentScore: фото в интерьере, не на белом фоне.</div>
+      <div class="bpain">Боль: поиск уникальных решений</div></div>
+      <div class="bright"><span class="badge bd-nav">Каталог</span></div></div>
+    <div class="block bg-conv"><div class="bno">03</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">«Создайте своё изделие» — форма с загрузкой референса</div>
+      <div class="bdesc">Форма: тип изделия / размеры / материал / загрузить фото-референс / телефон. Срок ответа с КП: 2 часа.</div>
+      <div class="bseo">Unique value proposition: индивидуальный заказ = дифференциация от конкурентов.</div>
+      <div class="bpain">Боль: поиск индивидуального подхода</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-seo"><div class="bno">04</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ + SEO-текст 800 слов</div>
+      <div class="bdesc">FAQ: Как заказать нестандартный размер / Уход / Доставка / Сроки. SEO: H2 виды, H2 материалы, H2 уход.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+
+<!-- ===== P8: МРАМОР ===== -->
+<div class="pc" id="p8">
+<div class="pc-head">
+  <div class="pnum">09</div>
+  <div class="pinfo">
+    <div class="ptitle">Мрамор — виды, свойства, изделия</div>
+    <div class="purl">/mramor/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span>
+      <span class="mtag mt-int">Информационный + коммерческий</span>
+      <span class="mtag mt-aud">Все сегменты ЦА на стадии выбора материала</span>
+      <span class="mtag mt-sch">CollectionPage · FAQPage · ItemList · BreadcrumbList</span>
+    </div>
+    <div class="pkws">
+      <span class="kw">мрамор купить</span><span class="kw">calacatta gold</span><span class="kw">bianco carrara</span><span class="kw">nero marquina</span><span class="kw">crema marfil</span><span class="kw">мрамор белый</span><span class="kw">итальянский мрамор</span><span class="kw">мрамор слэб купить</span><span class="kw">мрамор для столешницы</span><span class="kw">мрамор цена за м2</span><span class="kw">физические свойства мрамора</span>
+    </div>
+  </div>
+</div>
+<div class="painbar"><span class="plbl">Закрывает боли</span>
+  <span class="ptag">Сложность выбора вида мрамора</span>
+  <span class="ptag">Опасения по уходу и долговечности</span>
+  <span class="ptag">Высокая стоимость — нет понимания ценообразования</span>
+</div>
+<div class="sigbar"><span class="slbl">SEO 2026</span>
+  <span class="stag">EntityAnnotations: каждый вид мрамора — entity</span>
+  <span class="stag">contentEffort: энциклопедия + видео</span>
+  <span class="stag">siteFocusScore: тематический хаб «мрамор»</span>
+  <span class="stag">QBST: покрытие всего семантического кластера</span>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero с H1 + навигация по подвидам</div>
+      <div class="bdesc">H1: «Мрамор: виды, свойства и изделия на заказ». Якорные ссылки-табы: Итальянский / Греческий / Турецкий / Испанский / Иранский / Отечественный. Фото слэбов крупным планом. CTA: «Рассчитать стоимость изделия».</div>
+      <div class="bseo">H1 + якорные ссылки = avgTermWeight. Breadcrumb Schema.</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+
+    <div class="block bg-content"><div class="bno">02</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Энциклопедия видов мрамора (интерактивные карточки)</div>
+      <div class="bdesc">Карточка каждого вида: фото текстуры крупно + название (RU + EN) + страна добычи + цвет + применение + твёрдость по Моосу + пористость + цена/м². Популярные: Calacatta Gold, Carrara Bianco, Nero Marquina, Crema Marfil, Emperador Dark, Fior di Bosco, Calacatta Viola, Arabescato Orobico, Valery Grey, Statuario. Фильтр карточек по цвету/стране. Минимум 30 позиций.</div>
+      <div class="bseo">contentEffort MAX: исчерпывающий справочник. EntityAnnotations: каждый вид мрамора — явная entity с атрибутами. OriginalContentScore: авторские описания, не с сайтов производителей.</div>
+      <div class="bpain">Боль: сложность выбора вида мрамора</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+
+    <div class="block bg-content"><div class="bno">03</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Сравнительная таблица: мрамор vs гранит vs кварцит</div>
+      <div class="bdesc">По 8 параметрам: твёрдость / пористость / устойчивость к кислотам / уход / цена / уникальность рисунка / применение / ремонтопригодность. Авторский вывод для каждой ситуации.</div>
+      <div class="bseo">QBST: «гранит и мрамор отличия», «что дороже гранит или мрамор», «мрамор или гранит что лучше». Featured Snippet кандидат.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+
+    <div class="block bg-nav"><div class="bno">04</div><div class="bbar bb-nav"></div>
+      <div class="bmain"><div class="bname">Изделия из мрамора — товарная сетка</div>
+      <div class="bdesc">Отфильтрованная товарная сетка: столешницы из мрамора / подоконники / ступени / ванны / полы. Ссылки на соответствующие категории. 12-16 карточек с ценами.</div>
+      <div class="bseo">Внутренние ссылки на /stoleshnicy/?material=marble и другие категории. PageRank перетекает на коммерческие страницы.</div></div>
+      <div class="bright"><span class="badge bd-nav">Навигация</span></div></div>
+
+    <div class="block bg-trust"><div class="bno">05</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Видео: как добывают мрамор + история происхождения</div>
+      <div class="bdesc">YouTube-embed: добыча в Каррарских карьерах или аналогичных. Раздел «История мрамора»: использование в Древней Греции, Риме, Ренессансе. Интересные факты. 400-600 слов авторского текста.</div>
+      <div class="bseo">contentEffort: видео + история = глубокая экспертность E-E-A-T. dwell time. «мрамор в древней греции» — информационный кластер.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+
+    <div class="block bg-conv"><div class="bno">06</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Калькулятор стоимости изделия из мрамора</div>
+      <div class="bdesc">Тип изделия + вид мрамора (цена/м²) + площадь = стоимость. CTA: «Получить точный расчёт — отвечаем за 1 час».</div>
+      <div class="bseo">contentEffort: интерактив. Конверсионная точка на информационной странице.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+
+    <div class="block bg-seo"><div class="bno">07</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ по мрамору (Schema FAQPage, 8 вопросов)</div>
+      <div class="bdesc">Сколько стоит мрамор за м² / Чем мрамор отличается от гранита / Устойчивость к пятнам / Как ухаживать за мраморной столешницей / Можно ли класть горячее / Реставрация царапин / Какой мрамор самый дорогой / Где добывают российский мрамор.</div>
+      <div class="bseo">PAA полное покрытие. Schema FAQPage = расширенные сниппеты. Ответы 80-120 слов = оптимальные чанки для AI Overviews.</div>
+      <div class="bpain">Боли: опасения по уходу + высокая стоимость</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+
+    <div class="block bg-seo"><div class="bno">08</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">SEO-текст (2500 слов, H2/H3 структура)</div>
+      <div class="bdesc">H2: Что такое мрамор — геология и происхождение. H2: Виды мрамора — итальянский, турецкий, греческий, испанский, иранский. H3: Calacatta и его разновидности. H3: Carrara — история и применение. H2: Свойства мрамора: твёрдость, пористость, теплопроводность. H2: Уход за мрамором. H2: Мрамор в интерьере 2025. Авторский текст с уникальным анализом.</div>
+      <div class="bseo">QBST MAX покрытие: вся семантика темы «мрамор». siteFocusScore. H2/H3 иерархия = правильные чанки для Passage Indexing.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+
+</div></div>
+<div class="crosslink"><div class="cltitle">Внутренние ссылки — кластер «мрамор»</div><div class="cllist">
+  <a class="cltag" href="#p1">/stoleshnicy/</a><a class="cltag" href="#p2">/podokonnniki/</a>
+  <a class="cltag" href="#p3">/lestnicy-stupeni/</a><a class="cltag" href="#p5">/poly-steny/</a>
+  <a class="cltag" href="#p19">/portfolio/</a><a class="cltag" href="#p24">/konfigurator/</a>
+</div></div>
+</div>
+
+<!-- ===== P9: ГРАНИТ ===== -->
+<div class="pc" id="p9">
+<div class="pc-head">
+  <div class="pnum">10</div>
+  <div class="pinfo">
+    <div class="ptitle">Гранит — виды, свойства, изделия</div>
+    <div class="purl">/granit/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Информационный + коммерческий</span>
+      <span class="mtag mt-aud">Все ЦА — практичные покупатели + строительные компании</span>
+      <span class="mtag mt-sch">CollectionPage · FAQPage · ItemList</span>
+    </div>
+    <div class="pkws"><span class="kw">гранит купить</span><span class="kw">черный гранит</span><span class="kw">абсолют блэк гранит</span><span class="kw">black galaxy</span><span class="kw">гранит серый</span><span class="kw">гранит твёрдость</span><span class="kw">свойства гранита</span><span class="kw">применение гранита</span><span class="kw">из чего состоит гранит</span><span class="kw">что дороже гранит или мрамор</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero с H1 + навигация по цвету</div>
+      <div class="bdesc">H1: «Гранит: виды, свойства и изделия на заказ». Навигация-табы: чёрный / серый / белый / коричневый / красный / зелёный. Строка ключевых свойств: «твёрдость 6-7 Моос · нулевая пористость · не требует пропитки».</div>
+      <div class="bseo">EntityAnnotations: цвет = атрибут сущности «гранит».</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-content"><div class="bno">02</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Энциклопедия марок гранита (30+ позиций)</div>
+      <div class="bdesc">Карточки: Absolut Black / Black Galaxy / Galaxy White / Steel Grey / Viscount White / Colonial White / Tan Brown / Kashmir White / Verde Green / Sesame Black / Imperial Red и др. Каждая: фото текстуры + страна (Индия/Бразилия/Украина/Китай) + свойства + применение + цена/м².</div>
+      <div class="bseo">EntityAnnotations: каждая марка — явная entity. contentEffort: исчерпывающий справочник.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-content"><div class="bno">03</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Из чего состоит гранит — геология простыми словами</div>
+      <div class="bdesc">Кварц + полевой шпат + слюда = гранит. Оригинальная инфографика (не стоковая). Как формируется рисунок. Почему гранит прочнее мрамора. 400 слов авторского текста.</div>
+      <div class="bseo">ВЧ информационный запрос «из чего состоит гранит». contentEffort: оригинальная инфографика.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-conv"><div class="bno">04</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Товарная сетка + калькулятор</div>
+      <div class="bdesc">12-16 изделий из гранита с ценами. Калькулятор: тип изделия × марка гранита × площадь = стоимость.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-seo"><div class="bno">05</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ (7 вопросов) + SEO-текст 2000 слов</div>
+      <div class="bdesc">FAQ: Что дороже гранит или мрамор / Гранит твёрдость / Свойства / Уход / Применение / Откуда привозят / Гранит или кварц для кухни. SEO H2: история, месторождения, свойства, виды, применение, уход.</div>
+      <div class="bseo">PAA полное покрытие. siteFocusScore += «гранит».</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- P10: КВАРЦИТ -->
+<div class="pc" id="p10">
+<div class="pc-head"><div class="pnum">11</div>
+  <div class="pinfo"><div class="ptitle">Кварцит — природный камень</div>
+    <div class="purl">/kvartsit/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Информационный + коммерческий</span>
+      <span class="mtag mt-aud">Клиенты, ищущие премиум-альтернативу мрамору</span>
+      <span class="mtag mt-sch">CollectionPage · FAQPage</span>
+    </div>
+    <div class="pkws"><span class="kw">кварцит камень</span><span class="kw">кварцит патагония</span><span class="kw">кварц и кварцит в чём разница</span><span class="kw">кварцит что это</span><span class="kw">зелёный кварцит</span><span class="kw">кварцит для столешницы</span><span class="kw">кварцит патагония с подсветкой</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero + H1 + «не путать с кварцем»</div>
+      <div class="bdesc">H1: «Кварцит — природный камень: виды и изделия». Важный блок: «Кварцит ≠ кварц» — частая путаница. Кварцит природный vs кварцевый агломерат. Объяснение разницы сразу на hero.</div>
+      <div class="bseo">QBST: «кварц и кварцит в чём разница» — ВЧ запрос. Снимаем путаницу = dwell time.</div>
+      <div class="bpain">Боль: непонимание различий между материалами</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-content"><div class="bno">02</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Виды кварцита (карточки)</div>
+      <div class="bdesc">Патагония / Голубой жемчуг / Тадж Махал / Юрский / Кристаллодиамант / Белый Бразилия / Изумруд / Слоновая кость. Фото текстуры + страна + цена/м².</div>
+      <div class="bseo">EntityAnnotations: каждая марка — entity.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-content"><div class="bno">03</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Кварцит с подсветкой — специальный блок</div>
+      <div class="bdesc">Патагония и другие полупрозрачные кварциты в подсветке. Видео в тёмной комнате. Технология LED-подсветки слэбов. Цены.</div>
+      <div class="bseo">contentEffort: уникальный визуальный контент. Запрос «кварцит патагония с подсветкой».</div>
+      <div class="bpain">Боль: поиск уникальных дизайнерских решений</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-seo"><div class="bno">04</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ (6) + SEO-текст 1500 слов</div>
+      <div class="bdesc">FAQ: Кварцит или мрамор что прочнее / Кварцит в кухне / Уход / Цена / Кварцит vs кварцевый агломерат. SEO: H2 геология, H2 виды, H2 свойства, H2 применение.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- P11: ОНИКС И ТРАВЕРТИН -->
+<div class="pc" id="p11">
+<div class="pc-head"><div class="pnum">12</div>
+  <div class="pinfo"><div class="ptitle">Оникс и Травертин</div>
+    <div class="purl">/oniks-travertin/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Информационный + коммерческий</span>
+      <span class="mtag mt-aud">Премиум-сегмент · Дизайнеры</span>
+      <span class="mtag mt-sch">CollectionPage · FAQPage</span>
+    </div>
+    <div class="pkws"><span class="kw">оникс купить</span><span class="kw">оникс с подсветкой</span><span class="kw">зелёный оникс</span><span class="kw">медовый оникс</span><span class="kw">травертин купить</span><span class="kw">травертин навона</span><span class="kw">бежевый травертин</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero: оникс с подсветкой — WOW-эффект</div>
+      <div class="bdesc">Fullscreen видео или фото оникса с LED-подсветкой в тёмном интерьере. Эмоциональный headline. Переключатель оникс/травертин.</div>
+      <div class="bseo">contentEffort: видео оникса с подсветкой — уникальный визуальный контент. dwell time MAX.</div>
+      <div class="bpain">Боль: поиск уникальных решений</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-content"><div class="bno">02</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Виды оникса (карточки с фото в подсветке)</div>
+      <div class="bdesc">Белый / чёрный / зелёный / медовый / голубой / оранжевый / персиановый. Страны: Иран / Пакистан / Мексика / Турция. Каждый: 2 фото (дневной свет + подсветка) + страна + цена/м².</div>
+      <div class="bseo">contentEffort: двойные фото (дневной/подсветка) — уникальный формат.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-content"><div class="bno">03</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Виды травертина + применение</div>
+      <div class="bdesc">Навона / бежевый / серый / красный / полированный / матовый. Итальянский vs турецкий. Применение: полы, стены, фасады, бассейны, столешницы.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-seo"><div class="bno">04</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ (6) + SEO-текст 1500 слов</div>
+      <div class="bdesc">FAQ: Оникс и обсидиан в чём разница / Свойства оникса / Цена оникса / Уход за травертином / Травертин или мрамор / LED-подсветка.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- P12: КВАРЦЕВЫЙ АГЛОМЕРАТ -->
+<div class="pc" id="p12">
+<div class="pc-head"><div class="pnum">13</div>
+  <div class="pinfo"><div class="ptitle">Кварцевый агломерат — виды и бренды</div>
+    <div class="purl">/kvartsevyi-aglomerat/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Информационный + коммерческий</span>
+      <span class="mtag mt-aud">Практичные покупатели — боль «цена натурального камня»</span>
+      <span class="mtag mt-sch">CollectionPage · FAQPage · Brand</span>
+    </div>
+    <div class="pkws"><span class="kw">кварцевый агломерат</span><span class="kw">мир кварца</span><span class="kw">avant quartz</span><span class="kw">аварус</span><span class="kw">caesarstone</span><span class="kw">belenco</span><span class="kw">radianz</span><span class="kw">technistone</span><span class="kw">кварцевый агломерат рейтинг</span><span class="kw">кварцевый агломерат это что</span><span class="kw">производство кварцевого агломерата</span></div>
+  </div>
+</div>
+<div class="painbar"><span class="plbl">Закрывает боли</span>
+  <span class="ptag">Высокая стоимость натурального камня</span><span class="ptag">Сложность выбора бренда агломерата</span><span class="ptag">Разница между агломератом и натуральным камнем</span>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-content"><div class="bno">01</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Hero: честное сравнение с натуральным камнем</div>
+      <div class="bdesc">H1: «Кварцевый агломерат: виды, бренды, отличие от натурального камня». Таблица «кварцевый агломерат vs мрамор» с реальными плюсами и минусами каждого — без PR, объективно.</div>
+      <div class="bseo">QBST: «кварцевый агломерат и искусственный камень отличие», «кварц это искусственный или натуральный», «агломерат что это». OriginalContentScore: честный сравнительный анализ.</div>
+      <div class="bpain">Боль: сложность выбора, непонимание разницы</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-content"><div class="bno">02</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Бренды и их коллекции (карточки с рейтингом)</div>
+      <div class="bdesc">Caesarstone (Израиль) · Cambria (США) · Avant Quartz (Россия) · Аварус (Россия) · Belenco (Турция) · Radianz (Корея) · Technistone (Чехия) · Мир кварца (Россия) · Этна кварц. Каждый бренд: логотип + страна + особенности + популярные серии + цена/м² + рейтинг ⭐. Ссылка на страницу бренда (/brendy/{slug}/).</div>
+      <div class="bseo">EntityAnnotations: каждый бренд — авторитетная entity. Ссылки на страницы брендов = хаб-структура. siteFocusScore += «кварцевый агломерат».</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-content"><div class="bno">03</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Серии под мрамор — популярный кластер</div>
+      <div class="bdesc">Calacatta / Statuario / Carrara в агломерате: Calacatta Dofine 7400, Calacatta Berna 7470, и др. Фото рядом с оригинальным мрамором. «Честно: в чём разница и когда агломерат выгоднее».</div>
+      <div class="bseo">ВЧ запросы: «кварцевый агломерат под мрамор калакатта», «кварцевый агломерат калакатта». Честный контент = goodClicks.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-trust"><div class="bno">04</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Видео: производство кварцевого агломерата</div>
+      <div class="bdesc">YouTube-embed с комментарием нашего технолога. «Как делают кварцевый агломерат: 93% кварца + 7% смол и пигментов».</div>
+      <div class="bseo">contentEffort: видео + экспертный комментарий = E-E-A-T demonstrated expertise.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-seo"><div class="bno">05</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ (8) + SEO-текст 2000 слов</div>
+      <div class="bdesc">FAQ: Кварцевый агломерат это что / Как ухаживать / Рейтинг брендов 2025 / Агломерат vs натуральный / Можно ли класть горячее / Ремонт царапин / Вес м² / Выбор для кухни. SEO: H2 что это, H2 производство, H2 бренды, H2 уход, H2 сравнение.</div>
+      <div class="bseo">QBST MAX покрытие. ВЧ запрос «кварцевый агломерат рейтинг» = Featured Snippet.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- P13: АКРИЛОВЫЙ КАМЕНЬ -->
+<div class="pc" id="p13">
+<div class="pc-head"><div class="pnum">14</div>
+  <div class="pinfo"><div class="ptitle">Акриловый камень — виды и производители</div>
+    <div class="purl">/akrilovyi-kamen/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Информационный + коммерческий</span>
+      <span class="mtag mt-aud">Клиенты выбирающие бюджетный вариант · Дизайнеры</span>
+      <span class="mtag mt-sch">CollectionPage · FAQPage</span>
+    </div>
+    <div class="pkws"><span class="kw">акриловый камень</span><span class="kw">акрил грандекс</span><span class="kw">grandex</span><span class="kw">staron</span><span class="kw">tristone</span><span class="kw">что такое акриловый камень</span><span class="kw">кварц или акрил столешница что лучше</span><span class="kw">акрил столешница</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero + H1 + «что это за материал»</div>
+      <div class="bdesc">H1: «Акриловый камень: что это, виды, применение». Сразу объясняем: не природный камень, а полимерный материал с минеральным наполнителем. Честная позиция = доверие.</div>
+      <div class="bseo">ВЧ запрос «что такое акриловый камень», «искусственный камень что это за материал».</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-content"><div class="bno">02</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Бренды (Grandex, Staron, Tristone, Hi-Macs и др.)</div>
+      <div class="bdesc">Grandex M-701 Hazel / Milky Way / Tristone цена / Staron / Hi-Macs / Corian. Карточки: страна производства + особенности + серии + цена/м².</div>
+      <div class="bseo">EntityAnnotations: каждый бренд — entity. Запросы: «grandex milky way», «tristone цена», «аварус кварцевый агломерат» и т.д.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-seo"><div class="bno">03</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ (6) + SEO-текст 1500 слов</div>
+      <div class="bdesc">FAQ: Кварц или акрил что лучше / Уход за акриловой столешницей / Полировка царапин / Производители рейтинг / Акрил или агломерат для ванной / Можно ли класть горячее. SEO: H2 что это, H2 производители, H2 уход, H2 сравнение.</div>
+      <div class="bseo">QBST: «кварц или акрил столешница что лучше» — Featured Snippet кандидат.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- P14: КЕРАМОГРАНИТ -->
+<div class="pc" id="p14">
+<div class="pc-head"><div class="pnum">15</div>
+  <div class="pinfo"><div class="ptitle">Керамогранит и керамика для столешниц</div>
+    <div class="purl">/keramogranit/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Информационный + коммерческий</span>
+      <span class="mtag mt-aud">Клиенты ищущие современный ультратонкий камень</span>
+      <span class="mtag mt-sch">CollectionPage · FAQPage</span>
+    </div>
+    <div class="pkws"><span class="kw">керамическая столешница</span><span class="kw">laminam</span><span class="kw">lapitec</span><span class="kw">dekton</span><span class="kw">neolith</span><span class="kw">спечённый камень</span><span class="kw">керамогранит плюсы минусы</span><span class="kw">стол из керамогранита</span><span class="kw">ceramica infiniti</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero: спечённый камень — новый уровень</div>
+      <div class="bdesc">H1: «Керамогранит и спечённый камень для столешниц». «Толщина 12 мм · жаростойкость 1200°C · царапины невозможны». Видео: раскалённая сковородка на столешнице Dekton — ноль повреждений.</div>
+      <div class="bseo">contentEffort: видео-тест = уникальный контент. Демонстрация = dwell time.</div>
+      <div class="bpain">Боль: опасения по долговечности → видео-доказательство</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-content"><div class="bno">02</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Бренды спечённого камня (Dekton, Neolith, Laminam, Lapitec)</div>
+      <div class="bdesc">Dekton by Cosentino / Neolith / Laminam Calacatta Michelangelo / Lapitec / Sapienstone / Infiniti Ceramica. Карточки: страна + технология + толщины + серии + цена/м².</div>
+      <div class="bseo">EntityAnnotations: премиальные бренды как entity. «kerama marfil», «laminam calacatta michelangelo» — запросы.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-seo"><div class="bno">03</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ (6) + SEO-текст 1200 слов</div>
+      <div class="bdesc">FAQ: Что такое спечённый камень / Dekton vs Neolith / Керамическая столешница плюсы минусы / Можно ли резать на столешнице / Уход. SEO: H2 что это, H2 бренды, H2 уход, H2 монтаж.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+
+<!-- ===== P15: ИЗГОТОВЛЕНИЕ ===== -->
+<div class="pc" id="p15">
+<div class="pc-head"><div class="pnum">16</div>
+  <div class="pinfo"><div class="ptitle">Изготовление на заказ</div>
+    <div class="purl">/izgotovlenie/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Коммерческий</span>
+      <span class="mtag mt-aud">Все сегменты — боль «поиск квалифицированных мастеров»</span>
+      <span class="mtag mt-sch">Service · FAQPage · LocalBusiness</span>
+    </div>
+    <div class="pkws"><span class="kw">изделия из мрамора на заказ</span><span class="kw">производство столешниц из камня</span><span class="kw">изготовление акриловых столешниц</span><span class="kw">производители каменных столешниц</span><span class="kw">изделия из натурального камня</span></div>
+  </div>
+</div>
+<div class="painbar"><span class="plbl">Закрывает боли</span>
+  <span class="ptag">Поиск квалифицированных мастеров</span>
+  <span class="ptag">Недостаток информации о процессе</span>
+  <span class="ptag">Сложность с индивидуальными заказами</span>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero: «Собственное производство — полный цикл»</div>
+      <div class="bdesc">H1: «Изготовление изделий из камня на заказ». Оригинальное видео производственного цикла: приёмка слэба → разметка → фрезеровка → шлифовка → полировка → контроль. 60-90 секунд. Строка с параметрами цеха: площадь X м², оборудование (5-осные ЧПУ и т.д.).</div>
+      <div class="bseo">contentEffort MAX: оригинальное видео производства — высочайший сигнал. E-E-A-T: demonstrated expertise через показ цеха.</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-trust"><div class="bno">02</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Что мы изготавливаем (полный перечень)</div>
+      <div class="bdesc">Иконки + краткое описание: столешницы / подоконники / ступени / ванны / раковины / порталы / мебель / ресепшн / фасады / мозаика / панно / нестандартные изделия. Ссылки на соответствующие разделы каталога.</div>
+      <div class="bseo">Перелинковка hub → spoke. Покрытие всех видов изделий = siteFocusScore.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-content"><div class="bno">03</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Наше оборудование (с фотографиями)</div>
+      <div class="bdesc">5-осный обрабатывающий центр ЧПУ / итальянский полировальный агрегат / лазерный темплейтер / водоструйная резка. Фото оборудования в работе. Пояснения что даёт каждый станок для качества изделия.</div>
+      <div class="bseo">contentEffort: демонстрация профессионального оборудования = E-E-A-T. Этот контент невозможно сгенерировать AI — оригинальные фото.</div>
+      <div class="bpain">Боль: поиск квалифицированных мастеров</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-trust"><div class="bno">04</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Этапы изготовления (step-by-step с фото)</div>
+      <div class="bdesc">8 шагов с оригинальными фото: 1. Приёмка слэба → 2. Темплейтирование (лазер) → 3. Раскрой → 4. ЧПУ-обработка → 5. Шлифовка → 6. Полировка → 7. Контроль качества → 8. Упаковка. Фото каждого этапа.</div>
+      <div class="bseo">OriginalContentScore: уникальный производственный контент. E-E-A-T.</div>
+      <div class="bpain">Боль: нет понимания процесса</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-conv"><div class="bno">05</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Форма «Рассчитать производство» + сроки</div>
+      <div class="bdesc">Тип изделия + материал + размеры + доп. опции = ориентировочная стоимость + срок. Кнопка «Получить КП за 2 часа». Гарантия фиксации цены.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-seo"><div class="bno">06</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ (6) + SEO-текст 1000 слов</div>
+      <div class="bdesc">FAQ: Минимальный заказ / Сроки / Доставка / Нестандартные изделия / Гарантия качества / Исправим брак. SEO: H2 виды изделий, H2 технология, H2 преимущества собственного производства.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- P16: МОНТАЖ -->
+<div class="pc" id="p16">
+<div class="pc-head"><div class="pnum">17</div>
+  <div class="pinfo"><div class="ptitle">Доставка и монтаж</div>
+    <div class="purl">/dostavka-montazh/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Коммерческий</span>
+      <span class="mtag mt-aud">Все ЦА — боль «поиск монтажников»</span>
+      <span class="mtag mt-sch">Service · FAQPage · LocalBusiness</span>
+    </div>
+    <div class="pkws"><span class="kw">установка столешницы из камня</span><span class="kw">монтаж подоконника из камня</span><span class="kw">установка мойки из искусственного камня</span><span class="kw">укладка каменных ступеней</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero: «Доставим и установим — своими бригадами»</div>
+      <div class="bdesc">H1: «Доставка и монтаж изделий из камня». Строка: собственные бригады / страховка грузов / гарантия монтажа 3 года / уборка после работ. CTA «Записаться на монтаж».</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-content"><div class="bno">02</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Что входит в монтаж (чекбоксы)</div>
+      <div class="bdesc">Доставка спецтранспортом / Подъём на этаж / Установка и подключение мойки / Герметизация стыков / Пробивка отверстий / Уборка / Инструкция по уходу.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-trust"><div class="bno">03</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Видео монтажа столешницы</div>
+      <div class="bdesc">YouTube-embed: пошаговый монтаж с нашей бригадой. Комментарий мастера. 3-5 минут.</div>
+      <div class="bseo">contentEffort: видео монтажа = E-E-A-T. dwell time.</div>
+      <div class="bpain">Боль: нет понимания процесса монтажа</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-seo"><div class="bno">04</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ (6) + SEO-текст 800 слов</div>
+      <div class="bdesc">FAQ: Сколько стоит монтаж / Сроки / Нужно ли готовить помещение / Монтаж в выходные / Зона доставки / Что если повредим. SEO: H2 этапы монтажа, H2 стоимость, H2 зона работы.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- P17: ЗАМЕР -->
+<div class="pc" id="p17">
+<div class="pc-head"><div class="pnum">18</div>
+  <div class="pinfo"><div class="ptitle">Бесплатный замер и проектирование</div>
+    <div class="purl">/zamer/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Транзакционный</span>
+      <span class="mtag mt-aud">Клиенты готовые к заказу — максимальная конверсия</span>
+      <span class="mtag mt-sch">Service · FAQPage · LocalBusiness · GeoCoordinates</span>
+    </div>
+    <div class="pkws"><span class="kw">замер столешницы бесплатно</span><span class="kw">вызов замерщика</span><span class="kw">бесплатный замер на дому</span><span class="kw">замер и проектирование камня</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero: оффер замера + CTA</div>
+      <div class="bdesc">H1: «Бесплатный замер с выездом к вам». Большой блок: «Выезжаем в течение 24 часов · Бесплатно · С 3D-визуализацией». CTA-кнопка «Записаться на замер» — самая заметная на странице.</div>
+      <div class="bseo">Транзакционная страница: минимум отвлекающих элементов. Один чёткий призыв к действию.</div>
+      <div class="bpain">Боль: барьер перед первым шагом к заказу</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-content"><div class="bno">02</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Что вы получите на замере</div>
+      <div class="bdesc">Чекбоксы: точный обмер помещения / рекомендации по материалу / 3D-визуализация будущего изделия / чертёж с размерами / коммерческое предложение с фиксированной ценой / консультация дизайнера.</div>
+      <div class="bseo">Закрывает вопрос «что будет на замере» = снижает тревожность = goodClicks.</div>
+      <div class="bpain">Боль: нет понимания процесса</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-trust"><div class="bno">03</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Видео: как проходит замер (наш замерщик в деле)</div>
+      <div class="bdesc">YouTube-embed: 2-3 минуты. Замерщик приезжает, делает лазерный обмер, объясняет нюансы монтажа, обсуждает материалы. Реальный замер, не постановочный.</div>
+      <div class="bseo">contentEffort: оригинальное видео реального замера. E-E-A-T.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-conv"><div class="bno">04</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Форма записи (3 поля)</div>
+      <div class="bdesc">Имя + телефон + удобная дата/время. Опционально: адрес и тип изделия. «Перезвоним за 15 минут для подтверждения».</div>
+      <div class="bseo">Минимум полей = максимум конверсии. LocalBusiness Schema + GeoCoordinates для локального SEO.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-trust"><div class="bno">05</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">3 отзыва клиентов после замера</div>
+      <div class="bdesc">«Замерщик приехал на следующий день, всё объяснил, 3D сделали на месте — мы сразу всё поняли». Schema Review.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-seo"><div class="bno">06</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ (5) + карта зоны выезда</div>
+      <div class="bdesc">FAQ: В какие районы выезжаем / Стоимость дальнего выезда / Что нужно подготовить / Время замера / После замера нас ни к чему не обязываете. Яндекс.Карты embed с зоной выезда.</div>
+      <div class="bseo">Local SEO: зона выезда + карта = сигнал геолоцации. «замер столешницы [город]».</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- P18: РЕСТАВРАЦИЯ -->
+<div class="pc" id="p18">
+<div class="pc-head"><div class="pnum">19</div>
+  <div class="pinfo"><div class="ptitle">Реставрация и уход за камнем</div>
+    <div class="purl">/restavraciya/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Коммерческий</span>
+      <span class="mtag mt-aud">Владельцы уже установленного камня</span>
+      <span class="mtag mt-sch">Service · FAQPage</span>
+    </div>
+    <div class="pkws"><span class="kw">реставрация мрамора</span><span class="kw">полировка столешницы из камня</span><span class="kw">полировка мрамора</span><span class="kw">полировка агата</span><span class="kw">восстановление каменной столешницы</span><span class="kw">как убрать царапины с кварцевого агломерата</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero: drag-слайдер ДО/ПОСЛЕ</div>
+      <div class="bdesc">H1: «Реставрация и полировка изделий из камня». Drag-слайдер: царапанная/матовая столешница → зеркально отполированная. Сразу несколько слайдеров по типам: мрамор / гранит / агломерат.</div>
+      <div class="bseo">contentEffort: оригинальный до/после контент. dwell time MAX. NavBoost: goodClicks.</div>
+      <div class="bpain">Боль: вопросы по уходу и реставрации → «решение есть»</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-content"><div class="bno">02</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Виды реставрации с ценами</div>
+      <div class="bdesc">Полировка / Кристаллизация / Глубокое обеззараживание / Пропитка защитным составом / Заделка трещин и сколов / Устранение пятен. Каждый вид: описание + когда нужен + цена за м² или за работу.</div>
+      <div class="bseo">Полное покрытие кластера «реставрация камня».</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-conv"><div class="bno">03</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Калькулятор реставрации</div>
+      <div class="bdesc">Тип повреждения (царапины/матовость/трещина/пятно) + тип материала + площадь = ориентировочная стоимость. CTA «Вызвать мастера для оценки».</div>
+      <div class="bseo">contentEffort: специализированный калькулятор.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-trust"><div class="bno">04</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Видео процесса реставрации (наши объекты)</div>
+      <div class="bdesc">Оригинальное видео: мастер полирует мраморную столешницу. Не постановочное, реальный объект. 3-5 минут.</div>
+      <div class="bseo">contentEffort MAX: оригинальный профессиональный видео-контент.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-seo"><div class="bno">05</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ (7) + SEO-текст 1200 слов</div>
+      <div class="bdesc">FAQ: Можно ли реставрировать самому / Сроки / Гарантия / Стоимость / Восстановление трещины / Как часто нужна полировка / Чем мыть после реставрации. SEO: H2 виды, H2 материалы, H2 цены, H2 уход после.</div>
+      <div class="bseo">PAA: «полировка мраморной столешницы» — Featured Snippet.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- ===== P19: ПОРТФОЛИО ===== -->
+<div class="pc" id="p19">
+<div class="pc-head"><div class="pnum">20</div>
+  <div class="pinfo"><div class="ptitle">Портфолио — реализованные проекты</div>
+    <div class="purl">/portfolio/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Информационный</span>
+      <span class="mtag mt-aud">Клиенты на стадии выбора исполнителя</span>
+      <span class="mtag mt-sch">CollectionPage · ImageGallery · BreadcrumbList</span>
+    </div>
+    <div class="pkws"><span class="kw">изделия из камня фото</span><span class="kw">мраморная столешница фото</span><span class="kw">каменные изделия интерьер фото</span><span class="kw">портфолио работ из камня</span></div>
+  </div>
+</div>
+<div class="painbar"><span class="plbl">Закрывает боли</span>
+  <span class="ptag">Нужно увидеть и потрогать</span>
+  <span class="ptag">Поиск квалифицированных мастеров</span>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero + фильтр проектов</div>
+      <div class="bdesc">H1: «Наши проекты — X реализованных работ». Фильтр: тип объекта (квартира/дом/ресторан/офис/отель) / тип изделия (столешница/лестница/пол и т.д.) / материал / бюджет (бюджетный/средний/премиум) / стиль интерьера. Счётчик найденных проектов обновляется при фильтрации.</div>
+      <div class="bseo">Фильтр — параметры, canonical на /portfolio/. dwell time: пользователи настраивают фильтр = вовлечение.</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-trust"><div class="bno">02</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Masonry-галерея проектов (24 + lazy-load)</div>
+      <div class="bdesc">Карточка: обложка (оригинальное фото, не стоковое!) + тип объекта + материал + город. При клике — переход на /portfolio/{slug}/. Только наши реальные проекты.</div>
+      <div class="bseo">OriginalContentScore MAX: только свои фото. ImageObject Schema на каждой картинке с alt-текстом «столешница из мрамора Calacatta Gold Москва».</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-trust"><div class="bno">03</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Таб «До/После» — отдельный раздел</div>
+      <div class="bdesc">Отфильтрованные проекты с drag-слайдером до/после. Реставрация / замена старых материалов / редизайн. Самый вовлекающий формат контента.</div>
+      <div class="bseo">dwell time: drag-слайдеры удерживают внимание. NavBoost.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-conv"><div class="bno">04</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">CTA после галереи</div>
+      <div class="bdesc">«Понравились работы? Обсудим ваш проект» → Кнопки: «Записаться на замер» (primary) + «Написать в WhatsApp» (secondary). Лёгкая форма: имя + телефон + тип изделия.</div>
+      <div class="bseo">Конверсия на горячую аудиторию (уже видели работы).</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+</div></div>
+</div>
+
+<!-- P20: БРЕНДЫ -->
+<div class="pc" id="p20">
+<div class="pc-head"><div class="pnum">21</div>
+  <div class="pinfo"><div class="ptitle">Бренды камня и агломерата</div>
+    <div class="purl">/brendy/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1 (хаб) → /brendy/{slug}/ глубина 2</span>
+      <span class="mtag mt-int">Информационный + навигационный</span>
+      <span class="mtag mt-aud">Клиенты ищущие конкретный бренд</span>
+      <span class="mtag mt-sch">CollectionPage · Brand · ItemList</span>
+    </div>
+    <div class="pkws"><span class="kw">caesarstone официальный сайт</span><span class="kw">мир кварца официальный сайт</span><span class="kw">avant quartz отзывы</span><span class="kw">аварус кварцевый агломерат</span><span class="kw">belenco кварцевый агломерат</span><span class="kw">grandex производители</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero: «Официальный дилер — прямые поставки»</div>
+      <div class="bdesc">H1: «Бренды камня и агломерата — официальные дилерские поставки». Строка: «30+ брендов · официальные цены · образцы в наличии в шоуруме».</div>
+      <div class="bseo">queriesForWhichOfficial: связь с официальными брендами повышает авторитет домена.</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-nav"><div class="bno">02</div><div class="bbar bb-nav"></div>
+      <div class="bmain"><div class="bname">Сетка брендов с категориями</div>
+      <div class="bdesc">Фильтр-табы: Кварцевый агломерат / Акриловый камень / Спечённый камень / Натуральный камень. Карточки брендов: логотип + страна + тип материала + количество серий + ссылка на /brendy/{slug}/.</div>
+      <div class="bseo">EntityAnnotations: каждый бренд — entity. Хаб → spoke перелинковка на страницы брендов.</div></div>
+      <div class="bright"><span class="badge bd-nav">Навигация</span></div></div>
+    <div class="block bg-seo"><div class="bno">03</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">Рейтинг брендов (авторский, не реклама)</div>
+      <div class="bdesc">«Наш рейтинг по соотношению цена/качество 2025»: Топ-5 бюджетных / Топ-5 средний сегмент / Топ-3 премиум. С пояснением критериев. contentEffort: авторский анализ, не компиляция.</div>
+      <div class="bseo">ВЧ запрос «кварцевый агломерат рейтинг брендов». Featured Snippet. OriginalContentScore: авторское мнение эксперта.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- P21: БЛОГ -->
+<div class="pc" id="p21">
+<div class="pc-head"><div class="pnum">22</div>
+  <div class="pinfo"><div class="ptitle">Блог — советы и статьи</div>
+    <div class="purl">/blog/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1 (хаб) → /blog/{slug}/ глубина 2</span>
+      <span class="mtag mt-int">Информационный</span>
+      <span class="mtag mt-aud">Все ЦА на стадии изучения</span>
+      <span class="mtag mt-sch">Blog · BreadcrumbList · ItemList</span>
+    </div>
+    <div class="pkws"><span class="kw">как выбрать камень для столешницы</span><span class="kw">уход за мраморной столешницей</span><span class="kw">камень в интерьере</span><span class="kw">тренды в интерьере 2025</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero + рубрики + поиск</div>
+      <div class="bdesc">H1: «Блог — советы по выбору и уходу за камнем». Рубрики-табы: Выбор материала / Уход за камнем / Дизайн с камнем / Кейсы и проекты / Сравнения. Поиск по блогу.</div>
+      <div class="bseo">siteFocusScore: тематические кластеры статей. Каждая рубрика = кластер запросов.</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-content"><div class="bno">02</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Рекомендованные статьи (3 больших карточки)</div>
+      <div class="bdesc">Editorial picks: оригинальные обложки, заголовки с ключевыми словами, анонс 2-3 предложения, время чтения. Выбираются вручную редактором.</div>
+      <div class="bseo">NavBoost: CTR через качественные обложки и сильные заголовки. OriginalContentScore: уникальные обложки.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-nav"><div class="bno">03</div><div class="bbar bb-nav"></div>
+      <div class="bmain"><div class="bname">Сетка статей (12 + пагинация)</div>
+      <div class="bdesc">Карточка: обложка + рубрика + заголовок + анонс + автор (с фото) + дата + время чтения. Пагинация с rel=next/prev.</div>
+      <div class="bseo">Schema Article на каждой карточке. Имя автора = E-E-A-T authorship signal.</div></div>
+      <div class="bright"><span class="badge bd-nav">Навигация</span></div></div>
+    <div class="block bg-conv"><div class="bno">04</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Email-подписка (лид-магнит)</div>
+      <div class="bdesc">«Подпишитесь — пришлём гид "Как выбрать камень для столешницы" (42 страницы PDF)». Email + кнопка.</div>
+      <div class="bseo">Брендовый запрос: «гид по выбору камня [название компании]». contentEffort: создание ценного PDF-руководства.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+</div></div>
+</div>
+
+<!-- P22: ОТЗЫВЫ -->
+<div class="pc" id="p22">
+<div class="pc-head"><div class="pnum">23</div>
+  <div class="pinfo"><div class="ptitle">Отзывы клиентов</div>
+    <div class="purl">/otzyvy/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Навигационный</span>
+      <span class="mtag mt-aud">Клиенты проверяющие репутацию перед заказом</span>
+      <span class="mtag mt-sch">CollectionPage · AggregateRating · Review</span>
+    </div>
+    <div class="pkws"><span class="kw">отзывы об изделиях из камня</span><span class="kw">отзывы покупателей столешниц</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-trust"><div class="bno">01</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Агрегированный рейтинг (Hero)</div>
+      <div class="bdesc">★★★★★ 4.9/5 — X отзывов. Источники: Яндекс.Карты (X) / Google (X) / 2GIS (X) / сайт (X). Кнопки перехода на внешние площадки. Schema AggregateRating.</div>
+      <div class="bseo">AggregateRating = звёздочки в SERP = CTR +30%. Ссылки на внешние площадки = spamrank clean (авторитетные исходящие).</div>
+      <div class="bpain">Боль: поиск надёжного исполнителя</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-trust"><div class="bno">02</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Видео-отзывы (3-5 штук, приоритет)</div>
+      <div class="bdesc">Клиент на камере рассказывает о заказе. Фото готового изделия на фоне. 60-90 секунд. Подпись: имя + тип заказа + город. Самый конвертирующий формат отзывов.</div>
+      <div class="bseo">contentEffort: оригинальные видео-отзывы трудно подделать. E-E-A-T: реальные клиенты. dwell time.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-trust"><div class="bno">03</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Карточки текстовых отзывов с фильтром</div>
+      <div class="bdesc">Фильтр: по типу изделия / по материалу / по источнику. Карточка: фото клиента + имя + город + тип заказа + рейтинг + текст + фото результата + верифицированный значок. Schema Review на каждой.</div>
+      <div class="bseo">Schema Review = структурированные данные для Google. Фото результата = OriginalContentScore.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+</div></div>
+</div>
+
+<!-- P23: О НАС -->
+<div class="pc" id="p23">
+<div class="pc-head"><div class="pnum">24</div>
+  <div class="pinfo"><div class="ptitle">О компании</div>
+    <div class="purl">/o-nas/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Навигационный + доверие</span>
+      <span class="mtag mt-aud">Клиенты, проверяющие надёжность</span>
+      <span class="mtag mt-sch">Organization · LocalBusiness · AboutPage · Person</span>
+    </div>
+    <div class="pkws"><span class="kw">производство изделий из камня [город]</span><span class="kw">о компании камень</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero: фото команды / производства + миссия</div>
+      <div class="bdesc">H1: «О нас — X лет создаём изделия из камня». Оригинальное фото команды у производства или в шоуруме. Миссия компании в 2-3 предложениях. Ключевые цифры.</div>
+      <div class="bseo">siteAuthority: страница «О нас» с реальными людьми и историей = ключевой E-E-A-T сигнал.</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-trust"><div class="bno">02</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Цифры компании (animated)</div>
+      <div class="bdesc">X лет / X реализованных проектов / X сотрудников / X м² цеха / X партнёров-поставщиков. Конкретные числа, не «много».</div>
+      <div class="bseo">predictedDefaultNsr: конкретные факты повышают базовый рейтинг доверия домена.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-content"><div class="bno">03</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">История компании (timeline)</div>
+      <div class="bdesc">Год основания → первый цех → расширение производства → ключевые проекты → сегодня. Оригинальные фото разных периодов. Рассказ от первого лица.</div>
+      <div class="bseo">contentEffort: история с оригинальными фото — уникальный контент. E-E-A-T.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-trust"><div class="bno">04</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Видео-тур по производству</div>
+      <div class="bdesc">YouTube-embed: директор или главный мастер проводит экскурсию по цеху. 5-7 минут. Показывает оборудование, объясняет технологию.</div>
+      <div class="bseo">contentEffort MAX: оригинальный видео-тур = наивысший уровень E-E-A-T demonstrated expertise. dwell time = 5+ минут.</div>
+      <div class="bpain">Боль: поиск квалифицированных мастеров → «вот наш цех»</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-trust"><div class="bno">05</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Команда (карточки сотрудников)</div>
+      <div class="bdesc">Фото + имя + должность + опыт (лет) + специализация + личная цитата. Schema Person с jobTitle и worksFor. Минимум: директор + главный технолог + дизайнер.</div>
+      <div class="bseo">E-E-A-T: authorship — реальные люди за контентом. Schema Person = EntityAnnotations людей.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-trust"><div class="bno">06</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Сертификаты + партнёры-карьеры</div>
+      <div class="bdesc">Сертификаты качества (lightbox PDF). Членство в ассоциациях. Партнёры: карьеры Италии, Испании, Индии — с фотографиями карьеров и историей сотрудничества.</div>
+      <div class="bseo">EntityAnnotations: связь с авторитетными мировыми брендами усиливает siteAuthority. Исходящие ссылки на партнёров = spamrank clean.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-seo"><div class="bno">07</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">Schema Organization разметка (скрытая в head)</div>
+      <div class="bdesc">name / url / logo / address / telephone / foundingDate / numberOfEmployees / sameAs (ВКонтакте, YouTube, Instagram). Явное объявление entity для Knowledge Graph.</div>
+      <div class="bseo">Schema Organization = заявка на карточку Knowledge Panel. queriesForWhichOfficial: по брендовым запросам сайт будет на первом месте.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- P24: КОНФИГУРАТОР -->
+<div class="pc" id="p24">
+<div class="pc-head"><div class="pnum">25</div>
+  <div class="pinfo"><div class="ptitle">Конфигуратор изделия</div>
+    <div class="purl">/konfigurator/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Транзакционный</span>
+      <span class="mtag mt-aud">Клиенты с конкретными параметрами</span>
+      <span class="mtag mt-sch">WebApplication</span>
+    </div>
+    <div class="pkws"><span class="kw">рассчитать стоимость столешницы из камня</span><span class="kw">конфигуратор кухонной столешницы</span><span class="kw">онлайн расчёт каменного изделия</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-conv"><div class="bno">01</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Шаг 1: Тип изделия</div>
+      <div class="bdesc">Большие иконки с подписями: Столешница / Подоконник / Ступени / Раковина / Пол / Стена / Портал / Другое. Прогресс-бар шагов вверху.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-conv"><div class="bno">02</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Шаг 2: Материал (фото текстур + цена/м²)</div>
+      <div class="bdesc">Фото текстур камней с ценой за м². Фильтр по цвету. При hover — увеличение текстуры. При выборе — мгновенный пересчёт итоговой суммы.</div>
+      <div class="bseo">Визуализация = вовлечение = dwell time. contentEffort: интерактив.</div>
+      <div class="bpain">Боль: нужно увидеть материал перед покупкой</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-conv"><div class="bno">03</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Шаг 3: Размеры + опции</div>
+      <div class="bdesc">Интерактивный чертёж с полями ввода (мм). Опции: отделка края (прямой/радиус/профиль) + тип поверхности (полированная/матовая/кожаная) + отверстия. Автопересчёт стоимости при каждом изменении.</div>
+      <div class="bseo">contentEffort MAX: специализированный конфигуратор = наивысший сигнал.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-content"><div class="bno">04</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Шаг 4: Визуализация в интерьере</div>
+      <div class="bdesc">Превью выбранного камня в типовом интерьере: кухня / ванная / гостиная. Переключение между вариантами комнат. «Отправить в WhatsApp» — поделиться результатом.</div>
+      <div class="bpain">Боль: нужно увидеть результат в реальной обстановке</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-conv"><div class="bno">05</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Итог: стоимость + форма</div>
+      <div class="bdesc">«Ориентировочная стоимость: X — X ₽». Форма: имя + телефон + «Получить точный расчёт с монтажом» (2 поля). Подсказка: «Уточним цену за 1 час».</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+</div></div>
+</div>
+
+<!-- P25: ЦЕНЫ -->
+<div class="pc" id="p25">
+<div class="pc-head"><div class="pnum">26</div>
+  <div class="pinfo"><div class="ptitle">Цены на изделия из камня</div>
+    <div class="purl">/ceny/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Коммерческий</span>
+      <span class="mtag mt-aud">Клиенты сравнивающие предложения</span>
+      <span class="mtag mt-sch">WebPage · FAQPage · PriceSpecification</span>
+    </div>
+    <div class="pkws"><span class="kw">столешница из камня цена</span><span class="kw">стоимость мраморного подоконника</span><span class="kw">прайс на изделия из камня</span><span class="kw">сколько стоит столешница из мрамора</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero: «Честные цены — без скрытых доплат»</div>
+      <div class="bdesc">H1: «Цены на изделия из натурального и искусственного камня». Крючок доверия: «Фиксируем цену в договоре — никаких сюрпризов». Онлайн-калькулятор для быстрой оценки.</div>
+      <div class="bseo">Честная позиция = goodClicks. «Прозрачность» = E-E-A-T.</div>
+      <div class="bpain">Боль: высокая стоимость — страх скрытых доплат</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-conv"><div class="bno">02</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Встроенный калькулятор (топ конверсии)</div>
+      <div class="bdesc">Тип изделия → материал → размер → отделка = стоимость «от X до Y ₽». Результат на email/WhatsApp.</div>
+      <div class="bseo">contentEffort: интерактивный инструмент на странице цен = максимальная конверсия.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-content"><div class="bno">03</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Таблица цен (вкладки по разделам)</div>
+      <div class="bdesc">Табы: Столешницы / Подоконники / Ступени / Ванные / Полы. Каждая таблица: наименование + ед.изм. + цена «от» + цена «до» + примечание (включает ли монтаж). Schema Table markup.</div>
+      <div class="bseo">Таблицы = Featured Snippet. Schema PriceSpecification.</div>
+      <div class="bpain">Боль: высокая стоимость → прозрачность цен снижает тревожность</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-conv"><div class="bno">04</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Акции и скидки (с таймером)</div>
+      <div class="bdesc">Текущие акции с дедлайном: «-15% на кварцевый агломерат Belenco до 31.03» + таймер. FOMO-механик.</div>
+      <div class="bseo">Поведенческий сигнал: таймер удерживает на странице.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-trust"><div class="bno">05</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Рассрочка и способы оплаты</div>
+      <div class="bdesc">0% рассрочка на 12 месяцев (логотипы банков-партнёров). Способы оплаты: наличные / карта / безналичный расчёт для юрлиц. «Работаем с НДС».</div>
+      <div class="bpain">Боль: высокая стоимость → «можно рассрочить»</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-seo"><div class="bno">06</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ по ценообразованию (6 вопросов)</div>
+      <div class="bdesc">Почему разная цена за м² / Что входит в стоимость монтажа / Есть ли скидки при большом объёме / Цена фиксируется в договоре / Доплата за сложную форму / Стоимость замера.</div>
+      <div class="bseo">PAA: «сколько стоит столешница из камня» — Featured Snippet.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- P26: КОНТАКТЫ -->
+<div class="pc" id="p26">
+<div class="pc-head"><div class="pnum">27</div>
+  <div class="pinfo"><div class="ptitle">Контакты и шоурум</div>
+    <div class="purl">/kontakty/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 1</span><span class="mtag mt-int">Навигационный</span>
+      <span class="mtag mt-aud">Готовые к контакту клиенты</span>
+      <span class="mtag mt-sch">ContactPage · LocalBusiness · GeoCoordinates · PostalAddress</span>
+    </div>
+    <div class="pkws"><span class="kw">изделия из камня [город]</span><span class="kw">шоурум натурального камня</span><span class="kw">адрес магазина камня</span><span class="kw">где купить мрамор [город]</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero: «Приходите — потрогайте камень вживую»</div>
+      <div class="bdesc">H1: «Контакты и адрес шоурума». Оффер визита: «В нашем шоуруме 500+ образцов камня — возьмите в руки и выберите». Фото шоурума изнутри. Адрес + часы работы выделены крупно.</div>
+      <div class="bseo">LocalBusiness Schema: name/address/telephone/openingHours/geo. Local SEO сигнал.</div>
+      <div class="bpain">Боль: нужно увидеть и потрогать камень перед покупкой</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-content"><div class="bno">02</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Интерактивная карта (Яндекс + Google embed)</div>
+      <div class="bdesc">Метки всех офисов/шоурумов. Кнопка «Построить маршрут». Зона обслуживания.</div>
+      <div class="bseo">GeoCoordinates Schema = точный сигнал геолокации для Local SEO. «изделия из камня [район города]».</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-content"><div class="bno">03</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Карточки адресов (все офисы/шоурумы)</div>
+      <div class="bdesc">Каждый офис: адрес + метро + часы работы + телефон + фото входа + фото шоурума изнутри + «Как добраться» (текст + карта). LocalBusiness Schema отдельно для каждой точки.</div>
+      <div class="bseo">LocalBusiness Schema × количество точек. Local SEO для каждого района.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-conv"><div class="bno">04</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Мессенджеры (большие кнопки)</div>
+      <div class="bdesc">WhatsApp / Telegram / Viber — отдельные большие кнопки с номером. «Отвечаем за 5 минут».</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-conv"><div class="bno">05</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Форма «Записаться в шоурум»</div>
+      <div class="bdesc">Дата + время + имя + телефон. «Забронируем образцы интересующего вас камня».</div>
+      <div class="bseo">Снижает барьер визита. LocalBusiness конверсия.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-trust"><div class="bno">06</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Реквизиты (аккордеон)</div>
+      <div class="bdesc">ИНН / ОГРН / юридический адрес / расчётный счёт. Свёрнуто по умолчанию. «Работаем с юридическими лицами и ИП».</div>
+      <div class="bseo">E-E-A-T: открытые реквизиты = доверие. Сигнал «настоящая компания».</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+</div></div>
+</div>
+
+
+<!-- ===== ШАБЛОНЫ (глубина 2) ===== -->
+<div class="pc" id="p27">
+<div class="pc-head"><div class="pnum">28</div>
+  <div class="pinfo"><div class="ptitle">Страница проекта (шаблон глубина 2)</div>
+    <div class="purl">/portfolio/{slug}/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 2</span><span class="mtag mt-int">Информационный</span>
+      <span class="mtag mt-aud">Клиенты изучающие похожие проекты</span>
+      <span class="mtag mt-sch">Article · ImageObject · Review · BreadcrumbList</span>
+    </div>
+    <div class="pkws"><span class="kw">[название объекта] мрамор фото</span><span class="kw">столешница из [камень] кейс</span><span class="kw">реализованный проект [материал]</span></div>
+  </div>
+</div>
+<div class="sigbar"><span class="slbl">SEO 2026</span>
+  <span class="stag">H1 = название проекта + материал</span>
+  <span class="stag">Оригинальные фото = OriginalContentScore MAX</span>
+  <span class="stag">История (задача→решение→результат) = contentEffort</span>
+  <span class="stag">Schema Review на отзыве клиента</span>
+</div>
+<div class="blocks"><div class="btitle">Блоки каждого проекта</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero: главное фото на всю ширину</div>
+      <div class="bdesc">Fullbleed фото лучшего ракурса. Наложение текста: название проекта + тип объекта + материал + город + год. H1 = «[Тип изделия] из [материал] — [тип объекта], [город]».</div>
+      <div class="bseo">H1 с конкретикой = avgTermWeight. BreadcrumbList: Главная → Портфолио → Название проекта.</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-trust"><div class="bno">02</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Drag-слайдер ДО/ПОСЛЕ</div>
+      <div class="bdesc">Горизонтальный drag-слайдер. Левая половина: ДО (пустая кухня / старые материалы). Правая: ПОСЛЕ (готовое изделие). Выше кнопки «До» и «После».</div>
+      <div class="bseo">dwell time MAX: пользователи взаимодействуют со слайдером = lastLongestClicks NavBoost. contentEffort: оригинальный до/после контент.</div>
+      <div class="bpain">Боль: нужно увидеть трансформацию</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-content"><div class="bno">03</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Параметры проекта (инфографика)</div>
+      <div class="bdesc">Визуальные карточки: Тип объекта / Материал / Площадь изделия (м²) / Бюджет (диапазон) / Срок (дней) / Год реализации / Стиль интерьера. Конкретные данные, не обобщения.</div>
+      <div class="bseo">EntityAnnotations: конкретные данные = чёткие атрибуты entity. Структурированная информация для AI-парсинга.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-content"><div class="bno">04</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">История проекта: Задача → Решение → Результат</div>
+      <div class="bdesc">3 блока с оригинальным текстом: 1) Задача клиента (что хотели, какие сложности) 2) Наше решение (почему выбрали этот материал, технические нюансы) 3) Результат (конкретные цифры: площадь, срок, отзыв клиента). Уникальный текст для каждого проекта.</div>
+      <div class="bseo">contentEffort: уникальный текст каждого проекта = невозможно автоматизировать. OriginalContentScore. dwell time: повествование удерживает читателя.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-trust"><div class="bno">05</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Полная галерея (lightbox, 8-20 фото)</div>
+      <div class="bdesc">Все оригинальные фото проекта. Разные ракурсы: общий вид / крупно текстура камня / детали обработки края / стык с мойкой / вид сбоку. ImageObject Schema на каждом.</div>
+      <div class="bseo">OriginalContentScore MAX: только свои фото. Alt-текст каждого фото = «столешница из Calacatta Gold, кухня 18м², Москва, 2024».</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-trust"><div class="bno">06</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Отзыв клиента этого проекта</div>
+      <div class="bdesc">Фото клиента + имя + «владелец квартиры, Москва» + цитата 3-5 предложений + рейтинг ★★★★★. Schema Review с reviewedBy и itemReviewed.</div>
+      <div class="bseo">Schema Review = структурированный отзыв. E-E-A-T: верифицированный отзыв конкретного человека.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-conv"><div class="bno">07</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">CTA «Хочу такой же» (inline-форма)</div>
+      <div class="bdesc">Форма прямо на странице проекта: «Понравился проект? Обсудим ваш». Имя + телефон + «Отправить». Горячий лид: человек уже вовлечён и видел работу.</div>
+      <div class="bseo">Конверсия на горячую аудиторию.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-nav"><div class="bno">08</div><div class="bbar bb-nav"></div>
+      <div class="bmain"><div class="bname">Похожие проекты (3-4 карточки)</div>
+      <div class="bdesc">Проекты с тем же материалом или типом изделия. Алгоритмическая выборка или ручной подбор.</div>
+      <div class="bseo">Внутренняя перелинковка внутри портфолио-кластера. Снижает показатель выхода. PageRank циркулирует в кластере.</div></div>
+      <div class="bright"><span class="badge bd-nav">Навигация</span></div></div>
+</div></div>
+</div>
+
+<!-- ШАБЛОН БРЕНДА -->
+<div class="pc" id="p28">
+<div class="pc-head"><div class="pnum">29</div>
+  <div class="pinfo"><div class="ptitle">Страница бренда (шаблон глубина 2)</div>
+    <div class="purl">/brendy/{slug}/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 2</span><span class="mtag mt-int">Информационный + коммерческий</span>
+      <span class="mtag mt-aud">Клиенты ищущие конкретный бренд</span>
+      <span class="mtag mt-sch">Brand · ItemList · FAQPage · Review</span>
+    </div>
+    <div class="pkws"><span class="kw">[название бренда] официальный дилер</span><span class="kw">[бренд] каталог серий</span><span class="kw">[бренд] отзывы</span><span class="kw">[бренд] цена</span></div>
+  </div>
+</div>
+<div class="blocks"><div class="btitle">Блоки каждой страницы бренда</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Hero: логотип + «Официальный дилер» + H1</div>
+      <div class="bdesc">H1: «[Название бренда] — официальный дилер, каталог серий и цены». Крупный логотип. Строка: страна производства + тип материала + гарантия производителя + статус дилера.</div>
+      <div class="bseo">queriesForWhichOfficial: «официальный дилер [бренд]». EntityAnnotations: бренд явно определён.</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-content"><div class="bno">02</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">О бренде (история, технология, позиционирование)</div>
+      <div class="bdesc">200-400 слов авторского текста: когда основан, страна, технология производства, чем отличается от конкурентов. Оригинальные фото производства (из пресс-кита).</div>
+      <div class="bseo">contentEffort: авторское описание, не с официального сайта. E-E-A-T: экспертное мнение дилера.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-nav"><div class="bno">03</div><div class="bbar bb-nav"></div>
+      <div class="bmain"><div class="bname">Каталог серий и коллекций (с фото)</div>
+      <div class="bdesc">Все серии бренда: фото текстуры + название + цветовые варианты + цена/м². Фильтр по цвету и стилю. Ссылки на конкретные изделия из этого материала.</div>
+      <div class="bseo">EntityAnnotations: каждая серия — entity (Calacatta Dofine 7400 = конкретный запрос). ItemList Schema.</div></div>
+      <div class="bright"><span class="badge bd-nav">Каталог</span></div></div>
+    <div class="block bg-trust"><div class="bno">04</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Наши проекты из этого бренда (4 примера)</div>
+      <div class="bdesc">Оригинальные фото реализованных проектов с материалом данного бренда. Ссылки на страницы проектов.</div>
+      <div class="bseo">OriginalContentScore. Внутренние ссылки бренд → проект → бренд = тематический кластер.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-seo"><div class="bno">05</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ (5) + SEO-текст 800 слов</div>
+      <div class="bdesc">FAQ: Отличие от конкурентов / Уход / Гарантия / Наличие образцов / Срок поставки. SEO: H2 описание, H2 серии, H2 применение, H2 уход.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+</div></div>
+</div>
+
+<!-- ШАБЛОН СТАТЬИ -->
+<div class="pc" id="p29">
+<div class="pc-head"><div class="pnum">30</div>
+  <div class="pinfo"><div class="ptitle">Статья блога (шаблон глубина 2)</div>
+    <div class="purl">/blog/{slug}/</div>
+    <div class="pmeta">
+      <span class="mtag mt-dep">Глубина 2</span><span class="mtag mt-int">Информационный</span>
+      <span class="mtag mt-aud">Клиенты на стадии изучения</span>
+      <span class="mtag mt-sch">Article · FAQPage · BreadcrumbList · Person</span>
+    </div>
+    <div class="pkws"><span class="kw">[информационный запрос]</span><span class="kw">как выбрать [материал]</span><span class="kw">уход за [камень]</span><span class="kw">[камень] vs [камень] что лучше</span></div>
+  </div>
+</div>
+<div class="sigbar"><span class="slbl">SEO 2026 — ключевые правила для статей</span>
+  <span class="stag">H1 ≠ Title (разные формулировки)</span>
+  <span class="stag">Первый абзац = «якорная сущность» с контекстом</span>
+  <span class="stag">Оригинальное фото обложки (не сток)</span>
+  <span class="stag">Авторская подпись = E-E-A-T authorship</span>
+  <span class="stag">FAQ в статье = PAA покрытие</span>
+</div>
+<div class="blocks"><div class="btitle">Блоки каждой статьи</div><div class="blist">
+    <div class="block bg-hook"><div class="bno">01</div><div class="bbar bb-hook"></div>
+      <div class="bmain"><div class="bname">Обложка 1200×630 + метаинформация</div>
+      <div class="bdesc">Оригинальное фото — не стоковое. Рубрика + H1 + время чтения + дата публикации/обновления + автор (фото + имя + должность). Schema Article с datePublished, dateModified, author.</div>
+      <div class="bseo">contentEffort: оригинальная обложка. E-E-A-T: автор с именем и фото. dateModified: регулярное обновление статей = сигнал актуальности.</div></div>
+      <div class="bright"><span class="badge bd-hook">Hero</span></div></div>
+    <div class="block bg-nav"><div class="bno">02</div><div class="bbar bb-nav"></div>
+      <div class="bmain"><div class="bname">Оглавление с якорными ссылками на H2</div>
+      <div class="bdesc">Автоматически генерируемое оглавление по H2. Sticky sidebar на десктопе. Улучшает навигацию = снижает показатель отказов.</div>
+      <div class="bseo">Passage Indexing: H2 = самостоятельные чанки. Структура = AI Overviews friendly. dwell time: пользователи переходят по оглавлению = активная сессия.</div></div>
+      <div class="bright"><span class="badge bd-nav">Навигация</span></div></div>
+    <div class="block bg-content"><div class="bno">03</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Вступление (крючок + якорная сущность)</div>
+      <div class="bdesc">Первый абзац: статистика или провокационный факт. КРИТИЧНО: первое упоминание ключевой сущности должно содержать контекст. Например: «Итальянский производитель [Название], специализирующийся на кварцевом агломерате класса люкс, выпустил…» — не просто «[Название]».</div>
+      <div class="bseo">site2vecEmbeddingEncoded: вес начала документа непропорционально высок. EntityAnnotations: контекст слева от сущности важнее контекста справа.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-content"><div class="bno">04</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Основной контент: H2/H3 структура + оригинальный контент</div>
+      <div class="bdesc">Уникальные оригинальные фото / таблицы / инфографика. Авторский анализ, не компиляция. Каждый H2 = самостоятельный ответ на подзапрос. H3 = более детальные аспекты. Контент 1500-3000 слов в зависимости от темы.</div>
+      <div class="bseo">contentEffort: каждый уникальный элемент (фото/таблица/инфографика) = +сигнал. Правило: ключевые термины встречаются в H2 + bold + начале абзацев = avgTermWeight.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-trust"><div class="bno">05</div><div class="bbar bb-trust"></div>
+      <div class="bmain"><div class="bname">Цитата эксперта (нашего мастера/технолога)</div>
+      <div class="bdesc">Блок: фото нашего сотрудника + имя + должность + прямая цитата по теме статьи 2-4 предложения. Schema Person + quote.</div>
+      <div class="bseo">E-E-A-T: демонстрация экспертизы через реальных людей. contentEffort: оригинальные экспертные комментарии.</div></div>
+      <div class="bright"><span class="badge bd-trust">Доверие</span></div></div>
+    <div class="block bg-conv"><div class="bno">06</div><div class="bbar bb-conv"></div>
+      <div class="bmain"><div class="bname">Inline CTA (в середине статьи, тематический)</div>
+      <div class="bdesc">Блок связан с темой статьи: «Читаете про уход за мрамором? → Наша услуга реставрации мрамора». Или «Выбираете кварцевый агломерат? → Рассчитайте стоимость столешницы». Нативно вписан в контент.</div>
+      <div class="bseo">Конверсия с информационного трафика без прерывания чтения. Релевантность CTA = goodClicks.</div></div>
+      <div class="bright"><span class="badge bd-conv">Конверсия</span></div></div>
+    <div class="block bg-seo"><div class="bno">07</div><div class="bbar bb-seo"></div>
+      <div class="bmain"><div class="bname">FAQ в статье (Schema FAQPage, 5-7 вопросов)</div>
+      <div class="bdesc">Вопросы из блока «Люди также спрашивают» по теме статьи. Ответы 60-120 слов. Schema FAQPage. Встроены в текст как раздел «Частые вопросы».</div>
+      <div class="bseo">PAA покрытие = Featured Snippets. AI Overviews: чёткие Q&A = идеальные чанки для извлечения.</div></div>
+      <div class="bright"><span class="badge bd-seo">SEO</span></div></div>
+    <div class="block bg-content"><div class="bno">08</div><div class="bbar bb-content"></div>
+      <div class="bmain"><div class="bname">Заключение с выводами</div>
+      <div class="bdesc">Структурированный вывод: 3-5 ключевых тезисов. Авторская рекомендация. CTA финальный: «Остались вопросы? Проконсультируем бесплатно».</div>
+      <div class="bseo">contentEffort: авторские выводы = невоспроизводимый контент. Финальный CTA = конверсионная точка.</div></div>
+      <div class="bright"><span class="badge bd-content">Контент</span></div></div>
+    <div class="block bg-nav"><div class="bno">09</div><div class="bbar bb-nav"></div>
+      <div class="bmain"><div class="bname">Похожие статьи (тематический кластер, 3 штуки)</div>
+      <div class="bdesc">Статьи той же рубрики или смежной темы. Принцип hub-and-spoke: статьи связаны между собой, все ссылаются на хаб-страницу раздела или материала.</div>
+      <div class="bseo">Внутренняя перелинковка кластера. siteFocusScore: тематические связи. Снижает выход.</div></div>
+      <div class="bright"><span class="badge bd-nav">Навигация</span></div></div>
+</div></div>
+</div>
+
+<!-- FOOTER -->
+<div style="background:var(--s2);border:1px solid var(--bdr);padding:24px 28px;margin-top:40px">
+  <div style="font-size:16px;font-weight:300;color:var(--cream);margin-bottom:16px">Итог: SEO-принципы применённые в архитектуре</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;font-size:11px;color:var(--muted)">
+    <div style="background:var(--s3);padding:12px;border:1px solid var(--bdr)">
+      <div style="color:var(--gold2);margin-bottom:5px;font-size:12px">📖 Плоская структура (SEO Монстр)</div>
+      27 из 30 страниц — глубина 1. Только шаблоны проектов/статей/брендов — глубина 2. Максимальный краулинговый бюджет для коммерческих страниц. Canonical для всех фильтров и пагинации.
+    </div>
+    <div style="background:var(--s3);padding:12px;border:1px solid var(--bdr)">
+      <div style="color:var(--gold2);margin-bottom:5px;font-size:12px">📖 contentEffort (DrMax 2026)</div>
+      Каждая страница содержит: оригинальное видео ИЛИ интерактивный калькулятор ИЛИ до/после слайдер ИЛИ уникальную инфографику. Ни одной страницы с только текстом.
+    </div>
+    <div style="background:var(--s3);padding:12px;border:1px solid var(--bdr)">
+      <div style="color:var(--gold2);margin-bottom:5px;font-size:12px">📖 NavBoost (DrMax 2026)</div>
+      Конфигуратор, калькуляторы, drag-слайдеры — удерживают пользователя 5-10+ минут (lastLongestClicks). Сегментация ЦА на главной снижает отказы. FAQ = goodClicks.
+    </div>
+    <div style="background:var(--s3);padding:12px;border:1px solid var(--bdr)">
+      <div style="color:var(--gold2);margin-bottom:5px;font-size:12px">📖 siteFocusScore (DrMax 2026)</div>
+      7 страниц изделий + 7 страниц материалов = 14 тематически плотных страниц вокруг «камень». Все перекрёстно перелинкованы. Высокий siteFocusScore для всего домена.
+    </div>
+    <div style="background:var(--s3);padding:12px;border:1px solid var(--bdr)">
+      <div style="color:var(--gold2);margin-bottom:5px;font-size:12px">📖 EntityAnnotations (DrMax 2026)</div>
+      Каждый вид камня, каждый бренд, каждый мастер — явно именованные сущности с атрибутами (страна, свойства, применение). Schema.org на всех типах контента.
+    </div>
+    <div style="background:var(--s3);padding:12px;border:1px solid var(--bdr)">
+      <div style="color:var(--gold2);margin-bottom:5px;font-size:12px">📖 E-E-A-T (DrMax 2026)</div>
+      Видео-тур по производству. Страница команды с фото. Авторские подписи к статьям. Сертификаты. Официальные дилерские статусы. Schema Organization. — многослойное подтверждение экспертизы.
+    </div>
+  </div>
+</div>
+
+</div><!-- /content -->
+</main>
+
+<script>
+// Highlight active nav item on scroll
+const sections = document.querySelectorAll('[id^="p"]');
+const navLinks = document.querySelectorAll('nav a');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      navLinks.forEach(l => l.classList.remove('active'));
+      const a = document.querySelector('nav a[href="#'+e.target.id+'"]');
+      if(a) a.classList.add('active');
+    }
+  });
+}, {threshold:0.2});
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
