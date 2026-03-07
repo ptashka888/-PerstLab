@@ -63,6 +63,46 @@ function cf_breadcrumbs() {
             'url'  => '',
         );
 
+    } elseif ( is_tax( 'car_country' ) ) {
+        $term = get_queried_object();
+        $items[] = array(
+            'name' => 'Авто из ' . $term->name,
+            'url'  => '',
+        );
+
+    } elseif ( is_tax( 'car_type' ) ) {
+        $term = get_queried_object();
+        $items[] = array(
+            'name' => 'Каталог',
+            'url'  => get_post_type_archive_link( 'car_model' ),
+        );
+        $items[] = array(
+            'name' => 'Кузов: ' . $term->name,
+            'url'  => '',
+        );
+
+    } elseif ( is_tax( 'price_range' ) ) {
+        $term = get_queried_object();
+        $items[] = array(
+            'name' => 'Каталог',
+            'url'  => get_post_type_archive_link( 'car_model' ),
+        );
+        $items[] = array(
+            'name' => 'Бюджет: ' . $term->name,
+            'url'  => '',
+        );
+
+    } elseif ( is_tax( 'engine_type' ) ) {
+        $term = get_queried_object();
+        $items[] = array(
+            'name' => 'Каталог',
+            'url'  => get_post_type_archive_link( 'car_model' ),
+        );
+        $items[] = array(
+            'name' => 'Двигатель: ' . $term->name,
+            'url'  => '',
+        );
+
     } elseif ( is_tax( 'catalog_tag' ) ) {
         $term = get_queried_object();
         $items[] = array(
@@ -92,8 +132,14 @@ function cf_breadcrumbs() {
                 'url'  => get_term_link( $brand ),
             );
         }
+        // Year / modification as last crumb context
+        $year = get_post_meta( $post_id, 'cf_year', true );
+        $crumb_title = get_the_title();
+        if ( $year ) {
+            $crumb_title .= ' ' . $year . ' г.';
+        }
         $items[] = array(
-            'name' => get_the_title(),
+            'name' => $crumb_title,
             'url'  => '',
         );
 

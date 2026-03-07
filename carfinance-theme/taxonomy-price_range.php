@@ -1,7 +1,7 @@
 <?php
 /**
- * Template: Car Type (Body Type) Taxonomy Archive
- * URL: /catalog/type/{type-slug}/
+ * Template: Price Range Taxonomy Archive
+ * URL: /catalog/price/{slug}/
  *
  * Delegates to archive-car_model.php which renders the full
  * horizontal filter panel and handles all taxonomy contexts.

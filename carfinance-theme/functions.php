@@ -29,6 +29,7 @@ require_once CF_DIR . '/inc/breadcrumbs.php';
 require_once CF_DIR . '/inc/interlinking.php';
 require_once CF_DIR . '/inc/catalog-filter.php';
 require_once CF_DIR . '/inc/catalog-tags.php';
+require_once CF_DIR . '/inc/rest-api.php';
 require_once CF_DIR . '/inc/calculator-ajax.php';
 require_once CF_DIR . '/inc/lead-form-ajax.php';
 require_once CF_DIR . '/inc/multisite.php';
@@ -100,7 +101,7 @@ add_action('wp_enqueue_scripts', function (): void {
     }
 
     // Catalog CSS (only on catalog/taxonomy pages)
-    if (is_post_type_archive('car_model') || is_tax('car_brand') || is_tax('catalog_tag') || is_tax('car_type') || is_tax('car_country')) {
+    if (is_post_type_archive('car_model') || is_tax('car_brand') || is_tax('catalog_tag') || is_tax('car_type') || is_tax('car_country') || is_tax('price_range') || is_tax('engine_type') || is_tax('transmission_type') || is_tax('drive_type')) {
         $catalog_path = $css_dir . '/components/catalog.css';
         if (file_exists($catalog_path)) {
             wp_enqueue_style('cf-comp-catalog', $css_uri . '/components/catalog.css', ['cf-variables', 'cf-comp-forms'], filemtime($catalog_path));
@@ -124,8 +125,8 @@ add_action('wp_enqueue_scripts', function (): void {
         'currency' => 'RUB',
     ]);
 
-    // Catalog filter JS (only on catalog/tag pages)
-    if (is_post_type_archive('car_model') || is_tax('car_brand') || is_tax('catalog_tag') || is_tax('car_type') || is_tax('car_country')) {
+    // Catalog filter JS (only on catalog/taxonomy pages)
+    if (is_post_type_archive('car_model') || is_tax('car_brand') || is_tax('catalog_tag') || is_tax('car_type') || is_tax('car_country') || is_tax('price_range') || is_tax('engine_type') || is_tax('transmission_type') || is_tax('drive_type')) {
         wp_enqueue_script('cf-catalog-filter', CF_URI . '/assets/js/catalog-filter.js', [], CF_VERSION, true);
         wp_localize_script('cf-catalog-filter', 'cfCatalog', [
             'ajaxUrl' => admin_url('admin-ajax.php'),

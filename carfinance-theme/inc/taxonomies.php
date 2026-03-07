@@ -136,4 +136,74 @@ function cf_register_taxonomies(): void {
         'rewrite'      => false,
         'show_in_rest' => true,
     ]);
+
+    // Generation — /catalog/toyota/camry/xv70/
+    register_taxonomy('generation', ['car_model', 'auction_lot'], [
+        'labels' => [
+            'name'          => 'Поколение',
+            'singular_name' => 'Поколение',
+            'add_new_item'  => 'Добавить поколение',
+        ],
+        'public'       => true,
+        'hierarchical' => true,
+        'rewrite'      => ['slug' => 'catalog/generation', 'with_front' => false],
+        'show_in_rest' => true,
+        'show_admin_column' => true,
+    ]);
+
+    // Engine type (Бензин, Дизель, Гибрид, Электро, ГБО) — taxonomy for SEO pages
+    register_taxonomy('engine_type', ['car_model', 'auction_lot'], [
+        'labels' => [
+            'name'          => 'Тип двигателя',
+            'singular_name' => 'Тип двигателя',
+            'add_new_item'  => 'Добавить тип двигателя',
+        ],
+        'public'       => true,
+        'hierarchical' => false,
+        'rewrite'      => ['slug' => 'catalog/dvigatel', 'with_front' => false],
+        'show_in_rest' => true,
+        'show_admin_column' => true,
+    ]);
+
+    // Transmission type (АКПП, МКПП, Робот, Вариатор) — taxonomy for SEO pages
+    register_taxonomy('transmission_type', ['car_model', 'auction_lot'], [
+        'labels' => [
+            'name'          => 'Коробка передач',
+            'singular_name' => 'Коробка передач',
+            'add_new_item'  => 'Добавить КПП',
+        ],
+        'public'       => true,
+        'hierarchical' => false,
+        'rewrite'      => ['slug' => 'catalog/kpp', 'with_front' => false],
+        'show_in_rest' => true,
+        'show_admin_column' => false,
+    ]);
+
+    // Drive type (Передний, Задний, Полный) — taxonomy for SEO pages
+    register_taxonomy('drive_type', ['car_model', 'auction_lot'], [
+        'labels' => [
+            'name'          => 'Тип привода',
+            'singular_name' => 'Тип привода',
+            'add_new_item'  => 'Добавить привод',
+        ],
+        'public'       => true,
+        'hierarchical' => false,
+        'rewrite'      => ['slug' => 'catalog/privod', 'with_front' => false],
+        'show_in_rest' => true,
+        'show_admin_column' => false,
+    ]);
+
+    // Car color taxonomy — for SEO pages and filter
+    register_taxonomy('car_color', ['car_model', 'auction_lot'], [
+        'labels' => [
+            'name'          => 'Цвет',
+            'singular_name' => 'Цвет',
+            'add_new_item'  => 'Добавить цвет',
+        ],
+        'public'       => true,
+        'hierarchical' => false,
+        'rewrite'      => ['slug' => 'catalog/color', 'with_front' => false],
+        'show_in_rest' => true,
+        'show_admin_column' => false,
+    ]);
 }
