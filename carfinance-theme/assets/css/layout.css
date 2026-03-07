@@ -391,3 +391,445 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/* ==========================================================================
+   Brand Taxonomy Page (taxonomy-car_brand.php)
+   ========================================================================== */
+
+/* Brand hero */
+.cf-brand-hero {
+    padding: 56px 0 48px;
+    background: var(--cf-bg, #fff);
+    border-bottom: 1px solid var(--cf-border, #e5e7eb);
+}
+
+.cf-brand-hero--country {
+    border-top: 4px solid var(--hero-accent, var(--cf-primary, #2563eb));
+}
+
+.cf-brand-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 48px;
+    align-items: center;
+}
+
+.cf-brand-hero__trail {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--cf-text-secondary, #6b7280);
+    margin-bottom: 16px;
+}
+
+.cf-brand-hero__trail a {
+    color: var(--cf-primary, #2563eb);
+    text-decoration: none;
+}
+
+.cf-brand-hero__trail a:hover { text-decoration: underline; }
+.cf-brand-hero__trail-current { font-weight: 600; color: var(--cf-text, #1a1a2e); }
+
+.cf-brand-hero__h1 {
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 1.15;
+    color: var(--cf-text, #1a1a2e);
+    margin: 0 0 12px;
+}
+
+.cf-brand-hero__subtitle {
+    font-size: 17px;
+    color: var(--cf-text-secondary, #6b7280);
+    margin: 0 0 24px;
+    line-height: 1.55;
+}
+
+.cf-brand-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.cf-brand-hero__meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--cf-bg-alt, #f7f8fa);
+    border: 1px solid var(--cf-border, #e5e7eb);
+    border-radius: 24px;
+    padding: 5px 14px;
+    color: var(--cf-text, #1a1a2e);
+}
+
+.cf-brand-hero__meta-icon { font-size: 16px; }
+
+.cf-brand-hero__actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.cf-brand-hero__logo-col { text-align: center; }
+
+.cf-brand-hero__logo {
+    max-width: 260px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.cf-brand-hero__logo-placeholder {
+    width: 200px;
+    height: 140px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--cf-bg-alt, #f7f8fa) 0%, var(--cf-border, #e5e7eb) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    font-weight: 900;
+    color: #9ca3af;
+    letter-spacing: -3px;
+}
+
+.cf-brand-hero__logo-placeholder--country {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: var(--cf-bg-alt, #f7f8fa);
+}
+
+.cf-brand-hero__logo-initials {
+    font-size: 48px;
+    font-weight: 900;
+    color: #9ca3af;
+    letter-spacing: -2px;
+}
+
+.cf-brand-hero__logo-flag {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    font-size: 28px;
+    background: #fff;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* Country tabs */
+.cf-brand-countries {
+    background: var(--cf-bg-alt, #f7f8fa);
+    border-bottom: 1px solid var(--cf-border, #e5e7eb);
+    padding: 12px 0;
+}
+
+.cf-brand-countries__wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.cf-brand-countries__label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cf-text-secondary, #6b7280);
+    white-space: nowrap;
+}
+
+.cf-brand-countries__tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.cf-brand-countries__tab {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 24px;
+    text-decoration: none;
+    color: var(--cf-text-secondary, #6b7280);
+    background: #fff;
+    border: 1px solid var(--cf-border, #e5e7eb);
+    transition: all 0.2s;
+}
+
+.cf-brand-countries__tab:hover,
+.cf-brand-countries__tab.is-active {
+    background: var(--cf-primary, #2563eb);
+    color: #fff;
+    border-color: var(--cf-primary, #2563eb);
+}
+
+/* Brand pros */
+.cf-brand-pros {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 36px;
+}
+
+.cf-brand-pros__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #fff;
+    padding: 18px 20px;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--cf-text, #1a1a2e);
+}
+
+.cf-brand-pros__icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+/* Popular models quick nav */
+.cf-brand-models-nav {
+    background: var(--cf-bg-alt, #f7f8fa);
+    padding: 16px 0;
+    border-top: 1px solid var(--cf-border, #e5e7eb);
+    border-bottom: 1px solid var(--cf-border, #e5e7eb);
+}
+
+.cf-brand-models-nav__label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cf-text-secondary, #6b7280);
+    margin: 0 0 10px;
+}
+
+.cf-brand-models-nav__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.cf-brand-models-nav__item {
+    font-size: 13px;
+    padding: 5px 12px;
+    background: #fff;
+    border: 1px solid var(--cf-border, #e5e7eb);
+    border-radius: 20px;
+    color: var(--cf-text, #1a1a2e);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.cf-brand-models-nav__item:hover {
+    border-color: var(--cf-primary, #2563eb);
+    color: var(--cf-primary, #2563eb);
+}
+
+/* Brand × Country cards */
+.cf-brand-country-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.cf-brand-country-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 24px;
+    background: #fff;
+    border: 1px solid var(--cf-border, #e5e7eb);
+    border-radius: 14px;
+    text-decoration: none;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.cf-brand-country-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    border-color: var(--cf-primary, #2563eb);
+}
+
+.cf-brand-country-card__flag { font-size: 28px; flex-shrink: 0; }
+
+.cf-brand-country-card__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cf-brand-country-card__body strong {
+    font-size: 16px;
+    color: var(--cf-text, #1a1a2e);
+}
+
+.cf-brand-country-card__body span {
+    font-size: 13px;
+    color: var(--cf-text-secondary, #6b7280);
+}
+
+.cf-brand-country-card__arrow {
+    font-size: 18px;
+    color: var(--cf-primary, #2563eb);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* SILO tag cloud (internal links) */
+.cf-silo-tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.cf-silo-tag {
+    font-size: 13px;
+    padding: 5px 12px;
+    background: var(--cf-bg-alt, #f7f8fa);
+    border: 1px solid var(--cf-border, #e5e7eb);
+    border-radius: 20px;
+    color: var(--cf-text, #1a1a2e);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.cf-silo-tag:hover,
+.cf-silo-tag.is-active {
+    background: var(--cf-primary, #2563eb);
+    color: #fff;
+    border-color: var(--cf-primary, #2563eb);
+}
+
+.cf-silo-tag__count {
+    margin-left: 4px;
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+.cf-silo-nav__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--cf-text, #1a1a2e);
+    margin: 0 0 12px;
+}
+
+/* SILO nav box (two columns) */
+.cf-silo-nav-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.cf-silo-nav-box__col h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--cf-text, #1a1a2e);
+    margin: 0 0 12px;
+}
+
+/* Engine type hero */
+.cf-engine-hero {
+    background: linear-gradient(135deg, var(--cf-text, #1a1a2e) 0%, #2d3748 100%);
+    color: #fff;
+}
+
+.cf-engine-hero .cf-container { padding-top: 48px; padding-bottom: 48px; }
+
+.cf-engine-hero__inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.cf-engine-hero__emoji { font-size: 56px; flex-shrink: 0; }
+
+.cf-engine-hero__h1 {
+    font-size: 36px;
+    font-weight: 900;
+    color: #fff;
+    margin: 0 0 8px;
+    line-height: 1.2;
+}
+
+.cf-engine-hero__subtitle {
+    font-size: 17px;
+    color: rgba(255,255,255,0.75);
+    margin: 0;
+}
+
+/* Engine country filter tabs */
+.cf-engine-country-filter {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.cf-engine-country-filter span {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cf-text-secondary, #6b7280);
+}
+
+/* Brand+country page more link */
+.cf-brand-country-page__more {
+    margin-top: 32px;
+    text-align: center;
+}
+
+/* Responsive: brand pages */
+@media (max-width: 992px) {
+    .cf-brand-pros {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cf-brand-hero__grid {
+        grid-template-columns: 1fr 200px;
+        gap: 32px;
+    }
+
+    .cf-silo-nav-box {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cf-brand-hero__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cf-brand-hero__logo-col {
+        display: none;
+    }
+
+    .cf-brand-hero__h1 { font-size: 30px; }
+
+    .cf-brand-pros {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .cf-engine-hero__inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cf-engine-hero__h1 { font-size: 26px; }
+}
