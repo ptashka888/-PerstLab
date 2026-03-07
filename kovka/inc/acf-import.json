@@ -1,0 +1,444 @@
+[
+  {
+    "key": "group_kv_product",
+    "title": "Характеристики изделия",
+    "fields": [
+      {
+        "key": "field_kv_price_from",
+        "label": "Цена от (руб)",
+        "name": "kv_price_from",
+        "type": "number",
+        "prepend": "₽",
+        "min": 0,
+        "step": 100
+      },
+      {
+        "key": "field_kv_price_to",
+        "label": "Цена до (руб)",
+        "name": "kv_price_to",
+        "type": "number",
+        "prepend": "₽",
+        "min": 0,
+        "step": 100
+      },
+      {
+        "key": "field_kv_metal",
+        "label": "Металл / сплав",
+        "name": "kv_metal",
+        "type": "text",
+        "placeholder": "Например: ст3сп, ст10, нержавеющая AISI 304"
+      },
+      {
+        "key": "field_kv_coating",
+        "label": "Покрытие",
+        "name": "kv_coating",
+        "type": "select",
+        "choices": {
+          "powder": "Порошковая окраска",
+          "hot_zinc": "Горячее цинкование",
+          "patina": "Патина (золото/серебро/медь)",
+          "rust": "Ржавый эффект (Corten)",
+          "chrome": "Хром",
+          "ss": "Нержавеющая полировка",
+          "none": "Без покрытия"
+        },
+        "default_value": "powder",
+        "allow_null": 0,
+        "return_format": "value"
+      },
+      {
+        "key": "field_kv_lead_time",
+        "label": "Срок изготовления",
+        "name": "kv_lead_time",
+        "type": "text",
+        "placeholder": "например: 7–14 дней"
+      },
+      {
+        "key": "field_kv_warranty",
+        "label": "Гарантия",
+        "name": "kv_warranty",
+        "type": "text",
+        "default_value": "25 лет",
+        "placeholder": "например: 25 лет"
+      },
+      {
+        "key": "field_kv_weight",
+        "label": "Масса изделия (кг)",
+        "name": "kv_weight",
+        "type": "number",
+        "append": "кг",
+        "min": 0,
+        "step": 0.5
+      },
+      {
+        "key": "field_kv_section",
+        "label": "Сечение прутка (мм)",
+        "name": "kv_section",
+        "type": "text",
+        "placeholder": "например: 12×12 или Ø16"
+      },
+      {
+        "key": "field_kv_installable",
+        "label": "Монтаж включён в стоимость",
+        "name": "kv_installable",
+        "type": "true_false",
+        "ui": 1,
+        "ui_on_text": "Да",
+        "ui_off_text": "Нет"
+      },
+      {
+        "key": "field_kv_gallery",
+        "label": "Галерея изделия",
+        "name": "kv_gallery",
+        "type": "gallery",
+        "mime_types": "jpg,jpeg,webp,png",
+        "library": "all",
+        "min": 0,
+        "max": 20,
+        "min_width": 600,
+        "min_height": 400,
+        "return_format": "array"
+      },
+      {
+        "key": "field_kv_3d_model",
+        "label": "Ссылка на 3D-модель / AR-просмотр",
+        "name": "kv_3d_model",
+        "type": "url"
+      },
+      {
+        "key": "field_kv_popular",
+        "label": "Хит продаж",
+        "name": "kv_popular",
+        "type": "true_false",
+        "ui": 1,
+        "ui_on_text": "Хит",
+        "ui_off_text": "Нет"
+      },
+      {
+        "key": "field_kv_product_faq",
+        "label": "FAQ по изделию",
+        "name": "kv_product_faq",
+        "type": "repeater",
+        "layout": "block",
+        "button_label": "Добавить вопрос",
+        "sub_fields": [
+          {
+            "key": "field_kv_faq_q",
+            "label": "Вопрос",
+            "name": "question",
+            "type": "text"
+          },
+          {
+            "key": "field_kv_faq_a",
+            "label": "Ответ",
+            "name": "answer",
+            "type": "textarea",
+            "rows": 3
+          }
+        ]
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "kv_product"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true
+  },
+  {
+    "key": "group_kv_work",
+    "title": "Данные работы (портфолио)",
+    "fields": [
+      {
+        "key": "field_kv_work_client",
+        "label": "Тип клиента",
+        "name": "kv_work_client",
+        "type": "select",
+        "choices": {
+          "private": "Частный дом / коттедж",
+          "cottage": "Дачный посёлок / КП",
+          "commercial": "Коммерческий объект",
+          "restaurant": "Ресторан / кафе",
+          "hotel": "Отель / гостиница",
+          "state": "Государственный заказ",
+          "gift": "Подарок / сувенир"
+        }
+      },
+      {
+        "key": "field_kv_work_city",
+        "label": "Город / регион",
+        "name": "kv_work_city",
+        "type": "text",
+        "placeholder": "Москва"
+      },
+      {
+        "key": "field_kv_work_year",
+        "label": "Год выполнения",
+        "name": "kv_work_year",
+        "type": "number",
+        "min": 2000,
+        "max": 2099,
+        "step": 1,
+        "default_value": 2024
+      },
+      {
+        "key": "field_kv_work_budget",
+        "label": "Бюджет проекта (руб)",
+        "name": "kv_work_budget",
+        "type": "number",
+        "prepend": "₽",
+        "min": 0
+      },
+      {
+        "key": "field_kv_work_duration",
+        "label": "Срок выполнения (рабочих дней)",
+        "name": "kv_work_duration",
+        "type": "number",
+        "append": "дней",
+        "min": 1
+      },
+      {
+        "key": "field_kv_work_gallery",
+        "label": "Галерея готовой работы",
+        "name": "kv_work_gallery",
+        "type": "gallery",
+        "min": 1,
+        "max": 30,
+        "return_format": "array"
+      },
+      {
+        "key": "field_kv_work_video",
+        "label": "Видео процесса / результата (YouTube/VK)",
+        "name": "kv_work_video",
+        "type": "url"
+      },
+      {
+        "key": "field_kv_work_featured",
+        "label": "Показывать на главной странице",
+        "name": "kv_work_featured",
+        "type": "true_false",
+        "ui": 1
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "kv_work"
+        }
+      ]
+    ],
+    "position": "normal",
+    "style": "seamless",
+    "active": true
+  },
+  {
+    "key": "group_kv_review",
+    "title": "Данные отзыва",
+    "fields": [
+      {
+        "key": "field_kv_r_rating",
+        "label": "Рейтинг (1–5 звёзд)",
+        "name": "kv_rating",
+        "type": "number",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "default_value": 5
+      },
+      {
+        "key": "field_kv_r_city",
+        "label": "Город клиента",
+        "name": "kv_city",
+        "type": "text"
+      },
+      {
+        "key": "field_kv_r_product",
+        "label": "Заказанное изделие",
+        "name": "kv_product",
+        "type": "post_object",
+        "post_type": ["kv_product"],
+        "allow_null": 1,
+        "return_format": "object"
+      },
+      {
+        "key": "field_kv_r_source",
+        "label": "Источник отзыва",
+        "name": "kv_source",
+        "type": "select",
+        "choices": {
+          "google": "Google Maps",
+          "yandex": "Яндекс Карты",
+          "avito": "Avito",
+          "vk": "ВКонтакте",
+          "2gis": "2ГИС",
+          "direct": "Прямой / личный"
+        }
+      },
+      {
+        "key": "field_kv_r_photo",
+        "label": "Фото клиента (аватар)",
+        "name": "kv_r_photo",
+        "type": "image",
+        "return_format": "url",
+        "preview_size": "thumbnail"
+      },
+      {
+        "key": "field_kv_r_video",
+        "label": "Видеоотзыв (YouTube/VK URL)",
+        "name": "kv_r_video",
+        "type": "url"
+      },
+      {
+        "key": "field_kv_r_featured",
+        "label": "Показывать на главной",
+        "name": "kv_r_featured",
+        "type": "true_false",
+        "ui": 1
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "kv_review"
+        }
+      ]
+    ],
+    "position": "normal",
+    "style": "seamless",
+    "active": true
+  },
+  {
+    "key": "group_kv_team",
+    "title": "Данные сотрудника",
+    "fields": [
+      {
+        "key": "field_kv_t_role",
+        "label": "Должность",
+        "name": "kv_role",
+        "type": "text",
+        "placeholder": "Главный кузнец"
+      },
+      {
+        "key": "field_kv_t_experience",
+        "label": "Стаж работы (лет)",
+        "name": "kv_experience",
+        "type": "number",
+        "append": "лет",
+        "min": 1
+      },
+      {
+        "key": "field_kv_t_spec",
+        "label": "Специализация",
+        "name": "kv_spec",
+        "type": "text",
+        "placeholder": "Художественная ковка, ворота, лестницы"
+      },
+      {
+        "key": "field_kv_t_cert",
+        "label": "Квалификационный разряд / сертификат",
+        "name": "kv_cert",
+        "type": "text",
+        "placeholder": "Кузнец 6-го разряда"
+      },
+      {
+        "key": "field_kv_t_photo",
+        "label": "Фото (квадратное, минимум 400×400)",
+        "name": "kv_t_photo",
+        "type": "image",
+        "return_format": "url",
+        "preview_size": "thumbnail"
+      },
+      {
+        "key": "field_kv_t_vk",
+        "label": "Профиль ВКонтакте",
+        "name": "kv_vk",
+        "type": "url"
+      },
+      {
+        "key": "field_kv_t_tg",
+        "label": "Telegram (ссылка или @username)",
+        "name": "kv_tg",
+        "type": "url"
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "kv_team"
+        }
+      ]
+    ],
+    "position": "normal",
+    "style": "seamless",
+    "active": true
+  },
+  {
+    "key": "group_kv_page",
+    "title": "Настройки страницы (SEO / Hero)",
+    "fields": [
+      {
+        "key": "field_kv_p_hero_img",
+        "label": "Фоновое изображение Hero-блока",
+        "name": "kv_hero_img",
+        "type": "image",
+        "return_format": "url",
+        "preview_size": "medium",
+        "instructions": "Рекомендуется: 1920×1080 px, формат JPEG/WebP"
+      },
+      {
+        "key": "field_kv_p_hero_sub",
+        "label": "Подзаголовок Hero (для категорийных страниц)",
+        "name": "kv_hero_sub",
+        "type": "textarea",
+        "rows": 2
+      },
+      {
+        "key": "field_kv_p_cta_text",
+        "label": "Текст CTA-кнопки",
+        "name": "kv_cta_text",
+        "type": "text",
+        "default_value": "Получить расчёт бесплатно"
+      },
+      {
+        "key": "field_kv_p_schema_type",
+        "label": "Schema.org тип страницы",
+        "name": "kv_schema_type",
+        "type": "select",
+        "choices": {
+          "Service": "Service (сервис/услуга)",
+          "Product": "Product (товар)",
+          "Article": "Article (статья)",
+          "WebPage": "WebPage (общая)"
+        },
+        "default_value": "WebPage"
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "page"
+        }
+      ]
+    ],
+    "position": "side",
+    "style": "default",
+    "active": true
+  }
+]
