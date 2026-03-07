@@ -31,10 +31,12 @@ if (empty($items)) {
 // Default items if still empty
 if (empty($items)) {
     $items = [
-        ['value' => '2500', 'suffix' => '+', 'label' => 'Авто доставлено'],
-        ['value' => '8',    'suffix' => '',  'label' => 'Лет на рынке'],
-        ['value' => '98',   'suffix' => '%', 'label' => 'Довольных клиентов'],
-        ['value' => '14',   'suffix' => '',  'label' => 'Дней средняя доставка'],
+        ['value' => '3100', 'suffix' => '+', 'label' => 'Авто доставлено', 'icon' => '🚗'],
+        ['value' => '8',    'suffix' => '',  'label' => 'Лет на рынке',    'icon' => '📅'],
+        ['value' => '95',   'suffix' => '%', 'label' => 'Рекомендуют нас', 'icon' => '⭐'],
+        ['value' => '28',   'suffix' => '',  'label' => 'Сотрудников',     'icon' => '👥'],
+        ['value' => '4',    'suffix' => '',  'label' => 'Офиса в России',  'icon' => '📍'],
+        ['value' => '14',   'suffix' => '',  'label' => 'Дней до получения', 'icon' => '⚡'],
     ];
 }
 
@@ -51,8 +53,12 @@ if ($variant === 'icons') {
                 $value  = $item['value'] ?? '';
                 $suffix = $item['suffix'] ?? '';
                 $label  = $item['label'] ?? '';
+                $icon   = $item['icon'] ?? '';
             ?>
                 <div class="cf-features__item">
+                    <?php if ($icon): ?>
+                        <div class="cf-features__icon"><?php echo esc_html($icon); ?></div>
+                    <?php endif; ?>
                     <div class="cf-features__value" data-target="<?php echo esc_attr($value); ?>">
                         0<?php echo esc_html($suffix); ?>
                     </div>

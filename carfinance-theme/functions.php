@@ -108,6 +108,14 @@ add_action('wp_enqueue_scripts', function (): void {
         }
     }
 
+    // Author page CSS
+    if (is_page_template('page-author.php') || (is_singular('cf_team') && !is_admin())) {
+        $author_path = $css_dir . '/components/author.css';
+        if (file_exists($author_path)) {
+            wp_enqueue_style('cf-comp-author', $css_uri . '/components/author.css', ['cf-variables'], filemtime($author_path));
+        }
+    }
+
     // Responsive CSS (depends on layout and all components)
     $responsive_path = $css_dir . '/responsive.css';
     if (file_exists($responsive_path)) {
