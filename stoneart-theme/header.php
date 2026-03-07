@@ -54,33 +54,106 @@
             <?php endif; ?>
         </a>
 
-        <!-- Navigation -->
+        <!-- Navigation / Mega Menu -->
         <nav class="sa-nav" aria-label="Основная навигация">
-            <?php
-            if (has_nav_menu('primary')) {
-                wp_nav_menu([
+            <?php if (has_nav_menu('primary')) : ?>
+                <?php wp_nav_menu([
                     'theme_location' => 'primary',
                     'container'      => false,
                     'items_wrap'     => '%3$s',
                     'walker'         => new SA_Nav_Walker(),
                     'depth'          => 2,
-                ]);
-            } else {
-                // Fallback navigation
-                $nav_pages = [
-                    'about'          => 'Производство',
-                    'services'       => 'Изделия',
-                    'materials'      => 'Материалы',
-                    'portfolio-page' => 'Портфолио',
-                    'blog'           => 'Блог',
+                ]); ?>
+            <?php else : ?>
+                <?php
+                // Mega menu fallback — hardcoded structure
+                $mega = [
+                    'Изделия' => [
+                        'url'  => get_page_by_path('services') ? get_permalink(get_page_by_path('services')) : '#',
+                        'cols' => [
+                            [
+                                ['slug' => 'stoleshnitsy',      'label' => 'Столешницы',          'icon' => 'fa-solid fa-kitchen-set'],
+                                ['slug' => 'lestnitsy',         'label' => 'Лестницы и ступени',  'icon' => 'fa-solid fa-stairs'],
+                                ['slug' => 'kaminy',            'label' => 'Камины и порталы',    'icon' => 'fa-solid fa-fire'],
+                            ],
+                            [
+                                ['slug' => 'poly-i-oblitsovka', 'label' => 'Полы и облицовка',   'icon' => 'fa-solid fa-grip'],
+                                ['slug' => 'rakoviny',          'label' => 'Раковины и мойки',   'icon' => 'fa-solid fa-sink'],
+                                ['slug' => 'vanny',             'label' => 'Ванны из камня',      'icon' => 'fa-solid fa-bath'],
+                            ],
+                            [
+                                ['slug' => 'fasady',            'label' => 'Фасады и экстерьер', 'icon' => 'fa-solid fa-building'],
+                                ['slug' => 'malye-formy',       'label' => 'Малые формы',         'icon' => 'fa-solid fa-mountain'],
+                                ['slug' => 'pamyatniki',        'label' => 'Памятники',           'icon' => 'fa-solid fa-monument'],
+                            ],
+                        ],
+                    ],
+                    'Материалы' => [
+                        'url'  => get_page_by_path('materials') ? get_permalink(get_page_by_path('materials')) : '#',
+                        'cols' => [
+                            [
+                                ['slug' => 'materialy-mramor',   'label' => 'Мрамор',    'icon' => 'fa-solid fa-gem'],
+                                ['slug' => 'materialy-granit',   'label' => 'Гранит',    'icon' => 'fa-solid fa-gem'],
+                                ['slug' => 'materialy-oniks',    'label' => 'Оникс',     'icon' => 'fa-solid fa-gem'],
+                                ['slug' => 'materialy-travertin','label' => 'Травертин', 'icon' => 'fa-solid fa-gem'],
+                                ['slug' => 'materialy-kvartsit', 'label' => 'Кварцит',   'icon' => 'fa-solid fa-gem'],
+                            ],
+                        ],
+                    ],
+                    'Услуги' => [
+                        'url'  => get_page_by_path('services') ? get_permalink(get_page_by_path('services')) : '#',
+                        'cols' => [
+                            [
+                                ['slug' => 'uslugi-zamer',          'label' => 'Выезд замерщика',    'icon' => 'fa-solid fa-ruler-combined'],
+                                ['slug' => 'uslugi-proektirovanie', 'label' => 'Проектирование 3D',  'icon' => 'fa-solid fa-cube'],
+                                ['slug' => 'uslugi-dostavka',       'label' => 'Доставка',           'icon' => 'fa-solid fa-truck'],
+                                ['slug' => 'uslugi-montazh',        'label' => 'Монтаж и установка', 'icon' => 'fa-solid fa-screwdriver-wrench'],
+                                ['slug' => 'uslugi-restavratsiya',  'label' => 'Реставрация',        'icon' => 'fa-solid fa-wand-magic-sparkles'],
+                                ['slug' => 'uslugi-ukhod',          'label' => 'Уход за камнем',     'icon' => 'fa-solid fa-spray-can-sparkles'],
+                            ],
+                        ],
+                    ],
                 ];
-                foreach ($nav_pages as $slug => $label) {
+
+                foreach ($mega as $label => $data) :
+                    $has_cols = !empty($data['cols']);
+                    ?>
+                    <?php if ($has_cols) : ?>
+                        <div class="sa-nav__mega-wrap">
+                            <a href="<?php echo esc_url($data['url']); ?>" class="sa-nav__link">
+                                <?php echo esc_html($label); ?> <i class="fa-solid fa-chevron-down" style="font-size:0.6rem;margin-left:0.25rem;"></i>
+                            </a>
+                            <div class="sa-nav__mega">
+                                <div class="sa-nav__mega-inner">
+                                    <?php foreach ($data['cols'] as $col) : ?>
+                                        <div class="sa-nav__mega-col">
+                                            <?php foreach ($col as $link) :
+                                                $page = get_page_by_path($link['slug']);
+                                                if (!$page) continue;
+                                                $url = get_permalink($page);
+                                                ?>
+                                                <a href="<?php echo esc_url($url); ?>" class="sa-nav__mega-item">
+                                                    <i class="<?php echo esc_attr($link['icon']); ?> sa-nav__mega-icon"></i>
+                                                    <span><?php echo esc_html($link['label']); ?></span>
+                                                </a>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php else : ?>
+                        <a href="<?php echo esc_url($data['url']); ?>" class="sa-nav__link"><?php echo esc_html($label); ?></a>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                <?php
+                $simple = ['portfolio-page' => 'Портфолио', 'blog' => 'Блог', 'contacts' => 'Контакты'];
+                foreach ($simple as $slug => $lbl) {
                     $page = get_page_by_path($slug);
-                    $url = $page ? get_permalink($page) : '#';
-                    echo '<a href="' . esc_url($url) . '" class="sa-nav__link">' . esc_html($label) . '</a>';
+                    echo '<a href="' . esc_url($page ? get_permalink($page) : '#') . '" class="sa-nav__link">' . esc_html($lbl) . '</a>';
                 }
-            }
-            ?>
+                ?>
+            <?php endif; ?>
         </nav>
 
         <!-- Actions -->

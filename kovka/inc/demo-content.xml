@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- WordPress eXtended RSS (WXR) — Demo content for Kovka Theme -->
+<!-- Import via: WP Admin → Tools → Import → WordPress -->
+<rss version="2.0"
+    xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:wp="http://wordpress.org/export/1.2/">
+
+<channel>
+    <title>Kovka — Demo Content</title>
+    <link>https://kovka.ru</link>
+    <description>Demo content for Kovka WordPress Theme</description>
+    <pubDate>Fri, 07 Mar 2026 10:00:00 +0000</pubDate>
+    <language>ru-RU</language>
+    <wp:wxr_version>1.2</wp:wxr_version>
+    <wp:base_site_url>https://kovka.ru</wp:base_site_url>
+    <wp:base_blog_url>https://kovka.ru</wp:base_blog_url>
+
+    <!-- ========== TAXONOMIES ========== -->
+    <wp:category>
+        <wp:term_id>10</wp:term_id>
+        <wp:category_nicename>vorota</wp:category_nicename>
+        <wp:category_parent></wp:category_parent>
+        <wp:cat_name><![CDATA[Ворота и калитки]]></wp:cat_name>
+    </wp:category>
+    <wp:category>
+        <wp:term_id>11</wp:term_id>
+        <wp:category_nicename>zabory</wp:category_nicename>
+        <wp:category_parent></wp:category_parent>
+        <wp:cat_name><![CDATA[Заборы и ограждения]]></wp:cat_name>
+    </wp:category>
+    <wp:category>
+        <wp:term_id>12</wp:term_id>
+        <wp:category_nicename>lestnitsy</wp:category_nicename>
+        <wp:category_parent></wp:category_parent>
+        <wp:cat_name><![CDATA[Лестницы и перила]]></wp:cat_name>
+    </wp:category>
+    <wp:category>
+        <wp:term_id>13</wp:term_id>
+        <wp:category_nicename>mebel</wp:category_nicename>
+        <wp:category_parent></wp:category_parent>
+        <wp:cat_name><![CDATA[Мебель]]></wp:cat_name>
+    </wp:category>
+    <wp:category>
+        <wp:term_id>14</wp:term_id>
+        <wp:category_nicename>dekor</wp:category_nicename>
+        <wp:category_parent></wp:category_parent>
+        <wp:cat_name><![CDATA[Декор и интерьер]]></wp:cat_name>
+    </wp:category>
+    <wp:category>
+        <wp:term_id>15</wp:term_id>
+        <wp:category_nicename>art</wp:category_nicename>
+        <wp:category_parent></wp:category_parent>
+        <wp:cat_name><![CDATA[Художественная ковка]]></wp:cat_name>
+    </wp:category>
+
+    <!-- ========== PRODUCTS (kv_product) ========== -->
+
+    <!-- ВОРОТА 1 -->
+    <item>
+        <title>Ворота распашные «Классика» 3×2 м</title>
+        <link>https://kovka.ru/catalog/vorota-raspashnye-klassika/</link>
+        <pubDate>Mon, 01 Jan 2024 10:00:00 +0000</pubDate>
+        <dc:creator>admin</dc:creator>
+        <guid isPermaLink="false">https://kovka.ru/?post_type=kv_product&amp;p=101</guid>
+        <content:encoded><![CDATA[
+<p>Распашные ворота «Классика» — вечный выбор для частного дома. Строгая геометрия, надёжная конструкция и порошковая покраска 120 цветов RAL.</p>
+<h2>Особенности</h2>
+<ul>
+<li>Каркас из профильной трубы 40×40 мм, ст3</li>
+<li>Кованые элементы из прутка 12×12 мм</li>
+<li>Петли усиленные на подшипниках</li>
+<li>Возможна интеграция автоматики CAME, NICE, BFT</li>
+<li>Порошковая окраска или горячее цинкование</li>
+</ul>
+<h2>Размеры</h2>
+<p>Стандарт: ширина 3 м (2×1.5 м), высота 2 м. Изготавливаем по любым размерам под ваш проём.</p>
+        ]]></content:encoded>
+        <excerpt:encoded><![CDATA[Классические распашные ворота с кованым декором. Стандарт 3×2 м, возможны любые размеры. Порошковая окраска 120 цветов. Автоматика в комплекте.]]></excerpt:encoded>
+        <wp:post_type>kv_product</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>vorota-raspashnye-klassika</wp:post_name>
+        <category domain="kv_category" nicename="vorota"><![CDATA[Ворота и калитки]]></category>
+        <category domain="kv_material" nicename="kovanyi-metall"><![CDATA[Кованый металл]]></category>
+        <wp:postmeta><wp:meta_key>kv_price_from</wp:meta_key><wp:meta_value>45000</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_price_to</wp:meta_key><wp:meta_value>65000</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_metal</wp:meta_key><wp:meta_value>Ст3сп + профильная труба 40×40</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_coating</wp:meta_key><wp:meta_value>powder</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_lead_time</wp:meta_key><wp:meta_value>14–18 рабочих дней</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_warranty</wp:meta_key><wp:meta_value>25 лет</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_weight</wp:meta_key><wp:meta_value>85</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_popular</wp:meta_key><wp:meta_value>1</wp:meta_value></wp:postmeta>
+    </item>
+
+    <!-- ВОРОТА 2 -->
+    <item>
+        <title>Ворота откатные «Модерн» 4×1.8 м</title>
+        <link>https://kovka.ru/catalog/vorota-otkatnye-modern/</link>
+        <pubDate>Mon, 15 Jan 2024 10:00:00 +0000</pubDate>
+        <dc:creator>admin</dc:creator>
+        <wp:post_type>kv_product</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>vorota-otkatnye-modern</wp:post_name>
+        <content:encoded><![CDATA[<p>Откатные ворота «Модерн» — идеальное решение для небольших участков. Экономят место, автоматизируются, работают при −40°C.</p>]]></content:encoded>
+        <excerpt:encoded><![CDATA[Откатные ворота в стиле модерн. Стандарт 4×1.8 м. Работают с любой автоматикой. Гарантия 25 лет.]]></excerpt:encoded>
+        <category domain="kv_category" nicename="vorota"><![CDATA[Ворота и калитки]]></category>
+        <wp:postmeta><wp:meta_key>kv_price_from</wp:meta_key><wp:meta_value>38000</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_lead_time</wp:meta_key><wp:meta_value>12–16 рабочих дней</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_coating</wp:meta_key><wp:meta_value>powder</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_warranty</wp:meta_key><wp:meta_value>25 лет</wp:meta_value></wp:postmeta>
+    </item>
+
+    <!-- ЗАБОР -->
+    <item>
+        <title>Секция кованого забора «Флора» 2×1.5 м</title>
+        <link>https://kovka.ru/catalog/sekciya-kovanogo-zabora-flora/</link>
+        <pubDate>Mon, 20 Jan 2024 10:00:00 +0000</pubDate>
+        <dc:creator>admin</dc:creator>
+        <wp:post_type>kv_product</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>sekciya-kovanogo-zabora-flora</wp:post_name>
+        <content:encoded><![CDATA[<p>Кованая секция «Флора» с растительным орнаментом. Листья аканта, завитки. Прекрасно смотрится с каменными столбами.</p>]]></content:encoded>
+        <excerpt:encoded><![CDATA[Кованая секция забора с растительным орнаментом «Флора». 2×1.5 м. Цена указана за 1 секцию. Опорные столбы — отдельно.]]></excerpt:encoded>
+        <category domain="kv_category" nicename="zabory"><![CDATA[Заборы и ограждения]]></category>
+        <wp:postmeta><wp:meta_key>kv_price_from</wp:meta_key><wp:meta_value>8500</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_lead_time</wp:meta_key><wp:meta_value>7–10 дней / секция</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_warranty</wp:meta_key><wp:meta_value>25 лет</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_popular</wp:meta_key><wp:meta_value>1</wp:meta_value></wp:postmeta>
+    </item>
+
+    <!-- ЛЕСТНИЦА -->
+    <item>
+        <title>Лестница маршевая «Арго» с кованым ограждением</title>
+        <link>https://kovka.ru/catalog/lestnitsa-marshevaya-argo/</link>
+        <pubDate>Mon, 05 Feb 2024 10:00:00 +0000</pubDate>
+        <dc:creator>admin</dc:creator>
+        <wp:post_type>kv_product</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>lestnitsa-marshevaya-argo</wp:post_name>
+        <content:encoded><![CDATA[<p>Маршевая лестница «Арго» — монолитный металлокаркас + кованое ограждение. Ступени из дуба или стекла. Несущая способность — 400 кг/м².</p>]]></content:encoded>
+        <excerpt:encoded><![CDATA[Маршевая лестница с кованым ограждением. Ступени дуб/стекло/металл. Цена — за 1 ступень (12+ ступеней).]]></excerpt:encoded>
+        <category domain="kv_category" nicename="lestnitsy"><![CDATA[Лестницы и перила]]></category>
+        <wp:postmeta><wp:meta_key>kv_price_from</wp:meta_key><wp:meta_value>4800</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_lead_time</wp:meta_key><wp:meta_value>18–25 рабочих дней</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_warranty</wp:meta_key><wp:meta_value>25 лет</wp:meta_value></wp:postmeta>
+    </item>
+
+    <!-- КРОВАТЬ -->
+    <item>
+        <title>Кровать кованая «Версаль» 160×200</title>
+        <link>https://kovka.ru/catalog/krovat-kovanaya-versal/</link>
+        <pubDate>Mon, 12 Feb 2024 10:00:00 +0000</pubDate>
+        <dc:creator>admin</dc:creator>
+        <wp:post_type>kv_product</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>krovat-kovanaya-versal</wp:post_name>
+        <content:encoded><![CDATA[<p>Кованая кровать «Версаль» в классическом стиле. Изогнутые прутья, розочки, листья. Покрытие: патина золото или порошок RAL. Размер: 160×200 (queen) или под заказ.</p>]]></content:encoded>
+        <excerpt:encoded><![CDATA[Кованая кровать «Версаль» в классическом стиле. 160×200. Патина или порошковая окраска. Сборка 30 мин.]]></excerpt:encoded>
+        <category domain="kv_category" nicename="mebel"><![CDATA[Мебель]]></category>
+        <wp:postmeta><wp:meta_key>kv_price_from</wp:meta_key><wp:meta_value>65000</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_lead_time</wp:meta_key><wp:meta_value>21–28 рабочих дней</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_coating</wp:meta_key><wp:meta_value>patina</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_warranty</wp:meta_key><wp:meta_value>25 лет</wp:meta_value></wp:postmeta>
+    </item>
+
+    <!-- ПОДСВЕЧНИК -->
+    <item>
+        <title>Подсвечник кованый «Готика» на 3 свечи</title>
+        <link>https://kovka.ru/catalog/podsvechnik-kovanyi-gotika/</link>
+        <pubDate>Mon, 19 Feb 2024 10:00:00 +0000</pubDate>
+        <dc:creator>admin</dc:creator>
+        <wp:post_type>kv_product</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>podsvechnik-kovanyi-gotika</wp:post_name>
+        <content:encoded><![CDATA[<p>Кованый подсвечник «Готика» — ручная работа. Высота 35 см. На 3 свечи диаметром до 5 см. Покрытие: чёрная патина с воском.</p>]]></content:encoded>
+        <excerpt:encoded><![CDATA[Кованый подсвечник на 3 свечи. Высота 35 см. Ручная работа, патина чёрная с воском. Отличный подарок.]]></excerpt:encoded>
+        <category domain="kv_category" nicename="dekor"><![CDATA[Декор и интерьер]]></category>
+        <wp:postmeta><wp:meta_key>kv_price_from</wp:meta_key><wp:meta_value>2800</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_lead_time</wp:meta_key><wp:meta_value>3–5 рабочих дней</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_coating</wp:meta_key><wp:meta_value>patina</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_popular</wp:meta_key><wp:meta_value>1</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_warranty</wp:meta_key><wp:meta_value>5 лет</wp:meta_value></wp:postmeta>
+    </item>
+
+    <!-- ========== WORKS (kv_work) ========== -->
+
+    <item>
+        <title>Ворота для коттеджного посёлка «Бархатные сезоны», Подмосковье</title>
+        <link>https://kovka.ru/portfolio/vorota-barkhatnye-sezony/</link>
+        <pubDate>Mon, 01 Mar 2024 10:00:00 +0000</pubDate>
+        <dc:creator>admin</dc:creator>
+        <wp:post_type>kv_work</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>vorota-barkhatnye-sezony</wp:post_name>
+        <content:encoded><![CDATA[<p>Комплект из 48 секций забора и 6 пар ворот для охраняемого коттеджного посёлка. Единый стиль, горячее цинкование, RAL 7016. Монтаж — 18 дней.</p>]]></content:encoded>
+        <excerpt:encoded><![CDATA[Комплект ворот и забора для КП. 48 секций, 6 пар ворот. Горячее цинкование + RAL 7016.]]></excerpt:encoded>
+        <category domain="kv_category" nicename="vorota"><![CDATA[Ворота и калитки]]></category>
+        <wp:postmeta><wp:meta_key>kv_work_city</wp:meta_key><wp:meta_value>Одинцово, Подмосковье</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_work_year</wp:meta_key><wp:meta_value>2024</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_work_client</wp:meta_key><wp:meta_value>cottage</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_work_budget</wp:meta_key><wp:meta_value>2400000</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_work_duration</wp:meta_key><wp:meta_value>45</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_work_featured</wp:meta_key><wp:meta_value>1</wp:meta_value></wp:postmeta>
+    </item>
+
+    <item>
+        <title>Лестница винтовая «Спираль» для частного дома, Москва</title>
+        <link>https://kovka.ru/portfolio/lestnitsa-vintovaya-spiral/</link>
+        <pubDate>Mon, 15 Mar 2024 10:00:00 +0000</pubDate>
+        <dc:creator>admin</dc:creator>
+        <wp:post_type>kv_work</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>lestnitsa-vintovaya-spiral</wp:post_name>
+        <content:encoded><![CDATA[<p>Винтовая лестница диаметром 1.8 м, 14 ступеней из дуба. Ограждение из кованых прутьев с листьями. Покрытие — чёрная полуглянцевая эмаль.</p>]]></content:encoded>
+        <excerpt:encoded><![CDATA[Винтовая кованая лестница. D=1.8 м, 14 ступеней дуб. Время: 22 дня. Бюджет: 380 000 ₽.]]></excerpt:encoded>
+        <category domain="kv_category" nicename="lestnitsy"><![CDATA[Лестницы и перила]]></category>
+        <wp:postmeta><wp:meta_key>kv_work_city</wp:meta_key><wp:meta_value>Москва</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_work_year</wp:meta_key><wp:meta_value>2023</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_work_client</wp:meta_key><wp:meta_value>private</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_work_budget</wp:meta_key><wp:meta_value>380000</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_work_duration</wp:meta_key><wp:meta_value>22</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_work_featured</wp:meta_key><wp:meta_value>1</wp:meta_value></wp:postmeta>
+    </item>
+
+    <!-- ========== REVIEWS (kv_review) ========== -->
+
+    <item>
+        <title>Андрей Соколов</title>
+        <link>https://kovka.ru/otzyvy/andrey-sokolov/</link>
+        <pubDate>Mon, 10 Feb 2024 10:00:00 +0000</pubDate>
+        <dc:creator>admin</dc:creator>
+        <wp:post_type>kv_review</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>andrey-sokolov</wp:post_name>
+        <content:encoded><![CDATA[Заказывали ворота распашные 4×2 метра с калиткой. Всё сделали за 18 дней. Сварные швы идеальные, покраска равномерная. Уже 2 года стоят — ни пятна ржавчины. Рекомендую без оговорок! Отдельное спасибо замерщику Петру — всё рассказал, показал, ничего не навязывал.]]></content:encoded>
+        <excerpt:encoded><![CDATA[Ворота распашные 4×2 м с калиткой. 18 дней, качество отличное. 5 звёзд!]]></excerpt:encoded>
+        <wp:postmeta><wp:meta_key>kv_rating</wp:meta_key><wp:meta_value>5</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_city</wp:meta_key><wp:meta_value>Москва</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_source</wp:meta_key><wp:meta_value>google</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_r_featured</wp:meta_key><wp:meta_value>1</wp:meta_value></wp:postmeta>
+    </item>
+
+    <item>
+        <title>Марина Петрова</title>
+        <link>https://kovka.ru/otzyvy/marina-petrova/</link>
+        <pubDate>Mon, 05 Feb 2024 10:00:00 +0000</pubDate>
+        <dc:creator>admin</dc:creator>
+        <wp:post_type>kv_review</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>marina-petrova</wp:post_name>
+        <content:encoded><![CDATA[Делали лестницу в частном доме. Приехали замерщики, предложили 3 варианта дизайна, всё нарисовали на компьютере. Результат превзошёл ожидания — гости спрашивают, где делали. Монтаж прошёл за один день, ребята убрали за собой весь мусор.]]></content:encoded>
+        <excerpt:encoded><![CDATA[Лестница в частном доме. 3D-проект, быстрый монтаж. Все спрашивают, где делали!]]></excerpt:encoded>
+        <wp:postmeta><wp:meta_key>kv_rating</wp:meta_key><wp:meta_value>5</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_city</wp:meta_key><wp:meta_value>Красногорск</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_source</wp:meta_key><wp:meta_value>yandex</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_r_featured</wp:meta_key><wp:meta_value>1</wp:meta_value></wp:postmeta>
+    </item>
+
+    <item>
+        <title>Сергей Громов</title>
+        <link>https://kovka.ru/otzyvy/sergey-gromov/</link>
+        <pubDate>Mon, 29 Jan 2024 10:00:00 +0000</pubDate>
+        <dc:creator>admin</dc:creator>
+        <wp:post_type>kv_review</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>sergey-gromov</wp:post_name>
+        <content:encoded><![CDATA[Забор с элементами художественной ковки для загородного дома. Ребята сделали эскиз прямо на встрече. Монтаж занял один день. Соседи уже несколько раз спрашивали контакты. Приеду за воротами через год — уже знаю к кому.]]></content:encoded>
+        <excerpt:encoded><![CDATA[Кованый забор. Эскиз сразу, монтаж 1 день. Соседи уже спрашивают контакты.]]></excerpt:encoded>
+        <wp:postmeta><wp:meta_key>kv_rating</wp:meta_key><wp:meta_value>5</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_city</wp:meta_key><wp:meta_value>Санкт-Петербург</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_source</wp:meta_key><wp:meta_value>avito</wp:meta_value></wp:postmeta>
+        <wp:postmeta><wp:meta_key>kv_r_featured</wp:meta_key><wp:meta_value>1</wp:meta_value></wp:postmeta>
+    </item>
+
+    <!-- ========== FAQ (kv_faq) ========== -->
+
+    <item>
+        <title>Сколько стоит ковка под ключ?</title>
+        <wp:post_type>kv_faq</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>stoimost-kovki</wp:post_name>
+        <content:encoded><![CDATA[Стоимость зависит от типа изделия, размеров, сложности узора и покрытия. Ориентировочно: ворота — от 38 000 ₽, забор — от 4 500 ₽/пм, лестница — от 4 800 ₽/ступень. Точную цену рассчитаем после бесплатного замера.]]></content:encoded>
+    </item>
+
+    <item>
+        <title>Как долго делается заказ?</title>
+        <wp:post_type>kv_faq</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>srok-izgotovleniya</wp:post_name>
+        <content:encoded><![CDATA[Стандартные изделия — 14–21 рабочий день. Простые декоративные элементы — от 7 дней. При срочном заказе возможно ускорение за дополнительную плату. Срок указываем в договоре.]]></content:encoded>
+    </item>
+
+    <item>
+        <title>Делаете монтаж?</title>
+        <wp:post_type>kv_faq</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>montazh</wp:post_name>
+        <content:encoded><![CDATA[Да, у нас собственная монтажная бригада. Работаем в Москве, Подмосковье и регионах России. Монтаж ворот, заборов, лестниц, мебели — всё под ключ. Стоимость монтажа рассчитывается отдельно по замеру.]]></content:encoded>
+    </item>
+
+    <item>
+        <title>Какое покрытие лучше всего?</title>
+        <wp:post_type>kv_faq</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>pokrytie</wp:post_name>
+        <content:encoded><![CDATA[Для улицы рекомендуем горячее цинкование + порошковая окраска — это самая долговечная комбинация (40+ лет). Для интерьера — порошок RAL или патина. Подберём оптимальный вариант под ваши условия.]]></content:encoded>
+    </item>
+
+    <item>
+        <title>Можно ли изготовить по моему эскизу?</title>
+        <wp:post_type>kv_faq</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>po-esksizu</wp:post_name>
+        <content:encoded><![CDATA[Да, именно так и работаем! Принимаем фото, рисунки, ссылки на примеры. Дизайнер дорабатывает эскиз в 3D, согласуем с вами, затем запускаем в производство. Изменения до запуска — бесплатно.]]></content:encoded>
+    </item>
+
+    <item>
+        <title>Есть ли рассрочка?</title>
+        <wp:post_type>kv_faq</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>rassrochka</wp:post_name>
+        <content:encoded><![CDATA[Да, рассрочка 0% на 6 месяцев через Сбербанк и Тинькофф. Первый взнос — от 20% стоимости. Оформление занимает 15 минут на сайте банка.]]></content:encoded>
+    </item>
+
+    <!-- ========== BLOG POSTS ========== -->
+
+    <item>
+        <title>Как выбрать ворота: распашные vs откатные — плюсы и минусы</title>
+        <link>https://kovka.ru/blog/vorota-raspashnye-vs-otkatnye/</link>
+        <pubDate>Mon, 04 Mar 2026 10:00:00 +0000</pubDate>
+        <dc:creator>admin</dc:creator>
+        <wp:post_type>post</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>vorota-raspashnye-vs-otkatnye</wp:post_name>
+        <content:encoded><![CDATA[
+<p>Один из первых вопросов при планировании въезда на участок — <strong>какие ворота выбрать: распашные или откатные?</strong> У каждого типа есть неочевидные плюсы и минусы, о которых стоит знать до заказа.</p>
+
+<h2>Распашные ворота</h2>
+<p>Классика жанра. Открываются вправо-влево, как двери. Дешевле в производстве и монтаже, проще в обслуживании, прекрасно смотрятся в любом стиле.</p>
+<p><strong>Плюсы:</strong> ниже цена, нет ограничений по ширине, не нужна площадка сбоку.<br>
+<strong>Минусы:</strong> нужно место перед воротами для открывания, при сильном ветре могут "играть".</p>
+
+<h2>Откатные ворота</h2>
+<p>Полотно уходит вдоль забора. Идеальны для небольших дворов, где нет места перед въездом.</p>
+<p><strong>Плюсы:</strong> не занимают пространство перед въездом, проще автоматизировать, устойчивее к ветру.<br>
+<strong>Минусы:</strong> нужна площадка сбоку длиной 1.2× ширины ворот, чуть дороже.</p>
+
+<h2>Итог: что выбрать?</h2>
+<p>Если двор позволяет — берите откатные. Если стоите перед въездом — распашные. В любом случае закажите бесплатный замер: наш специалист приедет и подскажет оптимальный вариант для вашего участка.</p>
+        ]]></content:encoded>
+        <excerpt:encoded><![CDATA[Разбираем отличия между распашными и откатными воротами: цена, место, автоматика, обслуживание. Что выбрать для вашего участка?]]></excerpt:encoded>
+        <category domain="kv_cluster" nicename="vorota"><![CDATA[Ворота и калитки]]></category>
+    </item>
+
+    <item>
+        <title>Покрытие для уличной ковки: порошок или горячий цинк?</title>
+        <link>https://kovka.ru/blog/pokrytie-poroshok-vs-tsink/</link>
+        <pubDate>Mon, 25 Feb 2026 10:00:00 +0000</pubDate>
+        <dc:creator>admin</dc:creator>
+        <wp:post_type>post</wp:post_type>
+        <wp:status>publish</wp:status>
+        <wp:post_name>pokrytie-poroshok-vs-tsink</wp:post_name>
+        <content:encoded><![CDATA[
+<p>Самый частый вопрос при заказе кованых ворот или забора: <strong>что надёжнее — порошковая окраска или горячее цинкование?</strong> Коротко: зависит от условий эксплуатации.</p>
+
+<h2>Порошковая окраска</h2>
+<p>Полимерная краска наносится электростатически и запекается при 180°C. Толщина слоя 60–80 мкм. Служит 10–15 лет на улице при правильном уходе. Доступна в 120+ цветах RAL.</p>
+<p>Идеальна для умеренного климата, умеренной влажности. Требует периодического обновления.</p>
+
+<h2>Горячее цинкование</h2>
+<p>Металл погружается в ванну расплавленного цинка при 460°C. Цинк проникает в структуру металла, образуя слой 50–85 мкм. Срок службы — 40+ лет даже в агрессивной среде.</p>
+<p>Идеально для морского климата, высокой влажности, промышленных зон. Цена выше на 30–35%.</p>
+
+<h2>Оптимум: комбо</h2>
+<p>Лучшая защита — горячий цинк + порошковая окраска поверх. Вы получаете и антикоррозийную защиту на 40 лет, и выбор любого цвета. Именно такой вариант мы рекомендуем для уличных ворот и заборов.</p>
+        ]]></content:encoded>
+        <excerpt:encoded><![CDATA[Сравниваем порошковую окраску и горячее цинкование: срок службы, цена, применение. Что выбрать для уличной ковки?]]></excerpt:encoded>
+        <category domain="kv_cluster" nicename="materialy"><![CDATA[Материалы]]></category>
+    </item>
+
+</channel>
+</rss>

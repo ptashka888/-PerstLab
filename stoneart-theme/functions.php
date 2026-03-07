@@ -37,6 +37,8 @@ function sa_theme_setup() {
         'mobile'    => 'Мобильное меню',
         'footer_1'  => 'Подвал — Изделия',
         'footer_2'  => 'Подвал — Услуги',
+        'footer_3'  => 'Подвал — Материалы',
+        'footer_4'  => 'Подвал — О компании',
     ]);
 }
 add_action('after_setup_theme', 'sa_theme_setup');
@@ -57,6 +59,11 @@ function sa_enqueue_assets() {
 
     // Main JS
     wp_enqueue_script('stoneart-main', SA_URI . '/assets/js/main.js', [], SA_VERSION, true);
+
+    // Calculator JS (loaded on calculator page and front page)
+    if (is_page_template('page-templates/calculator.php') || is_front_page() || is_page('calculator')) {
+        wp_enqueue_script('stoneart-calc', SA_URI . '/assets/js/calculator.js', [], SA_VERSION, true);
+    }
 
     // Localize for AJAX
     wp_localize_script('stoneart-main', 'saAjax', [
@@ -80,6 +87,27 @@ remove_action('wp_head', 'wp_shortlink_wp_head');
 // Custom Post Types
 // ============================================================
 function sa_register_post_types() {
+    // Product (catalog items with specs, prices, gallery)
+    register_post_type('sa_product', [
+        'labels' => [
+            'name'               => 'Каталог изделий',
+            'singular_name'      => 'Изделие',
+            'add_new'            => 'Добавить изделие',
+            'add_new_item'       => 'Добавить новое изделие',
+            'edit_item'          => 'Редактировать изделие',
+            'all_items'          => 'Все изделия',
+            'search_items'       => 'Найти изделие',
+            'not_found'          => 'Изделия не найдены',
+        ],
+        'public'       => true,
+        'has_archive'  => true,
+        'rewrite'      => ['slug' => 'catalog'],
+        'menu_icon'    => 'dashicons-store',
+        'menu_position'=> 5,
+        'supports'     => ['title', 'editor', 'thumbnail', 'excerpt'],
+        'show_in_rest' => true,
+    ]);
+
     // Portfolio
     register_post_type('sa_portfolio', [
         'labels' => [
@@ -179,7 +207,7 @@ add_action('init', 'sa_register_post_types');
 // ============================================================
 function sa_register_taxonomies() {
     // Product Category (for portfolio, services)
-    register_taxonomy('sa_product_cat', ['sa_portfolio', 'sa_service'], [
+    register_taxonomy('sa_product_cat', ['sa_portfolio', 'sa_service', 'sa_product'], [
         'labels' => [
             'name'          => 'Категории изделий',
             'singular_name' => 'Категория изделий',
@@ -191,7 +219,7 @@ function sa_register_taxonomies() {
     ]);
 
     // Material Type
-    register_taxonomy('sa_material', ['sa_portfolio'], [
+    register_taxonomy('sa_material', ['sa_portfolio', 'sa_product'], [
         'labels' => [
             'name'          => 'Материалы',
             'singular_name' => 'Материал',
@@ -199,6 +227,30 @@ function sa_register_taxonomies() {
         ],
         'hierarchical' => true,
         'rewrite'      => ['slug' => 'material'],
+        'show_in_rest' => true,
+    ]);
+
+    // Product Type (hierarchical: Столешницы > Из мрамора / Кухонные)
+    register_taxonomy('sa_product_type', ['sa_product'], [
+        'labels' => [
+            'name'          => 'Тип изделия',
+            'singular_name' => 'Тип изделия',
+            'add_new_item'  => 'Добавить тип',
+        ],
+        'hierarchical' => true,
+        'rewrite'      => ['slug' => 'type'],
+        'show_in_rest' => true,
+    ]);
+
+    // Blog cluster (for SILO blog architecture)
+    register_taxonomy('sa_blog_cluster', ['post'], [
+        'labels' => [
+            'name'          => 'Кластер блога',
+            'singular_name' => 'Кластер',
+            'add_new_item'  => 'Добавить кластер',
+        ],
+        'hierarchical' => false,
+        'rewrite'      => ['slug' => 'blog-cluster'],
         'show_in_rest' => true,
     ]);
 
@@ -465,6 +517,72 @@ add_action('wp_ajax_sa_form_submit', 'sa_handle_form_submit');
 add_action('wp_ajax_nopriv_sa_form_submit', 'sa_handle_form_submit');
 
 // ============================================================
+// AJAX: Stone Price Calculator
+// ============================================================
+function sa_ajax_calculator() {
+    check_ajax_referer('sa_nonce', 'nonce');
+
+    $type      = sanitize_text_field($_POST['product_type'] ?? '');
+    $material  = sanitize_text_field($_POST['material'] ?? '');
+    $length    = floatval($_POST['length'] ?? 0);
+    $width     = floatval($_POST['width'] ?? 0);
+    $thickness = intval($_POST['thickness'] ?? 20);
+    $edge      = sanitize_text_field($_POST['edge'] ?? 'straight');
+
+    // Base prices per m² by material
+    $base_prices = [
+        'mramor'    => 18000,
+        'granit'    => 14000,
+        'oniks'     => 45000,
+        'travertin' => 16000,
+        'kvartsit'  => 22000,
+        'kvarts'    => 12000,
+        'akril'     => 9000,
+    ];
+
+    // Multipliers by product type
+    $type_multipliers = [
+        'stoleshnitsa' => 1.0,
+        'lestnitsa'    => 1.4,
+        'kamin'        => 2.0,
+        'pol'          => 0.85,
+        'rakoviny'     => 1.6,
+        'vanna'        => 3.0,
+        'fasad'        => 1.1,
+        'podokonnik'   => 0.9,
+    ];
+
+    // Edge multipliers
+    $edge_multipliers = [
+        'straight' => 1.0,
+        'bevel'    => 1.05,
+        'round'    => 1.08,
+        'profiled' => 1.15,
+        'carving'  => 1.25,
+    ];
+
+    // Thickness multiplier
+    $thickness_mult = $thickness >= 40 ? 1.2 : ($thickness >= 30 ? 1.1 : 1.0);
+
+    $base    = $base_prices[$material] ?? 14000;
+    $type_m  = $type_multipliers[$type] ?? 1.0;
+    $edge_m  = $edge_multipliers[$edge] ?? 1.0;
+    $area    = $length * $width / 1000000; // mm² to m²
+    $area    = max($area, 0.1);
+
+    $price_min = round($base * $type_m * $edge_m * $thickness_mult * $area * 0.9, -3);
+    $price_max = round($base * $type_m * $edge_m * $thickness_mult * $area * 1.1, -3);
+
+    wp_send_json_success([
+        'price_min' => number_format($price_min, 0, '.', ' '),
+        'price_max' => number_format($price_max, 0, '.', ' '),
+        'area'      => round($area, 2),
+    ]);
+}
+add_action('wp_ajax_sa_calculator', 'sa_ajax_calculator');
+add_action('wp_ajax_nopriv_sa_calculator', 'sa_ajax_calculator');
+
+// ============================================================
 // Widgets
 // ============================================================
 function sa_widgets_init() {
@@ -484,16 +602,48 @@ add_action('widgets_init', 'sa_widgets_init');
 // ============================================================
 function sa_create_default_pages() {
     $pages = [
-        'front-page'  => ['title' => 'Главная', 'template' => ''],
-        'about'       => ['title' => 'О компании', 'template' => 'page-templates/about.php'],
-        'services'    => ['title' => 'Услуги', 'template' => 'page-templates/services.php'],
-        'materials'   => ['title' => 'Материалы', 'template' => 'page-templates/materials.php'],
-        'portfolio-page' => ['title' => 'Портфолио', 'template' => 'page-templates/portfolio.php'],
-        'contacts'    => ['title' => 'Контакты', 'template' => 'page-templates/contacts.php'],
-        'calculator'  => ['title' => 'Калькулятор', 'template' => 'page-templates/calculator.php'],
-        'faq-page'    => ['title' => 'Часто задаваемые вопросы', 'template' => 'page-templates/faq.php'],
-        'privacy'     => ['title' => 'Политика конфиденциальности', 'template' => ''],
-        'blog'        => ['title' => 'Блог', 'template' => ''],
+        // Core
+        'front-page'  => ['title' => 'Главная',                          'template' => ''],
+        'blog'        => ['title' => 'Блог',                             'template' => ''],
+        'privacy'     => ['title' => 'Политика конфиденциальности',       'template' => ''],
+        'contacts'    => ['title' => 'Контакты',                         'template' => 'page-templates/contacts.php'],
+        'calculator'  => ['title' => 'Калькулятор стоимости',            'template' => 'page-templates/calculator.php'],
+        'faq-page'    => ['title' => 'Часто задаваемые вопросы',         'template' => 'page-templates/faq.php'],
+        'portfolio-page' => ['title' => 'Портфолио',                     'template' => 'page-templates/portfolio.php'],
+        // Product category landing pages
+        'stoleshnitsy'      => ['title' => 'Столешницы из камня',        'template' => 'page-templates/category-landing.php'],
+        'lestnitsy'         => ['title' => 'Лестницы из камня',          'template' => 'page-templates/category-landing.php'],
+        'kaminy'            => ['title' => 'Камины из камня',            'template' => 'page-templates/category-landing.php'],
+        'poly-i-oblitsovka' => ['title' => 'Полы и облицовка камнем',    'template' => 'page-templates/category-landing.php'],
+        'rakoviny'          => ['title' => 'Раковины и мойки из камня',  'template' => 'page-templates/category-landing.php'],
+        'vanny'             => ['title' => 'Ванны из камня',             'template' => 'page-templates/category-landing.php'],
+        'fasady'            => ['title' => 'Фасады и экстерьер из камня','template' => 'page-templates/category-landing.php'],
+        'malye-formy'       => ['title' => 'Малые архитектурные формы',  'template' => 'page-templates/category-landing.php'],
+        'pamyatniki'        => ['title' => 'Памятники и мемориалы',      'template' => 'page-templates/category-landing.php'],
+        // Materials
+        'materials'         => ['title' => 'Каталог материалов',         'template' => 'page-templates/materials.php'],
+        'materialy-mramor'  => ['title' => 'Мрамор — каталог и цены',   'template' => 'page-templates/material-single.php'],
+        'materialy-granit'  => ['title' => 'Гранит — каталог и цены',   'template' => 'page-templates/material-single.php'],
+        'materialy-oniks'   => ['title' => 'Оникс — каталог',           'template' => 'page-templates/material-single.php'],
+        'materialy-travertin'=> ['title' => 'Травертин — каталог',      'template' => 'page-templates/material-single.php'],
+        'materialy-kvartsit' => ['title' => 'Кварцит — каталог',        'template' => 'page-templates/material-single.php'],
+        // Services
+        'services'          => ['title' => 'Услуги',                    'template' => 'page-templates/services.php'],
+        'uslugi-zamer'      => ['title' => 'Выезд замерщика',           'template' => 'page-templates/service-detail.php'],
+        'uslugi-proektirovanie' => ['title' => 'Проектирование и 3D',   'template' => 'page-templates/service-detail.php'],
+        'uslugi-dostavka'   => ['title' => 'Доставка',                  'template' => 'page-templates/service-detail.php'],
+        'uslugi-montazh'    => ['title' => 'Монтаж и установка',        'template' => 'page-templates/service-detail.php'],
+        'uslugi-restavratsiya'=> ['title' => 'Реставрация камня',       'template' => 'page-templates/service-detail.php'],
+        'uslugi-ukhod'      => ['title' => 'Уход за камнем',            'template' => 'page-templates/service-detail.php'],
+        // Company
+        'about'             => ['title' => 'О компании',                'template' => 'page-templates/about.php'],
+        'o-kompanii-showroom'=> ['title' => 'Шоурум',                   'template' => ''],
+        'o-kompanii-sertifikaty'=> ['title' => 'Сертификаты',           'template' => ''],
+        'o-kompanii-otzyvy' => ['title' => 'Отзывы клиентов',          'template' => ''],
+        'o-kompanii-vakansii'=> ['title' => 'Вакансии',                 'template' => ''],
+        // Utility
+        'garantii'          => ['title' => 'Гарантии',                  'template' => 'page-templates/garantii.php'],
+        'oplata'            => ['title' => 'Способы оплаты',            'template' => 'page-templates/oplata.php'],
     ];
 
     foreach ($pages as $slug => $data) {
@@ -544,33 +694,58 @@ function sa_create_default_menus() {
     if (!$menu_exists) {
         $menu_id = wp_create_nav_menu($menu_name);
 
-        $pages_map = [
-            'О компании'  => 'about',
-            'Услуги'      => 'services',
-            'Материалы'   => 'materials',
-            'Портфолио'   => 'portfolio-page',
-            'Блог'        => 'blog',
-            'Контакты'    => 'contacts',
+        // Top-level + subcategory items for mega menu
+        $items = [
+            ['title' => 'Изделия',    'slug' => 'services',     'parent' => 0],
+            ['title' => 'Столешницы', 'slug' => 'stoleshnitsy', 'parent_title' => 'Изделия'],
+            ['title' => 'Лестницы',   'slug' => 'lestnitsy',    'parent_title' => 'Изделия'],
+            ['title' => 'Камины',     'slug' => 'kaminy',       'parent_title' => 'Изделия'],
+            ['title' => 'Полы и облицовка', 'slug' => 'poly-i-oblitsovka', 'parent_title' => 'Изделия'],
+            ['title' => 'Раковины и мойки', 'slug' => 'rakoviny', 'parent_title' => 'Изделия'],
+            ['title' => 'Ванны из камня',   'slug' => 'vanny',   'parent_title' => 'Изделия'],
+            ['title' => 'Фасады',     'slug' => 'fasady',       'parent_title' => 'Изделия'],
+            ['title' => 'Памятники',  'slug' => 'pamyatniki',   'parent_title' => 'Изделия'],
+            ['title' => 'Материалы',  'slug' => 'materials',    'parent' => 0],
+            ['title' => 'Мрамор',     'slug' => 'materialy-mramor',  'parent_title' => 'Материалы'],
+            ['title' => 'Гранит',     'slug' => 'materialy-granit',  'parent_title' => 'Материалы'],
+            ['title' => 'Оникс',      'slug' => 'materialy-oniks',   'parent_title' => 'Материалы'],
+            ['title' => 'Травертин',  'slug' => 'materialy-travertin','parent_title' => 'Материалы'],
+            ['title' => 'Кварцит',    'slug' => 'materialy-kvartsit', 'parent_title' => 'Материалы'],
+            ['title' => 'Услуги',     'slug' => 'services',     'parent' => 0],
+            ['title' => 'Замер',      'slug' => 'uslugi-zamer', 'parent_title' => 'Услуги'],
+            ['title' => 'Монтаж',     'slug' => 'uslugi-montazh','parent_title' => 'Услуги'],
+            ['title' => 'Реставрация','slug' => 'uslugi-restavratsiya','parent_title' => 'Услуги'],
+            ['title' => 'Портфолио',  'slug' => 'portfolio-page','parent' => 0],
+            ['title' => 'Блог',       'slug' => 'blog',          'parent' => 0],
+            ['title' => 'Контакты',   'slug' => 'contacts',      'parent' => 0],
         ];
 
         $order = 1;
-        foreach ($pages_map as $title => $slug) {
-            $page = get_page_by_path($slug);
-            if ($page) {
-                wp_update_nav_menu_item($menu_id, 0, [
-                    'menu-item-title'     => $title,
-                    'menu-item-object'    => 'page',
-                    'menu-item-object-id' => $page->ID,
-                    'menu-item-type'      => 'post_type',
-                    'menu-item-status'    => 'publish',
-                    'menu-item-position'  => $order++,
-                ]);
+        $item_ids = [];
+        foreach ($items as $item) {
+            $page = get_page_by_path($item['slug']);
+            if (!$page) continue;
+
+            $parent_id = 0;
+            if (!empty($item['parent_title']) && isset($item_ids[$item['parent_title']])) {
+                $parent_id = $item_ids[$item['parent_title']];
             }
+
+            $id = wp_update_nav_menu_item($menu_id, 0, [
+                'menu-item-title'     => $item['title'],
+                'menu-item-object'    => 'page',
+                'menu-item-object-id' => $page->ID,
+                'menu-item-type'      => 'post_type',
+                'menu-item-status'    => 'publish',
+                'menu-item-position'  => $order++,
+                'menu-item-parent-id' => $parent_id,
+            ]);
+            $item_ids[$item['title']] = $id;
         }
 
         $locations = get_theme_mod('nav_menu_locations', []);
         $locations['primary'] = $menu_id;
-        $locations['mobile'] = $menu_id;
+        $locations['mobile']  = $menu_id;
         set_theme_mod('nav_menu_locations', $locations);
     }
 }

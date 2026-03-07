@@ -359,4 +359,71 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.sa-animate').forEach(function(el) {
         observer.observe(el);
     });
+
+    // ============================================================
+    // Category product filter (data-material attribute)
+    // ============================================================
+    document.querySelectorAll('.sa-cat-filter-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var filter = this.dataset.filter;
+            document.querySelectorAll('.sa-cat-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+            this.classList.add('active');
+
+            document.querySelectorAll('.sa-product-card').forEach(function(card) {
+                if (filter === 'all') {
+                    card.style.display = '';
+                } else {
+                    var mats = (card.dataset.material || '').split(' ');
+                    card.style.display = mats.indexOf(filter) !== -1 ? '' : 'none';
+                }
+            });
+        });
+    });
+
+    // ============================================================
+    // CTA form (reusable cta-form.php) submission
+    // ============================================================
+    document.querySelectorAll('.sa-cta-form').forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var data = new FormData(form);
+            data.append('action', 'sa_form_submit');
+            if (!data.get('nonce')) {
+                var nonceField = document.querySelector('input[name="nonce"]');
+                if (nonceField) data.append('nonce', nonceField.value);
+            }
+            if (typeof saAjax !== 'undefined') {
+                fetch(saAjax.url, { method: 'POST', body: data })
+                    .then(function(r) { return r.json(); })
+                    .then(function(res) {
+                        var btn = form.querySelector('button[type="submit"]');
+                        if (btn) {
+                            btn.textContent = res.success ? 'Заявка отправлена!' : 'Ошибка, попробуйте ещё раз';
+                            btn.disabled = true;
+                        }
+                    })
+                    .catch(function() {});
+            }
+        });
+    });
+
+    // Geo-landing form
+    var geoForm = document.getElementById('geo-form');
+    if (geoForm) {
+        geoForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var data = new FormData(geoForm);
+            data.append('action', 'sa_form_submit');
+            data.append('form_type', 'contact');
+            if (typeof saAjax !== 'undefined') {
+                fetch(saAjax.url, { method: 'POST', body: data })
+                    .then(function(r) { return r.json(); })
+                    .then(function(res) {
+                        var btn = geoForm.querySelector('button[type="submit"]');
+                        if (btn) btn.textContent = 'Заявка отправлена!';
+                    })
+                    .catch(function() {});
+            }
+        });
+    }
 });

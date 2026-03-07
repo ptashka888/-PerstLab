@@ -392,5 +392,147 @@ function sa_register_acf_fields() {
             [['param' => 'post_type', 'operator' => '==', 'value' => 'sa_service']],
         ],
     ]);
+
+    // ================================================================
+    // Product (CPT sa_product fields)
+    // ================================================================
+    acf_add_local_field_group([
+        'key'   => 'group_sa_product_fields',
+        'title' => 'Характеристики изделия',
+        'fields' => [
+            ['key' => 'field_sa_product_price_from', 'label' => 'Цена от (₽/м²)', 'name' => 'sa_product_price_from', 'type' => 'text'],
+            ['key' => 'field_sa_product_price_to',   'label' => 'Цена до (₽/м²)', 'name' => 'sa_product_price_to',   'type' => 'text'],
+            ['key' => 'field_sa_product_thickness',  'label' => 'Толщина (мм)',    'name' => 'sa_product_thickness',  'type' => 'select',
+                'choices' => ['20' => '20 мм', '30' => '30 мм', '40' => '40 мм', '60' => '60 мм'],
+                'default_value' => '20',
+            ],
+            ['key' => 'field_sa_product_surface',    'label' => 'Вид обработки',  'name' => 'sa_product_surface',    'type' => 'select',
+                'choices' => [
+                    'polish'    => 'Полировка',
+                    'honed'     => 'Лощение',
+                    'thermal'   => 'Термообработка',
+                    'bush'      => 'Бучардирование',
+                    'antique'   => 'Антик (состаривание)',
+                    'sandblast' => 'Пескоструй',
+                ],
+                'default_value' => 'polish',
+                'multiple' => 1,
+                'ui' => 1,
+            ],
+            ['key' => 'field_sa_product_edge',       'label' => 'Вид кромки',     'name' => 'sa_product_edge',       'type' => 'select',
+                'choices' => [
+                    'straight'  => 'Прямая',
+                    'bevel'     => 'Фаска',
+                    'round'     => 'Скругление',
+                    'profiled'  => 'Профильная',
+                    'carving'   => 'Резная',
+                ],
+                'multiple' => 1,
+                'ui' => 1,
+            ],
+            ['key' => 'field_sa_product_features',   'label' => 'Особенности',    'name' => 'sa_product_features',   'type' => 'textarea',
+                'instructions' => 'Каждая строка — отдельная особенность в списке',
+                'rows' => 4,
+            ],
+            ['key' => 'field_sa_product_gallery',    'label' => 'Галерея',        'name' => 'sa_product_gallery',    'type' => 'gallery',
+                'instructions' => '5-10 фото: общий вид, детали, кромка, в интерьере',
+                'min' => 1, 'max' => 20,
+            ],
+            ['key' => 'field_sa_product_in_stock',   'label' => 'Есть в наличии', 'name' => 'sa_product_in_stock',   'type' => 'true_false', 'default_value' => 1],
+            ['key' => 'field_sa_product_is_hit',     'label' => 'Хит продаж',     'name' => 'sa_product_is_hit',     'type' => 'true_false', 'default_value' => 0],
+        ],
+        'location' => [
+            [['param' => 'post_type', 'operator' => '==', 'value' => 'sa_product']],
+        ],
+    ]);
+
+    // ================================================================
+    // Category Landing page fields
+    // ================================================================
+    acf_add_local_field_group([
+        'key'   => 'group_sa_category_landing',
+        'title' => 'Настройки страницы категории',
+        'fields' => [
+            ['key' => 'field_sa_cat_intro',     'label' => 'Вводный текст (200-500 слов)', 'name' => 'sa_cat_intro',     'type' => 'wysiwyg'],
+            ['key' => 'field_sa_cat_product_cat','label' => 'Категория изделий (slug)', 'name' => 'sa_cat_product_cat', 'type' => 'text',
+                'instructions' => 'Slug категории из sa_product_cat (напр. stoleshnitsy)',
+            ],
+            ['key' => 'field_sa_cat_faq_cat',   'label' => 'Категория FAQ (название)', 'name' => 'sa_cat_faq_cat',  'type' => 'text'],
+        ],
+        'location' => [
+            [['param' => 'page_template', 'operator' => '==', 'value' => 'page-templates/category-landing.php']],
+        ],
+    ]);
+
+    // ================================================================
+    // Material Single page fields
+    // ================================================================
+    acf_add_local_field_group([
+        'key'   => 'group_sa_material_single',
+        'title' => 'Данные о материале',
+        'fields' => [
+            ['key' => 'field_sa_mat_type',         'label' => 'Тип камня',          'name' => 'sa_mat_type',         'type' => 'select',
+                'choices' => ['mramor' => 'Мрамор', 'granit' => 'Гранит', 'oniks' => 'Оникс', 'travertin' => 'Травертин', 'kvartsit' => 'Кварцит', 'peshanik' => 'Песчаник', 'izvestnyak' => 'Известняк'],
+            ],
+            ['key' => 'field_sa_mat_country',      'label' => 'Страна добычи',      'name' => 'sa_mat_country',      'type' => 'text'],
+            ['key' => 'field_sa_mat_density',      'label' => 'Плотность (кг/м³)',  'name' => 'sa_mat_density',      'type' => 'text'],
+            ['key' => 'field_sa_mat_water_abs',    'label' => 'Водопоглощение (%)', 'name' => 'sa_mat_water_abs',    'type' => 'text'],
+            ['key' => 'field_sa_mat_hardness',     'label' => 'Твёрдость (Мооса)', 'name' => 'sa_mat_hardness',     'type' => 'text'],
+            ['key' => 'field_sa_mat_frost',        'label' => 'Морозостойкость (F)','name' => 'sa_mat_frost',        'type' => 'text'],
+            ['key' => 'field_sa_mat_price_m2',     'label' => 'Цена за м² (от, ₽)','name' => 'sa_mat_price_m2',     'type' => 'text'],
+            ['key' => 'field_sa_mat_gallery',      'label' => 'Галерея слэбов',     'name' => 'sa_mat_gallery',      'type' => 'gallery'],
+            ['key' => 'field_sa_mat_applications', 'label' => 'Применение',         'name' => 'sa_mat_applications', 'type' => 'checkbox',
+                'choices' => [
+                    'stoleshnitsy' => 'Столешницы', 'lestnitsy' => 'Лестницы', 'kaminy' => 'Камины',
+                    'poly' => 'Полы', 'fasady' => 'Фасады', 'rakoviny' => 'Раковины', 'vanny' => 'Ванны',
+                ],
+            ],
+            ['key' => 'field_sa_mat_care',         'label' => 'Уход (краткий)',     'name' => 'sa_mat_care',         'type' => 'textarea', 'rows' => 3],
+        ],
+        'location' => [
+            [['param' => 'page_template', 'operator' => '==', 'value' => 'page-templates/material-single.php']],
+        ],
+    ]);
+
+    // ================================================================
+    // Service Detail page fields
+    // ================================================================
+    acf_add_local_field_group([
+        'key'   => 'group_sa_service_detail',
+        'title' => 'Данные страницы услуги',
+        'fields' => [
+            ['key' => 'field_sa_sd_icon',      'label' => 'Иконка (FA класс)', 'name' => 'sa_sd_icon',      'type' => 'text'],
+            ['key' => 'field_sa_sd_subtitle',  'label' => 'Подзаголовок',      'name' => 'sa_sd_subtitle',  'type' => 'text'],
+            ['key' => 'field_sa_sd_steps',     'label' => 'Этапы (повторитель)', 'name' => 'sa_sd_steps',   'type' => 'repeater',
+                'sub_fields' => [
+                    ['key' => 'field_sa_sd_step_title', 'label' => 'Шаг', 'name' => 'sa_sd_step_title', 'type' => 'text'],
+                    ['key' => 'field_sa_sd_step_text',  'label' => 'Описание', 'name' => 'sa_sd_step_text', 'type' => 'textarea'],
+                ],
+                'max' => 6,
+            ],
+            ['key' => 'field_sa_sd_price',     'label' => 'Стоимость (текст)', 'name' => 'sa_sd_price',     'type' => 'text'],
+            ['key' => 'field_sa_sd_faq_cat',   'label' => 'Категория FAQ',     'name' => 'sa_sd_faq_cat',   'type' => 'text'],
+        ],
+        'location' => [
+            [['param' => 'page_template', 'operator' => '==', 'value' => 'page-templates/service-detail.php']],
+        ],
+    ]);
+
+    // ================================================================
+    // Geo-Landing page fields
+    // ================================================================
+    acf_add_local_field_group([
+        'key'   => 'group_sa_geo_landing',
+        'title' => 'Данные геолендинга',
+        'fields' => [
+            ['key' => 'field_sa_geo_city',      'label' => 'Город',              'name' => 'sa_geo_city',      'type' => 'text'],
+            ['key' => 'field_sa_geo_product',   'label' => 'Тип изделия',        'name' => 'sa_geo_product',   'type' => 'text'],
+            ['key' => 'field_sa_geo_phone',     'label' => 'Телефон для города', 'name' => 'sa_geo_phone',     'type' => 'text'],
+            ['key' => 'field_sa_geo_map',       'label' => 'Карта (iframe src)', 'name' => 'sa_geo_map',       'type' => 'url'],
+        ],
+        'location' => [
+            [['param' => 'page_template', 'operator' => '==', 'value' => 'page-templates/geo-landing.php']],
+        ],
+    ]);
 }
 add_action('acf/init', 'sa_register_acf_fields');
