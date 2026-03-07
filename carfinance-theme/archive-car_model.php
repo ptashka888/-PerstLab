@@ -57,11 +57,50 @@ $trans_types = get_terms( ['taxonomy' => 'transmission_type', 'hide_empty' => tr
 $drive_types = get_terms( ['taxonomy' => 'drive_type', 'hide_empty' => true] );
 ?>
 
+<?php
+// Contextual intro text per taxonomy context
+$intro_blocks = [];
+if (is_tax('car_brand')) {
+    $brand_slug = $term->slug ?? '';
+    $brand_intros = [
+        'kia'     => 'KIA — корейский бренд с лучшим соотношением цена/качество. Новые модели KIA в 2–3 раза дешевле официальных дилеров при прямом импорте с корейских аукционов.',
+        'hyundai' => 'Hyundai — надёжные корейские автомобили с богатой комплектацией. Импортируем напрямую с заводских складов и аукционов Кореи.',
+        'toyota'  => 'Toyota — синоним надёжности. Японские Toyota с аукционов USS и TAA с аукционной оценкой 3.5–5 баллов. Пробег подтверждён, история проверена.',
+        'honda'   => 'Honda — технологичные японские авто с высоким ресурсом двигателей. Подбираем на аукционах Японии с фото 360° и аукционным листом.',
+        'mazda'   => 'Mazda — красивый дизайн KODO, надёжные двигатели SKYACTIV. Привозим прямо с японских аукционов с проверкой состояния.',
+        'lexus'   => 'Lexus — японский премиум по цене среднего класса. Lexus из Японии в 1.5–2 раза дешевле официального дилера, состояние 4–5 по аукционной шкале.',
+    ];
+    $intro_blocks[] = $brand_intros[$brand_slug] ?? 'Импортируем ' . esc_html($term->name ?? '') . ' напрямую с зарубежных аукционов. Полный пакет документов, доставка под ключ.';
+} elseif (is_tax('car_country')) {
+    $country_intros = [
+        'korea' => 'Автомобили из Кореи — высокое качество, богатая комплектация и гарантия производителя. Срок доставки: 14–25 дней. Экономия до 40% vs российских дилеров.',
+        'japan' => 'Японские автомобили с аукционов USS, TAA, JU — строгий техосмотр, подтверждённый пробег, аукционная оценка. Доставка 21–35 дней.',
+        'china' => 'Новые китайские авто BYD, Haval, Chery прямо с заводов. Гарантия производителя, нулевой пробег. Доставка 14–21 день.',
+        'usa'   => 'Автомобили из США — масл-кары, пикапы, премиум-бренды. Tesla, Ford F-150, Chevrolet Silverado — доставляем с аукционов Copart и IAAI.',
+        'uae'   => 'Авто из ОАЭ — правый руль, арабская версия с богатой комплектацией. Toyota Land Cruiser, Lexus, Genesis — без налогов ОАЭ.',
+    ];
+    $intro_blocks[] = $country_intros[$term->slug ?? ''] ?? 'Импортируем автомобили из ' . esc_html($term->name ?? '') . ' под ключ с полным пакетом документов.';
+} elseif (is_tax('price_range')) {
+    $intro_blocks[] = 'В данном ценовом диапазоне ' . esc_html($term->name ?? '') . ' мы предлагаем лучшие варианты из Кореи, Японии, Китая и США. Цена включает: аукционную стоимость, доставку, таможенные платежи и постановку на учёт.';
+}
+?>
+
 <!-- Page header -->
 <section class="cf-section cf-section--compact">
     <div class="cf-container">
+        <?php cf_breadcrumbs(); ?>
         <h1 class="cf-catalog__heading"><?php echo esc_html( $page_title ); ?></h1>
         <p class="cf-catalog__subheading"><?php echo esc_html( $page_sub ); ?></p>
+        <?php if (!empty($intro_blocks)): ?>
+            <p class="cf-catalog__intro"><?php echo esc_html($intro_blocks[0]); ?></p>
+        <?php endif; ?>
+        <!-- Trust badges -->
+        <div class="cf-catalog__trust">
+            <span class="cf-badge cf-badge--green">✓ Проверка истории</span>
+            <span class="cf-badge cf-badge--green">✓ Доставка под ключ</span>
+            <span class="cf-badge cf-badge--green">✓ Договор и гарантия</span>
+            <span class="cf-badge cf-badge--blue">📦 3100+ доставлено</span>
+        </div>
     </div>
 </section>
 

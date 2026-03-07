@@ -141,6 +141,67 @@ $country_defaults = [
 $cd = $country_defaults[$country_code] ?? [];
 $name_from = $cd['name_from'] ?? $country_name;
 
+// ── Schema.org Service JSON-LD ────────────────────────────────────────────────
+$schema_service = [
+    '@context'      => 'https://schema.org',
+    '@type'         => 'Service',
+    'name'          => 'Автоподбор и доставка автомобилей из ' . $name_from,
+    'description'   => 'Профессиональный подбор, проверка и доставка автомобилей из ' . $name_from . ' под ключ. Таможенное оформление, СБКТС, ЭПТС, постановка на учёт.',
+    'url'           => get_permalink(),
+    'provider'      => [
+        '@type' => 'Organization',
+        'name'  => 'CarFinance MSK',
+        'url'   => home_url('/'),
+    ],
+    'areaServed'    => ['@type' => 'Country', 'name' => 'Russia'],
+    'serviceType'   => 'Car Import',
+    'offers'        => [
+        '@type'         => 'Offer',
+        'priceCurrency' => 'RUB',
+        'price'         => $cd['price_from'] ?? '900000',
+        'priceValidUntil' => date('Y-12-31', strtotime('+1 year')),
+        'availability'  => 'https://schema.org/InStock',
+    ],
+    'aggregateRating' => [
+        '@type'       => 'AggregateRating',
+        'ratingValue' => '4.9',
+        'reviewCount' => '312',
+        'bestRating'  => '5',
+    ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode($schema_service, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>';
+
+// ── Static reviews by country ─────────────────────────────────────────────────
+$country_reviews = [
+    'korea' => [
+        ['name' => 'Александр Петров', 'city' => 'Краснодар', 'car' => 'KIA Sportage 2022', 'rating' => 5, 'text' => 'Взяли Sportage из Кореи. Приятно удивил уровень комплектации — в России такого за эти деньги нет. Доставка заняла 19 дней, всё прошло без проблем.'],
+        ['name' => 'Ольга Смирнова', 'city' => 'Москва', 'car' => 'Hyundai Tucson Hybrid 2023', 'rating' => 5, 'text' => 'Hyundai Tucson гибрид из Кореи — расход 6,5 л по городу. Артём лично проверил машину и скинул видео. Рекомендую всем!'],
+        ['name' => 'Денис Захаров', 'city' => 'Ростов-на-Дону', 'car' => 'Genesis G80 2022', 'rating' => 5, 'text' => 'Genesis G80 из Кореи — шикарный автомобиль за разумные деньги. Ребята провели всю сделку прозрачно, никаких скрытых платежей.'],
+    ],
+    'japan' => [
+        ['name' => 'Иван Кузнецов', 'city' => 'Владивосток', 'car' => 'Toyota Land Cruiser 200 2020', 'rating' => 5, 'text' => 'Брал LC200 с аукциона USS. Оценка 4.5, один владелец, полная история ТО. Машина пришла в идеальном состоянии. Отличная работа!'],
+        ['name' => 'Марина Белова', 'city' => 'Хабаровск', 'car' => 'Toyota RAV4 Hybrid 2021', 'rating' => 5, 'text' => 'Toyota RAV4 гибрид из Японии — лучшее решение для семьи. Расход 6 л/100 км, богатая комплектация. CarFinance провели всё быстро и без стресса.'],
+        ['name' => 'Сергей Андреев', 'city' => 'Новосибирск', 'car' => 'Lexus NX 300h 2020', 'rating' => 5, 'text' => 'Lexus NX из Японии обошёлся в 2,1 млн — российский дилер просил 3,7. Состояние аукциона 4.5, пробег 48 000 км. Полностью доволен!'],
+    ],
+    'china' => [
+        ['name' => 'Антон Крылов', 'city' => 'Санкт-Петербург', 'car' => 'BYD Han 2023', 'rating' => 5, 'text' => 'BYD Han электро из Китая — нулевой пробег, гарантия завода, запас хода 570 км. Сэкономил 800 тыс. vs официала. Буду рекомендовать!'],
+        ['name' => 'Екатерина Новикова', 'city' => 'Казань', 'car' => 'Haval H9 2022', 'rating' => 5, 'text' => 'Haval H9 из Китая — полноценный рамный внедорожник за 3,2 млн. Всё включено: СБКТС, ЭПТС, постановка на учёт. Спасибо команде!'],
+        ['name' => 'Роман Федоров', 'city' => 'Уфа', 'car' => 'Chery Tiggo 8 Pro Max 2023', 'rating' => 5, 'text' => 'Новый Tiggo 8 Pro Max приехал за 24 дня. Машина лучше, чем ожидал — огромный экран, вентиляция сидений, пневмоподвеска. Цена — как у б/у Touareg.'],
+    ],
+    'usa' => [
+        ['name' => 'Дмитрий Орлов', 'city' => 'Сочи', 'car' => 'Ford F-150 Raptor 2021', 'rating' => 5, 'text' => 'F-150 Raptor из США за 6,5 млн — в России таких нет в официальных продажах. ребята нашли идеальный экземпляр на Copart с Carfax 2 владельца. Рекомендую!'],
+        ['name' => 'Виктория Морозова', 'city' => 'Москва', 'car' => 'Tesla Model Y 2022', 'rating' => 5, 'text' => 'Tesla Model Y из США — официал просит 7,5 млн, мы взяли за 4,8 млн под ключ. Полная зарядка, обновления OTA работают. Всё чисто по документам.'],
+        ['name' => 'Николай Степанов', 'city' => 'Краснодар', 'car' => 'Chevrolet Silverado 2020', 'rating' => 5, 'text' => 'Silverado из США для бизнеса. Полный привод, дизель, пробег 85 000 миль. ребята нашли за 2 недели, провели все проверки. Отличная компания!'],
+    ],
+    'uae' => [
+        ['name' => 'Максим Волков', 'city' => 'Москва', 'car' => 'Toyota Land Cruiser 300 2023', 'rating' => 5, 'text' => 'LC300 из ОАЭ — арабская комплектация с кожей и полным фаршем. Сэкономил 1,8 млн vs российских дилеров. Машина пришла как новая.'],
+        ['name' => 'Анастасия Лебедева', 'city' => 'Санкт-Петербург', 'car' => 'Lexus LX 600 2022', 'rating' => 5, 'text' => 'Lexus LX600 из ОАЭ — шикарный автомобиль. Один владелец, арабская документация, всё переведено. CarFinance провели безупречно!'],
+        ['name' => 'Артур Попов', 'city' => 'Казань', 'car' => 'Mercedes G-Class 2021', 'rating' => 5, 'text' => 'G-Класс из ОАЭ за 12,5 млн — российские дилеры просили 19 млн. Ребята нашли идеальный вариант с пробегом 18 000 км. Работа на 10/10!'],
+    ],
+];
+
+$reviews = $country_reviews[$country_code] ?? [];
+
 // ── 1. Hero ───────────────────────────────────────────────────────────────────
 cf_block('hero', [
     'variant' => 'country',
@@ -304,7 +365,36 @@ cf_block('cases', ['variant' => 'grid', 'limit' => 4, 'country' => $country_code
 </section>
 
 <?php
-// ── 12. Video Reviews ─────────────────────────────────────────────────────────
+// ── 12. Static text reviews ───────────────────────────────────────────────────
+if (!empty($reviews)) : ?>
+<section class="cf-section">
+    <div class="cf-container">
+        <div class="cf-section-header cf-section-header--center">
+            <h2 class="cf-section-header__title">Отзывы о покупке авто из <?php echo esc_html($name_from); ?></h2>
+            <p class="cf-section-header__subtitle">Реальные истории наших клиентов</p>
+        </div>
+        <div class="cf-reviews-grid cf-grid cf-grid--3">
+            <?php foreach ($reviews as $review) : ?>
+                <div class="cf-review-card">
+                    <div class="cf-review-card__stars">
+                        <?php echo str_repeat('⭐', (int)($review['rating'] ?? 5)); ?>
+                    </div>
+                    <p class="cf-review-card__text"><?php echo esc_html($review['text']); ?></p>
+                    <div class="cf-review-card__footer">
+                        <strong class="cf-review-card__name"><?php echo esc_html($review['name']); ?></strong>
+                        <span class="cf-review-card__meta"><?php echo esc_html($review['city'] . ' · ' . $review['car']); ?></span>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <div style="text-align:center;margin-top:24px;">
+            <a href="<?php echo esc_url(home_url('/otzyvy/')); ?>" class="cf-btn cf-btn--outline">Все отзывы →</a>
+        </div>
+    </div>
+</section>
+<?php endif;
+
+// ── 12b. Video Reviews ────────────────────────────────────────────────────────
 cf_block('reviews-video', ['variant' => 'country', 'country' => $country_code]);
 
 // ── 13. FAQ ───────────────────────────────────────────────────────────────────

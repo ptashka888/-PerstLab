@@ -246,6 +246,89 @@ $popular = $d['popular'] ?? [];
     </div>
 </section>
 
+<!-- ENGINE TYPE COMPARISON TABLE -->
+<section class="cf-section cf-section--light">
+    <div class="cf-container">
+        <h2 class="cf-section__title">Сравнение типов двигателей</h2>
+        <p class="cf-section__subtitle">Выберите тип двигателя под ваши задачи</p>
+        <div class="cf-engine-compare">
+            <table class="cf-table cf-engine-compare__table">
+                <thead>
+                    <tr>
+                        <th>Параметр</th>
+                        <th class="<?php echo $slug === 'benzin' ? 'cf-engine-compare__current' : ''; ?>">⛽ Бензин</th>
+                        <th class="<?php echo $slug === 'gibrid' ? 'cf-engine-compare__current' : ''; ?>">🔋 Гибрид</th>
+                        <th class="<?php echo $slug === 'elektro' ? 'cf-engine-compare__current' : ''; ?>">⚡ Электро</th>
+                        <th class="<?php echo $slug === 'dizel' ? 'cf-engine-compare__current' : ''; ?>">🛢️ Дизель</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Расход топлива</td>
+                        <td>8–14 л/100 км</td>
+                        <td><strong>4–7 л/100 км</strong></td>
+                        <td>—</td>
+                        <td>5–9 л/100 км</td>
+                    </tr>
+                    <tr>
+                        <td>Стоимость заправки</td>
+                        <td>~4 000 руб/1000 км</td>
+                        <td><strong>~2 000 руб/1000 км</strong></td>
+                        <td>~400 руб/1000 км</td>
+                        <td>~3 500 руб/1000 км</td>
+                    </tr>
+                    <tr>
+                        <td>Ресурс двигателя</td>
+                        <td>200 000–350 000 км</td>
+                        <td>300 000+ км</td>
+                        <td>Нет ДВС</td>
+                        <td>300 000–500 000 км</td>
+                    </tr>
+                    <tr>
+                        <td>Стоимость ТО</td>
+                        <td>20 000–50 000 руб/год</td>
+                        <td>25 000–60 000 руб/год</td>
+                        <td><strong>5 000–15 000 руб/год</strong></td>
+                        <td>25 000–60 000 руб/год</td>
+                    </tr>
+                    <tr>
+                        <td>Выбор из-за рубежа</td>
+                        <td>⭐⭐⭐⭐⭐ Огромный</td>
+                        <td>⭐⭐⭐⭐ Большой</td>
+                        <td>⭐⭐⭐ Растёт</td>
+                        <td>⭐⭐⭐ Средний</td>
+                    </tr>
+                    <tr>
+                        <td>Таможенная пошлина</td>
+                        <td>Стандартная</td>
+                        <td>Стандартная</td>
+                        <td>Льготная (до 2025)</td>
+                        <td>Стандартная</td>
+                    </tr>
+                    <tr>
+                        <td>Лучшие страны</td>
+                        <td>Корея, Япония, США</td>
+                        <td>Япония, Корея</td>
+                        <td>Китай, Корея, США</td>
+                        <td>Япония, Корея</td>
+                    </tr>
+                    <tr>
+                        <td>Рейтинг надёжности</td>
+                        <td>⭐⭐⭐⭐</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                        <td>⭐⭐⭐⭐</td>
+                        <td>⭐⭐⭐⭐</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="cf-engine-compare__note">
+            * Данные приведены для автомобилей среднего класса при городском режиме езды.
+            Для расчёта точной стоимости под ключ воспользуйтесь калькулятором ниже.
+        </p>
+    </div>
+</section>
+
 <!-- CALCULATOR -->
 <?php cf_block('calculator', ['variant' => 'turnkey']); ?>
 

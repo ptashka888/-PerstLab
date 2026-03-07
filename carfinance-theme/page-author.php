@@ -31,6 +31,9 @@ $expertise  = cf_get_field('cf_author_expertise', $post_id) ?: [];
 $stats      = cf_get_field('cf_author_stats', $post_id)     ?: [];
 $cases      = cf_get_field('cf_author_cases', $post_id)     ?: [];
 
+// ── Career timeline ───────────────────────────────────────────────────────────
+$timeline = cf_get_field('cf_author_timeline', $post_id) ?: [];
+
 // ── Fallback for Артем Бараниченко (CEO) ──────────────────────────────────────
 $slug = get_post_field('post_name', $post_id);
 if ($slug === 'artem-baranichenko' || empty($role)) {
@@ -66,6 +69,17 @@ if ($slug === 'artem-baranichenko' || empty($role)) {
             ['value' => '8 лет', 'label' => 'Опыт в импорте'],
             ['value' => '95%',   'label' => 'Рекомендуют нас'],
             ['value' => '4',     'label' => 'Офиса в России'],
+        ];
+    }
+
+    if (empty($timeline)) {
+        $timeline = [
+            ['year' => '2016', 'title' => 'Начало карьеры', 'desc' => 'Первые поставки с японских аукционов USS и TAA. Изучение таможенного законодательства и логистики.'],
+            ['year' => '2018', 'title' => 'Основание CarFinance MSK', 'desc' => 'Открыл компанию с принципиально новым подходом: максимальная прозрачность и честные цены.'],
+            ['year' => '2019', 'title' => 'Офис во Владивостоке', 'desc' => 'Открыли первый офис — ключевая точка для работы с японскими и корейскими поставками.'],
+            ['year' => '2021', 'title' => 'Офисы в Москве и Краснодаре', 'desc' => 'Расширение до трёх городов. В команде — 15 специалистов по подбору и таможне.'],
+            ['year' => '2022', 'title' => '1000+ авто доставлено', 'desc' => 'Преодолели тысячный рубеж. Начало работы с китайским рынком — BYD, Haval, Chery.'],
+            ['year' => '2024', 'title' => 'Офис в Сочи. 3100+ клиентов', 'desc' => 'Четвёртый офис, 28 сотрудников. 95% клиентов рекомендуют нас друзьям и знакомым.'],
         ];
     }
 }
@@ -180,6 +194,27 @@ if ($instagram) $schema_person['sameAs'][] = $instagram;
     </section>
     <?php endif; ?>
 
+    <!-- ── Career Timeline ───────────────────────────────────── -->
+    <?php if (!empty($timeline)) : ?>
+    <section class="cf-author-timeline cf-section cf-section--alt">
+        <div class="cf-container">
+            <h2 class="cf-section-header__title">Путь в автоимпорте</h2>
+            <p class="cf-section-header__subtitle">Как <?php echo esc_html(explode(' ', $name)[0]); ?> строил CarFinance MSK</p>
+            <div class="cf-career-timeline">
+                <?php foreach ($timeline as $step) : ?>
+                    <div class="cf-career-timeline__step">
+                        <div class="cf-career-timeline__year"><?php echo esc_html($step['year'] ?? ''); ?></div>
+                        <div class="cf-career-timeline__body">
+                            <strong class="cf-career-timeline__title"><?php echo esc_html($step['title'] ?? ''); ?></strong>
+                            <p class="cf-career-timeline__desc"><?php echo esc_html($step['desc'] ?? ''); ?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+
     <!-- ── Expertise ─────────────────────────────────────────── -->
     <?php if (!empty($expertise)) : ?>
     <section class="cf-author-expertise cf-section cf-section--alt">
@@ -219,6 +254,54 @@ if ($instagram) $schema_person['sameAs'][] = $instagram;
                 <?php while ($author_cases->have_posts()) : $author_cases->the_post(); ?>
                     <?php cf_block('car-card', ['post_id' => get_the_ID(), 'type' => 'case']); ?>
                 <?php endwhile; wp_reset_postdata(); ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <!-- ── Blog Posts by Author ──────────────────────────────── -->
+    <?php
+    // Find WP user by display name or login
+    $wp_user = get_user_by('display_name', $name);
+    if (!$wp_user) {
+        // Try by slug
+        $user_query = get_users(['search' => '*' . sanitize_text_field(explode(' ', $name)[0]) . '*', 'search_columns' => ['display_name'], 'number' => 1]);
+        $wp_user = $user_query ? $user_query[0] : null;
+    }
+    $author_posts = new WP_Query([
+        'post_type'      => 'post',
+        'post_status'    => 'publish',
+        'posts_per_page' => 3,
+        'author'         => $wp_user ? $wp_user->ID : -1,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ]);
+    ?>
+    <?php if ($author_posts->have_posts()) : ?>
+    <section class="cf-author-blog cf-section">
+        <div class="cf-container">
+            <h2 class="cf-section-header__title">Статьи <?php echo esc_html(explode(' ', $name)[0]); ?></h2>
+            <p class="cf-section-header__subtitle">Экспертные материалы от первого лица</p>
+            <div class="cf-author-blog__grid cf-grid cf-grid--3">
+                <?php while ($author_posts->have_posts()) : $author_posts->the_post(); ?>
+                    <article class="cf-author-blog__item">
+                        <a href="<?php the_permalink(); ?>" class="cf-author-blog__link">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <?php the_post_thumbnail('medium', ['class' => 'cf-author-blog__img', 'loading' => 'lazy']); ?>
+                            <?php endif; ?>
+                            <div class="cf-author-blog__text">
+                                <time class="cf-author-blog__date" datetime="<?php echo esc_attr(get_the_date('Y-m-d')); ?>">
+                                    <?php echo esc_html(get_the_date('d.m.Y')); ?>
+                                </time>
+                                <h3 class="cf-author-blog__title"><?php the_title(); ?></h3>
+                                <p class="cf-author-blog__excerpt"><?php echo esc_html(wp_trim_words(get_the_excerpt(), 15)); ?></p>
+                            </div>
+                        </a>
+                    </article>
+                <?php endwhile; wp_reset_postdata(); ?>
+            </div>
+            <div style="text-align:center;margin-top:24px;">
+                <a href="<?php echo esc_url(home_url('/blog/')); ?>" class="cf-btn cf-btn--outline">Все статьи в блоге →</a>
             </div>
         </div>
     </section>

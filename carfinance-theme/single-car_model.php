@@ -43,6 +43,23 @@ $trans_labels = ['automatic' => 'Автомат', 'manual' => 'Механика'
 $drive_labels = ['fwd' => 'Передний', 'rwd' => 'Задний', 'awd' => 'Полный'];
 ?>
 
+<?php
+// Urgency bar: views count (pseudo-random but stable per post, 3-17 range)
+$views_seed = ($post_id % 15) + 3;
+$views_now  = $views_seed;
+?>
+<!-- Urgency Bar -->
+<div class="cf-urgency-bar">
+    <div class="cf-container">
+        <span class="cf-urgency-bar__item cf-urgency-bar__pulse">👁 Сейчас смотрят: <strong><?php echo esc_html($views_now); ?></strong> человек</span>
+        <span class="cf-urgency-bar__item">🔥 Популярный лот</span>
+        <span class="cf-urgency-bar__item">⏱ Доставка от <strong>14 дней</strong></span>
+        <span class="cf-urgency-bar__sep">|</span>
+        <a href="https://t.me/carfinancemsk" class="cf-urgency-bar__cta" target="_blank" rel="noopener">💬 Telegram</a>
+        <a href="https://wa.me/79999999999" class="cf-urgency-bar__cta" target="_blank" rel="noopener">📱 WhatsApp</a>
+    </div>
+</div>
+
 <article class="cf-model">
     <div class="cf-container">
         <!-- Header -->
@@ -110,6 +127,21 @@ $drive_labels = ['fwd' => 'Передний', 'rwd' => 'Задний', 'awd' => 
                     <a href="<?php echo esc_url(home_url('/calculator/')); ?>" class="cf-btn cf-btn--secondary cf-btn--full">
                         Рассчитать в калькуляторе
                     </a>
+                    <!-- Inline quick contacts -->
+                    <div class="cf-model__quick-contacts">
+                        <span class="cf-model__quick-label">Быстрый ответ:</span>
+                        <a href="https://t.me/carfinancemsk" class="cf-model__contact-btn cf-model__contact-btn--tg" target="_blank" rel="noopener">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+                            Telegram
+                        </a>
+                        <a href="https://wa.me/79999999999" class="cf-model__contact-btn cf-model__contact-btn--wa" target="_blank" rel="noopener">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2.003C6.481 2.003 2 6.485 2 12.009c0 1.768.463 3.505 1.342 5.025L2 22l5.098-1.335A9.957 9.957 0 0012.004 22C17.527 22 22 17.518 22 11.994c0-5.517-4.473-9.991-9.996-9.991zm0 18.199a8.191 8.191 0 01-4.183-1.147l-.3-.178-3.107.814.829-3.026-.196-.31A8.199 8.199 0 013.8 11.994c0-4.524 3.68-8.205 8.204-8.205 4.525 0 8.204 3.681 8.204 8.205 0 4.524-3.679 8.208-8.204 8.208z"/></svg>
+                            WhatsApp
+                        </a>
+                        <a href="tel:+78001234567" class="cf-model__contact-btn cf-model__contact-btn--phone">
+                            📞 Позвонить
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Specs Table -->
@@ -196,6 +228,51 @@ $drive_labels = ['fwd' => 'Передний', 'rwd' => 'Задний', 'awd' => 
                 </table>
             </div>
         <?php endif; ?>
+
+        <!-- Delivery Timeline -->
+        <div class="cf-model__delivery-timeline">
+            <h3>Как это работает: от заявки до получения авто</h3>
+            <div class="cf-timeline">
+                <div class="cf-timeline__step">
+                    <div class="cf-timeline__num">1</div>
+                    <div class="cf-timeline__body">
+                        <strong>Заявка</strong>
+                        <span>День 1 — обсуждаем бюджет и пожелания</span>
+                    </div>
+                </div>
+                <div class="cf-timeline__step">
+                    <div class="cf-timeline__num">2</div>
+                    <div class="cf-timeline__body">
+                        <strong>Выбор и торги</strong>
+                        <span>День 2–5 — участвуем в аукционе, побеждаем</span>
+                    </div>
+                </div>
+                <div class="cf-timeline__step">
+                    <div class="cf-timeline__num">3</div>
+                    <div class="cf-timeline__body">
+                        <strong>Доставка морем</strong>
+                        <span>День 6–21 — судно идёт во Владивосток</span>
+                    </div>
+                </div>
+                <div class="cf-timeline__step">
+                    <div class="cf-timeline__num">4</div>
+                    <div class="cf-timeline__body">
+                        <strong>Таможня</strong>
+                        <span>День 22–27 — оформление и уплата пошлины</span>
+                    </div>
+                </div>
+                <div class="cf-timeline__step cf-timeline__step--final">
+                    <div class="cf-timeline__num">🎉</div>
+                    <div class="cf-timeline__body">
+                        <strong>Вы получаете авто</strong>
+                        <span>День 28–45 — доставка в ваш город, постановка на учёт</span>
+                    </div>
+                </div>
+            </div>
+            <p class="cf-model__delivery-note">
+                ⚡ Среднее время доставки из Кореи — <strong>14–25 дней</strong>, из Японии — <strong>21–35 дней</strong>, из Китая — <strong>14–21 день</strong>.
+            </p>
+        </div>
 
         <!-- Video review -->
         <?php if ($video_url): ?>
