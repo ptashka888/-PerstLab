@@ -37,19 +37,30 @@ function cf_ajax_catalog_filter() {
     check_ajax_referer( 'cf_catalog_nonce', 'nonce' );
 
     // Read and sanitize inputs.
-    $country      = sanitize_text_field( wp_unslash( $_POST['country'] ?? '' ) );
-    $brand        = sanitize_text_field( wp_unslash( $_POST['brand'] ?? '' ) );
-    $body_type    = sanitize_text_field( wp_unslash( $_POST['body_type'] ?? '' ) );
-    $year_from    = absint( $_POST['year_from'] ?? 0 );
-    $year_to      = absint( $_POST['year_to'] ?? 0 );
-    $price_from   = absint( $_POST['price_from'] ?? 0 );
-    $price_to     = absint( $_POST['price_to'] ?? 0 );
-    $fuel         = sanitize_text_field( wp_unslash( $_POST['fuel'] ?? '' ) );
-    $transmission = sanitize_text_field( wp_unslash( $_POST['transmission'] ?? '' ) );
-    $drive        = sanitize_text_field( wp_unslash( $_POST['drive'] ?? '' ) );
-    $sort         = sanitize_text_field( wp_unslash( $_POST['sort'] ?? '' ) );
-    $page         = absint( $_POST['page'] ?? 1 );
-    $per_page     = absint( $_POST['per_page'] ?? 12 );
+    $country         = sanitize_text_field( wp_unslash( $_POST['country'] ?? '' ) );
+    $brand           = sanitize_text_field( wp_unslash( $_POST['brand'] ?? '' ) );
+    $body_type       = sanitize_text_field( wp_unslash( $_POST['body_type'] ?? '' ) );
+    $year_from       = absint( $_POST['year_from'] ?? 0 );
+    $year_to         = absint( $_POST['year_to'] ?? 0 );
+    $price_from      = absint( $_POST['price_from'] ?? 0 );
+    $price_to        = absint( $_POST['price_to'] ?? 0 );
+    $fuel            = sanitize_text_field( wp_unslash( $_POST['fuel'] ?? '' ) );
+    $transmission    = sanitize_text_field( wp_unslash( $_POST['transmission'] ?? '' ) );
+    $drive           = sanitize_text_field( wp_unslash( $_POST['drive'] ?? '' ) );
+    $mileage_from    = absint( $_POST['mileage_from'] ?? 0 );
+    $mileage_to      = absint( $_POST['mileage_to'] ?? 0 );
+    $engine_from     = (float) ( $_POST['engine_from'] ?? 0 );
+    $engine_to       = (float) ( $_POST['engine_to'] ?? 0 );
+    $power_from      = absint( $_POST['power_from'] ?? 0 );
+    $power_to        = absint( $_POST['power_to'] ?? 0 );
+    $steering        = sanitize_text_field( wp_unslash( $_POST['steering'] ?? '' ) );
+    $accident_free   = absint( $_POST['accident_free'] ?? 0 );
+    $condition       = sanitize_text_field( wp_unslash( $_POST['condition'] ?? '' ) ); // new/used/all
+    $seats           = absint( $_POST['seats'] ?? 0 );
+    $color           = sanitize_text_field( wp_unslash( $_POST['color'] ?? '' ) );
+    $sort            = sanitize_text_field( wp_unslash( $_POST['sort'] ?? '' ) );
+    $page            = absint( $_POST['page'] ?? 1 );
+    $per_page        = absint( $_POST['per_page'] ?? 12 );
 
     if ( $page < 1 ) {
         $page = 1;
@@ -71,15 +82,16 @@ function cf_ajax_catalog_filter() {
 
     if ( $country ) {
         $tax_query[] = [
-            'taxonomy' => 'cf_country',
+            'taxonomy' => 'car_country',
             'field'    => 'slug',
-            'terms'    => $country,
+            'terms'    => array_map( 'sanitize_text_field', (array) $country ),
+            'operator' => is_array( $country ) ? 'IN' : '=',
         ];
     }
 
     if ( $brand ) {
         $tax_query[] = [
-            'taxonomy' => 'cf_brand',
+            'taxonomy' => 'car_brand',
             'field'    => 'slug',
             'terms'    => $brand,
         ];
@@ -87,9 +99,45 @@ function cf_ajax_catalog_filter() {
 
     if ( $body_type ) {
         $tax_query[] = [
-            'taxonomy' => 'cf_body_type',
+            'taxonomy' => 'car_type',
             'field'    => 'slug',
-            'terms'    => $body_type,
+            'terms'    => array_map( 'sanitize_text_field', (array) $body_type ),
+            'operator' => is_array( $body_type ) ? 'IN' : '=',
+        ];
+    }
+
+    if ( $fuel ) {
+        $tax_query[] = [
+            'taxonomy' => 'engine_type',
+            'field'    => 'slug',
+            'terms'    => array_map( 'sanitize_text_field', (array) $fuel ),
+            'operator' => is_array( $fuel ) ? 'IN' : '=',
+        ];
+    }
+
+    if ( $transmission ) {
+        $tax_query[] = [
+            'taxonomy' => 'transmission_type',
+            'field'    => 'slug',
+            'terms'    => array_map( 'sanitize_text_field', (array) $transmission ),
+            'operator' => is_array( $transmission ) ? 'IN' : '=',
+        ];
+    }
+
+    if ( $drive ) {
+        $tax_query[] = [
+            'taxonomy' => 'drive_type',
+            'field'    => 'slug',
+            'terms'    => array_map( 'sanitize_text_field', (array) $drive ),
+            'operator' => is_array( $drive ) ? 'IN' : '=',
+        ];
+    }
+
+    if ( $color ) {
+        $tax_query[] = [
+            'taxonomy' => 'car_color',
+            'field'    => 'slug',
+            'terms'    => $color,
         ];
     }
 
@@ -140,27 +188,90 @@ function cf_ajax_catalog_filter() {
         ];
     }
 
-    if ( $fuel ) {
+    if ( $mileage_from ) {
         $meta_query[] = [
-            'key'     => 'cf_fuel',
-            'value'   => $fuel,
+            'key'     => 'cf_mileage',
+            'value'   => $mileage_from,
+            'compare' => '>=',
+            'type'    => 'NUMERIC',
+        ];
+    }
+
+    if ( $mileage_to ) {
+        $meta_query[] = [
+            'key'     => 'cf_mileage',
+            'value'   => $mileage_to,
+            'compare' => '<=',
+            'type'    => 'NUMERIC',
+        ];
+    }
+
+    if ( $engine_from > 0 ) {
+        $meta_query[] = [
+            'key'     => 'cf_engine_cc',
+            'value'   => (int) round( $engine_from * 1000 ),
+            'compare' => '>=',
+            'type'    => 'NUMERIC',
+        ];
+    }
+
+    if ( $engine_to > 0 ) {
+        $meta_query[] = [
+            'key'     => 'cf_engine_cc',
+            'value'   => (int) round( $engine_to * 1000 ),
+            'compare' => '<=',
+            'type'    => 'NUMERIC',
+        ];
+    }
+
+    if ( $power_from ) {
+        $meta_query[] = [
+            'key'     => 'cf_power_hp',
+            'value'   => $power_from,
+            'compare' => '>=',
+            'type'    => 'NUMERIC',
+        ];
+    }
+
+    if ( $power_to ) {
+        $meta_query[] = [
+            'key'     => 'cf_power_hp',
+            'value'   => $power_to,
+            'compare' => '<=',
+            'type'    => 'NUMERIC',
+        ];
+    }
+
+    if ( $steering ) {
+        $meta_query[] = [
+            'key'     => 'cf_steering',
+            'value'   => $steering,
             'compare' => '=',
         ];
     }
 
-    if ( $transmission ) {
+    if ( $accident_free ) {
         $meta_query[] = [
-            'key'     => 'cf_transmission',
-            'value'   => $transmission,
+            'key'     => 'cf_accident_free',
+            'value'   => '1',
             'compare' => '=',
         ];
     }
 
-    if ( $drive ) {
+    if ( $condition && $condition !== 'all' ) {
         $meta_query[] = [
-            'key'     => 'cf_drive',
-            'value'   => $drive,
+            'key'     => 'cf_condition',
+            'value'   => $condition,
             'compare' => '=',
+        ];
+    }
+
+    if ( $seats ) {
+        $meta_query[] = [
+            'key'     => 'cf_seats',
+            'value'   => $seats,
+            'compare' => '=',
+            'type'    => 'NUMERIC',
         ];
     }
 
@@ -190,6 +301,12 @@ function cf_ajax_catalog_filter() {
             $args['meta_key'] = 'cf_year';
             $args['orderby']  = 'meta_value_num';
             $args['order']    = 'DESC';
+            break;
+
+        case 'mileage_asc':
+            $args['meta_key'] = 'cf_mileage';
+            $args['orderby']  = 'meta_value_num';
+            $args['order']    = 'ASC';
             break;
 
         case 'popular':
@@ -279,7 +396,7 @@ function cf_ajax_get_brands_by_country() {
         'fields'         => 'ids',
         'tax_query'      => [
             [
-                'taxonomy' => 'cf_country',
+                'taxonomy' => 'car_country',
                 'field'    => 'slug',
                 'terms'    => $country_slug,
             ],
@@ -291,7 +408,7 @@ function cf_ajax_get_brands_by_country() {
     }
 
     // Get brand terms from those posts.
-    $brands = wp_get_object_terms( $post_ids, 'cf_brand', [
+    $brands = wp_get_object_terms( $post_ids, 'car_brand', [
         'orderby' => 'name',
         'order'   => 'ASC',
     ] );
@@ -343,7 +460,7 @@ function cf_ajax_get_models_by_brand() {
         'order'          => 'ASC',
         'tax_query'      => [
             [
-                'taxonomy' => 'cf_brand',
+                'taxonomy' => 'car_brand',
                 'field'    => 'slug',
                 'terms'    => $brand_slug,
             ],

@@ -1,6 +1,6 @@
 /* Block: Team */
 .cf-team {
-    padding: 60px 0;
+    padding: 80px 0;
 }
 
 .cf-team__container {
@@ -70,8 +70,17 @@
 .cf-team__photo-placeholder {
     width: 100%;
     height: 100%;
-    background: var(--cf-border, #e5e7eb);
+    background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cf-team__initials {
+    font-size: 36px;
+    font-weight: 800;
+    color: #9ca3af;
 }
 
 /* Info */
@@ -88,15 +97,67 @@
     margin-bottom: 10px;
 }
 
+.cf-team__card-body {
+    padding-top: 0;
+}
+
+.cf-team__name {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.cf-team__name a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.cf-team__name a:hover {
+    color: var(--cf-primary, #2563eb);
+}
+
+.cf-team__photo-link {
+    display: block;
+    text-decoration: none;
+}
+
+.cf-team__badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
 .cf-team__badge {
     display: inline-block;
     font-size: 12px;
     font-weight: 500;
     color: var(--cf-primary, #2563eb);
     background: rgba(37, 99, 235, 0.08);
-    padding: 4px 12px;
+    padding: 3px 10px;
     border-radius: 20px;
-    margin-bottom: 12px;
+}
+
+.cf-team__quote {
+    font-size: 13px;
+    color: var(--cf-text-secondary, #6b7280);
+    font-style: italic;
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.cf-team__footer {
+    margin-top: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.cf-team__offices {
+    font-size: 14px;
+    color: var(--cf-text-secondary, #6b7280);
 }
 
 /* Socials */

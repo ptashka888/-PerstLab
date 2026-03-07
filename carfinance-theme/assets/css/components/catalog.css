@@ -3,6 +3,665 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
+   Catalog Page Heading
+   -------------------------------------------------------------------------- */
+
+.cf-catalog__heading {
+  font-size: var(--cf-fs-2xl);
+  font-weight: 700;
+  margin-bottom: var(--cf-space-xs);
+}
+
+.cf-catalog__subheading {
+  font-size: var(--cf-fs-md);
+  color: var(--cf-text-light);
+  margin-bottom: 0;
+}
+
+.cf-section--compact {
+  padding: var(--cf-space-lg) 0 var(--cf-space-md);
+}
+
+/* --------------------------------------------------------------------------
+   Horizontal Filter Bar
+   -------------------------------------------------------------------------- */
+
+.cf-filter-bar {
+  position: sticky;
+  top: 64px; /* height of sticky header */
+  z-index: 100;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--cf-border);
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  padding: var(--cf-space-md) 0;
+}
+
+.cf-filter-bar__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cf-space-sm);
+}
+
+/* --- Row --- */
+
+.cf-filter-bar__row {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: var(--cf-space-sm);
+}
+
+.cf-filter-bar__row--extended {
+  padding-top: var(--cf-space-sm);
+  border-top: 1px dashed var(--cf-border);
+}
+
+/* --- Field --- */
+
+.cf-filter-bar__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 120px;
+  flex: 1;
+}
+
+.cf-filter-bar__field--range {
+  min-width: 160px;
+  flex: 1.5;
+}
+
+.cf-filter-bar__field--checks {
+  min-width: 160px;
+  flex: 2;
+}
+
+.cf-filter-bar__field--radio {
+  min-width: 160px;
+  flex: 1.5;
+}
+
+.cf-filter-bar__field--action {
+  flex: 0 0 auto;
+  min-width: auto;
+}
+
+.cf-filter-bar__field--check-single {
+  flex: 0 0 auto;
+  min-width: auto;
+  justify-content: flex-end;
+}
+
+/* --- Label --- */
+
+.cf-filter-bar__label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--cf-text-light);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+
+/* --- Select --- */
+
+.cf-filter-bar__select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-radius);
+  font-size: var(--cf-fs-sm);
+  color: var(--cf-text);
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: border-color var(--cf-transition-fast);
+  appearance: auto;
+}
+
+.cf-filter-bar__select:focus {
+  outline: none;
+  border-color: var(--cf-primary);
+  box-shadow: 0 0 0 3px rgba(26,82,118,.12);
+}
+
+/* --- Input --- */
+
+.cf-filter-bar__input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-radius);
+  font-size: var(--cf-fs-sm);
+  color: var(--cf-text);
+  transition: border-color var(--cf-transition-fast);
+}
+
+.cf-filter-bar__input:focus {
+  outline: none;
+  border-color: var(--cf-primary);
+  box-shadow: 0 0 0 3px rgba(26,82,118,.12);
+}
+
+.cf-filter-bar__range {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cf-filter-bar__sep {
+  font-size: var(--cf-fs-sm);
+  color: var(--cf-text-light);
+  flex-shrink: 0;
+}
+
+/* --- Radio group (Состояние) --- */
+
+.cf-filter-bar__radio-group {
+  display: flex;
+  gap: 4px;
+}
+
+.cf-filter-bar__radio-btn {
+  cursor: pointer;
+}
+
+.cf-filter-bar__radio-btn input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.cf-filter-bar__radio-btn span {
+  display: block;
+  padding: 7px 12px;
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-radius-full);
+  font-size: var(--cf-fs-xs);
+  font-weight: 500;
+  color: var(--cf-text);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all var(--cf-transition-fast);
+}
+
+.cf-filter-bar__radio-btn input[type="radio"]:checked + span {
+  background-color: var(--cf-primary);
+  border-color: var(--cf-primary);
+  color: #fff;
+}
+
+.cf-filter-bar__radio-btn span:hover {
+  border-color: var(--cf-primary);
+  color: var(--cf-primary);
+}
+
+/* --- Chips (checkbox pills for engine/kpp/body) --- */
+
+.cf-filter-bar__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.cf-filter-bar__chip-check {
+  cursor: pointer;
+}
+
+.cf-filter-bar__chip-check input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.cf-filter-bar__chip-check span {
+  display: block;
+  padding: 5px 10px;
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-radius-full);
+  font-size: var(--cf-fs-xs);
+  font-weight: 500;
+  color: var(--cf-text);
+  cursor: pointer;
+  transition: all var(--cf-transition-fast);
+  user-select: none;
+}
+
+.cf-filter-bar__chip-check input[type="checkbox"]:checked + span {
+  background-color: var(--cf-primary);
+  border-color: var(--cf-primary);
+  color: #fff;
+}
+
+.cf-filter-bar__chip-check span:hover {
+  border-color: var(--cf-primary);
+  color: var(--cf-primary);
+}
+
+/* --- Checkbox single (Без ДТП) --- */
+
+.cf-filter-bar__checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: var(--cf-space-xs);
+  font-size: var(--cf-fs-sm);
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+.cf-filter-bar__checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--cf-primary);
+  cursor: pointer;
+}
+
+/* --- Toggle row --- */
+
+.cf-filter-bar__toggle-row {
+  display: flex;
+  align-items: center;
+  gap: var(--cf-space-md);
+}
+
+.cf-filter-bar__toggle-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: var(--cf-fs-sm);
+  color: var(--cf-primary);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color var(--cf-transition-fast);
+}
+
+.cf-filter-bar__toggle-btn:hover {
+  color: var(--cf-primary-dark, #133d59);
+}
+
+.cf-filter-bar__toggle-arrow {
+  display: inline-block;
+  font-size: 10px;
+  transition: transform var(--cf-transition-fast);
+}
+
+.cf-filter-bar__toggle-btn[aria-expanded="true"] .cf-filter-bar__toggle-arrow {
+  transform: rotate(180deg);
+}
+
+.cf-filter-bar__active-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background-color: var(--cf-primary);
+  color: #fff;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.cf-filter-bar__reset {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: var(--cf-fs-sm);
+  color: var(--cf-text-light);
+  cursor: pointer;
+  transition: color var(--cf-transition-fast);
+}
+
+.cf-filter-bar__reset:hover {
+  color: var(--cf-danger);
+}
+
+/* --- Search button --- */
+
+.cf-filter-bar__btn-search {
+  white-space: nowrap;
+  padding: 9px 20px;
+}
+
+/* --------------------------------------------------------------------------
+   Active Filter Chips Row
+   -------------------------------------------------------------------------- */
+
+.cf-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cf-space-xs);
+  padding: var(--cf-space-sm) 0;
+  min-height: 0;
+}
+
+.cf-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 12px;
+  background-color: var(--cf-bg-alt);
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-radius-full);
+  font-size: var(--cf-fs-xs);
+  color: var(--cf-text);
+}
+
+.cf-filter-chip__remove {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--cf-text-light);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.cf-filter-chip__remove:hover {
+  color: var(--cf-danger);
+}
+
+/* --------------------------------------------------------------------------
+   Catalog Full-width (no sidebar)
+   -------------------------------------------------------------------------- */
+
+.cf-catalog--full .cf-catalog__grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.cf-catalog__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--cf-space-sm);
+  margin-bottom: var(--cf-space-lg);
+  padding-bottom: var(--cf-space-md);
+  border-bottom: 1px solid var(--cf-border);
+}
+
+.cf-catalog__toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--cf-space-md);
+}
+
+/* --- Classic pagination (SEO) hidden by default --- */
+
+.cf-catalog__classic-pagination {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Car Card (inline fallback)
+   -------------------------------------------------------------------------- */
+
+.cf-car-card {
+  background: #fff;
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-radius-lg);
+  overflow: hidden;
+  transition: box-shadow var(--cf-transition-fast);
+}
+
+.cf-car-card:hover {
+  box-shadow: 0 4px 16px var(--cf-shadow);
+}
+
+.cf-car-card__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.cf-car-card__image {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--cf-bg-alt);
+}
+
+.cf-car-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .3s ease;
+}
+
+.cf-car-card:hover .cf-car-card__img {
+  transform: scale(1.04);
+}
+
+.cf-car-card__body {
+  padding: var(--cf-space-md);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cf-car-card__brand {
+  font-size: var(--cf-fs-xs);
+  font-weight: 600;
+  color: var(--cf-primary);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.cf-car-card__title {
+  font-size: var(--cf-fs-md);
+  font-weight: 700;
+  color: var(--cf-text);
+  margin: 0;
+}
+
+.cf-car-card__specs {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-size: var(--cf-fs-xs);
+  color: var(--cf-text-light);
+  margin: 4px 0 0;
+  padding: 0;
+}
+
+.cf-car-card__price {
+  font-size: var(--cf-fs-lg);
+  font-weight: 700;
+  color: var(--cf-text);
+  margin-top: auto;
+  padding-top: var(--cf-space-sm);
+}
+
+.cf-car-card__price--request {
+  color: var(--cf-text-light);
+  font-size: var(--cf-fs-sm);
+}
+
+/* List view */
+
+.cf-catalog__grid--list .cf-car-card__link {
+  flex-direction: row;
+}
+
+.cf-catalog__grid--list .cf-car-card__image {
+  flex: 0 0 240px;
+  aspect-ratio: auto;
+  height: 160px;
+}
+
+.cf-catalog__grid--list .cf-car-card__body {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--cf-space-md);
+}
+
+/* --------------------------------------------------------------------------
+   SEO text block
+   -------------------------------------------------------------------------- */
+
+.cf-catalog__seo-text {
+  margin-top: var(--cf-space-3xl);
+  padding: var(--cf-space-xl);
+  background: var(--cf-bg-alt);
+  border-radius: var(--cf-radius-lg);
+}
+
+.cf-catalog__seo-text-inner {
+  max-height: 120px;
+  overflow: hidden;
+  transition: max-height .3s ease;
+}
+
+.cf-catalog__seo-text-inner.cf-is-expanded {
+  max-height: 2000px;
+}
+
+.cf-catalog__seo-toggle {
+  background: none;
+  border: none;
+  padding: var(--cf-space-sm) 0 0;
+  font-size: var(--cf-fs-sm);
+  color: var(--cf-primary);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile filter drawer
+   -------------------------------------------------------------------------- */
+
+.cf-filter-drawer {
+  display: none; /* JS shows it */
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.cf-filter-drawer.cf-is-open {
+  display: block;
+}
+
+.cf-filter-drawer__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  animation: cf-fade-in .2s ease;
+}
+
+.cf-filter-drawer__panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 90vh;
+  background: #fff;
+  border-radius: var(--cf-radius-lg) var(--cf-radius-lg) 0 0;
+  display: flex;
+  flex-direction: column;
+  animation: cf-slide-up .25s ease;
+}
+
+.cf-filter-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--cf-space-md) var(--cf-space-lg);
+  border-bottom: 1px solid var(--cf-border);
+}
+
+.cf-filter-drawer__title {
+  font-weight: 700;
+  font-size: var(--cf-fs-md);
+}
+
+.cf-filter-drawer__close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--cf-text-light);
+  padding: 4px;
+}
+
+.cf-filter-drawer__body {
+  overflow-y: auto;
+  flex: 1;
+  padding: var(--cf-space-lg);
+}
+
+.cf-filter-drawer__footer {
+  padding: var(--cf-space-md) var(--cf-space-lg);
+  border-top: 1px solid var(--cf-border);
+}
+
+/* Mobile filter trigger bar */
+
+.cf-filter-mobile-trigger {
+  display: none;
+  position: sticky;
+  top: 64px;
+  z-index: 90;
+  background: #fff;
+  border-bottom: 1px solid var(--cf-border);
+  padding: var(--cf-space-sm) 0;
+}
+
+.cf-filter-mobile-trigger__inner {
+  display: flex;
+  gap: var(--cf-space-sm);
+  align-items: center;
+}
+
+.cf-filter-mobile-trigger__btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.cf-filter-mobile-trigger__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background-color: var(--cf-accent, #e74c3c);
+  color: #fff;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.cf-filter-mobile-trigger__sort {
+  flex: 1;
+}
+
+/* Animations */
+
+@keyframes cf-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes cf-slide-up {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
    Catalog Wrapper & Layout
    -------------------------------------------------------------------------- */
 

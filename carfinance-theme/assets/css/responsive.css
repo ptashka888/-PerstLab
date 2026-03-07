@@ -187,3 +187,76 @@
     font-size: var(--cf-fs-xs);
   }
 }
+
+/* --------------------------------------------------------------------------
+   Catalog: Horizontal Filter — Responsive
+   -------------------------------------------------------------------------- */
+
+/* Desktop: 4-column grid */
+@media (min-width: 1200px) {
+  .cf-catalog--full .cf-catalog__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Tablet: 3 columns, filter wraps */
+@media (max-width: 1200px) {
+  .cf-catalog--full .cf-catalog__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cf-filter-bar__field {
+    flex: 1 1 calc(33% - var(--cf-space-sm));
+    min-width: 140px;
+  }
+}
+
+/* Tablet portrait: 2 columns */
+@media (max-width: 992px) {
+  .cf-catalog--full .cf-catalog__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cf-filter-bar__field {
+    flex: 1 1 calc(50% - var(--cf-space-sm));
+  }
+
+  /* Hide extended row on tablet, show drawer trigger instead */
+  .cf-filter-bar__row--main .cf-filter-bar__field--checks,
+  .cf-filter-bar__row--main .cf-filter-bar__field--radio {
+    flex: 1 1 100%;
+  }
+}
+
+/* Mobile: switch to drawer */
+@media (max-width: 768px) {
+  /* Hide horizontal filter bar on mobile */
+  .cf-filter-bar {
+    display: none;
+  }
+
+  /* Show mobile trigger */
+  .cf-filter-mobile-trigger {
+    display: block;
+  }
+
+  /* 2 columns */
+  .cf-catalog--full .cf-catalog__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cf-car-card__image {
+    height: 160px;
+  }
+}
+
+/* Small mobile: 1 column */
+@media (max-width: 480px) {
+  .cf-catalog--full .cf-catalog__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cf-filter-drawer__panel {
+    max-height: 95vh;
+  }
+}

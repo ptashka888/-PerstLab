@@ -80,7 +80,7 @@ function cf_schema_output() {
     }
 
     // Catalog / archive / tag pages — ItemList
-    if ( is_post_type_archive( 'car_model' ) || is_tax( 'cf_brand' ) || is_tax( 'cf_body_type' ) || is_tax( 'cf_price_range' ) ) {
+    if ( is_post_type_archive( 'car_model' ) || is_tax( 'car_brand' ) || is_tax( 'car_type' ) || is_tax( 'price_range' ) || is_tax( 'car_country' ) || is_tax( 'engine_type' ) ) {
         $items = array();
         if ( have_posts() ) {
             $position = 1;
@@ -282,7 +282,7 @@ function cf_schema_product( $post_id ) {
     }
 
     // Brand from taxonomy
-    $brands = get_the_terms( $post_id, 'cf_brand' );
+    $brands = get_the_terms( $post_id, 'car_brand' );
     if ( $brands && ! is_wp_error( $brands ) ) {
         $brand = reset( $brands );
         $product['brand'] = array(

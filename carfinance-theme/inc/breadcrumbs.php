@@ -53,13 +53,59 @@ function cf_breadcrumbs() {
         );
 
     } elseif ( is_tax( 'car_brand' ) ) {
+        $term     = get_queried_object();
+        $active_c = sanitize_text_field( $_GET['country'] ?? '' );
+        $items[]  = [ 'name' => 'Каталог', 'url' => get_post_type_archive_link( 'car_model' ) ];
+        if ( $active_c ) {
+            $c_page_slugs = [ 'korea' => 'avto-iz-korei', 'japan' => 'avto-iz-yaponii', 'china' => 'avto-iz-kitaya', 'usa' => 'avto-iz-usa', 'uae' => 'avto-iz-oae' ];
+            $c_from_names = [ 'korea' => 'Из Кореи', 'japan' => 'Из Японии', 'china' => 'Из Китая', 'usa' => 'Из США', 'uae' => 'Из ОАЭ' ];
+            $c_gen_names  = [ 'korea' => 'Кореи', 'japan' => 'Японии', 'china' => 'Китая', 'usa' => 'США', 'uae' => 'ОАЭ' ];
+            $cp = get_page_by_path( $c_page_slugs[ $active_c ] ?? '' );
+            if ( $cp ) {
+                $items[] = [ 'name' => $c_from_names[ $active_c ] ?? $active_c, 'url' => get_permalink( $cp ) ];
+            }
+            $items[] = [ 'name' => $term->name . ' из ' . ( $c_gen_names[ $active_c ] ?? $active_c ), 'url' => '' ];
+        } else {
+            $items[] = [ 'name' => $term->name, 'url' => '' ];
+        }
+
+    } elseif ( is_tax( 'car_country' ) ) {
+        $term = get_queried_object();
+        $items[] = array(
+            'name' => 'Авто из ' . $term->name,
+            'url'  => '',
+        );
+
+    } elseif ( is_tax( 'car_type' ) ) {
         $term = get_queried_object();
         $items[] = array(
             'name' => 'Каталог',
             'url'  => get_post_type_archive_link( 'car_model' ),
         );
         $items[] = array(
-            'name' => $term->name,
+            'name' => 'Кузов: ' . $term->name,
+            'url'  => '',
+        );
+
+    } elseif ( is_tax( 'price_range' ) ) {
+        $term = get_queried_object();
+        $items[] = array(
+            'name' => 'Каталог',
+            'url'  => get_post_type_archive_link( 'car_model' ),
+        );
+        $items[] = array(
+            'name' => 'Бюджет: ' . $term->name,
+            'url'  => '',
+        );
+
+    } elseif ( is_tax( 'engine_type' ) ) {
+        $term = get_queried_object();
+        $items[] = array(
+            'name' => 'Каталог',
+            'url'  => get_post_type_archive_link( 'car_model' ),
+        );
+        $items[] = array(
+            'name' => 'Двигатель: ' . $term->name,
             'url'  => '',
         );
 
@@ -92,8 +138,14 @@ function cf_breadcrumbs() {
                 'url'  => get_term_link( $brand ),
             );
         }
+        // Year / modification as last crumb context
+        $year = get_post_meta( $post_id, 'cf_year', true );
+        $crumb_title = get_the_title();
+        if ( $year ) {
+            $crumb_title .= ' ' . $year . ' г.';
+        }
         $items[] = array(
-            'name' => get_the_title(),
+            'name' => $crumb_title,
             'url'  => '',
         );
 
@@ -158,28 +210,50 @@ function cf_breadcrumbs() {
         }
 
         if ( ! $is_country_page ) {
-            // Check for known pages.
-            if ( is_page( 'calculator' ) || is_page( 'kalkulyator' ) ) {
-                $items[] = array(
-                    'name' => 'Калькулятор',
-                    'url'  => '',
-                );
+            $page_template = get_page_template_slug( get_the_ID() );
+
+            // Brand+Country hub page
+            if ( 'page-brand-country.php' === $page_template ) {
+                $ancestors = array_reverse( get_post_ancestors( get_the_ID() ) );
+                foreach ( $ancestors as $anc_id ) {
+                    $anc_slug = get_post_field( 'post_name', $anc_id );
+                    if ( isset( $country_slugs[ $anc_slug ] ) ) {
+                        $items[] = [ 'name' => $country_slugs[ $anc_slug ], 'url' => get_permalink( $anc_id ) ];
+                    } else {
+                        $items[] = [ 'name' => get_the_title( $anc_id ), 'url' => get_permalink( $anc_id ) ];
+                    }
+                }
+                $brand_slug_field = cf_get_field( 'cf_brand_slug', get_the_ID() ) ?: get_post_field( 'post_name', get_the_ID() );
+                $brand_term       = get_term_by( 'slug', $brand_slug_field, 'car_brand' );
+                if ( $brand_term ) {
+                    $items[] = [ 'name' => $brand_term->name, 'url' => '' ];
+                } else {
+                    $items[] = [ 'name' => get_the_title(), 'url' => '' ];
+                }
+
+            } elseif ( 'page-author.php' === $page_template ) {
+                $ancestors = array_reverse( get_post_ancestors( get_the_ID() ) );
+                foreach ( $ancestors as $anc_id ) {
+                    $items[] = [ 'name' => get_the_title( $anc_id ), 'url' => get_permalink( $anc_id ) ];
+                }
+                $items[] = [ 'name' => get_the_title(), 'url' => '' ];
+
+            } elseif ( is_page( 'calculator' ) || is_page( 'kalkulyator' ) ) {
+                $items[] = [ 'name' => 'Калькулятор', 'url' => '' ];
+
             } else {
                 // Build hierarchy for nested pages.
                 $ancestors = get_post_ancestors( get_the_ID() );
                 if ( $ancestors ) {
                     $ancestors = array_reverse( $ancestors );
                     foreach ( $ancestors as $ancestor_id ) {
-                        $items[] = array(
+                        $items[] = [
                             'name' => get_the_title( $ancestor_id ),
                             'url'  => get_permalink( $ancestor_id ),
-                        );
+                        ];
                     }
                 }
-                $items[] = array(
-                    'name' => get_the_title(),
-                    'url'  => '',
-                );
+                $items[] = [ 'name' => get_the_title(), 'url' => '' ];
             }
         }
     }

@@ -20,6 +20,7 @@ function cf_seo_init() {
     add_action( 'wp_head', 'cf_canonical', 1 );
     add_action( 'wp_head', 'cf_meta_robots', 1 );
     add_action( 'wp_head', 'cf_hreflang', 1 );
+    add_action( 'wp_head', 'cf_meta_description', 1 );
     add_action( 'wp_head', 'cf_og_meta', 2 );
     add_filter( 'robots_txt', 'cf_robots_txt', 10, 2 );
     add_filter( 'pre_get_document_title', 'cf_seo_title', 10, 1 );
@@ -195,7 +196,15 @@ function cf_robots_txt( $output, $public ) {
     $additions .= "Disallow: /*?sort=\n";
     $additions .= "Disallow: /*?filter=\n";
     $additions .= "Disallow: /*?color=\n";
+    $additions .= "Disallow: /*?price_from=\n";
+    $additions .= "Disallow: /*?price_to=\n";
+    $additions .= "Disallow: /*?year_from=\n";
+    $additions .= "Disallow: /*?year_to=\n";
+    $additions .= "Disallow: /*?mileage_from=\n";
+    $additions .= "Disallow: /*?mileage_to=\n";
     $additions .= "Allow: /catalog/tags/\n";
+    $additions .= "Allow: /catalog/toyota/\n";
+    $additions .= "Allow: /catalog/hyundai/\n";
     $additions .= "\n";
     $additions .= "Sitemap: " . home_url( '/sitemap.xml' ) . "\n";
 
@@ -282,7 +291,7 @@ function cf_og_meta() {
 /**
  * SEO title filter — hooked to pre_get_document_title.
  *
- * Custom titles for taxonomy archives.
+ * Custom titles for all archive, taxonomy, and singular types.
  * Skips if Yoast active.
  */
 function cf_seo_title( $title ) {
@@ -290,21 +299,133 @@ function cf_seo_title( $title ) {
         return $title;
     }
 
+    $year = date( 'Y' );
+    $site = 'CarFinance MSK';
+
+    // Catalog archive
+    if ( is_post_type_archive( 'car_model' ) ) {
+        return 'Каталог автомобилей из Японии, Кореи, Китая, США, ОАЭ — ' . $site;
+    }
+
+    // car_brand taxonomy: «Купить Toyota из-за рубежа под ключ — цены 2026 | CarFinance MSK»
+    if ( is_tax( 'car_brand' ) ) {
+        $term = get_queried_object();
+        if ( $term && ! is_wp_error( $term ) ) {
+            return 'Купить ' . $term->name . ' из-за рубежа под ключ — цены ' . $year . ' | ' . $site;
+        }
+    }
+
+    // car_country taxonomy: «Авто из Японии с аукционов под ключ — цены 2026 | CarFinance MSK»
+    if ( is_tax( 'car_country' ) ) {
+        $term = get_queried_object();
+        if ( $term && ! is_wp_error( $term ) ) {
+            return 'Авто из ' . $term->name . ' под ключ — цены ' . $year . ' | ' . $site;
+        }
+    }
+
+    // car_type taxonomy: «Купить кроссовер из-за рубежа — каталог с ценами 2026 | CarFinance MSK»
+    if ( is_tax( 'car_type' ) ) {
+        $term = get_queried_object();
+        if ( $term && ! is_wp_error( $term ) ) {
+            return 'Купить ' . mb_strtolower( $term->name ) . ' из-за рубежа — каталог с ценами ' . $year . ' | ' . $site;
+        }
+    }
+
+    // price_range taxonomy: «Автомобили до 1,5 млн — подбор и доставка под ключ | CarFinance MSK»
+    if ( is_tax( 'price_range' ) ) {
+        $term = get_queried_object();
+        if ( $term && ! is_wp_error( $term ) ) {
+            return 'Автомобили ' . $term->name . ' — подбор и доставка под ключ | ' . $site;
+        }
+    }
+
+    // engine_type taxonomy: «Гибриды из Японии под ключ — каталог 2026 | CarFinance MSK»
+    if ( is_tax( 'engine_type' ) ) {
+        $term = get_queried_object();
+        if ( $term && ! is_wp_error( $term ) ) {
+            return $term->name . ' из-за рубежа — каталог ' . $year . ' | ' . $site;
+        }
+    }
+
     // catalog_tag taxonomy
     if ( is_tax( 'catalog_tag' ) ) {
         $term = get_queried_object();
         if ( $term && ! is_wp_error( $term ) ) {
-            return 'Купить ' . $term->name . ' из-за рубежа — CarFinance MSK';
+            return 'Купить ' . $term->name . ' из-за рубежа — ' . $site;
         }
     }
 
-    // cf_brand taxonomy
-    if ( is_tax( 'cf_brand' ) ) {
-        $term = get_queried_object();
-        if ( $term && ! is_wp_error( $term ) ) {
-            return $term->name . ' из-за рубежа — каталог CarFinance MSK';
+    // Single car_model: «Toyota Camry 2023 2.5л Гибрид — 3 500 000 ₽ под ключ»
+    if ( is_singular( 'car_model' ) ) {
+        $post_id    = get_the_ID();
+        $car_title  = get_the_title( $post_id );
+        $car_year   = get_post_meta( $post_id, 'cf_year', true );
+        $engine_cc  = get_post_meta( $post_id, 'cf_engine_cc', true );
+        $price_from = get_post_meta( $post_id, 'cf_price_from', true );
+
+        $parts = [ $car_title ];
+        if ( $car_year )   $parts[] = $car_year . ' г.';
+        if ( $engine_cc )  $parts[] = number_format( $engine_cc / 1000, 1, '.', '' ) . ' л';
+        $seo = implode( ' ', $parts );
+
+        if ( $price_from ) {
+            $seo .= ' — от ' . number_format( (int) $price_from, 0, '', ' ' ) . ' ₽ под ключ';
+        } else {
+            $seo .= ' — цена под ключ';
         }
+
+        return $seo . ' | ' . $site;
     }
 
     return $title;
+}
+
+/**
+ * Meta description filter for key page types.
+ * Hooked to wp_head via cf_seo_init().
+ */
+function cf_meta_description() {
+    if ( defined( 'WPSEO_VERSION' ) ) {
+        return;
+    }
+
+    $description = '';
+    $year        = date( 'Y' );
+
+    if ( is_tax( 'car_brand' ) ) {
+        $term = get_queried_object();
+        if ( $term && ! is_wp_error( $term ) ) {
+            if ( $term->description ) {
+                $description = wp_strip_all_tags( $term->description );
+            } else {
+                $description = 'Каталог автомобилей ' . $term->name . ' из Японии, Кореи, Китая. Доставка под ключ, таможня, СБКТС, постановка на учёт. Честные цены ' . $year . ' года.';
+            }
+        }
+    } elseif ( is_tax( 'car_country' ) ) {
+        $term = get_queried_object();
+        if ( $term && ! is_wp_error( $term ) ) {
+            $description = 'Автомобили из ' . $term->name . ' — подбор, выкуп на аукционе, доставка под ключ в Россию. Актуальные цены ' . $year . '. Более 500 моделей в каталоге.';
+        }
+    } elseif ( is_tax( 'car_type' ) ) {
+        $term = get_queried_object();
+        if ( $term && ! is_wp_error( $term ) ) {
+            $description = 'Купить ' . mb_strtolower( $term->name ) . ' из Японии, Кореи или Китая — большой каталог с ценами ' . $year . '. Доставка по всей России.';
+        }
+    } elseif ( is_singular( 'car_model' ) ) {
+        $post_id     = get_the_ID();
+        $excerpt     = get_the_excerpt( $post_id );
+        $car_title   = get_the_title( $post_id );
+        $price_from  = get_post_meta( $post_id, 'cf_price_from', true );
+
+        if ( $excerpt ) {
+            $description = wp_strip_all_tags( $excerpt );
+        } elseif ( $price_from ) {
+            $description = $car_title . ' под ключ в России — от ' . number_format( (int) $price_from, 0, '', ' ' ) . ' ₽. Полный цикл: аукцион, таможня, СБКТС, доставка.';
+        }
+    }
+
+    if ( $description ) {
+        $description = esc_attr( wp_trim_words( $description, 35, '...' ) );
+        echo '<meta name="description" content="' . $description . '" />' . "\n";
+    }
 }
