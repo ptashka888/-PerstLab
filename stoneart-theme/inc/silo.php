@@ -12,14 +12,22 @@ defined('ABSPATH') || exit;
  */
 function sa_render_silo_links() {
     $silo_pages = [
-        'services'       => ['label' => 'Изделия из камня', 'icon' => 'fa-solid fa-gem'],
-        'materials'      => ['label' => 'Каталог материалов', 'icon' => 'fa-solid fa-layer-group'],
-        'portfolio-page' => ['label' => 'Портфолио работ', 'icon' => 'fa-solid fa-images'],
-        'calculator'     => ['label' => 'Калькулятор стоимости', 'icon' => 'fa-solid fa-calculator'],
-        'about'          => ['label' => 'О компании', 'icon' => 'fa-solid fa-building'],
-        'faq-page'       => ['label' => 'Вопросы и ответы', 'icon' => 'fa-solid fa-circle-question'],
-        'contacts'       => ['label' => 'Контакты', 'icon' => 'fa-solid fa-location-dot'],
-        'blog'           => ['label' => 'Блог о камне', 'icon' => 'fa-solid fa-newspaper'],
+        // Level 1: Product categories
+        'stoleshnitsy'      => ['label' => 'Столешницы из камня',       'icon' => 'fa-solid fa-kitchen-set'],
+        'lestnitsy'         => ['label' => 'Лестницы и ступени',        'icon' => 'fa-solid fa-stairs'],
+        'kaminy'            => ['label' => 'Камины и порталы',          'icon' => 'fa-solid fa-fire'],
+        'poly-i-oblitsovka' => ['label' => 'Полы и облицовка',         'icon' => 'fa-solid fa-grip'],
+        'rakoviny'          => ['label' => 'Раковины и мойки',         'icon' => 'fa-solid fa-sink'],
+        'vanny'             => ['label' => 'Ванны из камня',            'icon' => 'fa-solid fa-bath'],
+        'fasady'            => ['label' => 'Фасады и экстерьер',       'icon' => 'fa-solid fa-building'],
+        // Level 1: Other
+        'materials'         => ['label' => 'Каталог материалов',        'icon' => 'fa-solid fa-layer-group'],
+        'services'          => ['label' => 'Все услуги',                'icon' => 'fa-solid fa-screwdriver-wrench'],
+        'portfolio-page'    => ['label' => 'Портфолио работ',          'icon' => 'fa-solid fa-images'],
+        'calculator'        => ['label' => 'Калькулятор стоимости',     'icon' => 'fa-solid fa-calculator'],
+        'faq-page'          => ['label' => 'Вопросы и ответы',         'icon' => 'fa-solid fa-circle-question'],
+        'blog'              => ['label' => 'Блог о камне',              'icon' => 'fa-solid fa-newspaper'],
+        'contacts'          => ['label' => 'Контакты',                  'icon' => 'fa-solid fa-location-dot'],
     ];
 
     echo '<section class="sa-section sa-section--white sa-animate" style="border-top:1px solid var(--sa-gray-200);">';
@@ -133,15 +141,41 @@ function sa_auto_internal_links($content) {
     if (!is_singular('post')) return $content;
 
     $link_map = [
-        'столешниц'    => 'services',
-        'подоконник'   => 'services',
-        'кварцевый агломерат' => 'materials',
-        'натуральный камень'  => 'materials',
-        'мрамор'       => 'materials',
-        'гранит'       => 'materials',
-        'акриловый камень'    => 'materials',
-        'портфолио'    => 'portfolio-page',
-        'калькулятор'  => 'calculator',
+        // Product categories → category landing pages
+        'столешниц'          => 'stoleshnitsy',
+        'столешница'         => 'stoleshnitsy',
+        'лестниц'            => 'lestnitsy',
+        'лестницы'           => 'lestnitsy',
+        'ступен'             => 'lestnitsy',
+        'камин'              => 'kaminy',
+        'каминный портал'    => 'kaminy',
+        'полов'              => 'poly-i-oblitsovka',
+        'облицовка'          => 'poly-i-oblitsovka',
+        'раковин'            => 'rakoviny',
+        'мойк'               => 'rakoviny',
+        'ванн'               => 'vanny',
+        'фасад'              => 'fasady',
+        'подоконник'         => 'stoleshnitsy',
+        // Materials → material pages
+        'мрамор'             => 'materialy-mramor',
+        'мраморн'            => 'materialy-mramor',
+        'гранит'             => 'materialy-granit',
+        'гранитн'            => 'materialy-granit',
+        'оникс'              => 'materials',
+        'травертин'          => 'materialy-travertin',
+        'кварцит'            => 'materialy-kvartsit',
+        'кварцевый агломерат'=> 'materials',
+        'натуральный камень' => 'materials',
+        'акриловый камень'   => 'materials',
+        // Service pages
+        'замер'              => 'uslugi-zamer',
+        'монтаж'             => 'uslugi-montazh',
+        'реставрац'          => 'uslugi-restavratsiya',
+        'гидрофобизатор'     => 'uslugi-ukhod',
+        // Navigation
+        'портфолио'          => 'portfolio-page',
+        'калькулятор'        => 'calculator',
+        'наши работы'        => 'portfolio-page',
     ];
 
     $linked = [];
