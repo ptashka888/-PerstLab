@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#214E3E"/>
+      <stop offset="1" stop-color="#5BA17E"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="280" y1="160" x2="1320" y2="820" gradientUnits="userSpaceOnUse">
+      <stop stop-color="white" stop-opacity=".24"/>
+      <stop offset="1" stop-color="white" stop-opacity=".06"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" rx="48" fill="url(#bg)"/>
+  <circle cx="1240" cy="220" r="140" fill="white" fill-opacity=".08"/>
+  <circle cx="1340" cy="760" r="220" fill="white" fill-opacity=".06"/>
+  <path d="M0 760C170 690 270 670 410 708C520 738 637 780 820 750C1020 718 1194 604 1366 624C1474 636 1549 674 1600 704V1000H0V760Z" fill="white" fill-opacity=".12"/>
+  <path d="M0 834C116 784 245 774 405 822C572 872 737 920 939 872C1104 833 1273 714 1440 716C1499 717 1552 728 1600 742V1000H0V834Z" fill="white" fill-opacity=".17"/>
+  <path d="M240 200H1360C1404.18 200 1440 235.817 1440 280V760C1440 804.183 1404.18 840 1360 840H240C195.817 840 160 804.183 160 760V280C160 235.817 195.817 200 240 200Z" fill="url(#glass)" stroke="white" stroke-opacity=".2" stroke-width="2"/>
+  <rect x="240" y="260" width="600" height="18" rx="9" fill="white" fill-opacity=".16"/>
+  <rect x="240" y="300" width="420" height="16" rx="8" fill="white" fill-opacity=".10"/>
+  <rect x="240" y="520" width="360" height="12" rx="6" fill="white" fill-opacity=".13"/>
+  <rect x="240" y="550" width="480" height="12" rx="6" fill="white" fill-opacity=".10"/>
+  <rect x="240" y="580" width="300" height="12" rx="6" fill="white" fill-opacity=".09"/>
+  <rect x="940" y="280" width="360" height="260" rx="32" fill="white" fill-opacity=".12" stroke="white" stroke-opacity=".16"/>
+  <rect x="980" y="330" width="280" height="14" rx="7" fill="white" fill-opacity=".20"/>
+  <rect x="980" y="364" width="210" height="12" rx="6" fill="white" fill-opacity=".12"/>
+  <rect x="980" y="410" width="240" height="96" rx="24" fill="white" fill-opacity=".08"/>
+  <circle cx="1084" cy="664" r="74" fill="white" fill-opacity=".10"/>
+  <circle cx="1246" cy="676" r="48" fill="white" fill-opacity=".10"/>
+  <text x="240" y="420" fill="white" font-size="86" font-family="Inter, Arial, sans-serif" font-weight="800">Земля для жизни и инвестиций</text>
+  <text x="240" y="474" fill="white" fill-opacity=".88" font-size="28" font-family="Inter, Arial, sans-serif">Каталог · генпланы · юридическая проверка</text>
+  <text x="1260" y="170" text-anchor="end" fill="white" font-size="92" font-family="Inter, Arial, sans-serif">🏡</text>
+</svg>
