@@ -298,8 +298,21 @@ function renderGeoPlots(){
 function renderIntentOffers(){
   const mount = safeQS('#intentOffers');
   if (!mount) return;
-  const items = PLOTS.filter(plot => plot.status === 'free' && plot.scenarios?.includes('invest'))
-    .sort((a,b)=>(b.roiEstimate||0) - (a.roiEstimate||0)).slice(0, 4);
+  const scenario = mount.dataset.scenario || 'invest';
+  let items;
+  if (scenario === 'sea') {
+    items = PLOTS.filter(plot => plot.status === 'free' && plot.seaDist && plot.seaDist > 0)
+      .sort((a,b)=>(a.seaDist||9999) - (b.seaDist||9999)).slice(0, 4);
+  } else if (scenario === 'installment') {
+    items = PLOTS.filter(plot => plot.status === 'free' && plot.installment?.available)
+      .sort((a,b)=>(a.installment?.monthly||0) - (b.installment?.monthly||0)).slice(0, 4);
+  } else {
+    items = PLOTS.filter(plot => plot.status === 'free' && plot.scenarios?.includes(scenario))
+      .sort((a,b)=>(b.roiEstimate||0) - (a.roiEstimate||0)).slice(0, 4);
+  }
+  if (!items.length) {
+    items = PLOTS.filter(p => p.status === 'free').slice(0, 4);
+  }
   mount.innerHTML = items.map(makePlotCard).join('');
 }
 
