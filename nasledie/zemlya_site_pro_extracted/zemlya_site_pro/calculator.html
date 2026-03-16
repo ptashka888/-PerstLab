@@ -61,11 +61,11 @@
     <div class="calc-main card card--lg">
       <h3 style="margin-top:0">Исходные параметры</h3>
       <div class="calc-rows">
-        <div class="calc-row"><label>Стоимость покупки, ₽</label><input id="calcPrice" type="number" value="2500000" oninput="updateCalc()"></div>
-        <div class="calc-row"><label>Площадь, соток</label><input id="calcArea" type="number" value="10" oninput="updateCalc()"></div>
-        <div class="calc-row"><label>Горизонт, лет</label><input id="calcYears" type="number" value="3" oninput="updateCalc()"></div>
-        <div class="calc-row"><label>Ожидаемый рост, % в год</label><input id="calcGrowth" type="number" value="18" oninput="updateCalc()"></div>
-        <div class="calc-row"><label>Доп. расходы, ₽</label><input id="calcExpenses" type="number" value="250000" oninput="updateCalc()"></div>
+        <div class="calc-row"><label>Стоимость покупки, ₽</label><input id="calcPrice" type="number" value="2500000" min="0" max="999999999" oninput="updateCalc()"></div>
+        <div class="calc-row"><label>Площадь, соток</label><input id="calcArea" type="number" value="10" min="0.1" max="10000" step="0.1" oninput="updateCalc()"></div>
+        <div class="calc-row"><label>Горизонт, лет</label><input id="calcYears" type="number" value="3" min="1" max="30" oninput="updateCalc()"></div>
+        <div class="calc-row"><label>Ожидаемый рост, % в год</label><input id="calcGrowth" type="number" value="18" min="-50" max="200" oninput="updateCalc()"></div>
+        <div class="calc-row"><label>Доп. расходы, ₽</label><input id="calcExpenses" type="number" value="250000" min="0" max="999999999" oninput="updateCalc()"></div>
       </div>
     </div>
     <aside class="calc-result card card--lg">
