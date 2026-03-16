@@ -14,7 +14,8 @@
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": ["Organization", "LocalBusiness"], "name": "Наследие", "legalName": "ИП Юсубова Любовь Михайловна", "telephone": "+7 (985) 219-83-02", "address": {"@type": "PostalAddress", "addressRegion": "Республика Калмыкия", "addressLocality": "Элиста", "addressCountry": "RU"}, "sameAs": ["https://t.me/+dxP0tIDCMKhkNTYy", "https://vk.com/club227797565", "https://dzen.ru/nasledie_company", "https://www.youtube.com/channel/UCc2muIEW-o0JUl-pwds_DEQ"], "description": "Продажа земельных участков для жизни, отдыха, инвестиций и коммерческих проектов.", "taxID": "081600498983", "url": "./index.html"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "index.html"}, {"@type": "ListItem", "position": 2, "name": "Квиз подбора", "item": "quiz.html"}]}</script>
     </head>
-<body data-page="catalog" >
+<body data-page="quiz" >
+<a href="#main-content" class="skip-link">Перейти к содержимому</a>
     <header class="site-header">
       <div class="header-meta">
         <div class="container">
@@ -42,7 +43,7 @@
       </div>
     </header>
 <nav class="breadcrumbs container" aria-label="Хлебные крошки"><a href="index.html">Главная</a><span>›</span><span>Квиз подбора</span></nav>
-<main>
+<main id="main-content">
 
 <section class="hero hero-small">
   <div class="container hero__grid">
@@ -70,12 +71,41 @@
       <div class="quiz-top"><div class="quiz-bar"><div class="quiz-progress" id="quizProgress"></div></div></div>
       <div id="quizBody"></div>
       <noscript>
-        <div style="padding:24px;text-align:center">
-          <h3 style="margin-bottom:12px">Для прохождения квиза нужен JavaScript</h3>
-          <p style="margin-bottom:16px;color:#6b7280">Включите JavaScript в настройках браузера или свяжитесь с нами напрямую:</p>
-          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-            <a class="btn btn--whatsapp" href="https://wa.me/79852198302?text=Здравствуйте!%20Хочу%20подобрать%20участок." target="_blank" rel="noopener">Написать в WhatsApp</a>
-            <a class="btn btn--outline" href="tel:79852198302">Позвонить</a>
+        <div class="noscript-fallback">
+          <h2>Подбор участка</h2>
+          <p style="margin-bottom:18px;color:#607068">Для интерактивного квиза нужен JavaScript. Воспользуйтесь формой ниже или свяжитесь с нами напрямую.</p>
+          <form action="https://wa.me/79852198302" method="get" style="display:grid;gap:14px">
+            <div class="form-row">
+              <label for="ns-goal">Цель покупки</label>
+              <select id="ns-goal" name="text">
+                <option value="Здравствуйте! Интересует участок для инвестиций.">Для инвестиций</option>
+                <option value="Здравствуйте! Интересует участок для жизни.">Для жизни</option>
+                <option value="Здравствуйте! Интересует участок для отдыха.">Для отдыха</option>
+                <option value="Здравствуйте! Интересует участок под бизнес.">Под бизнес</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="ns-region">Регион</label>
+              <select id="ns-region">
+                <option>Южные регионы</option>
+                <option>Западное направление</option>
+                <option>Видовые локации</option>
+                <option>Подмосковье</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="ns-budget">Бюджет</label>
+              <select id="ns-budget">
+                <option>До 1,5 млн ₽</option>
+                <option>1,5–3 млн ₽</option>
+                <option>3–5 млн ₽</option>
+                <option>Более 5 млн ₽</option>
+              </select>
+            </div>
+            <button class="btn btn--cta btn--full" type="submit">Отправить в WhatsApp</button>
+          </form>
+          <div style="margin-top:14px;text-align:center">
+            <a href="tel:79852198302" style="color:#2e6b52;font-weight:700">Или позвоните: +7 (985) 219-83-02</a>
           </div>
         </div>
       </noscript>

@@ -73,15 +73,21 @@ function compareValue(plot, key){
   }
 }
 
+/* ==============================
+   TOAST NOTIFICATIONS (auto-dismiss 5s)
+   ============================== */
 function showToast(text){
   const el = safeQS('#siteToast');
   if(!el) return;
   el.textContent = text;
   el.classList.add('is-show');
   window.clearTimeout(showToast._t);
-  showToast._t = window.setTimeout(() => el.classList.remove('is-show'), 2600);
+  showToast._t = window.setTimeout(() => el.classList.remove('is-show'), 5000);
 }
 
+/* ==============================
+   COMPARE (localStorage)
+   ============================== */
 function loadCompare(){
   try{
     SiteState.compare = JSON.parse(localStorage.getItem('zemlyaCompare') || '[]');
@@ -103,7 +109,7 @@ function toggleCompare(plotId, btn){
   const exists = current.includes(plotId);
   if (exists){
     SiteState.compare = current.filter(id => id !== plotId);
-    showToast('Участок удалён из сравнения');
+    showToast('Участок удален из сравнения');
   } else {
     if (current.length >= 3){
       showToast('В сравнении может быть до 3 участков');
@@ -121,6 +127,18 @@ function toggleCompare(plotId, btn){
 }
 window.toggleCompare = toggleCompare;
 
+function clearAllCompare(){
+  SiteState.compare = [];
+  saveCompare();
+  safeQSA('[data-compare-id]').forEach(el => el.classList.remove('is-active'));
+  if (document.body.dataset.page === 'compare') renderComparePage();
+  showToast('Сравнение очищено');
+}
+window.clearAllCompare = clearAllCompare;
+
+/* ==============================
+   PLOT CARD
+   ============================== */
 function makePlotCard(plot){
   const project = getPlotProject(plot);
   const title = getPlotName(plot);
@@ -133,7 +151,7 @@ function makePlotCard(plot){
   return `
   <article class="plot-card">
     <div class="plot-card__media">
-      <img src="${media}" alt="${title}">
+      <img src="${media}" alt="${title}" loading="lazy" width="400" height="250">
       <div class="plot-card__badges">
         <span class="mini-badge">${STATUS_LABELS[plot.status]?.name || 'Свободен'}</span>
         ${scenario ? `<span class="mini-badge">${scenario.emoji} ${scenario.name}</span>` : ''}
@@ -169,7 +187,7 @@ function makePlotCard(plot){
 function makeProjectCard(project){
   return `
   <article class="media-card card">
-    <div class="media-card__image"><img src="assets/img/project-masterplan.svg" alt="${project.name}"></div>
+    <div class="media-card__image"><img src="assets/img/project-masterplan.svg" alt="${project.name}" loading="lazy" width="600" height="375"></div>
     <div class="media-card__body">
       <div class="media-card__meta"><span>${project.regionName}</span><span>•</span><span>${project.city}</span></div>
       <h3>${project.name}</h3>
@@ -187,6 +205,9 @@ function makeProjectCard(project){
   </article>`;
 }
 
+/* ==============================
+   CATALOG FILTERS (with debounce)
+   ============================== */
 function getFilteredPlots(){
   let items = PLOTS.filter(plot => SiteState.filters.status === 'all' ? true : plot.status === SiteState.filters.status);
   if (SiteState.filters.region !== 'all'){
@@ -226,16 +247,23 @@ function renderIndexOffers(){
   mount.innerHTML = items.map(makePlotCard).join('');
 }
 
+let _catalogDebounce = null;
 function renderCatalog(){
   const mount = safeQS('#catalogGrid');
   if (!mount) return;
   const items = getFilteredPlots();
-  mount.innerHTML = items.length
-    ? items.map(makePlotCard).join('')
-    : `<div class="compare-empty" style="grid-column:1 / -1">
-        <h3 style="margin-top:0">Ничего не нашли по этим параметрам</h3>
-        <p class="muted">Сбросьте часть фильтров или оставьте заявку — подберём из закрытой базы.</p>
+  if (items.length === 0){
+    mount.innerHTML = `<div class="compare-empty" style="grid-column:1 / -1">
+        <h3 style="margin-top:0">По вашим критериям участков не найдено</h3>
+        <p class="muted">Попробуйте изменить фильтры или оставьте заявку — подберем из закрытой базы.</p>
+        <div style="margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn--outline" onclick="document.getElementById('catalogReset')?.click()">Сбросить фильтры</button>
+          <a class="btn btn--whatsapp" href="${waLink('Здравствуйте! Не нашел подходящий участок на сайте. Подберите, пожалуйста, варианты.')}" target="_blank" rel="noopener">Оставить заявку</a>
+        </div>
       </div>`;
+  } else {
+    mount.innerHTML = items.map(makePlotCard).join('');
+  }
   const meta = safeQS('#catalogMeta');
   if (meta){
     const totalFree = items.filter(i => i.status === 'free').length;
@@ -253,6 +281,11 @@ function renderCatalog(){
   if (instBtn) instBtn.classList.toggle('is-active', SiteState.filters.installment);
   const sort = safeQS('#catalogSort');
   if (sort) sort.value = SiteState.filters.sort;
+}
+
+function renderCatalogDebounced(){
+  clearTimeout(_catalogDebounce);
+  _catalogDebounce = setTimeout(renderCatalog, 200);
 }
 
 function renderGeoPlots(){
@@ -286,6 +319,9 @@ function renderRelatedPlots(){
   mount.innerHTML = items.map(makePlotCard).join('');
 }
 
+/* ==============================
+   COMPARE PAGE
+   ============================== */
 function renderComparePage(){
   const mount = safeQS('#compareTable');
   if (!mount) return;
@@ -293,7 +329,7 @@ function renderComparePage(){
   if (!items.length){
     mount.innerHTML = `
       <div class="compare-empty">
-        <h3 style="margin-top:0">Сравнение пока пустое</h3>
+        <h3 style="margin-top:0">Добавьте участки для сравнения из каталога</h3>
         <p class="muted">Добавьте до 3 участков из каталога через кнопку ⚖ на карточке. Мы покажем цену, площадь, коммуникации, рассрочку и инвестиционный потенциал.</p>
         <div style="margin-top:18px"><a class="btn btn--cta" href="catalog.html">Перейти в каталог</a></div>
       </div>`;
@@ -316,6 +352,9 @@ function renderComparePage(){
     ['Потенциал ROI','roi']
   ];
   mount.innerHTML = `
+    <div style="display:flex;justify-content:flex-end;margin-bottom:14px">
+      <button class="btn btn--ghost btn--sm" onclick="clearAllCompare()">Очистить сравнение</button>
+    </div>
     <div class="compare-table">
       <table>
         <thead>
@@ -340,9 +379,16 @@ function renderComparePage(){
           </tr>`).join('')}
         </tbody>
       </table>
+    </div>
+    <div style="text-align:center;margin-top:24px">
+      <p class="muted">Понравился один из вариантов?</p>
+      <a class="btn btn--cta" href="${waLink('Здравствуйте! Сравнил участки на сайте. Хочу узнать больше.')}" target="_blank" rel="noopener">Обсудить с менеджером</a>
     </div>`;
 }
 
+/* ==============================
+   GENPLAN
+   ============================== */
 function renderGenplan(){
   const grid = safeQS('#genplanGrid');
   if (!grid) return;
@@ -370,6 +416,9 @@ function renderGenplan(){
   grid.innerHTML = html;
 }
 
+/* ==============================
+   FAQ ACCORDION
+   ============================== */
 function initFAQ(){
   safeQSA('.faq-item').forEach(item => {
     const btn = item.querySelector('.faq-q');
@@ -378,35 +427,140 @@ function initFAQ(){
   });
 }
 
+/* ==============================
+   BURGER MENU
+   ============================== */
 function initBurger(){
   const burger = safeQS('#burger');
   const nav = safeQS('#topNav');
   if (!burger || !nav) return;
-  burger.addEventListener('click', () => nav.classList.toggle('is-open'));
+  burger.addEventListener('click', () => {
+    nav.classList.toggle('is-open');
+    burger.setAttribute('aria-expanded', nav.classList.contains('is-open'));
+  });
+  // Close on click outside
+  document.addEventListener('click', (e) => {
+    if (nav.classList.contains('is-open') && !nav.contains(e.target) && !burger.contains(e.target)){
+      nav.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+  });
+  // Close on nav link click
+  safeQSA('a', nav).forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+    });
+  });
 }
 
+/* ==============================
+   PHONE FORMATTING & VALIDATION
+   ============================== */
+function formatPhoneInput(value){
+  let digits = value.replace(/\D/g, '');
+  if (digits.startsWith('8') && digits.length > 1) digits = '7' + digits.slice(1);
+  if (!digits.startsWith('7') && digits.length > 0) digits = '7' + digits;
+  if (digits.length === 0) return '';
+  let result = '+7';
+  if (digits.length > 1) result += ' (' + digits.slice(1, 4);
+  if (digits.length >= 4) result += ')';
+  if (digits.length > 4) result += ' ' + digits.slice(4, 7);
+  if (digits.length > 7) result += '-' + digits.slice(7, 9);
+  if (digits.length > 9) result += '-' + digits.slice(9, 11);
+  return result;
+}
 
+function isValidPhone(value){
+  const digits = value.replace(/\D/g, '');
+  return digits.length === 11 && digits.startsWith('7');
+}
+
+function showFieldError(field, message){
+  clearFieldError(field);
+  field.classList.add('field-error');
+  const errEl = document.createElement('div');
+  errEl.className = 'field-error-msg';
+  errEl.textContent = message;
+  field.parentNode.insertBefore(errEl, field.nextSibling);
+}
+
+function clearFieldError(field){
+  field.classList.remove('field-error');
+  const next = field.nextElementSibling;
+  if (next && next.classList.contains('field-error-msg')){
+    next.remove();
+  }
+}
+
+function initPhoneInputs(){
+  safeQSA('input[type="tel"]').forEach(input => {
+    input.addEventListener('input', () => {
+      const cursorPos = input.selectionStart;
+      const oldLen = input.value.length;
+      input.value = formatPhoneInput(input.value);
+      const newLen = input.value.length;
+      const newPos = cursorPos + (newLen - oldLen);
+      input.setSelectionRange(newPos, newPos);
+      if (input.value.length > 0) clearFieldError(input);
+    });
+    input.addEventListener('focus', () => {
+      if (!input.value) input.value = '+7';
+    });
+    input.addEventListener('blur', () => {
+      if (input.value === '+7' || input.value === '+7 (') input.value = '';
+    });
+  });
+}
+
+/* ==============================
+   FORM VALIDATION & SUBMISSION
+   ============================== */
 function initForms(){
   safeQSA('[data-form]').forEach(form => {
     form.addEventListener('submit', e => {
       e.preventDefault();
+      let valid = true;
+
+      // Validate name if present
+      const nameInput = form.querySelector('input[name="name"], input[type="text"]');
+      if (nameInput){
+        const nameVal = nameInput.value.trim();
+        if (nameVal.length < 2){
+          showFieldError(nameInput, 'Укажите имя (минимум 2 символа)');
+          valid = false;
+        } else {
+          clearFieldError(nameInput);
+        }
+      }
+
+      // Validate phone
       const phone = form.querySelector('input[type="tel"]');
       const phoneValue = phone ? phone.value.trim() : '';
-      if (!phoneValue){
-        phone?.focus();
-        showToast('Введите телефон, чтобы мы могли связаться');
-        return;
+      if (!phoneValue || !isValidPhone(phoneValue)){
+        if (phone){
+          showFieldError(phone, 'Введите телефон в формате +7 (XXX) XXX-XX-XX');
+          phone.focus();
+        }
+        valid = false;
+      } else if (phone){
+        clearFieldError(phone);
       }
+
+      if (!valid) return;
+
       const title = form.dataset.formTitle || 'Запрос с сайта';
       const msg = `Здравствуйте! ${title}. Мой телефон: ${phoneValue}`;
       window.open(waLink(msg), '_blank', 'noopener');
-      showToast('Открыли WhatsApp с вашим запросом');
+      showToast('Спасибо! Менеджер свяжется в течение 15 минут');
       form.reset();
     });
   });
 }
 
-
+/* ==============================
+   QUIZ
+   ============================== */
 const quizSteps = [
   {
     label:'Шаг 1 из 5',
@@ -533,80 +687,124 @@ function renderQuizResult(){
     <div class="quiz-result">
       <div style="font-size:3rem">🎯</div>
       <h2 class="section-title" style="font-size:2.1rem">Нашли несколько подходящих сценариев</h2>
-      <p class="section-text" style="margin-left:auto;margin-right:auto">Показываем подходящие сценарии покупки и быстро переводим в живой контакт. Если нужен полный список, отправьте запрос и менеджер соберёт персональную подборку.</p>
+      <p class="section-text" style="margin-left:auto;margin-right:auto">Показываем подходящие сценарии покупки и быстро переводим в живой контакт. Если нужен полный список, отправьте запрос и менеджер соберет персональную подборку.</p>
       <div class="quiz-result__grid">
         <div class="quiz-pill"><strong>${matches.length}</strong><span>готовых лотов</span></div>
         <div class="quiz-pill"><strong>${regionLabel}</strong><span>основное направление</span></div>
         <div class="quiz-pill"><strong>${(matches[0]?.roiEstimate || 22)}%</strong><span>потенциал ROI</span></div>
       </div>
       <div class="catalog-grid" style="margin:18px 0 24px">${matches.map(makePlotCard).join('')}</div>
-      <form data-form class="form-card" style="max-width:560px;margin:0 auto;text-align:left">
+      <div style="text-align:center;margin-top:24px">
         <h3>Получить персональную подборку</h3>
-        <p>Оставьте телефон — откроем WhatsApp с готовым сообщением и передадим запрос менеджеру.</p>
-        <div class="inline-form" style="max-width:none">
-          <input type="tel" placeholder="+7 (___) ___-__-__">
-          <button class="btn btn--cta" type="submit">Получить подборку</button>
+        <p class="muted">Оставьте телефон — менеджер свяжется в течение 15 минут и подберет лоты под ваш сценарий.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px">
+          <a class="btn btn--cta" href="${waLink(`Здравствуйте! Прошел квиз на сайте. Сценарий: ${SCENARIO_LABELS[scenario]?.name || scenario}, регион: ${regionLabel}. Подберите, пожалуйста, участки.`)}" target="_blank" rel="noopener">Написать в WhatsApp</a>
+          <a class="btn btn--outline" href="catalog.html">Смотреть каталог</a>
         </div>
-      </form>
+      </div>
     </div>`;
-  initForms();
+}
+
+/* ==============================
+   CALCULATOR (with validation)
+   ============================== */
+function clampCalcInput(input, min, max){
+  let val = parseFloat(input.value);
+  if (isNaN(val) || val < min) val = min;
+  if (val > max) val = max;
+  input.value = val;
+  return val;
 }
 
 function updateCalc(){
-  const price = parseFloat(safeQS('#calcPrice')?.value || '0');
-  const area = parseFloat(safeQS('#calcArea')?.value || '1');
-  const years = parseFloat(safeQS('#calcYears')?.value || '1');
-  const growth = parseFloat(safeQS('#calcGrowth')?.value || '0');
-  const expenses = parseFloat(safeQS('#calcExpenses')?.value || '0');
+  const priceEl = safeQS('#calcPrice');
+  const areaEl = safeQS('#calcArea');
+  const yearsEl = safeQS('#calcYears');
+  const growthEl = safeQS('#calcGrowth');
+  const expensesEl = safeQS('#calcExpenses');
+  if (!priceEl) return;
+
+  const price = clampCalcInput(priceEl, 0, 999999999);
+  const area = clampCalcInput(areaEl, 0.1, 10000);
+  const years = clampCalcInput(yearsEl, 1, 30);
+  const growth = clampCalcInput(growthEl, -50, 200);
+  const expenses = clampCalcInput(expensesEl, 0, 999999999);
+
+  if (price <= 0){
+    const map = { calcTitle: 'Укажите стоимость покупки', calcFuturePrice: '—', calcInvestment: '—', calcProfit: '—', calcROI: '—', calcPerSotka: '—' };
+    Object.entries(map).forEach(([id, value]) => {
+      const el = safeQS('#' + id);
+      if (el) el.textContent = value;
+    });
+    return;
+  }
+
   const futurePrice = price * Math.pow(1 + growth / 100, years);
   const investment = price + expenses;
   const profit = futurePrice - investment;
   const roi = investment ? (profit / investment) * 100 : 0;
   const perSotka = area ? futurePrice / area : 0;
   const yWord = years == 1 ? 'год' : (years < 5 ? 'года' : 'лет');
+
   const map = {
     calcTitle: `Прогноз через ${years} ${yWord}`,
-    calcFuturePrice: formatPrice(Math.round(futurePrice)),
-    calcInvestment: formatPrice(Math.round(investment)),
-    calcProfit: (profit >= 0 ? '+' : '') + formatPrice(Math.round(profit)),
+    calcFuturePrice: formatRuNumber(Math.round(futurePrice)) + ' ₽',
+    calcInvestment: formatRuNumber(Math.round(investment)) + ' ₽',
+    calcProfit: (profit >= 0 ? '+' : '') + formatRuNumber(Math.round(profit)) + ' ₽',
     calcROI: (roi >= 0 ? '+' : '') + roi.toFixed(1) + '%',
-    calcPerSotka: formatPrice(Math.round(perSotka))
+    calcPerSotka: formatRuNumber(Math.round(perSotka)) + ' ₽'
   };
   Object.entries(map).forEach(([id, value]) => {
     const el = safeQS('#' + id);
     if (el) el.textContent = value;
   });
+
+  // Show CTA after calculation
+  const ctaMount = safeQS('#calcCTA');
+  if (ctaMount && !ctaMount.innerHTML.trim()){
+    ctaMount.innerHTML = `<div style="text-align:center;margin-top:20px;padding:16px;background:#f7faf7;border:1px solid var(--line);border-radius:18px">
+      <p style="margin:0 0 12px;color:var(--muted)">Хотите обсудить расчет с экспертом?</p>
+      <a class="btn btn--cta btn--sm" href="${waLink('Здравствуйте! Посчитал доходность на калькуляторе. Хочу обсудить реальные варианты.')}" target="_blank" rel="noopener">Обсудить с менеджером</a>
+    </div>`;
+  }
 }
 window.updateCalc = updateCalc;
 
+function formatRuNumber(n){
+  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+/* ==============================
+   CATALOG CONTROLS
+   ============================== */
 function initCatalogControls(){
   safeQSA('[data-region-filter]').forEach(btn => {
     btn.addEventListener('click', () => {
       SiteState.filters.region = btn.dataset.regionFilter;
-      renderCatalog();
+      renderCatalogDebounced();
     });
   });
   safeQSA('[data-scenario-filter]').forEach(btn => {
     btn.addEventListener('click', () => {
       const next = btn.dataset.scenarioFilter;
       SiteState.filters.scenario = SiteState.filters.scenario === next ? 'all' : next;
-      renderCatalog();
+      renderCatalogDebounced();
     });
   });
   const sea = safeQS('[data-toggle-sea]');
   if (sea) sea.addEventListener('click', () => {
     SiteState.filters.sea = !SiteState.filters.sea;
-    renderCatalog();
+    renderCatalogDebounced();
   });
   const inst = safeQS('[data-toggle-installment]');
   if (inst) inst.addEventListener('click', () => {
     SiteState.filters.installment = !SiteState.filters.installment;
-    renderCatalog();
+    renderCatalogDebounced();
   });
   const sort = safeQS('#catalogSort');
   if (sort) sort.addEventListener('change', () => {
     SiteState.filters.sort = sort.value;
-    renderCatalog();
+    renderCatalogDebounced();
   });
   const reset = safeQS('#catalogReset');
   if (reset) reset.addEventListener('click', () => {
@@ -615,6 +813,70 @@ function initCatalogControls(){
   });
 }
 
+/* ==============================
+   SMOOTH SCROLL FOR ANCHOR LINKS
+   ============================== */
+function initSmoothScroll(){
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const hash = link.getAttribute('href');
+    if (hash.length <= 1) return;
+    const target = document.querySelector(hash);
+    if (target){
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+}
+
+/* ==============================
+   SCROLL-TO-TOP BUTTON
+   ============================== */
+function initScrollToTop(){
+  const btn = safeQS('#scrollToTop');
+  if (!btn) return;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking){
+      window.requestAnimationFrame(() => {
+        btn.classList.toggle('is-show', window.scrollY > 600);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+/* ==============================
+   LAZY LOADING IMAGES
+   ============================== */
+function initLazyImages(){
+  if ('loading' in HTMLImageElement.prototype) return; // native lazy loading supported
+  const images = safeQSA('img[loading="lazy"]');
+  if (!images.length) return;
+  if ('IntersectionObserver' in window){
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          const img = entry.target;
+          if (img.dataset.src){
+            img.src = img.dataset.src;
+          }
+          observer.unobserve(img);
+        }
+      });
+    }, { rootMargin: '200px' });
+    images.forEach(img => observer.observe(img));
+  }
+}
+
+/* ==============================
+   ACTIVE NAV
+   ============================== */
 function setActiveNav(){
   const page = document.body.dataset.page;
   safeQSA('[data-nav]').forEach(link => {
@@ -622,14 +884,21 @@ function setActiveNav(){
   });
 }
 
+/* ==============================
+   INIT ON DOMContentLoaded
+   ============================== */
 document.addEventListener('DOMContentLoaded', () => {
   loadCompare();
   updateCompareCount();
   setActiveNav();
   initBurger();
   initFAQ();
+  initPhoneInputs();
   initForms();
   initCatalogControls();
+  initSmoothScroll();
+  initScrollToTop();
+  initLazyImages();
   renderIndexOffers();
   renderCatalog();
   renderGeoPlots();
