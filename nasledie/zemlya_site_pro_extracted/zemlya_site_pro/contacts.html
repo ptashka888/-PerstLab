@@ -52,7 +52,7 @@
       <p class="hero__lead">Звоните или пишите в мессенджеры. Быстрее всего подборка уходит через WhatsApp: вы пишете цель покупки, а мы отвечаем по проектам, свободным лотам и схеме сделки.</p>
       <div class="hero-mini"><span>Звонок</span><span>WhatsApp</span><span>Telegram</span></div>
     </div>
-    <div class="hero__card hero-visual"><img src="assets/img/contacts-office.svg" alt="Контакты компании Наследие"></div>
+    <div class="hero__card hero-visual"><img src="assets/img/contacts-office.svg" alt="Контакты компании Наследие" width="600" height="400"></div>
   </div>
 </section>
 <section class="section">
@@ -72,19 +72,65 @@
       <div class="section-kicker" style="color:#dff3e7">Быстрый вход</div>
       <h3>Напишите и получите подборку</h3>
       <p>Расскажите, для чего вам нужен участок. Ответим по проектам и свободным лотам без долгой переписки.</p>
-      <form data-form class="inline-form" data-form-title="Запрос с контактов">
-        <input type="tel" placeholder="+7 (___) ___-__-__">
-        <button class="btn btn--ghost" type="submit">Получить подборку</button>
+      <form aria-label="Форма обратной связи" data-form class="inline-form" data-form-title="Запрос с контактов">
+        <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
+        <button class="btn btn--ghost" type="submit">Запросить подборку участков</button>
       </form>
       <div class="cta-actions">
         <a class="btn btn--whatsapp" href="https://wa.me/79852198302?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BF%D0%BE%D0%B4%D0%BE%D0%B1%D1%80%D0%B0%D1%82%D1%8C%20%D1%83%D1%87%D0%B0%D1%81%D1%82%D0%BE%D0%BA%20%D0%B2%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D0%B8%20%D0%9D%D0%B0%D1%81%D0%BB%D0%B5%D0%B4%D0%B8%D0%B5." target="_blank" rel="noopener">Написать в WhatsApp</a>
         <a class="btn btn--outline" href="quiz.html">Пройти квиз</a>
       </div>
+      <div class="form-trust" style="margin:8px 0;font-size:.82rem;color:rgba(255,255,255,.7)">Более 200 консультаций с 2020 года. Без спама и навязчивых звонков.</div>
+      <div class="form-next" style="margin:8px 0;padding:10px 14px;background:rgba(255,255,255,.08);border-radius:8px;font-size:.85rem;color:rgba(255,255,255,.85)"><strong>Что будет дальше?</strong> Менеджер свяжется с вами в течение 15 минут, уточнит цель покупки и пришлёт подходящие варианты.</div>
+      <div class="form-note" style="font-size:.78rem;color:rgba(255,255,255,.5)">Нажимая кнопку, вы соглашаетесь с <a href="company.html" style="color:rgba(255,255,255,.7);text-decoration:underline">политикой обработки данных</a>.</div>
       <div class="form-note">Открываем готовый запрос в WhatsApp. Ответим звонком или в мессенджере.</div>
     </div>
     </div>
     </div>
-    <div class="map-box"><img src="assets/img/region-yubk.svg" alt="География проектов Наследие"></div>
+    <div class="map-box"><img src="assets/img/region-yubk.svg" alt="География проектов Наследие" loading="lazy" width="600" height="400"></div>
+  </div>
+</section>
+
+<section class="section section--dark" data-exit-intent="final-cta">
+  <div class="container" style="text-align:center;max-width:640px">
+    <h2 class="section-title" style="color:#fff">Не уходите без подборки</h2>
+    <p style="color:rgba(255,255,255,.8);margin-bottom:20px">Оставьте номер или напишите в мессенджер. Получите 3 варианта участков под вашу цель и бюджет -- без обязательств.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a class="btn btn--cta" href="quiz.html">Записаться на просмотр</a>
+      <a class="btn btn--whatsapp" href="https://wa.me/79852198302?text=Здравствуйте!%20Хочу%20подобрать%20участок." target="_blank" rel="noopener">Написать в WhatsApp</a>
+      <a class="btn btn--outline" style="border-color:rgba(255,255,255,.3);color:#fff" href="https://t.me/+dxP0tIDCMKhkNTYy" target="_blank" rel="noopener">Telegram</a>
+    </div>
+    <p style="margin-top:14px;font-size:.82rem;color:rgba(255,255,255,.5)">Ответим в WhatsApp за 5 минут. Более 200 консультаций с 2020 года.</p>
+  </div>
+</section>
+
+
+<section class="section section--surface">
+  <div class="container grid-3">
+    <div class="card card--lg">
+      <h3 style="margin-top:0">Режим работы</h3>
+      <div class="contact-list">
+        <div class="contact-line"><strong>Пн-Пт</strong><span>09:00 — 19:00</span></div>
+        <div class="contact-line"><strong>Сб</strong><span>10:00 — 16:00</span></div>
+        <div class="contact-line"><strong>Вс</strong><span>по записи</span></div>
+      </div>
+      <p class="muted" style="margin-top:12px">WhatsApp-сообщения обрабатываются ежедневно. Ответ в течение 15 минут в рабочее время.</p>
+    </div>
+    <div class="card card--lg">
+      <h3 style="margin-top:0">Адрес и регион</h3>
+      <div class="contact-list">
+        <div class="contact-line"><strong>Регистрация</strong><span>Республика Калмыкия, г. Элиста</span></div>
+        <div class="contact-line"><strong>Проекты</strong><span>Южное направление, Подмосковье</span></div>
+      </div>
+      <p class="muted" style="margin-top:12px">Просмотры участков проводятся по предварительной записи. Менеджер организует выезд на объект.</p>
+    </div>
+    <div class="card card--lg">
+      <h3 style="margin-top:0">Дополнительные контакты</h3>
+      <div class="contact-list">
+        <div class="contact-line"><strong>Email</strong><span><a href="mailto:info@nasledie-zemlya.ru">info@nasledie-zemlya.ru</a></span></div>
+        <div class="contact-line"><strong>Для партнёров</strong><span><a href="https://wa.me/79852198302?text=Здравствуйте! Вопрос по сотрудничеству." target="_blank" rel="noopener">Написать в WhatsApp</a></span></div>
+      </div>
+    </div>
   </div>
 </section>
 

@@ -52,7 +52,7 @@
       <p class="hero__lead">Калькулятор помогает обсчитать базовый инвестиционный сценарий: вход, расходы, рост стоимости и ориентировочную доходность. Это не обещание результата, а удобная отправная точка для разговора с менеджером.</p>
       <div class="hero-mini"><span>Оценка сценария</span><span>Прогноз по росту стоимости</span><span>Переход к консультации</span></div>
     </div>
-    <div class="hero__card hero-visual"><img src="assets/img/invest-chart.svg" alt="Калькулятор доходности"></div>
+    <div class="hero__card hero-visual"><img src="assets/img/invest-chart.svg" alt="Калькулятор доходности" width="600" height="400"></div>
   </div>
 </section>
 <section class="section">
@@ -74,6 +74,13 @@
       <div class="side-stat"><strong id="calcProfit">0 ₽</strong><span>потенциальная прибыль</span></div>
       <div class="side-stat"><strong id="calcROI">0%</strong><span>ориентировочный ROI</span></div>
       <div class="side-stat"><strong id="calcPerSotka">0 ₽</strong><span>стоимость на сотку в прогнозе</span></div>
+      <div class="calc-disclaimer" style="margin-top:16px;padding:12px 14px;background:rgba(0,0,0,.04);border-radius:8px;font-size:.85rem;color:#6b7280">
+        <strong>Расчёт примерный</strong> -- менеджер уточнит все детали по конкретному лоту и скорректирует прогноз с учётом актуальной ситуации.
+      </div>
+      <div style="margin-top:16px">
+        <a class="btn btn--cta btn--full" href="https://wa.me/79852198302?text=Здравствуйте!%20Посчитал%20доходность%20на%20сайте.%20Хочу%20обсудить%20инвестицию." target="_blank" rel="noopener">Хотите обсудить инвестицию? Напишите в WhatsApp</a>
+        <p style="margin-top:8px;font-size:.82rem;color:#6b7280;text-align:center">Ответим за 5 минут. Без обязательств.</p>
+      </div>
     </aside>
   </div>
 </section>
@@ -85,17 +92,54 @@
       <div class="section-kicker" style="color:#dff3e7">Быстрый вход</div>
       <h3>Обсудить расчёт с экспертом</h3>
       <p>Оставьте телефон. Поможем сопоставить цифры калькулятора с реальными сценариями по проектам компании.</p>
-      <form data-form class="inline-form" data-form-title="Обсуждение расчёта">
-        <input type="tel" placeholder="+7 (___) ___-__-__">
-        <button class="btn btn--ghost" type="submit">Получить подборку</button>
+      <form aria-label="Форма обратной связи" data-form class="inline-form" data-form-title="Обсуждение расчёта">
+        <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
+        <button class="btn btn--ghost" type="submit">Обсудить инвестицию с экспертом</button>
       </form>
       <div class="cta-actions">
         <a class="btn btn--whatsapp" href="https://wa.me/79852198302?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BF%D0%BE%D0%B4%D0%BE%D0%B1%D1%80%D0%B0%D1%82%D1%8C%20%D1%83%D1%87%D0%B0%D1%81%D1%82%D0%BE%D0%BA%20%D0%B2%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D0%B8%20%D0%9D%D0%B0%D1%81%D0%BB%D0%B5%D0%B4%D0%B8%D0%B5." target="_blank" rel="noopener">Написать в WhatsApp</a>
         <a class="btn btn--outline" href="quiz.html">Пройти квиз</a>
       </div>
+      <div class="form-trust" style="margin:8px 0;font-size:.82rem;color:rgba(255,255,255,.7)">Более 200 консультаций с 2020 года. Без спама и навязчивых звонков.</div>
+      <div class="form-next" style="margin:8px 0;padding:10px 14px;background:rgba(255,255,255,.08);border-radius:8px;font-size:.85rem;color:rgba(255,255,255,.85)"><strong>Что будет дальше?</strong> Менеджер свяжется с вами в течение 15 минут, уточнит цель покупки и пришлёт подходящие варианты.</div>
+      <div class="form-note" style="font-size:.78rem;color:rgba(255,255,255,.5)">Нажимая кнопку, вы соглашаетесь с <a href="company.html" style="color:rgba(255,255,255,.7);text-decoration:underline">политикой обработки данных</a>.</div>
       <div class="form-note">Открываем готовый запрос в WhatsApp. Ответим звонком или в мессенджере.</div>
     </div>
     
+  </div>
+</section>
+
+<section class="section section--dark" data-exit-intent="final-cta">
+  <div class="container" style="text-align:center;max-width:640px">
+    <h2 class="section-title" style="color:#fff">Не уходите без подборки</h2>
+    <p style="color:rgba(255,255,255,.8);margin-bottom:20px">Оставьте номер или напишите в мессенджер. Получите 3 варианта участков под вашу цель и бюджет -- без обязательств.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a class="btn btn--cta" href="quiz.html">Записаться на просмотр</a>
+      <a class="btn btn--whatsapp" href="https://wa.me/79852198302?text=Здравствуйте!%20Хочу%20подобрать%20участок." target="_blank" rel="noopener">Написать в WhatsApp</a>
+      <a class="btn btn--outline" style="border-color:rgba(255,255,255,.3);color:#fff" href="https://t.me/+dxP0tIDCMKhkNTYy" target="_blank" rel="noopener">Telegram</a>
+    </div>
+    <p style="margin-top:14px;font-size:.82rem;color:rgba(255,255,255,.5)">Ответим в WhatsApp за 5 минут. Более 200 консультаций с 2020 года.</p>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="card card--lg">
+      <div class="section-kicker">Методология расчёта</div>
+      <h3 style="margin-top:0">Как работает калькулятор</h3>
+      <p class="section-text" style="max-width:none">Калькулятор использует линейную модель роста стоимости земли на основе введённых параметров. Рост рассчитывается по формуле сложного процента с учётом ежегодного прироста. Доп. расходы включают оформление, налоги и возможные затраты на подготовку участка.</p>
+      <div class="feature-list" style="margin-top:14px">
+        <div class="feature-row"><div class="feature-icon">1</div><div><h4>Входные данные</h4><p>Стоимость покупки, площадь, горизонт владения, ожидаемый рост и дополнительные расходы.</p></div></div>
+        <div class="feature-row"><div class="feature-icon">2</div><div><h4>Прогноз стоимости</h4><p>Будущая цена рассчитывается как начальная стоимость, умноженная на (1 + рост%)^лет.</p></div></div>
+        <div class="feature-row"><div class="feature-icon">3</div><div><h4>ROI</h4><p>Возврат на инвестиции = (прибыль / суммарные вложения) x 100%.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section section--surface">
+  <div class="container" style="max-width:800px">
+    <p class="muted" style="font-size:.85rem;text-align:center">Калькулятор носит информационный характер и не является публичной офертой или гарантией доходности. Реальная динамика цен зависит от рыночных условий, локации, спроса и других факторов. Для точной оценки инвестиционного сценария обратитесь к менеджеру компании.</p>
   </div>
 </section>
 

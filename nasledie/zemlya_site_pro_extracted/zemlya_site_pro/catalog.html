@@ -64,7 +64,7 @@
         <span>💬 Запрос подборки прямо из каталога</span>
       </div>
     </div>
-    <div class="hero__card hero-visual"><img src="assets/img/plot-sea-view.svg" alt="Каталог земельных участков Наследие"></div>
+    <div class="hero__card hero-visual"><img src="assets/img/plot-sea-view.svg" alt="Каталог земельных участков Наследие" width="600" height="400"></div>
   </div>
 </section>
 
@@ -123,10 +123,15 @@
         </div>
       </div>
       <div class="catalog-grid" id="catalogGrid"></div>
-      <div class="offer-strip">
-        <strong>Не нашли точное совпадение?</strong>
-        <span>Напишите в WhatsApp — соберём 3 альтернативы под ваш бюджет и задачу.</span>
-        <a class="btn btn--whatsapp" href="https://wa.me/79852198302?text=Здравствуйте!%20Нужна%20подборка%20по%20каталогу%20участков." target="_blank" rel="noopener">Запросить подборку</a>
+      <div class="offer-strip" id="noResults" style="display:none"><strong>По выбранным фильтрам нет совпадений</strong><span>Попробуйте сбросить фильтры или напишите в WhatsApp — подберём варианты вручную.</span><a class="btn btn--whatsapp" href="https://wa.me/79852198302?text=Здравствуйте! Не нашёл подходящий участок в каталоге. Помогите подобрать." target="_blank" rel="noopener">Написать в WhatsApp</a></div>
+      <div class="offer-strip" style="padding:20px;border-radius:12px">
+        <strong>Не нашли подходящий участок?</strong>
+        <span>Это нормально -- лучшие варианты часто уходят до публикации. Оставьте заявку, и мы подберём 3 участка под ваш запрос из актуальной базы.</span>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+          <a class="btn btn--whatsapp" href="https://wa.me/79852198302?text=Здравствуйте!%20Не%20нашёл%20подходящий%20в%20каталоге.%20Нужна%20подборка." target="_blank" rel="noopener">Запросить подборку в WhatsApp</a>
+          <a class="btn btn--outline" href="quiz.html">Пройти квиз и получить 3 варианта</a>
+        </div>
+        <p style="margin-top:8px;font-size:.82rem;color:#6b7280">Ответим в WhatsApp за 5 минут. Более 200 подборок с 2020 года.</p>
       </div>
     </div>
   </div>
@@ -155,17 +160,33 @@
       <div class="section-kicker" style="color:#dff3e7">Быстрый вход</div>
       <h3>Получите 3 участка под ваш запрос</h3>
       <p>Оставьте телефон, и менеджер соберёт подборку без длинной переписки: под жизнь, инвестиции, участок у моря или лоты в рассрочку.</p>
-      <form data-form class="inline-form" data-form-title="Подборка из каталога">
-        <input type="tel" placeholder="+7 (___) ___-__-__">
-        <button class="btn btn--ghost" type="submit">Получить подборку</button>
+      <form aria-label="Форма обратной связи" data-form class="inline-form" data-form-title="Подборка из каталога">
+        <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
+        <button class="btn btn--ghost" type="submit">Получить подборку участков</button>
       </form>
       <div class="cta-actions">
         <a class="btn btn--whatsapp" href="https://wa.me/79852198302?text=Здравствуйте!%20Хочу%20подобрать%20участок%20в%20компании%20Наследие." target="_blank" rel="noopener">Написать в WhatsApp</a>
         <a class="btn btn--outline" href="quiz.html">Пройти квиз</a>
       </div>
+      <div class="form-trust" style="margin:8px 0;font-size:.82rem;color:rgba(255,255,255,.7)">Более 200 консультаций с 2020 года. Без спама и навязчивых звонков.</div>
+      <div class="form-next" style="margin:8px 0;padding:10px 14px;background:rgba(255,255,255,.08);border-radius:8px;font-size:.85rem;color:rgba(255,255,255,.85)"><strong>Что будет дальше?</strong> Менеджер свяжется с вами в течение 15 минут, уточнит цель покупки и пришлёт подходящие варианты.</div>
+      <div class="form-note" style="font-size:.78rem;color:rgba(255,255,255,.5)">Нажимая кнопку, вы соглашаетесь с <a href="company.html" style="color:rgba(255,255,255,.7);text-decoration:underline">политикой обработки данных</a>.</div>
       <div class="form-note">Сразу отправим в WhatsApp запрос с вашим номером. Ответ — звонком или в мессенджере.</div>
     </div>
     
+  </div>
+</section>
+
+<section class="section section--dark" data-exit-intent="final-cta">
+  <div class="container" style="text-align:center;max-width:640px">
+    <h2 class="section-title" style="color:#fff">Не уходите без подборки</h2>
+    <p style="color:rgba(255,255,255,.8);margin-bottom:20px">Оставьте номер или напишите в мессенджер. Получите 3 варианта участков под вашу цель и бюджет -- без обязательств.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a class="btn btn--cta" href="quiz.html">Записаться на просмотр</a>
+      <a class="btn btn--whatsapp" href="https://wa.me/79852198302?text=Здравствуйте!%20Хочу%20подобрать%20участок." target="_blank" rel="noopener">Написать в WhatsApp</a>
+      <a class="btn btn--outline" style="border-color:rgba(255,255,255,.3);color:#fff" href="https://t.me/+dxP0tIDCMKhkNTYy" target="_blank" rel="noopener">Telegram</a>
+    </div>
+    <p style="margin-top:14px;font-size:.82rem;color:rgba(255,255,255,.5)">Ответим в WhatsApp за 5 минут. Более 200 консультаций с 2020 года.</p>
   </div>
 </section>
 

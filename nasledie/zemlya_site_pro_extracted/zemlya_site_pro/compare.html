@@ -52,11 +52,43 @@
       <p class="hero__lead">Сравнение — один из самых сильных конверсионных инструментов в земельной нише. Покупатель быстрее видит, какой участок лучше для жизни, какой — для инвестиций, а какой — просто выглядит дешевле.</p>
       <div class="hero-mini"><span>До 3 лотов</span><span>10+ параметров</span><span>Честная логика выбора</span></div>
     </div>
-    <div class="hero__card hero-visual"><img src="assets/img/project-masterplan.svg" alt="Сравнение участков"></div>
+    <div class="hero__card hero-visual"><img src="assets/img/project-masterplan.svg" alt="Сравнение участков" width="600" height="400"></div>
   </div>
 </section>
 <section class="section">
-  <div class="container" id="compareTable"></div>
+  <div class="container">
+    <div id="compareEmpty" style="text-align:center;padding:40px 20px;display:none">
+      <h3 style="margin-bottom:12px;color:#374151">Пока ничего не добавлено для сравнения</h3>
+      <p style="color:#6b7280;margin-bottom:20px;max-width:480px;margin-left:auto;margin-right:auto">Перейдите в каталог и нажмите кнопку сравнения на карточках участков. Можно сравнить до 3 лотов одновременно по 10+ параметрам.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <a class="btn btn--cta" href="catalog.html">Открыть каталог участков</a>
+        <a class="btn btn--whatsapp" href="https://wa.me/79852198302?text=Здравствуйте!%20Помогите%20сравнить%20участки." target="_blank" rel="noopener">Помогите выбрать в WhatsApp</a>
+      </div>
+    </div>
+    <div id="compareTable"></div>
+    <div id="compareResult" style="display:none;margin-top:32px;text-align:center;padding:24px;background:#f0fdf4;border-radius:12px">
+      <h3 style="margin-bottom:8px">Сравнили участки? Пора сделать следующий шаг</h3>
+      <p style="color:#6b7280;margin-bottom:16px">Оставьте номер -- менеджер расскажет детали по выбранному лоту и поможет с бронированием.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <a class="btn btn--cta" href="quiz.html">Записаться на просмотр</a>
+        <a class="btn btn--whatsapp" href="https://wa.me/79852198302?text=Здравствуйте!%20Сравнил%20участки%20на%20сайте.%20Хочу%20обсудить." target="_blank" rel="noopener">Обсудить в WhatsApp</a>
+      </div>
+      <p style="margin-top:10px;font-size:.82rem;color:#6b7280">Без обязательств. Ответим в WhatsApp за 5 минут.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark" data-exit-intent="final-cta">
+  <div class="container" style="text-align:center;max-width:640px">
+    <h2 class="section-title" style="color:#fff">Не уходите без подборки</h2>
+    <p style="color:rgba(255,255,255,.8);margin-bottom:20px">Оставьте номер или напишите в мессенджер. Получите 3 варианта участков под вашу цель и бюджет -- без обязательств.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a class="btn btn--cta" href="quiz.html">Записаться на просмотр</a>
+      <a class="btn btn--whatsapp" href="https://wa.me/79852198302?text=Здравствуйте!%20Хочу%20подобрать%20участок." target="_blank" rel="noopener">Написать в WhatsApp</a>
+      <a class="btn btn--outline" style="border-color:rgba(255,255,255,.3);color:#fff" href="https://t.me/+dxP0tIDCMKhkNTYy" target="_blank" rel="noopener">Telegram</a>
+    </div>
+    <p style="margin-top:14px;font-size:.82rem;color:rgba(255,255,255,.5)">Ответим в WhatsApp за 5 минут. Более 200 консультаций с 2020 года.</p>
+  </div>
 </section>
 
 </main>
